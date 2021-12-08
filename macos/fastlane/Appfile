@@ -1,0 +1,6 @@
+
+app_identifier "me.albemala.ejimo"
+
+apple_id ENV["FASTLANE_APPLE_ID"]
+team_id ENV["FASTLANE_TEAM_ID"] # Developer Portal Team ID
+itc_team_id ENV["FASTLANE_ITC_TEAM_ID"] # App Store Connect Team ID

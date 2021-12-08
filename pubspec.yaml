@@ -1,0 +1,57 @@
+name: app
+description: Ejimo - Comprehensive emoji and symbol piker.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+2
+
+environment:
+  sdk: ">=2.14.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_hooks: ^0.18.1
+  hooks_riverpod: ^1.0.1
+
+  cupertino_icons: ^1.0.4
+  flex_color_scheme: ^4.1.1
+  google_fonts: ^2.1.0
+
+  emojis: ^0.9.9
+
+  fuzzywuzzy: ^0.1.7
+
+  clipboard: ^0.1.3
+  shared_preferences: ^2.0.9
+  url_launcher: ^6.0.17
+  package_info_plus: ^1.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.4
+
+  flutter_launcher_icons:
+    git:
+      url: https://github.com/kechankrisna/flutter_launcher_icons.git
+      ref: b54d5244566c59dc5e98fb7dd28a245999600d0f
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/data/
+    - assets/images/
+    - google_fonts/
+
+# fvm flutter pub run flutter_launcher_icons:main && fvm flutter clean
+flutter_icons:
+  android: false
+  ios: false
+  macos: true
+#  windows: true
+  image_path: "assets/images/app-icon.png"
+  image_path_macos: "assets/images/app-icon.png"

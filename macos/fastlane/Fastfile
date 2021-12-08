@@ -1,0 +1,41 @@
+platform :mac do
+
+  lane :app_store do
+    build_mac_app(
+      scheme: "Runner",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "me.albemala.ejimo" => "Ejimo - App Store - Mac App Distribution",
+        }
+      },
+      export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
+      output_directory: "build",
+    )
+    upload_to_app_store(
+      skip_metadata: true,
+      skip_screenshots: true,
+    )
+  end
+
+  lane :standalone do
+    build_mac_app(
+      scheme: "Runner",
+      export_method: "developer-id",
+      export_options: {
+        provisioningProfiles: {
+          "me.albemala.ejimo" => "Ejimo - Developer ID Application",
+        }
+      },
+      export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
+      output_directory: "build",
+    )
+    notarize(
+      asc_provider: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
+      package: "./build/Ejimo.app",
+#       print_log: true,
+#       verbose: true,
+    )
+  end
+
+end
