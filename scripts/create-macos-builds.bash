@@ -6,7 +6,7 @@ set -e
 #set -x
 
 
-cd .. || exit # app/
+cd .. || exit
 
 # read app version from pubspec.yaml
 appVersion=$(cat pubspec.yaml | grep version | awk '{ print $2 }' | cut -f1 -d "+")
@@ -51,8 +51,13 @@ cp macos/build/Ejimo.app.dSYM.zip "$standaloneArchiveDirectory/Ejimo.app.dSYM.zi
 
 echo "------ upload standalone build to github ------"
 
-# compress archives
-#(cd macos-builds/"$appVersion"/standalone && tar -czf ../"$appVersion"-macos-standalone.tar.gz .)
-#(cd macos-builds/"$appVersion"/standalone && tar -czf ../Ejimo-macos-"$appVersion".tar.gz Ejimo.app)
+archiveFileName="Ejimo-macOS-$appVersion.tar.gz"
+
+# compress archive
+(cd macos-builds/"$appVersion"/standalone && tar -czf "$archiveFileName" Ejimo.app)
+
 # upload
-# TODO
+(cd scripts && ./create-release.bash "$appVersion")
+echo "------ IMPORTANT ------"
+echo "Remember to upload file $archiveFileName to GitHub"
+echo "-----------------------"
