@@ -23,3 +23,5 @@ Use keyboard shortcuts to work faster:
 - Cmd/Ctrl+F to start searching for a character
 - Use the arrow keys to navigate between emoji and symbols
 - Cmd/Ctrl+C to copy the selected emoji or symbol to your clipboard
+
+Ejimo is open-source and available here: https://github.com/albemala/emoji-picker
