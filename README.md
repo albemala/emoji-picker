@@ -7,7 +7,7 @@ Find and copy unicode characters, emoticons, glyphs and symbols with Ejimo.
 <img src="app-store-assets/screenshots/1.0/screenshot-03.png" alt="Ejimo screenshot 3" width="540"/>
 <img src="app-store-assets/screenshots/1.0/screenshot-04.png" alt="Ejimo screenshot 4" width="540"/>
 
-Ejimo is a comprehensive emoji and symbol piker that puts every character you need at your fingertips. Whether you're a
+Ejimo is a comprehensive emoji and symbol picker that puts every character you need at your fingertips. Whether you're a
 designer, developer or writer, Ejimo makes it easy to find the missing character you need. With over 3000 emojis and
 symbols available, Ejimo is the perfect tool for any project, social media strategy, article and presentation.
 
