@@ -14,6 +14,19 @@ class SearchView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = useTextEditingController();
+
+    // When the search field gets focused, select the existing text
+    useListenable(focusNode);
+    if (focusNode.hasFocus) {
+      textEditingController.value = textEditingController.value.copyWith(
+        selection: TextSelection(
+          baseOffset: 0,
+          extentOffset: textEditingController.text.length,
+        ),
+        composing: TextRange.empty,
+      );
+    }
+
     return TextField(
       autofocus: true,
       focusNode: focusNode,
