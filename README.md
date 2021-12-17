@@ -51,6 +51,14 @@ Note: _The app was developed and tested with Flutter beta_.
 
 Setup, how to run and build: https://docs.flutter.dev/desktop
 
+## Release process
+
+- Set new app version in _pubspec.yaml_ 
+- Run `./create-macos-builds.bash` from inside the _scripts_ folder
+  - The script will create an App Store build, a Standalone build and set up a new GitHub release
+  - The script will also tag the _main_ branch with the app version
+- Upload the Standalone build to GitHub under the new release
+
 ## Credits
 
 Created by [@albemala](https://github.com/albemala) ([Twitter](https://twitter.com/albemala))
