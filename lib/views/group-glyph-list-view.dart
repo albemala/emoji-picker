@@ -14,7 +14,7 @@ class GroupGlyphListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      padding: const EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       itemCount: glyphs.length,
       itemBuilder: (context, index) {
         final glyph = glyphs.elementAt(index);
@@ -22,7 +22,7 @@ class GroupGlyphListView extends StatelessWidget {
       },
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 56,
-        childAspectRatio: 1,
+        // childAspectRatio: 1,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),

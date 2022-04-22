@@ -9,7 +9,7 @@ class AboutView extends HookConsumerWidget {
       builder: (context) {
         return const AlertDialog(
           clipBehavior: Clip.hardEdge,
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: EdgeInsets.zero,
           content: AboutView(),
         );
       },
@@ -55,7 +55,7 @@ class _AboutContentView extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    "assets/images/app-icon.png",
+                    'assets/images/app-icon.png',
                     width: 48,
                     height: 48,
                   ),
@@ -73,7 +73,7 @@ class _AboutContentView extends HookConsumerWidget {
                             future: appInfo.appVersion(),
                             builder: (context, snapshot) {
                               return Text(
-                                snapshot.data ?? "",
+                                snapshot.data ?? '',
                                 style: Theme.of(context).textTheme.caption,
                               );
                             },
@@ -92,26 +92,26 @@ class _AboutContentView extends HookConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Help & Support"),
+                  const Text('Help & Support'),
                   const SizedBox(height: 16),
                   OutlinedButton(
                     onPressed: () {
                       ref.read(urlsProvider).sendFeedback();
                     },
-                    child: const Text("Send Feedback"),
+                    child: const Text('Send Feedback'),
                   ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Follow me!"),
+                  const Text('Follow me!'),
                   const SizedBox(height: 16),
                   OutlinedButton(
                     onPressed: () {
                       ref.read(urlsProvider).openTwitter();
                     },
-                    child: const Text("Twitter"),
+                    child: const Text('Twitter'),
                   ),
                 ],
               ),
@@ -137,7 +137,7 @@ class _AdView extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            "assets/images/exabox-icon.png",
+            'assets/images/exabox-icon.png',
             width: 48,
             height: 48,
           ),
@@ -147,18 +147,18 @@ class _AdView extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Are you a software developer?".toUpperCase(),
+                  'Are you a software developer?'.toUpperCase(),
                   style: Theme.of(context).textTheme.caption,
                 ),
                 Text(
-                  "Exabox: Essential tools for developers",
+                  'Exabox: Essential tools for developers',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  """
+                  '''
 30+ tools: convert/format JSON/YAML, encode/decode Base64, generate fake data, parse JWTs, transform text using multiple rules, and much more. 
-All in one single app. Work offline. Privacy-friendly.""",
+All in one single app. Work offline. Privacy-friendly.''',
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
                 Align(
@@ -167,7 +167,7 @@ All in one single app. Work offline. Privacy-friendly.""",
                     onPressed: () {
                       ref.read(urlsProvider).openExaboxWebsite();
                     },
-                    child: const Text("Learn more"),
+                    child: const Text('Learn more'),
                   ),
                 ),
               ],

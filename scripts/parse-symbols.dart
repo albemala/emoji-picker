@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,9 +15,9 @@ void main() {
       .replaceAll(' = ', ', ');
 
   var group = '';
-  final List<Map<String, String>> symbols = [];
+  final symbols = <Map<String, String>>[];
 
-  for (var line in const LineSplitter().convert(data)) {
+  for (final line in const LineSplitter().convert(data)) {
     if (line.trim().isEmpty) {
       continue;
     }

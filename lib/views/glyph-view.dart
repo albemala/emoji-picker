@@ -19,9 +19,7 @@ class GlyphView extends HookConsumerWidget {
     return Material(
       type: MaterialType.card,
       child: InkWell(
-        onTap: () {
-          focusNode.requestFocus();
-        },
+        onTap: focusNode.requestFocus,
         onDoubleTap: () {
           CopyGlyphAction(context, glyph.char).invoke(const CopyGlyphIntent());
         },

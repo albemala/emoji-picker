@@ -35,7 +35,7 @@ class GlyphDetailsView extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Name".toUpperCase(),
+                        'Name'.toUpperCase(),
                         style: Theme.of(context).textTheme.caption,
                         maxLines: 1,
                         overflow: TextOverflow.fade,
@@ -52,11 +52,11 @@ class GlyphDetailsView extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Unicode".toUpperCase(),
+                      'Unicode'.toUpperCase(),
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
-                      "U+${glyph!.char.runes.first.toRadixString(16).toUpperCase()}",
+                      'U+${glyph!.char.runes.first.toRadixString(16).toUpperCase()}',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
@@ -82,8 +82,8 @@ class GlyphDetailsView extends HookConsumerWidget {
             const SizedBox(height: 8),
             Text(
               Platform.isMacOS //
-                  ? "⌘+C or double-click to copy"
-                  : "Ctrl+C or double-click to copy",
+                  ? '⌘+C or double-click to copy'
+                  : 'Ctrl+C or double-click to copy',
               style: Theme.of(context).textTheme.caption,
             ),
           ],

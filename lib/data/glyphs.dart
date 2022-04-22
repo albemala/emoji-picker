@@ -74,17 +74,18 @@ void _loadEmojis() {
 
 Future<void> _loadSymbols() async {
   final source = await rootBundle.loadString('assets/data/symbols.json');
-  glyphs.addAll(
-    json.decode(source).map((symbol) {
-      return Glyph(
-        char: symbol['char'],
-        name: symbol['name'],
-        group: GlyphGroup(
-          name: symbol['group'],
-        ),
-      );
-    }).cast<Glyph>(),
+  final decodedSource = json.decode(source) as List<dynamic>;
+  final loadedGlyphs = decodedSource //
+      .map(
+    (dynamic symbol) => Glyph(
+      char: symbol['char'] as String? ?? '',
+      name: symbol['name'] as String? ?? '',
+      group: GlyphGroup(
+        name: symbol['group'] as String? ?? '',
+      ),
+    ),
   );
+  glyphs.addAll(loadedGlyphs);
 }
 
 Map<String, List<Glyph>> glyphsByGroup(List<Glyph> glyphs) {

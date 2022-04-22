@@ -1,10 +1,8 @@
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
-
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
 linter:
   rules:
     file_names: false
-    prefer_final_locals: true
-    unnecessary_parenthesis: true
+    public_member_api_docs: false
+    sort_constructors_first: false
+    lines_longer_than_80_chars: false

@@ -9,7 +9,7 @@ class ThemeBloc extends StateNotifier<ThemeMode> {
     _init();
   }
 
-  void _init() async {
+  Future<void> _init() async {
     state = await _loadTheme();
   }
 
@@ -26,6 +26,6 @@ class ThemeBloc extends StateNotifier<ThemeMode> {
 
   Future<void> _saveTheme(ThemeMode theme) async {
     final preferences = await SharedPreferences.getInstance();
-    preferences.setInt(_themeKey, theme.index);
+    await preferences.setInt(_themeKey, theme.index);
   }
 }

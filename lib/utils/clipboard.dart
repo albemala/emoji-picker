@@ -20,7 +20,7 @@ Future<void> copyToClipboard(BuildContext context, String? text) async {
           ),
           const SizedBox(width: 16),
           Text(
-            "copied to clipboard",
+            'copied to clipboard',
             style: TextStyle(
               fontSize: Theme.of(context).textTheme.subtitle1?.fontSize,
               fontFamily: GoogleFonts.titilliumWeb().fontFamily,

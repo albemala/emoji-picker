@@ -32,7 +32,7 @@ class SearchView extends HookConsumerWidget {
       focusNode: focusNode,
       controller: textEditingController,
       decoration: const InputDecoration(
-        hintText: "Search for emojis and symbols",
+        hintText: 'Search for emojis and symbols',
         contentPadding: EdgeInsets.symmetric(horizontal: 16),
       ),
       onChanged: (value) {

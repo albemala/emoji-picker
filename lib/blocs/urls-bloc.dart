@@ -1,8 +1,8 @@
 import 'package:url_launcher/url_launcher.dart';
 
-const _supportEmail = "mailto:albemala@gmail.com";
-const _twitter = "https://twitter.com/albemala";
-const _exaboxWebsite = "https://exabox.app";
+const _supportEmail = 'mailto:albemala@gmail.com';
+const _twitter = 'https://twitter.com/albemala';
+const _exaboxWebsite = 'https://exabox.app';
 
 class UrlsBloc {
   Future<void> sendFeedback() async {
