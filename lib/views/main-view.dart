@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:app/intents-actions.dart';
 import 'package:app/providers.dart';
-import 'package:app/views/about-view.dart';
 import 'package:app/views/glyph-details-view.dart';
 import 'package:app/views/glyph-list-view.dart';
-import 'package:app/views/search-view.dart';
+import 'package:app/views/top-bar-view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,6 @@ class MainView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
     final glyphWithDetails = ref.watch(glyphDetailsProvider);
     final searchViewFocusNode = useFocusNode();
     return Shortcuts(
@@ -42,32 +40,8 @@ class MainView extends HookConsumerWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 24),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SearchView(
-                        focusNode: searchViewFocusNode,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    IconButton(
-                      onPressed: () {
-                        ref.read(themeProvider.notifier).toggleTheme();
-                      },
-                      icon: theme == ThemeMode.light //
-                          ? const Icon(CupertinoIcons.moon)
-                          : const Icon(CupertinoIcons.sun_max),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        AboutView.show(context);
-                      },
-                      icon: const Icon(CupertinoIcons.info),
-                    ),
-                  ],
-                ),
+              TopBarView(
+                searchViewFocusNode: searchViewFocusNode,
               ),
               const Expanded(
                 child: GlyphListView(),

@@ -415,6 +415,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliver_tools:
+    dependency: "direct main"
+    description:
+      name: sliver_tools
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.5"
+  slivers:
+    dependency: "direct main"
+    description:
+      name: slivers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+2"
   source_span:
     dependency: transitive
     description:
