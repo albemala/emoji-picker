@@ -6,20 +6,20 @@ set -e
 #set -x
 
 
-cd .. || exit
-
 # read app version from pubspec.yaml
-appVersion=$(cat pubspec.yaml | grep version | awk '{ print $2 }' | cut -f1 -d "+")
+appVersion=$(dart get-app-version.dart)
 
 archiveDirectory="macos-builds/$appVersion"
 
-echo "------ setup ------"
+cd .. || exit
 
-# install gems
-(cd macos/ && bundle install)
+echo "------ setup ------"
 
 # remove existing archive folder for this version
 rm -rf "$archiveDirectory"
+
+# install gems
+(cd macos/ && bundle install && bundle update fastlane)
 
 fvm flutter clean
 fvm flutter build macos --release
@@ -49,15 +49,6 @@ mkdir -p "$standaloneArchiveDirectory"
 cp -a macos/build/Ejimo.app "$standaloneArchiveDirectory/Ejimo.app"
 cp macos/build/Ejimo.app.dSYM.zip "$standaloneArchiveDirectory/Ejimo.app.dSYM.zip"
 
-echo "------ upload standalone build to github ------"
-
 archiveFileName="Ejimo-macOS-$appVersion.tar.gz"
-
 # compress archive
-(cd macos-builds/"$appVersion"/standalone && tar -czf "$archiveFileName" Ejimo.app)
-
-# upload
-(cd scripts && ./create-release.bash "$appVersion")
-echo "------ IMPORTANT ------"
-echo "Remember to upload file $archiveFileName to GitHub"
-echo "-----------------------"
+(cd standaloneArchiveDirectory && tar -czf "$archiveFileName" Ejimo.app)

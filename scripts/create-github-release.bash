@@ -6,11 +6,12 @@ set -e
 #set -x
 
 
+# read app version from pubspec.yaml
+appVersion=$(dart get-app-version.dart)
+
 cd .. || exit
 
-appVersion="$1"
-
 # install gems
-bundle install
-
+bundle install && bundle update
+# create new github release
 env $(cat .env | xargs) bundle exec fastlane create_release version:"$appVersion"
