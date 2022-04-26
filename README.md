@@ -38,7 +38,7 @@ Works on all desktop operating systems: Ejimo is available on macOS, Windows and
 Available to download (for **free**) on the:
 
 - [macOS App Store](https://apps.apple.com/us/app/ejimo/id1598944603)
-- Windows Store (_Soon_)
+- [Windows Store](https://www.microsoft.com/it-it/p/ejimo/9pf0q1xp8lcx?rtc=1)
 - Linux Snap Store (_Soon_)
 
 Or from the [releases](https://github.com/albemala/emoji-picker/releases) page.
@@ -53,15 +53,17 @@ Setup, how to run and build: https://docs.flutter.dev/desktop
 
 ## Release process
 
-- Set new app version in _pubspec.yaml_ 
-- Run `./create-macos-builds.bash` from inside the _scripts_ folder
-  - The script will create an App Store build, a Standalone build and set up a new GitHub release
-  - The script will also tag the _main_ branch with the app version
-- Upload the Standalone build to GitHub under the new release
+- Set new app version by running `dart set-app-version.dart x.y.z` (from inside the _scripts_ folder)
+- Run `./create-macos-builds.bash` (from inside the _scripts_ folder)
+  - The script will create an App Store build and a Standalone build
+- Run `./create-windows-builds.ps1` (from inside the _scripts_ folder)
+  - The script will create an App Store build
+- Run `./create-github-release.bash` (from inside the _scripts_ folder)
+  - The script will create a new GitHub release and tag the _main_ branch with the app version
+- Upload the Standalone builds to GitHub under the new release
 
 ## Credits
 
 Created by [@albemala](https://github.com/albemala) ([Twitter](https://twitter.com/albemala))
 
 Unicode characters list created by Rodrigo Siqueira ([Source](https://gist.github.com/ivandrofly/0fe20773bd712b303f78))
-
