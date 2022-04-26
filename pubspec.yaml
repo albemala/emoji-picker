@@ -73,4 +73,3 @@ msix_config:
   icons_background_color: transparent
   languages: en-us
   architecture: x64
-  capabilities: internetClient

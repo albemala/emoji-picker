@@ -57,3 +57,4 @@ fastlane/readme.md
 .env
 
 macos-builds/
+windows-builds/
