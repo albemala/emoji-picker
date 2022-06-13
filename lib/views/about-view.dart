@@ -27,7 +27,10 @@ class AboutView extends HookConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [_AboutContentView(), _AdView()],
+        children: const [
+          _AboutContentView(),
+          _AdView(),
+        ],
       ),
     );
   }
@@ -38,7 +41,6 @@ class _AboutContentView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appInfo = ref.watch(appInfoProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       child: Column(
@@ -48,75 +50,103 @@ class _AboutContentView extends HookConsumerWidget {
           Wrap(
             spacing: 32,
             runSpacing: 24,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'assets/images/app-icon.png',
-                    width: 48,
-                    height: 48,
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        appInfo.appName(),
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                      Row(
-                        children: [
-                          FutureBuilder<String>(
-                            future: appInfo.appVersion(),
-                            builder: (context, snapshot) {
-                              return Text(
-                                snapshot.data ?? '',
-                                style: Theme.of(context).textTheme.caption,
-                              );
-                            },
-                          ),
-                          // const SizedBox(width: 8),
-                          // LinkButton(
-                          //   onPressed: context.read<AboutViewBloc>().showReleaseNotes,
-                          //   text: "What's new?",
-                          // ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Help & Support'),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref.read(urlsProvider).sendFeedback();
-                    },
-                    child: const Text('Send Feedback'),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Follow me!'),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      ref.read(urlsProvider).openTwitter();
-                    },
-                    child: const Text('Twitter'),
-                  ),
-                ],
-              ),
+            children: const [
+              _AppInfoView(),
+              _SupportView(),
+              _SocialView(),
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class _AppInfoView extends HookConsumerWidget {
+  const _AppInfoView();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appInfo = ref.watch(appInfoProvider);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image.asset(
+          'assets/images/app-icon.png',
+          width: 48,
+          height: 48,
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              appInfo.appName(),
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            Row(
+              children: [
+                FutureBuilder<String>(
+                  future: appInfo.appVersion(),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.data ?? '',
+                      style: Theme.of(context).textTheme.caption,
+                    );
+                  },
+                ),
+                // const SizedBox(width: 8),
+                // LinkButton(
+                //   onPressed: context.read<AboutViewBloc>().showReleaseNotes,
+                //   text: "What's new?",
+                // ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SupportView extends HookConsumerWidget {
+  const _SupportView();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Help & Support'),
+        const SizedBox(height: 8),
+        OutlinedButton(
+          onPressed: () {
+            ref.read(urlsProvider).sendFeedback();
+          },
+          child: const Text('Send Feedback'),
+        ),
+      ],
+    );
+  }
+}
+
+class _SocialView extends HookConsumerWidget {
+  const _SocialView();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Follow me!'),
+        const SizedBox(height: 8),
+        OutlinedButton(
+          onPressed: () {
+            ref.read(urlsProvider).openTwitter();
+          },
+          child: const Text('Twitter'),
+        ),
+      ],
     );
   }
 }
@@ -126,50 +156,54 @@ class _AdView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      color: Theme.of(context).backgroundColor,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            'assets/images/exabox-icon.png',
-            width: 48,
-            height: 48,
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Are you a software developer?'.toUpperCase(),
-                  style: Theme.of(context).textTheme.caption,
-                ),
-                Text(
-                  'Exabox: Essential tools for developers',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '''
+    return Material(
+      surfaceTintColor: Theme.of(context).colorScheme.primary,
+      elevation: Theme.of(context).brightness == Brightness.light ? 1 : 12,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/exabox-icon.png',
+              width: 48,
+              height: 48,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Are you a software developer?'.toUpperCase(),
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    'Exabox: Essential tools for developers',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '''
 30+ tools: convert/format JSON/YAML, encode/decode Base64, generate fake data, parse JWTs, transform text using multiple rules, and much more. 
 All in one single app. Work offline. Privacy-friendly.''',
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      ref.read(urlsProvider).openExaboxWebsite();
-                    },
-                    child: const Text('Learn more'),
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
-                ),
-              ],
+                  const SizedBox(height: 4),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        ref.read(urlsProvider).openExaboxWebsite();
+                      },
+                      child: const Text('Learn more'),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
