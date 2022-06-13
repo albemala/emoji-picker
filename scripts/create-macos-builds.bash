@@ -21,8 +21,8 @@ rm -rf "$archiveDirectory"
 # install gems
 (cd macos/ && bundle install && bundle update fastlane)
 
-fvm flutter clean
-fvm flutter build macos --release
+flutter clean
+flutter build macos --release
 
 echo "------ build for and upload to app store ------"
 

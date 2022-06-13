@@ -5,5 +5,5 @@
 cd .. || exit
 
 git gc
-fvm flutter clean
+flutter clean
 rm -rf macos/build/

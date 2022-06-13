@@ -52,7 +52,7 @@ flutter:
     - assets/images/
     - google_fonts/
 
-# fvm flutter pub run flutter_launcher_icons_maker:main && fvm flutter clean
+# flutter pub run flutter_launcher_icons_maker:main && flutter clean
 flutter_icons:
   android: false
   ios: false
