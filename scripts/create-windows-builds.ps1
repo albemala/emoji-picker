@@ -1,14 +1,21 @@
 
 # read app version from pubspec.yaml
 $AppVersion = & dart get-app-version.dart
-$ArchiveDirectory = "windows-builds/$AppVersion"
 
-cd ..
+$ScriptsDirectory = Get-Location
+$RootDirectory = "$ScriptsDirectory/.."
+$ArchiveDirectory = "$RootDirectory/windows-builds/$AppVersion"
+$AppStoreArchiveDirectory = "$ArchiveDirectory/appstore"
+$WebStoreArchiveDirectory = "$ArchiveDirectory/webstore"
+
+cd $RootDirectory
 
 echo "------ setup ------"
 
 # remove existing archive folder for this version
-rm -r -fo "$archiveDirectory"
+rm -r -fo "$ArchiveDirectory"
+New-Item -ItemType Directory -Force -Path $AppStoreArchiveDirectory
+New-Item -ItemType Directory -Force -Path $WebStoreArchiveDirectory
 
 flutter clean
 flutter build windows --release
@@ -21,6 +28,18 @@ flutter pub run msix:create --store -i $EnvVariables.IdentityName -b $EnvVariabl
 
 echo "------ archive app store build ------"
 
-$AppStoreArchiveDirectory = "$ArchiveDirectory/appstore"
-mkdir "$AppStoreArchiveDirectory"
-cp build/windows/runner/Release/app.msix "$AppStoreArchiveDirectory/Ejimo.msix"
+Copy-Item -Path build/windows/runner/Release/app.msix -Destination "$AppStoreArchiveDirectory/Ejimo.msix"
+
+echo "------ archive web store build ------"
+
+Copy-Item -Path build/windows/runner/Release/data -Destination $WebStoreArchiveDirectory -Recurse
+Copy-Item -Path build/windows/runner/Release/emoji_picker.exe -Destination $WebStoreArchiveDirectory
+Copy-Item -Path build/windows/runner/Release/* -Include *.dll -Destination $WebStoreArchiveDirectory
+Copy-Item -Path C:/Windows/System32/msvcp140.dll -Destination $WebStoreArchiveDirectory
+Copy-Item -Path C:/Windows/System32/vcruntime140.dll -Destination $WebStoreArchiveDirectory
+Copy-Item -Path C:/Windows/System32/vcruntime140_1.dll -Destination $WebStoreArchiveDirectory
+
+cd $WebStoreArchiveDirectory
+Start-Process "C:\Program Files\7-Zip\7z.exe" -ArgumentList "a","-tzip","../Ejimo-Windows-$AppVersion.zip",'.' -wait
+
+cd $ScriptsDirectory
