@@ -9,9 +9,9 @@ class TopBarView extends HookConsumerWidget {
   final FocusNode searchViewFocusNode;
 
   const TopBarView({
-    Key? key,
+    super.key,
     required this.searchViewFocusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

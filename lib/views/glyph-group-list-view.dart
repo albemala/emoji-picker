@@ -6,9 +6,9 @@ class GlyphGroupListView extends StatelessWidget {
   final List<Glyph> glyphs;
 
   const GlyphGroupListView({
-    Key? key,
+    super.key,
     required this.glyphs,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -18,6 +18,12 @@ class UrlsBloc {
   }
 
   Future<void> _open(String url) async {
-    if (await canLaunch(url)) await launch(url);
+    final uri = Uri.tryParse(url);
+    if (uri == null) return;
+
+    final canOpenUrl = await canLaunchUrl(uri);
+    if (!canOpenUrl) return;
+
+    await launchUrl(uri);
   }
 }

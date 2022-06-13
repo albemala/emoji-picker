@@ -5,9 +5,9 @@ class GlyphGroupTitleView extends StatelessWidget {
   final String title;
 
   const GlyphGroupTitleView({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

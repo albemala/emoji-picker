@@ -7,9 +7,9 @@ class SearchView extends HookConsumerWidget {
   final FocusNode focusNode;
 
   const SearchView({
-    Key? key,
+    super.key,
     required this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

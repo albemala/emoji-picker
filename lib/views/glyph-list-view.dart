@@ -7,8 +7,8 @@ import 'package:sliver_tools/sliver_tools.dart';
 
 class GlyphListView extends HookConsumerWidget {
   const GlyphListView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

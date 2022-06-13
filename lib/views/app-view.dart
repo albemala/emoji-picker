@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppView extends HookConsumerWidget {
-  const AppView({Key? key}) : super(key: key);
+  const AppView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -17,8 +17,8 @@ class AboutView extends HookConsumerWidget {
   }
 
   const AboutView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,9 +34,7 @@ class AboutView extends HookConsumerWidget {
 }
 
 class _AboutContentView extends HookConsumerWidget {
-  const _AboutContentView({
-    Key? key,
-  }) : super(key: key);
+  const _AboutContentView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -124,9 +122,7 @@ class _AboutContentView extends HookConsumerWidget {
 }
 
 class _AdView extends HookConsumerWidget {
-  const _AdView({
-    Key? key,
-  }) : super(key: key);
+  const _AdView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

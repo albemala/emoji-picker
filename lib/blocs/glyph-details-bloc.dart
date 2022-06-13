@@ -6,6 +6,7 @@ class GlyphDetailsBloc extends StateNotifier<Glyph?> {
 
   bool get isVisible => state != null;
 
+  // ignore: use_setters_to_change_properties
   void showDetailsFor(Glyph? glyph) {
     state = glyph;
   }

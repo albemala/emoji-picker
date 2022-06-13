@@ -8,9 +8,9 @@ class GlyphDetailsView extends HookConsumerWidget {
   final Glyph? glyph;
 
   const GlyphDetailsView({
-    Key? key,
+    super.key,
     required this.glyph,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

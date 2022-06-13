@@ -5,14 +5,15 @@ import 'package:app/providers.dart';
 import 'package:app/views/glyph-details-view.dart';
 import 'package:app/views/glyph-list-view.dart';
 import 'package:app/views/top-bar-view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MainView extends HookConsumerWidget {
-  const MainView({Key? key}) : super(key: key);
+  const MainView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
