@@ -31,6 +31,7 @@ dependencies:
   shared_preferences: ^2.0.13
   url_launcher: ^6.0.20
   package_info_plus: ^1.4.2
+  cross_platform: ^3.0.1
 
 dev_dependencies:
   flutter_test:

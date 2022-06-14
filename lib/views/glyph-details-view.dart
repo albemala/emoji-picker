@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:app/data/glyphs.dart';
+import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -81,7 +80,9 @@ class GlyphDetailsView extends HookConsumerWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                Platform.isMacOS //
+                // TODO this doesn't work well on web
+                // TODO change copy on android and ios
+                cross_platform.Platform.isMacOS //
                     ? '⌘+C or double-click to copy'
                     : 'Ctrl+C or double-click to copy',
                 style: Theme.of(context).textTheme.caption,

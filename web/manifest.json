@@ -1,0 +1,23 @@
+{
+    "name": "Ejimo - Comprehensive emoji and symbol picker",
+    "short_name": "Ejimo",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#6200EE",
+    "description": "Comprehensive emoji and symbol picker",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
