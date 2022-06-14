@@ -56,7 +56,7 @@ flutter:
 # flutter pub run flutter_launcher_icons_maker:main && flutter clean
 flutter_icons:
   android: false
-  ios: false
+  ios: true
   macos: true
   windows: true
   web: true
