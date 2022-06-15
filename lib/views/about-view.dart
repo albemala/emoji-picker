@@ -56,7 +56,7 @@ class _AboutContentView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Wrap(
       spacing: 24,
-      runSpacing: 16,
+      runSpacing: 24,
       children: const [
         _AppInfoView(),
         _SupportView(),

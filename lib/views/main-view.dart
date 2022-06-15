@@ -37,19 +37,29 @@ class MainView extends HookConsumerWidget {
           CopyGlyphIntent: CopyGlyphAction(context, glyphWithDetails?.char),
         },
         child: Scaffold(
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TopBarView(
-                searchViewFocusNode: searchViewFocusNode,
+          body: Material(
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TopBarView(
+                    searchViewFocusNode: searchViewFocusNode,
+                  ),
+                  const Expanded(
+                    child: GlyphListView(),
+                  ),
+                  GlyphDetailsView(
+                    glyph: glyphWithDetails,
+                    onCopyGlyph: () {
+                      CopyGlyphAction(context, glyphWithDetails?.char).invoke(const CopyGlyphIntent());
+                    },
+                    onClose: () {
+                      ref.read(glyphDetailsProvider.notifier).hideDetails();
+                    },
+                  ),
+                ],
               ),
-              const Expanded(
-                child: GlyphListView(),
-              ),
-              GlyphDetailsView(
-                glyph: glyphWithDetails,
-              ),
-            ],
+            ),
           ),
         ),
       ),

@@ -13,15 +13,19 @@ class GlyphListView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final visibleGlyphs = ref.watch(visibleGlyphsProvider);
-    return CustomScrollView(
-      slivers: visibleGlyphs.entries.map((entry) {
-        return MultiSliver(
-          children: [
-            GlyphGroupTitleView(title: entry.key),
-            GlyphGroupListView(glyphs: entry.value),
-          ],
-        );
-      }).toList(),
+    return Material(
+      surfaceTintColor: Theme.of(context).colorScheme.primary,
+      elevation: Theme.of(context).brightness == Brightness.light ? 1 : 12,
+      child: CustomScrollView(
+        slivers: visibleGlyphs.entries.map((entry) {
+          return MultiSliver(
+            children: [
+              GlyphGroupTitleView(title: entry.key),
+              GlyphGroupListView(glyphs: entry.value),
+            ],
+          );
+        }).toList(),
+      ),
     );
   }
 }
