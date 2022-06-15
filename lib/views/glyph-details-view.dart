@@ -117,15 +117,10 @@ class _SmallScreenView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          // crossAxisAlignment: CrossAxisAlignment.baseline,
-          // textBaseline: TextBaseline.ideographic,
           children: [
-            Container(
-              // color: Theme.of(context).colorScheme.secondary,
-              child: _GlyphView(
-                glyph: glyph!,
-                onCopyGlyph: onCopyGlyph,
-              ),
+            _GlyphView(
+              glyph: glyph!,
+              onCopyGlyph: onCopyGlyph,
             ),
             const SizedBox(width: 16),
             Flexible(
