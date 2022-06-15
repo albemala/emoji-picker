@@ -7,7 +7,7 @@ class VisibleGlyphsBloc extends StateNotifier<Map<String, List<Glyph>>> {
 
   void onSearchChanged(String searchTerm) {
     if (searchTerm.isEmpty) {
-      state = glyphsByGroup(glyphs);
+      clearSearch();
     } else {
       final visibleGlyphs = glyphs.where((glyph) {
         return glyph.name.toLowerCase().contains(searchTerm.toLowerCase()) ||
@@ -17,5 +17,9 @@ class VisibleGlyphsBloc extends StateNotifier<Map<String, List<Glyph>>> {
       }).toList();
       state = glyphsByGroup(visibleGlyphs);
     }
+  }
+
+  void clearSearch() {
+    state = glyphsByGroup(glyphs);
   }
 }

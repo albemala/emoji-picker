@@ -1,4 +1,5 @@
 import 'package:app/providers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,9 +32,17 @@ class SearchView extends HookConsumerWidget {
       autofocus: true,
       focusNode: focusNode,
       controller: textEditingController,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: 'Search for emojis and symbols',
-        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+        suffixIcon: IconButton(
+          iconSize: 16,
+          icon: const Icon(CupertinoIcons.clear),
+          onPressed: () {
+            textEditingController.clear();
+            ref.read(visibleGlyphsProvider.notifier).clearSearch();
+          },
+        ),
       ),
       onChanged: (value) {
         ref.read(visibleGlyphsProvider.notifier).onSearchChanged(value);
