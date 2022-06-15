@@ -21,6 +21,7 @@ dependencies:
   google_fonts: ^3.0.1
   sliver_tools: ^0.2.5
   slivers: ^0.0.1+2
+  super_responsive: ^0.1.6
 
   emojis: ^0.9.9
 

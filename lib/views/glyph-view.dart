@@ -28,9 +28,10 @@ class GlyphView extends HookConsumerWidget {
         onFocusChange: (isFocused) {
           if (isFocused) {
             ref.read(glyphDetailsProvider.notifier).showDetailsFor(glyph);
-          } else {
-            ref.read(glyphDetailsProvider.notifier).hideDetails();
           }
+          // else {
+          //   ref.read(glyphDetailsProvider.notifier).hideDetails();
+          // }
         },
         child: Center(
           child: Text(
