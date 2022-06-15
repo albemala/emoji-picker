@@ -19,7 +19,7 @@ dependencies:
   cupertino_icons: ^1.0.4
   flex_color_scheme: ^5.0.1
   google_fonts: ^3.0.1
-  sliver_tools: ^0.2.5
+  sliver_tools: ^0.2.7
   slivers: ^0.0.1+2
   super_responsive: ^0.1.6
 
@@ -39,7 +39,7 @@ dev_dependencies:
     sdk: flutter
 
   # linting
-  very_good_analysis: ^3.0.0
+  very_good_analysis: ^3.0.1
 
   flutter_launcher_icons_maker: ^0.10.2
 
