@@ -96,12 +96,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "emoji_picker" "\0"
+            VALUE "FileDescription", "Comprehensive emoji and symbol picker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "emoji_picker" "\0"
+            VALUE "InternalName", "Ejimo" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "emoji_picker.exe" "\0"
-            VALUE "ProductName", "emoji_picker" "\0"
+            VALUE "OriginalFilename", "Ejimo.exe" "\0"
+            VALUE "ProductName", "Ejimo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

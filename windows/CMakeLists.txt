@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(emoji_picker LANGUAGES CXX)
 
-set(BINARY_NAME "emoji_picker")
+set(BINARY_NAME "Ejimo")
 
 cmake_policy(SET CMP0063 NEW)
 

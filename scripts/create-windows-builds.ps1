@@ -33,7 +33,7 @@ Copy-Item -Path build/windows/runner/Release/app.msix -Destination "$AppStoreArc
 echo "------ archive web store build ------"
 
 Copy-Item -Path build/windows/runner/Release/data -Destination $WebStoreArchiveDirectory -Recurse
-Copy-Item -Path build/windows/runner/Release/emoji_picker.exe -Destination $WebStoreArchiveDirectory
+Copy-Item -Path build/windows/runner/Release/Ejimo.exe -Destination $WebStoreArchiveDirectory
 Copy-Item -Path build/windows/runner/Release/* -Include *.dll -Destination $WebStoreArchiveDirectory
 Copy-Item -Path C:/Windows/System32/msvcp140.dll -Destination $WebStoreArchiveDirectory
 Copy-Item -Path C:/Windows/System32/vcruntime140.dll -Destination $WebStoreArchiveDirectory
