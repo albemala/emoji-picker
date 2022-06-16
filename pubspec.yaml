@@ -56,13 +56,15 @@ flutter:
 
 # flutter pub run flutter_launcher_icons_maker:main && flutter clean
 flutter_icons:
-  android: false
+  android: true
   ios: true
   macos: true
   windows: true
   web: true
   image_path: "assets/images/app-icon.png"
-  image_path_macos: "assets/images/app-icon.png"
+  adaptive_icon_background: "#000000"
+#  adaptive_icon_background: "assets/app-icon/android-background.png"
+  adaptive_icon_foreground: "assets/android-foreground.png"
 
 msix_config:
   # Windows Store
