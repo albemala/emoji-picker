@@ -62,9 +62,10 @@ flutter_icons:
   windows: true
   web: true
   image_path: "assets/images/app-icon.png"
+  image_path_ios: "assets/app-icon-ios.png"
   adaptive_icon_background: "#000000"
 #  adaptive_icon_background: "assets/app-icon/android-background.png"
-  adaptive_icon_foreground: "assets/android-foreground.png"
+  adaptive_icon_foreground: "assets/app-icon-android-foreground.png"
 
 msix_config:
   # Windows Store
