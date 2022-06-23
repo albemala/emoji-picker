@@ -1,0 +1,21 @@
+platform :ios do
+
+  lane :app_store do
+    build_mac_app(
+      scheme: "Runner",
+      export_method: "app-store",
+      export_team_id: ENV["TEAM_ID"],
+      export_options: {
+        provisioningProfiles: {
+          "me.albemala.ejimo" => "Ejimo App Store",
+        },
+      },
+      output_directory: "build",
+    )
+    upload_to_app_store(
+      skip_metadata: true,
+      skip_screenshots: true,
+    )
+  end
+
+end
