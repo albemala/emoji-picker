@@ -4,12 +4,12 @@ platform :mac do
     build_mac_app(
       scheme: "Runner",
       export_method: "app-store",
+      export_team_id: ENV["TEAM_ID"],
       export_options: {
         provisioningProfiles: {
           "me.albemala.ejimo" => "Ejimo - App Store - Mac App Distribution",
-        }
+        },
       },
-      export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
       output_directory: "build",
     )
     upload_to_app_store(
@@ -22,19 +22,19 @@ platform :mac do
     build_mac_app(
       scheme: "Runner",
       export_method: "developer-id",
+      export_team_id: ENV["TEAM_ID"],
       export_options: {
         provisioningProfiles: {
           "me.albemala.ejimo" => "Ejimo - Developer ID Application",
-        }
+        },
       },
-      export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
       output_directory: "build",
     )
     notarize(
-      asc_provider: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
+      asc_provider: ENV["TEAM_ID"],
       package: "./build/Ejimo.app",
-#       print_log: true,
-#       verbose: true,
+      print_log: true,
+      verbose: true,
     )
   end
 
