@@ -45,6 +45,9 @@ dev_dependencies:
 
   msix: ^3.5.1
   io: ^1.0.3
+  glob: ^2.1.0
+  pub_semver: ^2.1.1
+  archive: ^3.3.0
 
 flutter:
   uses-material-design: true

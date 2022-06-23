@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   archive:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: archive
       url: "https://pub.dartlang.org"
@@ -191,6 +191,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.2.0"
+  glob:
+    dependency: "direct dev"
+    description:
+      name: glob
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -402,7 +409,7 @@ packages:
     source: hosted
     version: "4.2.4"
   pub_semver:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: pub_semver
       url: "https://pub.dartlang.org"
