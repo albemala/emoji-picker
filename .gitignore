@@ -54,5 +54,9 @@ fastlane/readme.md
 
 .env
 
+.firebase/
+.firebaserc
+
 macos-builds/
 windows-builds/
+web-builds/
