@@ -2,12 +2,12 @@
 
 import 'dart:io';
 
-import 'build_utils.dart';
+import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
   final pubspecFile = File('pubspec.yaml');
-  final appVersion = await getVersion(pubspecFile);
-  final version = '${appVersion.major}.${appVersion.minor}.${appVersion.patch}';
+  final fullVersion = await getFullVersion(pubspecFile);
+  final version = getVersion(fullVersion);
 
   final environment = readEnvFile(File('.env'));
 
@@ -18,9 +18,9 @@ Future<void> main() async {
   print('------ Setup ------');
 
   await runFlutterClean();
+
   // Remove existing archive folder for this version
   deleteDirectory(archivePath);
-
   // Create archive folders
   createDirectory(appStoreArchivePath);
   createDirectory(standaloneArchivePath);
@@ -31,7 +31,7 @@ Future<void> main() async {
 
   // Build
   print('Running msix');
-  final flutterBuildResult = await Process.run(
+  await runCommand(
     'flutter',
     [
       'pub',
@@ -46,7 +46,6 @@ Future<void> main() async {
       environment['PublisherDisplayName'] ?? '',
     ],
   );
-  evaluateResult(flutterBuildResult);
 
   print('------ Archive App Store ------');
 
@@ -65,5 +64,8 @@ Future<void> main() async {
   copyFile(from: 'C:/Windows/System32/vcruntime140_1.dll', to: '$standaloneArchivePath/vcruntime140_1.dll');
 
   // Compress standalone app
-  zipDirectory(path: standaloneArchivePath);
+  zipDirectory(
+    path: standaloneArchivePath,
+    zipFilePath: '$standaloneArchivePath/Ejimo-Windows-$version.zip',
+  );
 }

@@ -2,16 +2,17 @@
 repository_name = "albemala/emoji-picker"
 
 lane :create_release do |options|
+    version - options[:version]
     release = get_github_release(
         url: repository_name,
-        version: options[:version]
+        version: version
     )
     if release == nil
         set_github_release(
             repository_name: repository_name,
             api_token: ENV["GITHUB_TOKEN"],
-            name: "v#{options[:version]}",
-            tag_name: "v#{options[:version]}",
+            name: "v#{version}",
+            tag_name: "v#{version}",
             commitish: "main",
             description: "",
         )

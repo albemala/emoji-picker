@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   archive:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: archive
       url: "https://pub.dartlang.org"
@@ -146,6 +146,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_build_helpers:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: "79f4b59984084c5095a44f6ee768be62461a4653"
+      resolved-ref: "79f4b59984084c5095a44f6ee768be62461a4653"
+      url: "https://github.com/albemala/flutter_build_helpers.git"
+    source: git
+    version: "0.0.1"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -192,7 +201,7 @@ packages:
     source: hosted
     version: "7.2.0"
   glob:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: glob
       url: "https://pub.dartlang.org"
@@ -234,7 +243,7 @@ packages:
     source: hosted
     version: "3.2.0"
   io:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: io
       url: "https://pub.dartlang.org"
@@ -409,7 +418,7 @@ packages:
     source: hosted
     version: "4.2.4"
   pub_semver:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: pub_semver
       url: "https://pub.dartlang.org"
@@ -659,5 +668,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
+  dart: ">=2.17.3 <3.0.0"
   flutter: ">=3.0.0"

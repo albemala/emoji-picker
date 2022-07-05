@@ -2,33 +2,30 @@
 
 import 'dart:io';
 
-import 'build_utils.dart';
+import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
   final pubspecFile = File('pubspec.yaml');
-  final appVersion = await getVersion(pubspecFile);
-  final version = '${appVersion.major}.${appVersion.minor}.${appVersion.patch}';
+  final fullVersion = await getFullVersion(pubspecFile);
+  final version = getVersion(fullVersion);
 
   final environment = readEnvFile(File('.env'));
 
   const buildPath = 'macos/build';
 
   final archivePath = 'macos-builds/$version';
-  final appStoreArchivePath = '$archivePath/appstore';
+  // final appStoreArchivePath = '$archivePath/appstore';
   final standaloneArchivePath = '$archivePath/standalone';
 
   print('------ Setup ------');
 
   await runFlutterClean();
+
   // Remove existing archive folder for this version
   deleteDirectory(archivePath);
-
   // Create archive folders
   // createDirectory(appStoreArchivePath);
   createDirectory(standaloneArchivePath);
-
-  // Install gems
-  await installAndUpdateFastlane(directory: 'macos');
 
   await runFlutterBuild('macos');
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd .. || exit
+# Usage: bash scripts/format-code.bash
 
 dart format -l 120 --fix lib/

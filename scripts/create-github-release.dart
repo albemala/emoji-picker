@@ -1,23 +1,19 @@
 import 'dart:io';
 
-import 'build_utils.dart';
+import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
   final pubspecFile = File('pubspec.yaml');
-  final appVersion = await getVersion(pubspecFile);
-  final version = '${appVersion.major}.${appVersion.minor}.${appVersion.patch}';
+  final fullVersion = await getFullVersion(pubspecFile);
+  final version = getVersion(fullVersion);
 
   final environment = readEnvFile(File('.env'));
 
-  // Install gems
-  await installAndUpdateFastlane(directory: '.');
-
   // Create new GitHub release
-  final bundleExecFastlaneResult = await Process.run(
-    'bundle',
-    ['exec', 'fastlane', 'create_release', 'version:"$version"'],
+  await runCommand(
+    'fastlane',
+    ['create_release', 'version:"$version"'],
     workingDirectory: '.',
     environment: environment,
   );
-  evaluateResult(bundleExecFastlaneResult);
 }

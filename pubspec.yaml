@@ -40,14 +40,15 @@ dev_dependencies:
 
   # linting
   very_good_analysis: ^3.0.1
-
+  # app icons
   flutter_launcher_icons_maker: ^0.10.2
-
+  # windows
   msix: ^3.5.1
-  io: ^1.0.3
-  glob: ^2.1.0
-  pub_semver: ^2.1.1
-  archive: ^3.3.0
+  # build scripts
+  flutter_build_helpers:
+    git:
+      url: https://github.com/albemala/flutter_build_helpers.git
+      ref: 79f4b59984084c5095a44f6ee768be62461a4653
 
 flutter:
   uses-material-design: true
