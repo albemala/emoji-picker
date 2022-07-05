@@ -1,3 +1,13 @@
+# 1.2.0
+
+- Ejimo is now available for 
+  - [Web](https://ejimo-app.web.app), 
+  - [Windows](https://apps.microsoft.com/store/detail/ejimo/9PF0Q1XP8LCX), 
+  - [Android](https://play.google.com/store/apps/details?id=me.albemala.ejimo) and 
+  - [iOS](https://apps.apple.com/us/app/ejimo/id1598944603).
+- Improved UI in a few places.
+- Targeting Dart 2.17 and Flutter 3 stable.
+
 # 1.1.0
 
 - Changed emojis list UI design
