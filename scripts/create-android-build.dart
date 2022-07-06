@@ -1,9 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
-  final environment = readEnvFile(File('.env'));
+  final environment = readEnvFile(path: '.env');
+
+  // Install gems
+  await installFastlane(directory: 'android');
+  await updateFastlane(directory: 'android');
 
   // Clean previous builds
   deleteDirectory('android/build');

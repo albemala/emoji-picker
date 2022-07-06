@@ -2,9 +2,8 @@
 
 import 'dart:io';
 
-import 'package:pub_semver/pub_semver.dart';
-
 import 'package:flutter_build_helpers/flutter_build_helpers.dart';
+import 'package:pub_semver/pub_semver.dart';
 
 /// Usage: dart scripts/set-app-version.dart x.y.z
 Future<void> main(List<String> arguments) async {
@@ -16,7 +15,7 @@ Future<void> main(List<String> arguments) async {
 
   final pubspecFile = File('pubspec.yaml');
 
-  final currentAppVersion = await getFullVersion(pubspecFile);
+  final currentAppVersion = await getFullVersion(pubspecFilePath: pubspecFile.path);
   final currentBuildNumber = currentAppVersion.build.first as int? ?? 1;
 
   final newVersion = Version.parse(arguments[0]);

@@ -1,15 +1,12 @@
 // ignore_for_file: avoid_print
 
-import 'dart:io';
-
 import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
-  final pubspecFile = File('pubspec.yaml');
-  final fullVersion = await getFullVersion(pubspecFile);
+  final fullVersion = await getFullVersion(pubspecFilePath: 'pubspec.yaml');
   final version = getVersion(fullVersion);
 
-  final environment = readEnvFile(File('.env'));
+  final environment = readEnvFile(path: '.env');
 
   const buildPath = 'macos/build';
 
@@ -19,13 +16,17 @@ Future<void> main() async {
 
   print('------ Setup ------');
 
-  await runFlutterClean();
+  // Install gems
+  await installFastlane(directory: 'macos');
+  await updateFastlane(directory: 'macos');
 
   // Remove existing archive folder for this version
   deleteDirectory(archivePath);
   // Create archive folders
   // createDirectory(appStoreArchivePath);
   createDirectory(standaloneArchivePath);
+
+  await runFlutterClean();
 
   await runFlutterBuild('macos');
 

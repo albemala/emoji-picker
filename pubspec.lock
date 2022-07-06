@@ -150,8 +150,8 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: "79f4b59984084c5095a44f6ee768be62461a4653"
-      resolved-ref: "79f4b59984084c5095a44f6ee768be62461a4653"
+      ref: "9f15d7049f048eba9c2b8d62730e8e473e0dec41"
+      resolved-ref: "9f15d7049f048eba9c2b8d62730e8e473e0dec41"
       url: "https://github.com/albemala/flutter_build_helpers.git"
     source: git
     version: "0.0.1"

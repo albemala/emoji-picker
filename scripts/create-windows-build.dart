@@ -1,15 +1,12 @@
 // ignore_for_file: avoid_print
 
-import 'dart:io';
-
 import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
-  final pubspecFile = File('pubspec.yaml');
-  final fullVersion = await getFullVersion(pubspecFile);
+  final fullVersion = await getFullVersion(pubspecFilePath: 'pubspec.yaml');
   final version = getVersion(fullVersion);
 
-  final environment = readEnvFile(File('.env'));
+  final environment = readEnvFile(path: '.env');
 
   final archivePath = 'windows-builds/$version';
   final appStoreArchivePath = '$archivePath/appstore';
@@ -17,13 +14,13 @@ Future<void> main() async {
 
   print('------ Setup ------');
 
-  await runFlutterClean();
-
   // Remove existing archive folder for this version
   deleteDirectory(archivePath);
   // Create archive folders
   createDirectory(appStoreArchivePath);
   createDirectory(standaloneArchivePath);
+
+  await runFlutterClean();
 
   await runFlutterBuild('windows');
 

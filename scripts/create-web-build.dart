@@ -1,24 +1,21 @@
-import 'dart:io';
-
 import 'package:flutter_build_helpers/flutter_build_helpers.dart';
 
 Future<void> main() async {
-  final pubspecFile = File('pubspec.yaml');
-  final fullVersion = await getFullVersion(pubspecFile);
+  final fullVersion = await getFullVersion(pubspecFilePath: 'pubspec.yaml');
   final version = getVersion(fullVersion);
 
-  final environment = readEnvFile(File('.env'));
+  final environment = readEnvFile(path: '.env');
 
   final archivePath = 'web-builds/$version';
 
   print('------ Setup ------');
 
-  await runFlutterClean();
-
   // Remove existing archive folder for this version
   deleteDirectory(archivePath);
   // Create archive folders
   createDirectory(archivePath);
+
+  await runFlutterClean();
 
   print('------ Build ------');
 
