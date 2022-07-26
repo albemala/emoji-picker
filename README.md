@@ -67,7 +67,7 @@ Setup, how to run and build: https://docs.flutter.dev/desktop
 
 🗺️ **[WMap](https://wmap.albemala.me/)** — Create beautiful, minimal, custom map wallpapers and backgrounds for your phone or tablet.
 
-🎨 **iro-iro** ([Android](https://play.google.com/store/search?q=iro-iro)/[iOS](https://apps.apple.com/us/app/iro-iro-relaxing-color-puzzle/id1563030881/)) — Rearrange the colors to form beautiful patterns in this relaxing color puzzle game.
+🎨 **[iro‿iro](https://iro-iro.albemala.me/)** — Rearrange the colors to form beautiful patterns in this relaxing color puzzle game.
 
 ## Credits
 
