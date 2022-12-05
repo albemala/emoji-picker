@@ -1,20 +1,13 @@
 import 'dart:convert';
 
-import 'package:emojis/emoji.dart';
+import 'package:app/models/emoji/emoji.dart';
+import 'package:app/models/symbol/symbol.dart';
 import 'package:flutter/services.dart';
-
-class GlyphGroup {
-  final String name;
-
-  const GlyphGroup({
-    required this.name,
-  });
-}
 
 class Glyph {
   final String char;
   final String name;
-  final GlyphGroup group;
+  final String group;
 
   const Glyph({
     required this.char,
@@ -23,79 +16,56 @@ class Glyph {
   });
 }
 
-String getEmojiGroupName(EmojiGroup group) {
-  switch (group) {
-    case EmojiGroup.smileysEmotion:
-      return 'Smileys & Emotion';
-    case EmojiGroup.activities:
-      return 'Activities';
-    case EmojiGroup.peopleBody:
-      return 'People & Body';
-    case EmojiGroup.objects:
-      return 'Objects';
-    case EmojiGroup.travelPlaces:
-      return 'Travel & Places';
-    case EmojiGroup.component:
-      return 'Component';
-    case EmojiGroup.animalsNature:
-      return 'Animals & Nature';
-    case EmojiGroup.foodDrink:
-      return 'Food & Drink';
-    case EmojiGroup.symbols:
-      return 'Symbols';
-    case EmojiGroup.flags:
-      return 'Flags';
-  }
-}
-
 List<Glyph> glyphs = [];
 
 Future<void> loadGlyphs() async {
-  _loadEmojis();
+  await _loadEmojis();
   await _loadSymbols();
 }
 
-void _loadEmojis() {
+Future<void> _loadEmojis() async {
+  final emojisDataFile = await rootBundle.loadString('assets/data/emojis.json');
+  final emojisData = json.decode(emojisDataFile) as List<dynamic>;
+  final emojis = emojisData
+      .map((item) => Emoji.fromJson(item as Map<String, dynamic>))
+      .toList();
   glyphs.addAll(
-    Emoji.all()
-        // Remove skin tones
-        .where((element) => !element.modifiable)
-        .map((emoji) {
-      return Glyph(
+    emojis.map(
+      (emoji) => Glyph(
         char: emoji.char,
         name: emoji.name,
-        group: GlyphGroup(
-          name: getEmojiGroupName(emoji.emojiGroup),
-        ),
-      );
-    }),
+        group: emoji.group,
+      ),
+    ),
   );
 }
 
 Future<void> _loadSymbols() async {
-  final source = await rootBundle.loadString('assets/data/symbols.json');
-  final decodedSource = json.decode(source) as List<dynamic>;
-  final loadedGlyphs = decodedSource //
-      .map(
-    (dynamic symbol) => Glyph(
-      char: symbol['char'] as String? ?? '',
-      name: symbol['name'] as String? ?? '',
-      group: GlyphGroup(
-        name: symbol['group'] as String? ?? '',
+  final symbolsDataFile =
+      await rootBundle.loadString('assets/data/symbols.json');
+  final symbolsData = json.decode(symbolsDataFile) as List<dynamic>;
+  final symbols = symbolsData
+      .map((item) => Symbol.fromJson(item as Map<String, dynamic>))
+      .toList();
+  glyphs.addAll(
+    symbols.map(
+      (symbol) => Glyph(
+        char: String.fromCharCode(symbol.charcode),
+        name: symbol.name,
+        group: symbol.group,
       ),
     ),
   );
-  glyphs.addAll(loadedGlyphs);
 }
 
 Map<String, List<Glyph>> glyphsByGroup(List<Glyph> glyphs) {
   final map = <String, List<Glyph>>{};
   for (final glyph in glyphs) {
-    if (map.containsKey(glyph.group.name)) {
-      map[glyph.group.name]?.add(glyph);
-    } else {
-      map[glyph.group.name] = [glyph];
-    }
+    map.update(
+      glyph.group,
+      ifAbsent: () => [glyph],
+      (value) => value..add(glyph),
+    );
   }
   return map;
 }
