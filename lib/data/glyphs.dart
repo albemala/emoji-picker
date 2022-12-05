@@ -8,11 +8,13 @@ import 'package:flutter/services.dart';
 class Glyph {
   final String char;
   final String name;
+  final List<String> keywords;
   final String group;
 
   const Glyph({
     required this.char,
     required this.name,
+    required this.keywords,
     required this.group,
   });
 }
@@ -35,6 +37,7 @@ Future<void> _loadEmojis() async {
       (emoji) => Glyph(
         char: emoji.char,
         name: emoji.name.toFirstUpperCase(),
+        keywords: emoji.keywords,
         group: emoji.group,
       ),
     ),
@@ -53,6 +56,7 @@ Future<void> _loadSymbols() async {
       (symbol) => Glyph(
         char: String.fromCharCode(symbol.charcode),
         name: symbol.name,
+        keywords: [],
         group: symbol.group,
       ),
     ),
