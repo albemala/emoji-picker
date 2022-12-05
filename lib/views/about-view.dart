@@ -27,7 +27,6 @@ class AboutView extends HookConsumerWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 480),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Padding(
@@ -36,7 +35,9 @@ class AboutView extends HookConsumerWidget {
             ),
             Material(
               surfaceTintColor: Theme.of(context).colorScheme.primary,
-              elevation: Theme.of(context).brightness == Brightness.light ? 1 : 12,
+              elevation: Theme.of(context).brightness == Brightness.light //
+                  ? 1
+                  : 12,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                 child: _AdView(),
@@ -76,14 +77,16 @@ class _AppInfoView extends HookConsumerWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          'assets/images/app-icon.png',
-          width: 48,
-          height: 48,
+        Transform.translate(
+          offset: const Offset(0, 2),
+          child: Image.asset(
+            'assets/images/app-icon.png',
+            width: 48,
+            height: 48,
+          ),
         ),
         const SizedBox(width: 16),
         Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -121,7 +124,6 @@ class _SupportView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Help & Support'),
@@ -146,7 +148,6 @@ class _SocialView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Follow me!'),
@@ -194,7 +195,6 @@ class _AdView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Image.asset(
