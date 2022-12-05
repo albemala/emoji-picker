@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/extensions/string.dart';
 import 'package:app/models/emoji/emoji.dart';
 import 'package:app/models/symbol/symbol.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +34,7 @@ Future<void> _loadEmojis() async {
     emojis.map(
       (emoji) => Glyph(
         char: emoji.char,
-        name: emoji.name,
+        name: emoji.name.toFirstUpperCase(),
         group: emoji.group,
       ),
     ),
