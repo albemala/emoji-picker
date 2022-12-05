@@ -2,8 +2,8 @@ import 'package:app/data/glyphs.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisibleGlyphsBloc extends StateNotifier<Map<String, List<Glyph>>> {
-  VisibleGlyphsBloc() : super(glyphsByGroup(glyphs));
+class FilteredGlyphsBloc extends StateNotifier<Map<String, List<Glyph>>> {
+  FilteredGlyphsBloc() : super(glyphsByGroup(glyphs));
 
   void onSearchChanged(String searchTerm) {
     if (searchTerm.isEmpty) {
