@@ -46,11 +46,11 @@ android {
     }
 
     ndkVersion flutter.ndkVersion
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId "me.albemala.ejimo"
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
