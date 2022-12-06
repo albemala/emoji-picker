@@ -34,14 +34,17 @@ class SearchView extends HookConsumerWidget {
       controller: textEditingController,
       decoration: InputDecoration(
         hintText: 'Search for emojis and symbols',
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-        suffixIcon: IconButton(
-          iconSize: 16,
-          icon: const Icon(CupertinoIcons.clear),
-          onPressed: () {
-            textEditingController.clear();
-            ref.read(visibleGlyphsProvider.notifier).clearSearch();
-          },
+        contentPadding: const EdgeInsets.symmetric(horizontal: 21),
+        suffixIcon: Padding(
+          padding: const EdgeInsets.all(8),
+          child: IconButton(
+            iconSize: 16,
+            icon: const Icon(CupertinoIcons.clear),
+            onPressed: () {
+              textEditingController.clear();
+              ref.read(visibleGlyphsProvider.notifier).clearSearch();
+            },
+          ),
         ),
       ),
       onChanged: (value) {

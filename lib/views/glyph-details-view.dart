@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app/data/glyphs.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
@@ -30,10 +28,14 @@ class GlyphDetailsView extends HookConsumerWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                icon: const Icon(CupertinoIcons.clear),
-                onPressed: onClose,
+              child: SizedBox(
+                width: 48,
+                height: 48,
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(CupertinoIcons.clear),
+                  onPressed: onClose,
+                ),
               ),
             ),
             ResponsiveWidget(
@@ -158,13 +160,17 @@ class _GlyphView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: onCopyGlyph,
-      iconSize: 80,
-      padding: EdgeInsets.zero,
-      icon: Text(
-        glyph.char,
-        style: const TextStyle(fontSize: 56),
+    return SizedBox(
+      width: 80,
+      height: 80,
+      child: IconButton(
+        onPressed: onCopyGlyph,
+        iconSize: 80,
+        padding: EdgeInsets.zero,
+        icon: Text(
+          glyph.char,
+          style: const TextStyle(fontSize: 56),
+        ),
       ),
     );
   }
@@ -256,14 +262,13 @@ class _CopyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS || Platform.isAndroid) {
+    if (cross_platform.Platform.isMobile) {
       return OutlinedButton(
         onPressed: onCopyGlyph,
         child: const Text('Copy'),
       );
-    } else {
+    } else /* is desktop */ {
       return Text(
-        // TODO this doesn't work well on web
         cross_platform.Platform.isMacOS //
             ? '⌘+C or double-click to copy'
             : 'Ctrl+C or double-click to copy',

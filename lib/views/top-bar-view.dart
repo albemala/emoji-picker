@@ -26,19 +26,27 @@ class TopBarView extends HookConsumerWidget {
             ),
           ),
           const SizedBox(width: 12),
-          IconButton(
-            onPressed: () {
-              ref.read(themeProvider.notifier).toggleTheme();
-            },
-            icon: theme == ThemeMode.light //
-                ? const Icon(CupertinoIcons.moon)
-                : const Icon(CupertinoIcons.sun_max),
+          SizedBox(
+            width: 48,
+            height: 48,
+            child: IconButton(
+              onPressed: () {
+                ref.read(themeProvider.notifier).toggleTheme();
+              },
+              icon: theme == ThemeMode.light //
+                  ? const Icon(CupertinoIcons.moon)
+                  : const Icon(CupertinoIcons.sun_max),
+            ),
           ),
-          IconButton(
-            onPressed: () {
-              AboutView.show(context);
-            },
-            icon: const Icon(CupertinoIcons.info),
+          SizedBox(
+            width: 48,
+            height: 48,
+            child: IconButton(
+              onPressed: () {
+                AboutView.show(context);
+              },
+              icon: const Icon(CupertinoIcons.info),
+            ),
           ),
         ],
       ),

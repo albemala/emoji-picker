@@ -22,14 +22,20 @@ class MainView extends HookConsumerWidget {
       shortcuts: {
         // focus search
         if (cross_platform.Platform.isMacOS) //
-          LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyF): const FocusSearchIntent(),
-        if (cross_platform.Platform.isWindows || cross_platform.Platform.isLinux) //
-          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyF): const FocusSearchIntent(),
+          LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyF):
+              const FocusSearchIntent(),
+        if (cross_platform.Platform.isWindows ||
+            cross_platform.Platform.isLinux) //
+          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyF):
+              const FocusSearchIntent(),
         // copy glyph
         if (cross_platform.Platform.isMacOS) //
-          LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyC): const CopyGlyphIntent(),
-        if (cross_platform.Platform.isWindows || cross_platform.Platform.isLinux) //
-          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyC): const CopyGlyphIntent(),
+          LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyC):
+              const CopyGlyphIntent(),
+        if (cross_platform.Platform.isWindows ||
+            cross_platform.Platform.isLinux) //
+          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyC):
+              const CopyGlyphIntent(),
       },
       child: Actions(
         actions: {
@@ -51,7 +57,8 @@ class MainView extends HookConsumerWidget {
                   GlyphDetailsView(
                     glyph: glyphWithDetails,
                     onCopyGlyph: () {
-                      CopyGlyphAction(context, glyphWithDetails?.char).invoke(const CopyGlyphIntent());
+                      CopyGlyphAction(context, glyphWithDetails?.char)
+                          .invoke(const CopyGlyphIntent());
                     },
                     onClose: () {
                       ref.read(glyphDetailsProvider.notifier).hideDetails();
