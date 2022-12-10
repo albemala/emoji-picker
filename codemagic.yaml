@@ -1,0 +1,208 @@
+workflows:
+
+  android-app-store:
+    name: Android App Store
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      groups:
+        - common
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/.gradle/caches
+        - $HOME/Library/Caches/CocoaPods
+        - $FCI_BUILD_DIR/node_modules
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "
+          sdk.dir=$ANDROID_SDK_ROOT
+          flutter.sdk=$FLUTTER_ROOT
+          " > android/local.properties
+      - name: Set up keystore
+        script: |
+          echo $ANDROID_KEYSTORE | base64 --decode > /tmp/keystore
+          echo $ANDROID_KEY_PROPERTIES | base64 --decode > android/key.properties
+      - name: Build for Android
+        script: |
+          flutter build appbundle --release
+    artifacts:
+      - build/**/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: production
+
+  ios-app-store:
+    name: iOS App Store
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: 13.4.1
+      cocoapods: 1.11.3
+      groups:
+        - common
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $HOME/.gradle/caches
+        - $FCI_BUILD_DIR/node_modules
+    scripts:
+      - name: Set up Certificates & Provisioning Profiles
+        script: |
+          keychain initialize
+          KEYCHAIN_PATH=$(keychain get-default)
+          cd ios
+          fastlane ios get_certificates_profiles keychain_name:$KEYCHAIN_PATH username:$APPLE_ID
+      - name: Build for iOS
+        script: |
+          flutter build ipa --release --no-codesign
+          cd ios
+          fastlane ios build
+    artifacts:
+      - build/**/*.ipa
+    publishing:
+      app_store_connect:
+        apple_id: $APPLE_ID
+        password: $APPLE_APPLICATION_SPECIFIC_PASSWORD
+
+  macos-app-store:
+    name: macOS App Store
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: 13.4.1
+      cocoapods: 1.11.3
+      groups:
+        - common
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $HOME/.gradle/caches
+        - $FCI_BUILD_DIR/node_modules
+    scripts:
+      - name: Set up Certificates & Provisioning Profiles
+        script: |
+          keychain initialize
+          KEYCHAIN_PATH=$(keychain get-default)
+          cd macos
+          fastlane mac get_certificates_profiles keychain_name:$KEYCHAIN_PATH username:$APPLE_ID
+      - name: Build for macOS
+        script: |
+          flutter build macos --release
+          cd macos
+          fastlane mac build_app_store
+    artifacts:
+      # - macos/build/Ejimo.app.zip
+      # - macos/build/Ejimo.app.dSYM.zip
+      - macos/build/Ejimo.pkg
+    publishing:
+      app_store_connect:
+        apple_id: $APPLE_ID
+        password: $APPLE_APPLICATION_SPECIFIC_PASSWORD
+
+  macos-standalone:
+    name: macOS Standalone
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: 13.4.1
+      cocoapods: 1.11.3
+      groups:
+        - common
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $HOME/.gradle/caches
+        - $FCI_BUILD_DIR/node_modules
+    scripts:
+      - name: Set up Certificates & Provisioning Profiles
+        script: |
+          keychain initialize
+          KEYCHAIN_PATH=$(keychain get-default)
+          cd macos
+          fastlane mac get_certificates_profiles keychain_name:$KEYCHAIN_PATH username:$APPLE_ID
+      - name: Build for macOS
+        script: |
+          flutter build macos --release
+          cd macos
+          fastlane mac build_standalone
+      - name: Notarize
+        script: |
+          cd macos
+          fastlane mac publish_standalone username:$APPLE_ID password:$APPLE_APPLICATION_SPECIFIC_PASSWORD
+    artifacts:
+      - macos/build/Ejimo.app.zip
+      - macos/build/Ejimo.app.dSYM.zip
+#    publishing:
+# TODO upload to Firebase
+
+  web:
+    name: Web
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: 13.4.1
+      cocoapods: 1.11.3
+      groups:
+        - common
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $HOME/.gradle/caches
+        - $FCI_BUILD_DIR/node_modules
+    scripts:
+      - name: Set up environment
+        script: |
+          npm install -g @sentry/cli
+      - name: Build for Web
+        script: |
+          flutter build web --release --source-maps
+      - name: Upload source maps to Sentry
+        script: |
+          APP_VERSION=$(sed -n 's/^version: //p' pubspec.yaml)
+          SENTRY_RELEASE="me.albemala.ejimo@$APP_VERSION"
+          # SENTRY_ORG is defined in .env
+          SENTRY_PROJECT=ejimo
+          # login
+          sentry-cli login --auth-token $SENTRY_TOKEN
+          # create sentry release
+          sentry-cli releases \
+          -o $SENTRY_ORG \
+          -p $SENTRY_PROJECT \
+          new $SENTRY_RELEASE
+          # upload source maps
+          sentry-cli releases \
+          -o $SENTRY_ORG \
+          -p $SENTRY_PROJECT \
+          files $SENTRY_RELEASE \
+          upload-sourcemaps build/web --ext map --ext js
+          # finalize release
+          sentry-cli releases \
+          -o $SENTRY_ORG \
+          -p $SENTRY_PROJECT \
+          finalize $SENTRY_RELEASE
+      - name: Upload to Firebase Hosting
+        script: |
+          firebase deploy --only hosting
+#    artifacts:
+#      - macos/build/Ejimo.app.zip
+#      - macos/build/Ejimo.app.dSYM.zip
+#    publishing:
+
+      #      - |
+      #        # build web
+      #        flutter build web --release
+      #        cd build/web
+      #        7z a -r ../web.zip ./*
+      # Web
+      #      - build/web.zip
+      # Windows
+      #      - build/windows/**/*.msix
+      # Linux
+      #      - '*.snap'

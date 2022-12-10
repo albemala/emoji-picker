@@ -1,0 +1,4 @@
+storage_mode("git")
+git_url("https://github.com/albemala/apple-certificates-profiles.git")
+app_identifier "me.albemala.ejimo"
+platform "macos"

@@ -1,8 +1,11 @@
 platform :android do
 
-  lane :stable do
+  lane :publish do |options|
     upload_to_play_store(
+      package_name: "me.albemala.ejimo",
       aab: '../build/app/outputs/bundle/release/app-release.aab',
+      track: 'production',
+      json_key: options[:json_key_file], # google auth key
     )
   end
 

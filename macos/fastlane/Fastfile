@@ -1,38 +1,94 @@
 platform :mac do
 
-  lane :app_store do
+  lane :generate_certificates_profiles do |options|
+    username = options[:username] # Apple ID
+    match(
+      username: username,
+      type: "development",
+    )
+    match(
+      username: username,
+      type: "appstore",
+    )
+    match(
+      username: username,
+      type: "developer_id",
+      additional_cert_types: [
+        "mac_installer_distribution",
+        "developer_id_installer",
+      ],
+    )
+  end
+
+  lane :get_certificates_profiles do |options|
+#     keychain_name = options[:keychain_name] || "login.keychain"
+    username = options[:username] # Apple ID
+    match(
+#       keychain_name: keychain_name,
+      username: username,
+      type: "development",
+      readonly: true,
+    )
+    match(
+#       keychain_name: keychain_name,
+      username: username,
+      type: "appstore",
+      readonly: true,
+    )
+    match(
+#       keychain_name: keychain_name,
+      username: username,
+      type: "developer_id",
+      additional_cert_types: [
+        "mac_installer_distribution",
+        "developer_id_installer",
+      ],
+      readonly: true,
+    )
+  end
+
+  lane :build_app_store do
     build_mac_app(
       scheme: "Runner",
       export_method: "app-store",
-      export_team_id: ENV["TEAM_ID"],
       export_options: {
+        teamID: "LN6G3T96BR",
         provisioningProfiles: {
-          "me.albemala.ejimo" => "Ejimo - App Store - Mac App Distribution",
+          "me.albemala.ejimo" => "match AppStore me.albemala.ejimo macos",
         },
       },
       output_directory: "build",
     )
+  end
+
+  lane :build_standalone do
+    build_mac_app(
+      scheme: "Runner",
+      export_method: "developer-id",
+      export_options: {
+        teamID: "LN6G3T96BR",
+        provisioningProfiles: {
+          "me.albemala.ejimo" => "match Direct me.albemala.ejimo macos",
+        },
+      },
+      output_directory: "build",
+    )
+  end
+
+  lane :publish_app_store do |options|
     upload_to_app_store(
+      username: options[:username],
       skip_metadata: true,
       skip_screenshots: true,
     )
   end
 
-  lane :standalone do
-    build_mac_app(
-      scheme: "Runner",
-      export_method: "developer-id",
-      export_team_id: ENV["TEAM_ID"],
-      export_options: {
-        provisioningProfiles: {
-          "me.albemala.ejimo" => "Ejimo - Developer ID Application",
-        },
-      },
-      output_directory: "build",
-    )
+  lane :publish_standalone do |options|
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = options[:password]
     notarize(
-      asc_provider: ENV["TEAM_ID"],
-      package: "./build/Ejimo.app",
+      username: options[:username],
+      asc_provider: "LN6G3T96BR",
+      package: "build/Ejimo.app",
       print_log: true,
       verbose: true,
     )
