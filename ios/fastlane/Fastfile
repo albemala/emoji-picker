@@ -40,6 +40,7 @@ platform :ios do
   lane :publish do |options|
     upload_to_app_store(
       username: options[:username],
+      app_identifier: "me.albemala.ejimo",
       skip_metadata: true,
       skip_screenshots: true,
     )
