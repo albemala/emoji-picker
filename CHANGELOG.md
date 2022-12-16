@@ -1,3 +1,10 @@
+# 1.3.0
+
+- Now supporting Emoji v15 (1800+ emojis) and 17000+ Unicode symbols
+- Added emoji keywords, to improve search experience
+- UI improvements and bug fixes
+- Targeting Dart 2.18 and Flutter 3.3 stable
+
 # 1.2.0
 
 - Ejimo is now available for 

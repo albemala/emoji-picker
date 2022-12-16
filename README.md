@@ -11,12 +11,12 @@ Ejimo is a comprehensive emoji and symbol picker that puts every character you n
 designer, developer or writer, Ejimo makes it easy to find the missing character you need. With over 3000 emojis and
 symbols available, Ejimo is the perfect tool for any project, social media strategy, article and presentation.
 
-😊 3000+ emojis and symbols available: smileys 😃, people 👥, animals 🐿️, food 🍄, objects 💡, arrows ⇒, letterŠ,
+😊 1800+ emojis and 17000+ symbols available: smileys 😃, people 👥, animals 🐿️, food 🍄, objects 💡, arrows ⇒, letterŠ,
 punctuation ⁈, and many more!
 
 ✏️️ Copy and paste easily: Just select the emoji or symbol you want, and copy it to your clipboard. It’s that easy!
 
-🔍 Fast search experience: Type any word or tag and Ejimo will show you all the matching emoji and symbols.
+🔍 Fast search experience: Type any word or keyword, and Ejimo will show you all the matching emoji and symbols.
 
 ☀️ Choose between a light and dark theme to match your mood or style.
 
@@ -31,7 +31,7 @@ important and respected.
 - Use the arrow keys to navigate between emoji and symbols
 - Cmd/Ctrl+C to copy the selected emoji or symbol to your clipboard
 
-Works on all desktop and mobile operating systems: Ejimo is available on macOS 🍏, Windows 🪟, Linux 🐧, iOS 📱 and Android 🤖. 
+It works on all desktop and mobile operating systems: Ejimo is available on macOS 🍏, Windows 🪟, Linux 🐧, iOS 📱 and Android 🤖. 
 Oh, and Web 🌐 too!
 
 ## Download
@@ -72,5 +72,3 @@ Setup, how to run and build: https://docs.flutter.dev/desktop
 ## Credits
 
 Created by [@albemala](https://github.com/albemala) ([Twitter](https://twitter.com/albemala))
-
-Unicode characters list created by Rodrigo Siqueira ([Source](https://gist.github.com/ivandrofly/0fe20773bd712b303f78))
