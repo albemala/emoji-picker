@@ -47,12 +47,13 @@ platform :mac do
     )
   end
 
-  lane :build_app_store do
+  lane :build_app_store do |options|
+    team_id = options[:team_id]
     build_mac_app(
       scheme: "Runner",
       export_method: "app-store",
       export_options: {
-        teamID: "LN6G3T96BR",
+        teamID: team_id,
         provisioningProfiles: {
           "me.albemala.ejimo" => "match AppStore me.albemala.ejimo macos",
         },
@@ -61,12 +62,14 @@ platform :mac do
     )
   end
 
-  lane :build_standalone do
+  lane :build_standalone do |options|
+    team_id = options[:team_id]
     build_mac_app(
       scheme: "Runner",
       export_method: "developer-id",
       export_options: {
-        teamID: "LN6G3T96BR",
+    team_id = options[:team_id]
+        teamID: team_id,
         provisioningProfiles: {
           "me.albemala.ejimo" => "match Direct me.albemala.ejimo macos",
         },
@@ -86,9 +89,10 @@ platform :mac do
 
   lane :publish_standalone do |options|
     ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = options[:password]
+    team_id = options[:team_id]
     notarize(
       username: options[:username],
-      asc_provider: "LN6G3T96BR",
+      asc_provider: team_id,
       package: "build/Ejimo.app",
       print_log: true,
       verbose: true,

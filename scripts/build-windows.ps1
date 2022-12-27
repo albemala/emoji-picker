@@ -1,6 +1,6 @@
-$ErrorActionPreference = "Stop" # exit on error
-
 # NOTE: run from scripts directory
+
+$ErrorActionPreference = "Stop" # exit on error
 
 $ScriptsDirectory = Get-Location
 $RootDirectory = "$ScriptsDirectory/.."

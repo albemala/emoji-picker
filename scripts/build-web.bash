@@ -22,21 +22,12 @@ SENTRY_PROJECT=ejimo
 # login
 sentry-cli login --auth-token $SENTRY_TOKEN
 # create sentry release
-sentry-cli releases \
-  -o $SENTRY_ORG \
-  -p $SENTRY_PROJECT \
-  new $SENTRY_RELEASE
+sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT new $SENTRY_RELEASE
 # upload source maps
-sentry-cli releases \
-  -o $SENTRY_ORG \
-  -p $SENTRY_PROJECT \
-  files $SENTRY_RELEASE \
-  upload-sourcemaps build/web --ext map --ext js
+sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT files $SENTRY_RELEASE upload-sourcemaps build/web --ext dart
+sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT files $SENTRY_RELEASE upload-sourcemaps build/web --ext map --ext js
 # finalize release
-sentry-cli releases \
-  -o $SENTRY_ORG \
-  -p $SENTRY_PROJECT \
-  finalize $SENTRY_RELEASE
+sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT finalize $SENTRY_RELEASE
 
 # upload to Firebase Hosting
 firebase deploy --only hosting

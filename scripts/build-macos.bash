@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
+# Usage: bash scripts/build-macos.bash
+
 set -e # exit on error
 #set -x # print commands
-
-# Usage: bash scripts/build-macos.bash
 
 APP_VERSION=$(sed -n 's/^version: //p' pubspec.yaml)
 # read .env file
@@ -19,15 +19,15 @@ fastlane mac get_certificates_profiles username:$APPLE_ID
 
 # build for app store
 rm -rf build
-fastlane mac build_app_store
+fastlane mac build_app_store team_id:$TEAM_ID
 # publish app store
 fastlane mac publish_app_store username:$APPLE_ID
 
 # build standalone
 rm -rf build
-fastlane mac build_standalone
+fastlane mac build_standalone team_id:$TEAM_ID
 # publish standalone
-fastlane mac publish_standalone username:$APPLE_ID password:$APPLE_APPLICATION_SPECIFIC_PASSWORD
+fastlane mac publish_standalone team_id:$TEAM_ID username:$APPLE_ID password:$APPLE_APPLICATION_SPECIFIC_PASSWORD
 # archive standalone
 cd ..
 ARCHIVE_PATH=macos-builds/$APP_VERSION

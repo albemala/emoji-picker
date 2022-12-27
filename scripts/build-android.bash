@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
+# Usage: bash scripts/build-android.bash
+
 set -e # exit on error
 #set -x # print commands
-
-# Usage: bash scripts/build-android.bash
 
 # read .env file
 source .env
