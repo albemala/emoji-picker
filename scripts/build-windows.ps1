@@ -38,7 +38,7 @@ cd $StandaloneArchiveDirectory
 Start-Process "C:\Program Files\7-Zip\7z.exe" -ArgumentList "a","-tzip","../$StandaloneArchiveName",'.' -wait
 cd $RootDirectory
 # upload standalone to Google Cloud Storage
-gcloud storage cp --recursive "$StandaloneArchiveDirectory/../$StandaloneArchiveName" "gs://ejimo-app-releases/$AppVersion"
+gcloud storage cp --recursive "$StandaloneArchiveDirectory/../$StandaloneArchiveName" "gs://ejimo-app-releases/$AppVersion/$StandaloneArchiveName"
 
 # read env file
 $EnvFilePath = ".env"
