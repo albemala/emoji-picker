@@ -15,14 +15,14 @@ Future<void> copyToClipboard(BuildContext context, String? text) async {
           Text(
             text,
             style: TextStyle(
-              fontSize: Theme.of(context).textTheme.headline5?.fontSize,
+              fontSize: Theme.of(context).textTheme.headlineSmall?.fontSize,
             ),
           ),
           const SizedBox(width: 16),
           Text(
             'copied to clipboard',
             style: TextStyle(
-              fontSize: Theme.of(context).textTheme.subtitle1?.fontSize,
+              fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
               fontFamily: GoogleFonts.titilliumWeb().fontFamily,
             ),
           ),

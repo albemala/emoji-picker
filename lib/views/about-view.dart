@@ -91,7 +91,7 @@ class _AppInfoView extends HookConsumerWidget {
           children: [
             Text(
               appInfo.appName(),
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             Row(
               children: [
@@ -100,7 +100,7 @@ class _AppInfoView extends HookConsumerWidget {
                   builder: (context, snapshot) {
                     return Text(
                       snapshot.data ?? '',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     );
                   },
                 ),
@@ -171,7 +171,7 @@ class _RepositoryView extends HookConsumerWidget {
     return RichText(
       text: TextSpan(
         text: 'Source code available on ',
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyMedium,
         children: [
           TextSpan(
             text: 'GitHub',
@@ -205,18 +205,18 @@ class _AdView extends HookConsumerWidget {
         const SizedBox(height: 16),
         Text(
           'Are you a software developer?'.toUpperCase(),
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         Text(
           'Exabox: Essential tools for developers',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 8),
         Text(
           '''
 30+ tools: convert/format JSON/YAML, encode/decode Base64, generate fake data, parse JWTs, transform text using multiple rules, and much more. 
 All in one single app. Work offline. Privacy-friendly.''',
-          style: Theme.of(context).textTheme.bodyText2,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         const SizedBox(height: 4),
         Align(

@@ -190,11 +190,11 @@ class _NameView extends StatelessWidget {
       children: [
         Text(
           'Name'.toUpperCase(),
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         Text(
           glyph.name,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -217,11 +217,11 @@ class _UnicodeView extends StatelessWidget {
       children: [
         Text(
           'Unicode'.toUpperCase(),
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         Text(
           'U+${glyph.char.runes.first.toRadixString(16).toUpperCase()}',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ],
     );
@@ -242,11 +242,11 @@ class _HtmlCodeView extends StatelessWidget {
       children: [
         Text(
           'HTML code'.toUpperCase(),
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         Text(
           '&#${glyph.char.runes.first.toRadixString(10).toUpperCase()};',
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );
@@ -272,7 +272,7 @@ class _CopyView extends StatelessWidget {
         cross_platform.Platform.isMacOS //
             ? '⌘+C or double-click to copy'
             : 'Ctrl+C or double-click to copy',
-        style: Theme.of(context).textTheme.caption,
+        style: Theme.of(context).textTheme.bodySmall,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
