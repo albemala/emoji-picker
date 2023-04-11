@@ -1,5 +1,5 @@
 import 'package:app/providers.dart';
-import 'package:app/views/exabox-ad-view.dart';
+import 'package:app/views/ads.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

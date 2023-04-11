@@ -1,8 +1,8 @@
 import 'package:app/intents-actions.dart';
 import 'package:app/providers.dart';
-import 'package:app/views/glyph-details-view.dart';
-import 'package:app/views/glyph-list-view.dart';
-import 'package:app/views/top-bar-view.dart';
+import 'package:app/views/glyph-details.dart';
+import 'package:app/views/glyph-list.dart';
+import 'package:app/views/top-bar.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

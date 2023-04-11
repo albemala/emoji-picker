@@ -1,6 +1,6 @@
 import 'package:app/providers.dart';
-import 'package:app/views/about-view.dart';
-import 'package:app/views/search-view.dart';
+import 'package:app/views/about.dart';
+import 'package:app/views/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,6 +1,6 @@
 import 'package:app/providers.dart';
-import 'package:app/views/glyph-group-list-view.dart';
-import 'package:app/views/glyph-group-title-view.dart';
+import 'package:app/views/glyph-group-list.dart';
+import 'package:app/views/glyph-group-title.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sliver_tools/sliver_tools.dart';

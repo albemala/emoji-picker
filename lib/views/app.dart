@@ -1,6 +1,6 @@
 import 'package:app/assets/app-theme.dart';
 import 'package:app/providers.dart';
-import 'package:app/views/main-view.dart';
+import 'package:app/views/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,7 +16,8 @@ class AppView extends HookConsumerWidget {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarBrightness: theme == ThemeMode.dark ? Brightness.dark : Brightness.light,
+        statusBarBrightness:
+            theme == ThemeMode.dark ? Brightness.dark : Brightness.light,
       ),
     );
 
