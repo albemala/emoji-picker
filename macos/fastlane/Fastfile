@@ -68,7 +68,6 @@ platform :mac do
       scheme: "Runner",
       export_method: "developer-id",
       export_options: {
-    team_id = options[:team_id]
         teamID: team_id,
         provisioningProfiles: {
           "me.albemala.ejimo" => "match Direct me.albemala.ejimo macos",
