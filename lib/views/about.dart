@@ -1,4 +1,5 @@
 import 'package:app/providers.dart';
+import 'package:app/utils/math.dart';
 import 'package:app/views/ads.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class AboutView extends HookConsumerWidget {
                   : 12,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                child: ExaboxAdView(),
+                child: _AdView(),
               ),
             ),
           ],
@@ -188,5 +189,20 @@ class _RepositoryView extends HookConsumerWidget {
         ],
       ),
     );
+  }
+}
+
+class _AdView extends StatelessWidget {
+  const _AdView();
+
+  @override
+  Widget build(BuildContext context) {
+    // randomize which ad to show
+    final random = randomInt(1, 4);
+    if (random == 1) return const ExaboxAdView();
+    if (random == 2) return const HexeeProAdView();
+    if (random == 3) return const WMapAdView();
+    if (random == 4) return const IroIronAdView();
+    return const SizedBox();
   }
 }
