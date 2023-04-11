@@ -2,7 +2,9 @@ include: package:very_good_analysis/analysis_options.yaml
 
 linter:
   rules:
+    sort_pub_dependencies: false
     file_names: false
     public_member_api_docs: false
     sort_constructors_first: false
     lines_longer_than_80_chars: false
+    always_put_required_named_parameters_first: false
