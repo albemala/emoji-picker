@@ -61,6 +61,8 @@ Setup, how to run and build: https://docs.flutter.dev/desktop
 
 ## Other projects
 
+🎨 **[Hexee Pro](https://hexee.app/)** — Palette editor & Advanced color toolkit
+
 🧰 **[exabox](https://exabox.app/)** — Essential tools for developers: All the tools you need in one single app.
 
 [//]: # (😃 **[Ejimo]&#40;https://github.com/albemala/emoji-picker&#41;** — Emoji and symbol picker)
