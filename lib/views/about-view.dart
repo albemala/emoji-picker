@@ -1,4 +1,5 @@
 import 'package:app/providers.dart';
+import 'package:app/views/exabox-ad-view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,7 +41,7 @@ class AboutView extends HookConsumerWidget {
                   : 12,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                child: _AdView(),
+                child: ExaboxAdView(),
               ),
             ),
           ],
@@ -186,51 +187,6 @@ class _RepositoryView extends HookConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _AdView extends HookConsumerWidget {
-  const _AdView();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.asset(
-          'assets/images/exabox-icon.png',
-          width: 48,
-          height: 48,
-          filterQuality: FilterQuality.medium,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'Are you a software developer?'.toUpperCase(),
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        Text(
-          'Exabox: Essential tools for developers',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          '''
-30+ tools: convert/format JSON/YAML, encode/decode Base64, generate fake data, parse JWTs, transform text using multiple rules, and much more. 
-All in one single app. Work offline. Privacy-friendly.''',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const SizedBox(height: 4),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {
-              ref.read(urlsProvider).openExaboxWebsite();
-            },
-            child: const Text('Learn more'),
-          ),
-        ),
-      ],
     );
   }
 }
