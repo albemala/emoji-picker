@@ -39,6 +39,10 @@ dependencies:
   url_launcher: ^6.1.10
   package_info_plus: ^3.1.0
   cross_platform: ^3.0.1
+  send_support_email:
+    git:
+      url: https://github.com/albemala/send_support_email.git
+      ref: a7a83ff7c956e5fffb19b8f9ac8078dad1b4dff0
 
 dev_dependencies:
   flutter_test:
