@@ -32,7 +32,7 @@ fastlane mac publish_standalone team_id:$TEAM_ID username:$APPLE_ID password:$AP
 cd ..
 ARCHIVE_PATH=macos-builds/$APP_VERSION
 rm -rf $ARCHIVE_PATH
-mkdir $ARCHIVE_PATH
+mkdir -p $ARCHIVE_PATH
 cp -r macos/build/Ejimo.app.zip $ARCHIVE_PATH
 cp -r macos/build/Ejimo.app.dSYM.zip $ARCHIVE_PATH
 # upload to Google Cloud Storage
