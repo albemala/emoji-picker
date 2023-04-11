@@ -58,11 +58,6 @@ dev_dependencies:
   flutter_launcher_icons_maker: ^0.10.2
   # windows
   msix: ^3.7.0
-  # build scripts
-  flutter_build_helpers:
-    git:
-      url: https://github.com/albemala/flutter_build_helpers.git
-      ref: 9f15d7049f048eba9c2b8d62730e8e473e0dec41
 
 flutter:
   uses-material-design: true

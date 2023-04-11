@@ -302,15 +302,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_build_helpers:
-    dependency: "direct dev"
-    description:
-      path: "."
-      ref: "9f15d7049f048eba9c2b8d62730e8e473e0dec41"
-      resolved-ref: "9f15d7049f048eba9c2b8d62730e8e473e0dec41"
-      url: "https://github.com/albemala/flutter_build_helpers.git"
-    source: git
-    version: "0.0.1"
   flutter_hooks:
     dependency: "direct main"
     description:
