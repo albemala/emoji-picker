@@ -83,6 +83,7 @@ class _AppInfoView extends HookConsumerWidget {
             'assets/images/app-icon.png',
             width: 48,
             height: 48,
+            filterQuality: FilterQuality.medium,
           ),
         ),
         const SizedBox(width: 16),
@@ -201,6 +202,7 @@ class _AdView extends HookConsumerWidget {
           'assets/images/exabox-icon.png',
           width: 48,
           height: 48,
+          filterQuality: FilterQuality.medium,
         ),
         const SizedBox(height: 16),
         Text(
