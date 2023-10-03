@@ -28,8 +28,6 @@ dependencies:
   super_responsive: ^0.1.6
 #  responsive_builder: ^0.4.3
 
-  emojis: ^0.9.9
-
   # search
   fuzzywuzzy: ^0.2.0
   easy_debounce: ^2.0.3
