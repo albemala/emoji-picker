@@ -64,8 +64,8 @@ flutter:
 
   assets:
     - assets/data/
+    - assets/fonts/TitilliumWeb
     - assets/images/
-    - google_fonts/
 
 # flutter pub run flutter_launcher_icons_maker:main && flutter clean
 flutter_icons:
