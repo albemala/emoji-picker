@@ -44,8 +44,11 @@ class GlyphListView extends StatelessWidget {
           return CustomScrollView(
             slivers: filteredGlyphs.entries.map((entry) {
               return MultiSliver(
+                pushPinnedChildren: true,
                 children: [
-                  GlyphGroupTitleView(title: entry.key),
+                  SliverPinnedHeader(
+                    child: GlyphGroupTitleView(title: entry.key),
+                  ),
                   GlyphGroupListView(glyphs: entry.value),
                   const _AdView(),
                 ],
