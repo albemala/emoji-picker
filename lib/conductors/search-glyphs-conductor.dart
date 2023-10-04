@@ -5,9 +5,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
 
-class FilteredGlyphsConductor extends Conductor {
-  factory FilteredGlyphsConductor.fromContext(BuildContext context) {
-    return FilteredGlyphsConductor(
+class SearchGlyphsConductor extends Conductor {
+  factory SearchGlyphsConductor.fromContext(BuildContext context) {
+    return SearchGlyphsConductor(
       context.getConductor<GlyphsConductor>(),
     );
   }
@@ -20,7 +20,7 @@ class FilteredGlyphsConductor extends Conductor {
 
   final filteredGlyphs = ValueNotifier<Map<String, List<Glyph>>>({});
 
-  FilteredGlyphsConductor(this._glyphsConductor) {
+  SearchGlyphsConductor(this._glyphsConductor) {
     _init();
   }
 

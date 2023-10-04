@@ -1,5 +1,5 @@
+import 'package:app/conductors/glyph-actions-conductor.dart';
 import 'package:app/conductors/glyph-details-conductor.dart';
-import 'package:app/intents-actions.dart';
 import 'package:app/models/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
@@ -67,13 +67,17 @@ class GlyphDetailsView extends StatelessWidget {
                     _LargeScreenView(
                       glyph: glyph,
                       onCopyGlyph: () {
-                        copyGlyph(context, glyph.char);
+                        context
+                            .getConductor<GlyphActionsConductor>()
+                            .copySelectedGlyphToClipboard();
                       },
                     ),
                     _SmallScreenView(
                       glyph: glyph,
                       onCopyGlyph: () {
-                        copyGlyph(context, glyph.char);
+                        context
+                            .getConductor<GlyphActionsConductor>()
+                            .copySelectedGlyphToClipboard();
                       },
                     ),
                   ],

@@ -1,5 +1,5 @@
+import 'package:app/conductors/glyph-actions-conductor.dart';
 import 'package:app/conductors/glyph-details-conductor.dart';
-import 'package:app/intents-actions.dart';
 import 'package:app/models/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
@@ -11,11 +11,11 @@ class GlyphViewConductor extends Conductor {
     );
   }
 
-  final GlyphDetailsConductor glyphDetailsConductor;
+  final GlyphDetailsConductor _glyphDetailsConductor;
 
   final focusNode = FocusNode();
 
-  GlyphViewConductor(this.glyphDetailsConductor);
+  GlyphViewConductor(this._glyphDetailsConductor);
 
   @override
   void dispose() {
@@ -24,9 +24,9 @@ class GlyphViewConductor extends Conductor {
 
   void onFocusChange(bool isFocused, Glyph glyph) {
     if (isFocused) {
-      glyphDetailsConductor.showDetailsForGlyph(glyph);
+      _glyphDetailsConductor.showDetailsForGlyph(glyph);
     } else {
-      glyphDetailsConductor.hideDetails();
+      _glyphDetailsConductor.hideDetails();
     }
   }
 }
@@ -72,7 +72,9 @@ class GlyphView extends StatelessWidget {
       child: InkWell(
         onTap: conductor.focusNode.requestFocus,
         onDoubleTap: () {
-          CopyGlyphAction(context, glyph.char).invoke(const CopyGlyphIntent());
+          context
+              .getConductor<GlyphActionsConductor>()
+              .copySelectedGlyphToClipboard();
         },
         focusNode: conductor.focusNode,
         focusColor: Theme.of(context).colorScheme.secondary,

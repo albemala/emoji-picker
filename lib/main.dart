@@ -1,9 +1,10 @@
-import 'package:app/conductors/filtered-glyphs-conductor.dart';
+import 'package:app/conductors/glyph-actions-conductor.dart';
 import 'package:app/conductors/glyph-details-conductor.dart';
 import 'package:app/conductors/glyphs-conductor.dart';
 import 'package:app/conductors/local-storage-conductor.dart';
 import 'package:app/conductors/preferences-conductor.dart';
 import 'package:app/conductors/routing-conductor.dart';
+import 'package:app/conductors/search-glyphs-conductor.dart';
 import 'package:app/views/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +23,13 @@ Future<void> main() async {
           child: ConductorCreator(
             create: GlyphsConductor.fromContext,
             child: ConductorCreator(
-              create: FilteredGlyphsConductor.fromContext,
+              create: SearchGlyphsConductor.fromContext,
               child: ConductorCreator(
                 create: GlyphDetailsConductor.fromContext,
-                child: AppViewCreator(),
+                child: ConductorCreator(
+                  create: GlyphActionsConductor.fromContext,
+                  child: AppView(),
+                ),
               ),
             ),
           ),

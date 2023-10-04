@@ -1,4 +1,4 @@
-import 'package:app/conductors/filtered-glyphs-conductor.dart';
+import 'package:app/conductors/search-glyphs-conductor.dart';
 import 'package:app/functions/math.dart';
 import 'package:app/models/glyph.dart';
 import 'package:app/views/ads.dart';
@@ -15,7 +15,7 @@ class GlyphListViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<FilteredGlyphsConductor>(
+    return ConductorConsumer<SearchGlyphsConductor>(
       builder: (context, filteredGlyphsConductor) {
         return GlyphListView(
           filteredGlyphsConductor: filteredGlyphsConductor,
@@ -26,7 +26,7 @@ class GlyphListViewCreator extends StatelessWidget {
 }
 
 class GlyphListView extends StatelessWidget {
-  final FilteredGlyphsConductor filteredGlyphsConductor;
+  final SearchGlyphsConductor filteredGlyphsConductor;
 
   const GlyphListView({
     super.key,

@@ -1,4 +1,4 @@
-import 'package:app/conductors/filtered-glyphs-conductor.dart';
+import 'package:app/conductors/search-glyphs-conductor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
@@ -8,7 +8,7 @@ class SearchViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<FilteredGlyphsConductor>(
+    return ConductorConsumer<SearchGlyphsConductor>(
       builder: (context, filteredGlyphsConductor) {
         return SearchView(
           filteredGlyphsConductor: filteredGlyphsConductor,
@@ -19,7 +19,7 @@ class SearchViewCreator extends StatelessWidget {
 }
 
 class SearchView extends StatelessWidget {
-  final FilteredGlyphsConductor filteredGlyphsConductor;
+  final SearchGlyphsConductor filteredGlyphsConductor;
 
   const SearchView({
     super.key,
