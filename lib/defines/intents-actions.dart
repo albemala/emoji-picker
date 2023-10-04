@@ -14,8 +14,10 @@ class CopyGlyphAction extends Action<CopyGlyphIntent> {
   CopyGlyphAction(this.glyphActionsConductor);
 
   @override
-  void invoke(covariant CopyGlyphIntent intent) =>
-      glyphActionsConductor.copySelectedGlyphToClipboard();
+  void invoke(covariant CopyGlyphIntent intent) {
+    glyphActionsConductor.copySelectedGlyphToClipboard();
+    RawKeyboard.instance.clearKeysPressed();
+  }
 }
 
 class FocusSearchIntent extends Intent {
@@ -28,8 +30,10 @@ class FocusSearchAction extends Action<FocusSearchIntent> {
   FocusSearchAction(this.searchGlyphsConductor);
 
   @override
-  void invoke(covariant FocusSearchIntent intent) =>
-      searchGlyphsConductor.searchFocusNode.requestFocus();
+  void invoke(covariant FocusSearchIntent intent) {
+    searchGlyphsConductor.searchFocusNode.requestFocus();
+    RawKeyboard.instance.clearKeysPressed();
+  }
 }
 
 final shortcuts = {
