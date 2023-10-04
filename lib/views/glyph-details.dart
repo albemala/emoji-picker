@@ -1,64 +1,89 @@
-import 'package:app/data/glyphs.dart';
+import 'package:app/conductors/glyph-details-conductor.dart';
+import 'package:app/intents-actions.dart';
+import 'package:app/models/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_state_management/flutter_state_management.dart';
 import 'package:super_responsive/super_responsive.dart';
 
-class GlyphDetailsView extends HookConsumerWidget {
-  final Glyph? glyph;
-  final void Function() onCopyGlyph;
-  final void Function() onClose;
-
-  const GlyphDetailsView({
+class GlyphDetailsViewCreator extends StatelessWidget {
+  const GlyphDetailsViewCreator({
     super.key,
-    required this.glyph,
-    required this.onCopyGlyph,
-    required this.onClose,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    if (glyph == null) {
-      return Container();
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(24),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: SizedBox(
-                width: 48,
-                height: 48,
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(CupertinoIcons.clear),
-                  onPressed: onClose,
-                ),
-              ),
-            ),
-            ResponsiveWidget(
-              followsScreenWidth: false,
-              breakpoints: Breakpoints(
-                first: double.maxFinite,
-                second: 480,
-              ),
+  Widget build(BuildContext context) {
+    return ConductorConsumer<GlyphDetailsConductor>(
+      builder: (context, conductor) {
+        return GlyphDetailsView(
+          conductor: conductor,
+        );
+      },
+    );
+  }
+}
+
+class GlyphDetailsView extends StatelessWidget {
+  final GlyphDetailsConductor conductor;
+
+  const GlyphDetailsView({
+    super.key,
+    required this.conductor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: conductor.isGlyphDetailsVisible,
+      builder: (context, isVisible, _) {
+        if (!isVisible) {
+          return Container();
+        } else {
+          final glyph = conductor.selectedGlyph.value!;
+          return Padding(
+            padding: const EdgeInsets.all(24),
+            child: Stack(
               children: [
-                _LargeScreenView(
-                  glyph: glyph,
-                  onCopyGlyph: onCopyGlyph,
+                Align(
+                  alignment: Alignment.topRight,
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(CupertinoIcons.clear),
+                      onPressed: conductor.hideDetails,
+                    ),
+                  ),
                 ),
-                _SmallScreenView(
-                  glyph: glyph,
-                  onCopyGlyph: onCopyGlyph,
+                ResponsiveWidget(
+                  followsScreenWidth: false,
+                  breakpoints: Breakpoints(
+                    first: double.maxFinite,
+                    second: 480,
+                  ),
+                  children: [
+                    _LargeScreenView(
+                      glyph: glyph,
+                      onCopyGlyph: () {
+                        copyGlyph(context, glyph.char);
+                      },
+                    ),
+                    _SmallScreenView(
+                      glyph: glyph,
+                      onCopyGlyph: () {
+                        copyGlyph(context, glyph.char);
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      );
-    }
+          );
+        }
+      },
+    );
   }
 }
 
@@ -68,7 +93,7 @@ class _LargeScreenView extends StatelessWidget {
     required this.onCopyGlyph,
   });
 
-  final Glyph? glyph;
+  final Glyph glyph;
   final void Function() onCopyGlyph;
 
   @override
@@ -79,15 +104,15 @@ class _LargeScreenView extends StatelessWidget {
         Row(
           children: [
             _GlyphView(
-              glyph: glyph!,
+              glyph: glyph,
               onCopyGlyph: onCopyGlyph,
             ),
             const SizedBox(width: 24),
             Flexible(
-              child: _NameView(glyph: glyph!),
+              child: _NameView(glyph: glyph),
             ),
             const SizedBox(width: 24),
-            _UnicodeView(glyph: glyph!),
+            _UnicodeView(glyph: glyph),
             // const SizedBox(width: 24),
             // _HtmlCodeView(glyph: glyph!),
             const SizedBox(width: 56),
@@ -110,7 +135,7 @@ class _SmallScreenView extends StatelessWidget {
     required this.onCopyGlyph,
   });
 
-  final Glyph? glyph;
+  final Glyph glyph;
   final void Function() onCopyGlyph;
 
   @override
@@ -121,7 +146,7 @@ class _SmallScreenView extends StatelessWidget {
         Row(
           children: [
             _GlyphView(
-              glyph: glyph!,
+              glyph: glyph,
               onCopyGlyph: onCopyGlyph,
             ),
             const SizedBox(width: 16),
@@ -136,10 +161,10 @@ class _SmallScreenView extends StatelessWidget {
         Row(
           children: [
             Flexible(
-              child: _NameView(glyph: glyph!),
+              child: _NameView(glyph: glyph),
             ),
             const SizedBox(width: 24),
-            _UnicodeView(glyph: glyph!),
+            _UnicodeView(glyph: glyph),
             // const SizedBox(width: 24),
             // _HtmlCodeView(glyph: glyph!),
           ],
@@ -228,6 +253,7 @@ class _UnicodeView extends StatelessWidget {
   }
 }
 
+// TODO?
 class _HtmlCodeView extends StatelessWidget {
   final Glyph glyph;
 

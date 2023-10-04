@@ -1,4 +1,4 @@
-import 'package:app/data/glyphs.dart';
+import 'package:app/models/glyph.dart';
 import 'package:app/views/glyph.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class GlyphGroupListView extends StatelessWidget {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final glyph = glyphs.elementAt(index);
-            return GlyphView(glyph: glyph);
+            return GlyphViewCreator(glyph: glyph);
           },
           childCount: glyphs.length,
         ),

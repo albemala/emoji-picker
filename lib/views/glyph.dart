@@ -1,37 +1,83 @@
-import 'package:app/data/glyphs.dart';
+import 'package:app/conductors/glyph-details-conductor.dart';
 import 'package:app/intents-actions.dart';
-import 'package:app/providers.dart';
+import 'package:app/models/glyph.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_state_management/flutter_state_management.dart';
 
-class GlyphView extends HookConsumerWidget {
+class GlyphViewConductor extends Conductor {
+  factory GlyphViewConductor.fromContext(BuildContext context) {
+    return GlyphViewConductor(
+      context.getConductor<GlyphDetailsConductor>(),
+    );
+  }
+
+  final GlyphDetailsConductor glyphDetailsConductor;
+
+  final focusNode = FocusNode();
+
+  GlyphViewConductor(this.glyphDetailsConductor);
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+  }
+
+  void onFocusChange(bool isFocused, Glyph glyph) {
+    if (isFocused) {
+      glyphDetailsConductor.showDetailsForGlyph(glyph);
+    } else {
+      glyphDetailsConductor.hideDetails();
+    }
+  }
+}
+
+class GlyphViewCreator extends StatelessWidget {
   final Glyph glyph;
 
-  const GlyphView({
+  const GlyphViewCreator({
     super.key,
     required this.glyph,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final focusNode = useFocusNode();
+  Widget build(BuildContext context) {
+    return ConductorCreator(
+      create: GlyphViewConductor.fromContext,
+      child: ConductorConsumer<GlyphViewConductor>(
+        builder: (context, conductor) {
+          return GlyphView(
+            glyph: glyph,
+            conductor: conductor,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class GlyphView extends StatelessWidget {
+  final Glyph glyph;
+  final GlyphViewConductor conductor;
+
+  const GlyphView({
+    super.key,
+    required this.glyph,
+    required this.conductor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       type: MaterialType.card,
       child: InkWell(
-        onTap: focusNode.requestFocus,
+        onTap: conductor.focusNode.requestFocus,
         onDoubleTap: () {
           CopyGlyphAction(context, glyph.char).invoke(const CopyGlyphIntent());
         },
-        focusNode: focusNode,
+        focusNode: conductor.focusNode,
         focusColor: Theme.of(context).colorScheme.secondary,
         onFocusChange: (isFocused) {
-          if (isFocused) {
-            ref.read(glyphDetailsProvider.notifier).showDetailsFor(glyph);
-          }
-          // else {
-          //   ref.read(glyphDetailsProvider.notifier).hideDetails();
-          // }
+          conductor.onFocusChange(isFocused, glyph);
         },
         child: Center(
           child: Text(

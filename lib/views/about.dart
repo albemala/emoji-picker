@@ -1,30 +1,94 @@
-import 'package:app/providers.dart';
-import 'package:app/utils/math.dart';
+import 'package:app/defines/urls.dart';
+import 'package:app/functions/app.dart';
+import 'package:app/functions/math.dart';
+import 'package:app/functions/url.dart';
 import 'package:app/views/ads.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:send_support_email/send_support_email.dart';
 
-class AboutView extends HookConsumerWidget {
-  static Future<void> show(BuildContext context) async {
-    await showDialog<void>(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          clipBehavior: Clip.hardEdge,
-          contentPadding: EdgeInsets.zero,
-          content: AboutView(),
-        );
-      },
-    );
+class AboutViewConductor extends Conductor {
+  factory AboutViewConductor.fromContext(BuildContext context) {
+    return AboutViewConductor();
   }
 
+  final appVersion = ValueNotifier<String>('...');
+
+  AboutViewConductor() {
+    _init();
+  }
+
+  Future<void> _init() async {
+    appVersion.value = await getAppVersion();
+  }
+
+  @override
+  void dispose() {
+    appVersion.dispose();
+  }
+
+/* TODO
+  Future<void> openRateApp() async {
+    await InAppReview.instance.openStoreListing(
+      appStoreId: appleAppId,
+    );
+  }
+*/
+
+/* TODO
+  Future<void> openShareApp(
+      String message,
+      Rect sharePosition,
+      ) async {
+    await shareText(
+      position: sharePosition,
+      text: message,
+    );
+  }
+*/
+
+/* TODO
+  Future<void> openOtherApps() async {
+    await openUrl(otherProjectsUrl);
+  }
+*/
+
+  Future<void> openSendFeedback() async {
+    final email = await generateSupportEmail(supportEmailUrl);
+    await openUrl(email);
+  }
+
+  Future<void> openTwitter() async {
+    await openUrl(twitterUrl);
+  }
+
+  Future<void> openRepository() async {
+    await openUrl(repositoryUrl);
+  }
+}
+
+class AboutViewCreator extends StatelessWidget {
+  const AboutViewCreator({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const ConductorCreator(
+      create: AboutViewConductor.fromContext,
+      child: AboutView(),
+    );
+  }
+}
+
+class AboutView extends StatelessWidget {
   const AboutView({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 480),
@@ -52,15 +116,15 @@ class AboutView extends HookConsumerWidget {
   }
 }
 
-class _AboutContentView extends HookConsumerWidget {
+class _AboutContentView extends StatelessWidget {
   const _AboutContentView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Wrap(
+  Widget build(BuildContext context) {
+    return const Wrap(
       spacing: 24,
       runSpacing: 24,
-      children: const [
+      children: [
         _AppInfoView(),
         _SupportView(),
         _SocialView(),
@@ -70,12 +134,11 @@ class _AboutContentView extends HookConsumerWidget {
   }
 }
 
-class _AppInfoView extends HookConsumerWidget {
+class _AppInfoView extends StatelessWidget {
   const _AppInfoView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final appInfo = ref.watch(appInfoProvider);
+  Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -93,16 +156,17 @@ class _AppInfoView extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              appInfo.appName(),
+              getAppName(),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Row(
               children: [
-                FutureBuilder<String>(
-                  future: appInfo.appVersion(),
-                  builder: (context, snapshot) {
+                ValueListenableBuilder<String>(
+                  valueListenable:
+                      context.getConductor<AboutViewConductor>().appVersion,
+                  builder: (context, appVersion, _) {
                     return Text(
-                      snapshot.data ?? '',
+                      appVersion,
                       style: Theme.of(context).textTheme.bodySmall,
                     );
                   },
@@ -121,11 +185,11 @@ class _AppInfoView extends HookConsumerWidget {
   }
 }
 
-class _SupportView extends HookConsumerWidget {
+class _SupportView extends StatelessWidget {
   const _SupportView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -133,7 +197,7 @@ class _SupportView extends HookConsumerWidget {
         const SizedBox(height: 8),
         OutlinedButton(
           onPressed: () {
-            ref.read(urlsProvider).sendFeedback();
+            context.getConductor<AboutViewConductor>().openSendFeedback();
           },
           child: const Text(
             'Send Feedback',
@@ -145,11 +209,11 @@ class _SupportView extends HookConsumerWidget {
   }
 }
 
-class _SocialView extends HookConsumerWidget {
+class _SocialView extends StatelessWidget {
   const _SocialView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -157,7 +221,7 @@ class _SocialView extends HookConsumerWidget {
         const SizedBox(height: 8),
         OutlinedButton(
           onPressed: () {
-            ref.read(urlsProvider).openTwitter();
+            context.getConductor<AboutViewConductor>().openTwitter();
           },
           child: const Text('Twitter'),
         ),
@@ -166,11 +230,11 @@ class _SocialView extends HookConsumerWidget {
   }
 }
 
-class _RepositoryView extends HookConsumerWidget {
+class _RepositoryView extends StatelessWidget {
   const _RepositoryView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
         text: 'Source code available on ',
@@ -183,7 +247,7 @@ class _RepositoryView extends HookConsumerWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                ref.read(urlsProvider).openRepository();
+                context.getConductor<AboutViewConductor>().openRepository();
               },
           ),
         ],

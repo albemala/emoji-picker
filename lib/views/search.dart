@@ -1,37 +1,37 @@
-import 'package:app/providers.dart';
+import 'package:app/conductors/filtered-glyphs-conductor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_state_management/flutter_state_management.dart';
 
-class SearchView extends HookConsumerWidget {
-  final FocusNode focusNode;
+class SearchViewCreator extends StatelessWidget {
+  const SearchViewCreator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ConductorConsumer<FilteredGlyphsConductor>(
+      builder: (context, filteredGlyphsConductor) {
+        return SearchView(
+          filteredGlyphsConductor: filteredGlyphsConductor,
+        );
+      },
+    );
+  }
+}
+
+class SearchView extends StatelessWidget {
+  final FilteredGlyphsConductor filteredGlyphsConductor;
 
   const SearchView({
     super.key,
-    required this.focusNode,
+    required this.filteredGlyphsConductor,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final textEditingController = useTextEditingController();
-
-    // When the search field gets focused, select the existing text
-    useListenable(focusNode);
-    if (focusNode.hasFocus) {
-      textEditingController.value = textEditingController.value.copyWith(
-        selection: TextSelection(
-          baseOffset: 0,
-          extentOffset: textEditingController.text.length,
-        ),
-        composing: TextRange.empty,
-      );
-    }
-
+  Widget build(BuildContext context) {
     return TextField(
       autofocus: true,
-      focusNode: focusNode,
-      controller: textEditingController,
+      focusNode: filteredGlyphsConductor.searchFocusNode,
+      controller: filteredGlyphsConductor.searchQueryController,
       decoration: InputDecoration(
         hintText: 'Search for emojis and symbols',
         contentPadding: const EdgeInsets.symmetric(horizontal: 21),
@@ -40,16 +40,11 @@ class SearchView extends HookConsumerWidget {
           child: IconButton(
             iconSize: 16,
             icon: const Icon(CupertinoIcons.clear),
-            onPressed: () {
-              textEditingController.clear();
-              ref.read(visibleGlyphsProvider.notifier).clearSearch();
-            },
+            onPressed: filteredGlyphsConductor.clearSearch,
           ),
         ),
       ),
-      onChanged: (value) {
-        ref.read(visibleGlyphsProvider.notifier).onSearchChanged(value);
-      },
+      onChanged: filteredGlyphsConductor.setSearchQuery,
     );
   }
 }

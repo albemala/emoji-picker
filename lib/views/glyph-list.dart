@@ -1,33 +1,58 @@
-import 'package:app/providers.dart';
-import 'package:app/utils/math.dart';
+import 'package:app/conductors/filtered-glyphs-conductor.dart';
+import 'package:app/functions/math.dart';
+import 'package:app/models/glyph.dart';
 import 'package:app/views/ads.dart';
 import 'package:app/views/glyph-group-list.dart';
 import 'package:app/views/glyph-group-title.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_state_management/flutter_state_management.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class GlyphListView extends HookConsumerWidget {
-  const GlyphListView({
+class GlyphListViewCreator extends StatelessWidget {
+  const GlyphListViewCreator({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final visibleGlyphs = ref.watch(visibleGlyphsProvider);
+  Widget build(BuildContext context) {
+    return ConductorConsumer<FilteredGlyphsConductor>(
+      builder: (context, filteredGlyphsConductor) {
+        return GlyphListView(
+          filteredGlyphsConductor: filteredGlyphsConductor,
+        );
+      },
+    );
+  }
+}
+
+class GlyphListView extends StatelessWidget {
+  final FilteredGlyphsConductor filteredGlyphsConductor;
+
+  const GlyphListView({
+    super.key,
+    required this.filteredGlyphsConductor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       surfaceTintColor: Theme.of(context).colorScheme.primary,
       elevation: Theme.of(context).brightness == Brightness.light ? 1 : 12,
-      child: CustomScrollView(
-        slivers: visibleGlyphs.entries.map((entry) {
-          return MultiSliver(
-            children: [
-              GlyphGroupTitleView(title: entry.key),
-              GlyphGroupListView(glyphs: entry.value),
-              const _AdView(),
-            ],
+      child: ValueListenableBuilder<Map<String, List<Glyph>>>(
+        valueListenable: filteredGlyphsConductor.filteredGlyphs,
+        builder: (context, filteredGlyphs, _) {
+          return CustomScrollView(
+            slivers: filteredGlyphs.entries.map((entry) {
+              return MultiSliver(
+                children: [
+                  GlyphGroupTitleView(title: entry.key),
+                  GlyphGroupListView(glyphs: entry.value),
+                  const _AdView(),
+                ],
+              );
+            }).toList(),
           );
-        }).toList(),
+        },
       ),
     );
   }

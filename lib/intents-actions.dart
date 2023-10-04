@@ -1,4 +1,4 @@
-import 'package:app/utils/clipboard.dart';
+import 'package:app/functions/clipboard.dart';
 import 'package:flutter/widgets.dart';
 
 class CopyGlyphIntent extends Intent {
@@ -7,12 +7,17 @@ class CopyGlyphIntent extends Intent {
 
 class CopyGlyphAction extends Action<CopyGlyphIntent> {
   final BuildContext context;
-  final String? char;
+  final String char;
 
   CopyGlyphAction(this.context, this.char);
 
   @override
-  void invoke(covariant CopyGlyphIntent intent) => copyToClipboard(context, char);
+  void invoke(covariant CopyGlyphIntent intent) =>
+      copyToClipboard(context, char);
+}
+
+void copyGlyph(BuildContext context, String char) {
+  CopyGlyphAction(context, char).invoke(const CopyGlyphIntent());
 }
 
 class FocusSearchIntent extends Intent {

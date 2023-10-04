@@ -1,67 +1,75 @@
-import 'package:app/providers.dart';
+import 'package:app/defines/urls.dart';
+import 'package:app/functions/url.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ExaboxAdView extends HookConsumerWidget {
-  const ExaboxAdView();
+class ExaboxAdView extends StatelessWidget {
+  const ExaboxAdView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return _BaseAdView(
       iconAssetPath: 'assets/images/exabox-icon.png',
       overline: 'Are you a software developer?',
       title: 'Exabox: Essential tools for developers',
       description: '''
 30+ tools: convert/format JSON/YAML, encode/decode Base64, generate fake data, parse JWTs, transform text using multiple rules, and much more. All in one single app. Work offline. Privacy-friendly.''',
-      onLearnMore: ref.read(urlsProvider).openExaboxWebsite,
+      onLearnMore: () {
+        openUrl(exaboxWebsiteUrl);
+      },
     );
   }
 }
 
-class HexeeProAdView extends HookConsumerWidget {
-  const HexeeProAdView();
+class HexeeProAdView extends StatelessWidget {
+  const HexeeProAdView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return _BaseAdView(
       iconAssetPath: 'assets/images/hexee-pro-icon.png',
       overline: 'Are you a designer or artist?',
       title: 'Hexee Pro: Advanced palette & color tools',
       description: '''
 Hexee Pro is the ultimate palette editor and color tool for designers and artists. If you're tired of switching between multiple apps to work with colors, Hexee Pro is the perfect solution for you.''',
-      onLearnMore: ref.read(urlsProvider).openHexeeWebsite,
+      onLearnMore: () {
+        openUrl(hexeeWebsiteUrl);
+      },
     );
   }
 }
 
-class WMapAdView extends HookConsumerWidget {
-  const WMapAdView();
+class WMapAdView extends StatelessWidget {
+  const WMapAdView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return _BaseAdView(
       iconAssetPath: 'assets/images/wmap-icon.png',
       overline: 'Mobile app',
       title: 'WMap: Map Wallpapers & Backgrounds',
       description: '''
 Create beautiful, minimal, custom map wallpapers and backgrounds for your phone or tablet.''',
-      onLearnMore: ref.read(urlsProvider).openWMapWebsite,
+      onLearnMore: () {
+        openUrl(wmapWebsiteUrl);
+      },
     );
   }
 }
 
-class IroIronAdView extends HookConsumerWidget {
-  const IroIronAdView();
+class IroIronAdView extends StatelessWidget {
+  const IroIronAdView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return _BaseAdView(
       iconAssetPath: 'assets/images/iro-iro-icon.png',
       overline: 'Game',
       title: 'Iro-Iro: Relaxing Color Puzzle',
       description: '''
 Arrange colors to form amazing patterns in this relaxing colour puzzle game!''',
-      onLearnMore: ref.read(urlsProvider).openIroIroWebsite,
+      onLearnMore: () {
+        openUrl(iroIroWebsiteUrl);
+      },
     );
   }
 }
