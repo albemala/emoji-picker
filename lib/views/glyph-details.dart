@@ -34,7 +34,7 @@ class GlyphDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
+    return ValueListenableBuilder(
       valueListenable: conductor.isGlyphDetailsVisible,
       builder: (context, isVisible, _) {
         if (!isVisible) {

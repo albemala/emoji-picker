@@ -1,4 +1,5 @@
 import 'package:app/conductors/search-glyphs-conductor.dart';
+import 'package:app/functions/glyphs.dart';
 import 'package:app/functions/math.dart';
 import 'package:app/models/glyph.dart';
 import 'package:app/views/ads.dart';
@@ -8,17 +9,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class GlyphListViewCreator extends StatelessWidget {
-  const GlyphListViewCreator({
+class EmojiListViewCreator extends StatelessWidget {
+  const EmojiListViewCreator({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return ConductorConsumer<SearchGlyphsConductor>(
-      builder: (context, filteredGlyphsConductor) {
-        return GlyphListView(
-          filteredGlyphsConductor: filteredGlyphsConductor,
+      builder: (context, conductor) {
+        return ValueListenableBuilder(
+          valueListenable: conductor.filteredEmoji,
+          builder: (context, filteredEmoji, _) {
+            return GlyphListView(
+              groupedGlyphs: glyphsByGroup(filteredEmoji),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class SymbolListViewCreator extends StatelessWidget {
+  const SymbolListViewCreator({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ConductorConsumer<SearchGlyphsConductor>(
+      builder: (context, conductor) {
+        return ValueListenableBuilder(
+          valueListenable: conductor.filteredSymbols,
+          builder: (context, filteredSymbols, _) {
+            return GlyphListView(
+              groupedGlyphs: glyphsByGroup(filteredSymbols),
+            );
+          },
         );
       },
     );
@@ -26,11 +54,11 @@ class GlyphListViewCreator extends StatelessWidget {
 }
 
 class GlyphListView extends StatelessWidget {
-  final SearchGlyphsConductor filteredGlyphsConductor;
+  final Map<String, List<Glyph>> groupedGlyphs;
 
   const GlyphListView({
     super.key,
-    required this.filteredGlyphsConductor,
+    required this.groupedGlyphs,
   });
 
   @override
@@ -38,24 +66,19 @@ class GlyphListView extends StatelessWidget {
     return Material(
       surfaceTintColor: Theme.of(context).colorScheme.primary,
       elevation: Theme.of(context).brightness == Brightness.light ? 1 : 12,
-      child: ValueListenableBuilder<Map<String, List<Glyph>>>(
-        valueListenable: filteredGlyphsConductor.filteredGlyphs,
-        builder: (context, filteredGlyphs, _) {
-          return CustomScrollView(
-            slivers: filteredGlyphs.entries.map((entry) {
-              return MultiSliver(
-                pushPinnedChildren: true,
-                children: [
-                  SliverPinnedHeader(
-                    child: GlyphGroupTitleView(title: entry.key),
-                  ),
-                  GlyphGroupListView(glyphs: entry.value),
-                  const _AdView(),
-                ],
-              );
-            }).toList(),
+      child: CustomScrollView(
+        slivers: groupedGlyphs.entries.map((entry) {
+          return MultiSliver(
+            pushPinnedChildren: true,
+            children: [
+              SliverPinnedHeader(
+                child: GlyphGroupTitleView(title: entry.key),
+              ),
+              GlyphGroupListView(glyphs: entry.value),
+              const _AdView(),
+            ],
           );
-        },
+        }).toList(),
       ),
     );
   }

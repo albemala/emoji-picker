@@ -14,24 +14,22 @@ class GlyphsConductor extends Conductor {
     return GlyphsConductor();
   }
 
-  final glyphs = ValueNotifier<List<Glyph>>([]);
+  final emojis = ValueNotifier<Iterable<Glyph>>([]);
+  final symbols = ValueNotifier<Iterable<Glyph>>([]);
 
   GlyphsConductor() {
     _init();
   }
 
   Future<void> _init() async {
-    final emojis = await loadEmojis();
-    final symbols = await loadSymbols();
-    glyphs.value = [
-      ...emojis,
-      ...symbols,
-    ];
+    emojis.value = await loadEmojis();
+    symbols.value = await loadSymbols();
   }
 
   @override
   void dispose() {
-    glyphs.dispose();
+    emojis.dispose();
+    symbols.dispose();
   }
 }
 

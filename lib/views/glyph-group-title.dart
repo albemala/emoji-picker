@@ -12,7 +12,7 @@ class GlyphGroupTitleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+        padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 8),
         child: Text(
           title.toUpperCase(),
           style: Theme.of(context).textTheme.bodyLarge,

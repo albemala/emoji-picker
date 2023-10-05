@@ -14,7 +14,7 @@ class TopBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 21, vertical: 24),
+      padding: EdgeInsets.all(21),
       child: Row(
         children: [
           Expanded(

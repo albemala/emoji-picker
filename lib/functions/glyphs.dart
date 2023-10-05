@@ -1,7 +1,7 @@
 import 'package:app/models/glyph.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
-Map<String, List<Glyph>> glyphsByGroup(List<Glyph> glyphs) {
+Map<String, List<Glyph>> glyphsByGroup(Iterable<Glyph> glyphs) {
   final map = <String, List<Glyph>>{};
   for (final glyph in glyphs) {
     map.update(

@@ -18,27 +18,32 @@ class SearchGlyphsConductor extends Conductor {
 
   final searchQueryController = TextEditingController();
 
-  final filteredGlyphs = ValueNotifier<Map<String, List<Glyph>>>({});
+  final filteredEmoji = ValueNotifier<Iterable<Glyph>>([]);
+
+  final filteredSymbols = ValueNotifier<Iterable<Glyph>>([]);
 
   SearchGlyphsConductor(this._glyphsConductor) {
     _init();
   }
 
   void _init() {
-    _glyphsConductor.glyphs.addListener(_updateFilteredGlyphs);
+    _glyphsConductor.emojis.addListener(_updateFilteredGlyphs);
+    _glyphsConductor.symbols.addListener(_updateFilteredGlyphs);
     searchFocusNode.addListener(onSearchFocusChanged);
     searchQueryController.addListener(onSearchChanged);
   }
 
   @override
   void dispose() {
-    _glyphsConductor.glyphs.removeListener(_updateFilteredGlyphs);
+    _glyphsConductor.emojis.removeListener(_updateFilteredGlyphs);
+    _glyphsConductor.symbols.removeListener(_updateFilteredGlyphs);
     searchFocusNode.removeListener(onSearchFocusChanged);
     searchQueryController.removeListener(onSearchChanged);
 
     searchFocusNode.dispose();
     searchQueryController.dispose();
-    filteredGlyphs.dispose();
+    filteredEmoji.dispose();
+    filteredSymbols.dispose();
   }
 
   void onSearchFocusChanged() {
@@ -71,17 +76,21 @@ class SearchGlyphsConductor extends Conductor {
 
   void _updateFilteredGlyphs() {
     if (searchQueryController.text.isEmpty) {
-      filteredGlyphs.value = glyphsByGroup(_glyphsConductor.glyphs.value);
+      filteredEmoji.value = _glyphsConductor.emojis.value;
+      filteredSymbols.value = _glyphsConductor.symbols.value;
     } else {
-      final filteredGlyphs = _glyphsConductor.glyphs.value
-          .where(
-            (glyph) => matchesSearchTerm(
-              glyph,
-              searchQueryController.text,
-            ),
-          )
-          .toList();
-      this.filteredGlyphs.value = glyphsByGroup(filteredGlyphs);
+      filteredEmoji.value = _glyphsConductor.emojis.value.where(
+        (glyph) => matchesSearchTerm(
+          glyph,
+          searchQueryController.text,
+        ),
+      );
+      filteredSymbols.value = _glyphsConductor.symbols.value.where(
+        (glyph) => matchesSearchTerm(
+          glyph,
+          searchQueryController.text,
+        ),
+      );
     }
   }
 

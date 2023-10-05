@@ -161,7 +161,7 @@ class _AppInfoView extends StatelessWidget {
             ),
             Row(
               children: [
-                ValueListenableBuilder<String>(
+                ValueListenableBuilder(
                   valueListenable:
                       context.getConductor<AboutViewConductor>().appVersion,
                   builder: (context, appVersion, _) {

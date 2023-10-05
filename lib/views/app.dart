@@ -17,7 +17,7 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ThemeMode>(
+    return ValueListenableBuilder(
       valueListenable: context.getConductor<PreferencesConductor>().themeMode,
       builder: (context, themeMode, child) {
         SystemChrome.setSystemUIOverlayStyle(
