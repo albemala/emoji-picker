@@ -1,4 +1,3 @@
-import 'package:app/conductors/glyph-actions-conductor.dart';
 import 'package:app/conductors/glyph-details-conductor.dart';
 import 'package:app/conductors/glyphs-conductor.dart';
 import 'package:app/conductors/local-storage-conductor.dart';
@@ -26,10 +25,7 @@ Future<void> main() async {
               create: SearchGlyphsConductor.fromContext,
               child: ConductorCreator(
                 create: GlyphDetailsConductor.fromContext,
-                child: ConductorCreator(
-                  create: GlyphActionsConductor.fromContext,
-                  child: AppView(),
-                ),
+                child: AppView(),
               ),
             ),
           ),

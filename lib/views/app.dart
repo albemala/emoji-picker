@@ -1,4 +1,4 @@
-import 'package:app/conductors/glyph-actions-conductor.dart';
+import 'package:app/conductors/glyph-details-conductor.dart';
 import 'package:app/conductors/preferences-conductor.dart';
 import 'package:app/conductors/routing-conductor.dart';
 import 'package:app/conductors/search-glyphs-conductor.dart';
@@ -47,7 +47,7 @@ class AppView extends StatelessWidget {
                 context.getConductor<SearchGlyphsConductor>(),
               ),
               CopyGlyphIntent: CopyGlyphAction(
-                context.getConductor<GlyphActionsConductor>(),
+                context.getConductor<GlyphDetailsConductor>(),
               ),
             },
             child: const AppContentView(),

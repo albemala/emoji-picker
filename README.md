@@ -78,3 +78,5 @@ Created by [@albemala](https://github.com/albemala) ([Twitter](https://twitter.c
 Emoji data: [unicode-emoji-json](https://github.com/muan/unicode-emoji-json), [emojilib](https://github.com/muan/emojilib)
 
 Symbol data: [Glyphr-Studio-1](https://raw.githubusercontent.com/glyphr-studio/Glyphr-Studio-1/master/dev/js/lib_unicode_blocks.js), [reactos](https://raw.githubusercontent.com/reactos/reactos/master/dll/win32/getuname/lang/en-US.rc) 
+
+Kaomoji data: [kaomoji](https://github.com/itsmeichigo/peachy/)

@@ -21,22 +21,27 @@ class SearchGlyphsConductor extends Conductor {
   final filteredEmoji = ValueNotifier<Iterable<Glyph>>([]);
 
   final filteredSymbols = ValueNotifier<Iterable<Glyph>>([]);
+  final filteredKaomoji = ValueNotifier<Iterable<Glyph>>([]);
 
   SearchGlyphsConductor(this._glyphsConductor) {
     _init();
   }
 
   void _init() {
-    _glyphsConductor.emojis.addListener(_updateFilteredGlyphs);
+    _glyphsConductor.emoji.addListener(_updateFilteredGlyphs);
     _glyphsConductor.symbols.addListener(_updateFilteredGlyphs);
+    _glyphsConductor.kaomoji.addListener(_updateFilteredGlyphs);
+
     searchFocusNode.addListener(onSearchFocusChanged);
     searchQueryController.addListener(onSearchChanged);
   }
 
   @override
   void dispose() {
-    _glyphsConductor.emojis.removeListener(_updateFilteredGlyphs);
+    _glyphsConductor.emoji.removeListener(_updateFilteredGlyphs);
     _glyphsConductor.symbols.removeListener(_updateFilteredGlyphs);
+    _glyphsConductor.kaomoji.removeListener(_updateFilteredGlyphs);
+
     searchFocusNode.removeListener(onSearchFocusChanged);
     searchQueryController.removeListener(onSearchChanged);
 
@@ -44,6 +49,7 @@ class SearchGlyphsConductor extends Conductor {
     searchQueryController.dispose();
     filteredEmoji.dispose();
     filteredSymbols.dispose();
+    filteredKaomoji.dispose();
   }
 
   void onSearchFocusChanged() {
@@ -76,16 +82,23 @@ class SearchGlyphsConductor extends Conductor {
 
   void _updateFilteredGlyphs() {
     if (searchQueryController.text.isEmpty) {
-      filteredEmoji.value = _glyphsConductor.emojis.value;
+      filteredEmoji.value = _glyphsConductor.emoji.value;
       filteredSymbols.value = _glyphsConductor.symbols.value;
+      filteredKaomoji.value = _glyphsConductor.kaomoji.value;
     } else {
-      filteredEmoji.value = _glyphsConductor.emojis.value.where(
+      filteredEmoji.value = _glyphsConductor.emoji.value.where(
         (glyph) => matchesSearchTerm(
           glyph,
           searchQueryController.text,
         ),
       );
       filteredSymbols.value = _glyphsConductor.symbols.value.where(
+        (glyph) => matchesSearchTerm(
+          glyph,
+          searchQueryController.text,
+        ),
+      );
+      filteredKaomoji.value = _glyphsConductor.kaomoji.value.where(
         (glyph) => matchesSearchTerm(
           glyph,
           searchQueryController.text,

@@ -1,4 +1,3 @@
-import 'package:app/conductors/glyph-actions-conductor.dart';
 import 'package:app/conductors/glyph-details-conductor.dart';
 import 'package:app/models/glyph.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +32,12 @@ class GlyphViewConductor extends Conductor {
 
 class GlyphViewCreator extends StatelessWidget {
   final Glyph glyph;
+  final Widget Function(BuildContext context, Glyph glyph) glyphContentBuilder;
 
   const GlyphViewCreator({
     super.key,
     required this.glyph,
+    required this.glyphContentBuilder,
   });
 
   @override
@@ -48,6 +49,7 @@ class GlyphViewCreator extends StatelessWidget {
           return GlyphView(
             glyph: glyph,
             conductor: conductor,
+            glyphContentView: glyphContentBuilder(context, glyph),
           );
         },
       ),
@@ -58,11 +60,13 @@ class GlyphViewCreator extends StatelessWidget {
 class GlyphView extends StatelessWidget {
   final Glyph glyph;
   final GlyphViewConductor conductor;
+  final Widget glyphContentView;
 
   const GlyphView({
     super.key,
     required this.glyph,
     required this.conductor,
+    required this.glyphContentView,
   });
 
   @override
@@ -73,20 +77,58 @@ class GlyphView extends StatelessWidget {
         onTap: conductor.focusNode.requestFocus,
         onDoubleTap: () {
           context
-              .getConductor<GlyphActionsConductor>()
+              .getConductor<GlyphDetailsConductor>()
               .copySelectedGlyphToClipboard();
         },
         focusNode: conductor.focusNode,
-        focusColor: Theme.of(context).colorScheme.secondary,
+        focusColor: Theme.of(context).colorScheme.tertiary,
         onFocusChange: (isFocused) {
           conductor.onFocusChange(isFocused, glyph);
         },
-        child: Center(
-          child: Text(
-            glyph.char,
-            style: const TextStyle(fontSize: 32),
-          ),
-        ),
+        child: glyphContentView,
+      ),
+    );
+  }
+}
+
+class SquaredGlyphContentView extends StatelessWidget {
+  final String glyph;
+
+  const SquaredGlyphContentView({
+    super.key,
+    required this.glyph,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        glyph,
+        style: const TextStyle(fontSize: 32),
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}
+
+class RectangularGlyphContentView extends StatelessWidget {
+  final String glyph;
+
+  const RectangularGlyphContentView({
+    super.key,
+    required this.glyph,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Text(
+        glyph,
+        style: const TextStyle(fontSize: 18),
+        overflow: TextOverflow.fade,
+        maxLines: 1,
+        softWrap: false,
       ),
     );
   }

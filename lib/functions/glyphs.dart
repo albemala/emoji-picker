@@ -1,6 +1,14 @@
 import 'package:app/models/glyph.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
+String getGlyphHtmlCode(String glyph) {
+  return '&#${glyph.runes.first.toRadixString(10).toUpperCase()};';
+}
+
+String getGlyphUnicode(String glyph) {
+  return 'U+${glyph.runes.first.toRadixString(16).toUpperCase()}';
+}
+
 Map<String, List<Glyph>> glyphsByGroup(Iterable<Glyph> glyphs) {
   final map = <String, List<Glyph>>{};
   for (final glyph in glyphs) {

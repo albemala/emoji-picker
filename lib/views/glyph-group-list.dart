@@ -12,22 +12,20 @@ class GlyphGroupListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.all(21),
-      sliver: SliverGrid(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 56,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            final glyph = glyphs.elementAt(index);
-            return GlyphViewCreator(glyph: glyph);
+    return SliverList.separated(
+      itemCount: glyphs.length,
+      itemBuilder: (context, index) {
+        final glyph = glyphs.elementAt(index);
+        return GlyphViewCreator(
+          glyph: glyph,
+          glyphContentBuilder: (BuildContext context, Glyph glyph) {
+            return RectangularGlyphContentView(glyph: glyph.glyph);
           },
-          childCount: glyphs.length,
-        ),
-      ),
+        );
+      },
+      separatorBuilder: (context, index) {
+        return const SizedBox(height: 8);
+      },
     );
   }
 }

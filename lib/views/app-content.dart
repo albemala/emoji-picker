@@ -14,7 +14,7 @@ class AppContentView extends StatelessWidget {
       body: Material(
         child: SafeArea(
           child: DefaultTabController(
-            length: 2,
+            length: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -27,6 +27,7 @@ class AppContentView extends StatelessWidget {
                       tabs: const [
                         Tab(text: 'Emoji'),
                         Tab(text: 'Symbols'),
+                        Tab(text: 'Kaomoji'),
                       ],
                     );
                   },
@@ -37,6 +38,7 @@ class AppContentView extends StatelessWidget {
                     children: [
                       EmojiListViewCreator(),
                       SymbolListViewCreator(),
+                      KaomojiListViewCreator(),
                     ],
                   ),
                 ),

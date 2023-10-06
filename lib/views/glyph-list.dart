@@ -3,6 +3,7 @@ import 'package:app/functions/glyphs.dart';
 import 'package:app/functions/math.dart';
 import 'package:app/models/glyph.dart';
 import 'package:app/views/ads.dart';
+import 'package:app/views/glyph-group-grid.dart';
 import 'package:app/views/glyph-group-list.dart';
 import 'package:app/views/glyph-group-title.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,11 @@ class EmojiListViewCreator extends StatelessWidget {
         return ValueListenableBuilder(
           valueListenable: conductor.filteredEmoji,
           builder: (context, filteredEmoji, _) {
-            return GlyphListView(
+            return GroupedGlyphsView(
               groupedGlyphs: glyphsByGroup(filteredEmoji),
+              groupBuilder: (context, glyphs) {
+                return GlyphGroupGridView(glyphs: glyphs);
+              },
             );
           },
         );
@@ -43,8 +47,11 @@ class SymbolListViewCreator extends StatelessWidget {
         return ValueListenableBuilder(
           valueListenable: conductor.filteredSymbols,
           builder: (context, filteredSymbols, _) {
-            return GlyphListView(
+            return GroupedGlyphsView(
               groupedGlyphs: glyphsByGroup(filteredSymbols),
+              groupBuilder: (context, glyphs) {
+                return GlyphGroupGridView(glyphs: glyphs);
+              },
             );
           },
         );
@@ -53,19 +60,45 @@ class SymbolListViewCreator extends StatelessWidget {
   }
 }
 
-class GlyphListView extends StatelessWidget {
-  final Map<String, List<Glyph>> groupedGlyphs;
+class KaomojiListViewCreator extends StatelessWidget {
+  const KaomojiListViewCreator({
+    super.key,
+  });
 
-  const GlyphListView({
+  @override
+  Widget build(BuildContext context) {
+    return ConductorConsumer<SearchGlyphsConductor>(
+      builder: (context, conductor) {
+        return ValueListenableBuilder(
+          valueListenable: conductor.filteredKaomoji,
+          builder: (context, filteredKaomoji, _) {
+            return GroupedGlyphsView(
+              groupedGlyphs: glyphsByGroup(filteredKaomoji),
+              groupBuilder: (context, glyphs) {
+                return GlyphGroupListView(glyphs: glyphs);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class GroupedGlyphsView extends StatelessWidget {
+  final Map<String, List<Glyph>> groupedGlyphs;
+  final Widget Function(BuildContext, List<Glyph>) groupBuilder;
+
+  const GroupedGlyphsView({
     super.key,
     required this.groupedGlyphs,
+    required this.groupBuilder,
   });
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      surfaceTintColor: Theme.of(context).colorScheme.primary,
-      elevation: Theme.of(context).brightness == Brightness.light ? 1 : 12,
+      color: Theme.of(context).colorScheme.surfaceVariant,
       child: CustomScrollView(
         slivers: groupedGlyphs.entries.map((entry) {
           return MultiSliver(
@@ -74,7 +107,10 @@ class GlyphListView extends StatelessWidget {
               SliverPinnedHeader(
                 child: GlyphGroupTitleView(title: entry.key),
               ),
-              GlyphGroupListView(glyphs: entry.value),
+              SliverPadding(
+                padding: const EdgeInsets.all(21),
+                sliver: groupBuilder(context, entry.value),
+              ),
               const _AdView(),
             ],
           );
@@ -135,7 +171,7 @@ class _AdContainerView extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 480),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 32),
               child: child,
             ),
           ),

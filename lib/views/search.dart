@@ -33,7 +33,7 @@ class SearchView extends StatelessWidget {
       focusNode: filteredGlyphsConductor.searchFocusNode,
       controller: filteredGlyphsConductor.searchQueryController,
       decoration: InputDecoration(
-        hintText: 'Search for emojis and symbols',
+        hintText: 'Search for emoji and symbols',
         contentPadding: const EdgeInsets.symmetric(horizontal: 21),
         suffixIcon: Padding(
           padding: const EdgeInsets.all(8),

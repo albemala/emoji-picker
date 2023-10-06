@@ -1,4 +1,4 @@
-import 'package:app/conductors/glyph-actions-conductor.dart';
+import 'package:app/conductors/glyph-details-conductor.dart';
 import 'package:app/conductors/search-glyphs-conductor.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/services.dart';
@@ -9,13 +9,13 @@ class CopyGlyphIntent extends Intent {
 }
 
 class CopyGlyphAction extends Action<CopyGlyphIntent> {
-  final GlyphActionsConductor glyphActionsConductor;
+  final GlyphDetailsConductor glyphDetailsConductor;
 
-  CopyGlyphAction(this.glyphActionsConductor);
+  CopyGlyphAction(this.glyphDetailsConductor);
 
   @override
   void invoke(covariant CopyGlyphIntent intent) {
-    glyphActionsConductor.copySelectedGlyphToClipboard();
+    glyphDetailsConductor.copySelectedGlyphToClipboard();
     RawKeyboard.instance.clearKeysPressed();
   }
 }

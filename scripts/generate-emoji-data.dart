@@ -66,10 +66,10 @@ Future<void> main() async {
   final emojiKeywords = //
       json.decode(emojiKeywordsResponse.body) as Map<String, dynamic>;
 
-  final emojis = emojiData.entries
+  final emoji = emojiData.entries
       .map((entry) => parseEmoji(entry, emojiKeywords))
       .toList();
 
-  File('assets/data/emojis.json') //
-      .writeAsStringSync(json.encode(emojis));
+  File('assets/data/emoji.json') //
+      .writeAsStringSync(json.encode(emoji));
 }
