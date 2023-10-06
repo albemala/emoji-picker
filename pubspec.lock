@@ -791,14 +791,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  super_responsive:
-    dependency: "direct main"
-    description:
-      name: super_responsive
-      sha256: "03e29dc43e9cf20b49b0ef55fe60176c6237a893cd6de3f0572cc6d75d6d3dca"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.6"
   term_glyph:
     dependency: transitive
     description:

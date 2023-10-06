@@ -31,8 +31,6 @@ dependencies:
   google_fonts: ^4.0.3
   sliver_tools: ^0.2.12
   slivers: ^0.0.1+2
-  super_responsive: ^0.1.6
-#  responsive_builder: ^0.4.3
 
   # search
   fuzzywuzzy: ^0.2.0
