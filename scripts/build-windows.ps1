@@ -44,7 +44,7 @@ gcloud storage cp --recursive "$StandaloneArchiveDirectory/../$StandaloneArchive
 $EnvFilePath = ".env"
 $EnvVariables = Get-Content $EnvFilePath | Out-String | ConvertFrom-StringData
 # build app store package
-flutter pub run msix:create --store -i $EnvVariables.IdentityName -b $EnvVariables.Publisher -u $EnvVariables.PublisherDisplayName
+dart run msix:create --store -i $EnvVariables.IdentityName -b $EnvVariables.Publisher -u $EnvVariables.PublisherDisplayName
 # copy app store package to archive directory
 Copy-Item -Path build/windows/runner/Release/app.msix -Destination "$AppStoreArchiveDirectory/Ejimo.msix"
 
