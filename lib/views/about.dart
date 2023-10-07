@@ -1,11 +1,13 @@
+import 'package:app/defines/app.dart';
 import 'package:app/defines/urls.dart';
 import 'package:app/functions/app.dart';
 import 'package:app/functions/math.dart';
+import 'package:app/functions/share.dart';
 import 'package:app/functions/url.dart';
 import 'package:app/views/ads.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:send_support_email/send_support_email.dart';
 
 class AboutViewConductor extends Conductor {
@@ -28,43 +30,38 @@ class AboutViewConductor extends Conductor {
     appVersion.dispose();
   }
 
-/* TODO
   Future<void> openRateApp() async {
     await InAppReview.instance.openStoreListing(
       appStoreId: appleAppId,
+      microsoftStoreId: microsoftStoreId,
     );
   }
-*/
 
-/* TODO
   Future<void> openShareApp(
-      String message,
-      Rect sharePosition,
-      ) async {
+    String message,
+    Rect sharePosition,
+  ) async {
     await shareText(
       position: sharePosition,
       text: message,
     );
   }
-*/
 
-/* TODO
   Future<void> openOtherApps() async {
     await openUrl(otherProjectsUrl);
   }
-*/
 
-  Future<void> openSendFeedback() async {
+  Future<void> openEmail() async {
     final email = await generateSupportEmail(supportEmailUrl);
     await openUrl(email);
   }
 
-  Future<void> openTwitter() async {
-    await openUrl(twitterUrl);
+  Future<void> openWebsite() async {
+    await openUrl(repositoryUrl);
   }
 
-  Future<void> openRepository() async {
-    await openUrl(repositoryUrl);
+  Future<void> openTwitter() async {
+    await openUrl(twitterUrl);
   }
 }
 
@@ -92,20 +89,17 @@ class AboutView extends StatelessWidget {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 480),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            Padding(
+              padding: EdgeInsets.all(24),
               child: _AboutContentView(),
             ),
             Material(
-              surfaceTintColor: Theme.of(context).colorScheme.primary,
-              elevation: Theme.of(context).brightness == Brightness.light //
-                  ? 1
-                  : 12,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              type: MaterialType.card,
+              child: Padding(
+                padding: EdgeInsets.all(24),
                 child: _AdView(),
               ),
             ),
@@ -121,14 +115,16 @@ class _AboutContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(
-      spacing: 24,
-      runSpacing: 24,
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _AppInfoView(),
+        SizedBox(height: 12),
+        _AppActionsView(),
+        SizedBox(height: 16),
         _SupportView(),
-        _SocialView(),
-        _RepositoryView(),
+        SizedBox(height: 16),
+        _NewsView(),
       ],
     );
   }
@@ -156,7 +152,7 @@ class _AppInfoView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              getAppName(),
+              appName,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Row(
@@ -185,6 +181,42 @@ class _AppInfoView extends StatelessWidget {
   }
 }
 
+class _AppActionsView extends StatelessWidget {
+  const _AppActionsView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        OutlinedButton(
+          onPressed: () {
+            context.getConductor<AboutViewConductor>().openRateApp();
+          },
+          child: const Text('Rate'),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            context.getConductor<AboutViewConductor>().openShareApp(
+              '''
+Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $repositoryUrl''',
+              getSharePosition(context),
+            );
+          },
+          child: const Text('Share'),
+        ),
+        FilledButton(
+          onPressed: () {
+            context.getConductor<AboutViewConductor>().openOtherApps();
+          },
+          child: const Text('Other Apps'),
+        ),
+      ],
+    );
+  }
+}
+
 class _SupportView extends StatelessWidget {
   const _SupportView();
 
@@ -195,63 +227,52 @@ class _SupportView extends StatelessWidget {
       children: [
         const Text('Help & Support'),
         const SizedBox(height: 8),
-        OutlinedButton(
-          onPressed: () {
-            context.getConductor<AboutViewConductor>().openSendFeedback();
-          },
-          child: const Text(
-            'Send Feedback',
-            maxLines: 1,
-          ),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                context.getConductor<AboutViewConductor>().openEmail();
+              },
+              child: const Text('Email'),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                context.getConductor<AboutViewConductor>().openWebsite();
+              },
+              child: const Text('Website'),
+            ),
+          ],
         ),
       ],
     );
   }
 }
 
-class _SocialView extends StatelessWidget {
-  const _SocialView();
+class _NewsView extends StatelessWidget {
+  const _NewsView();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Follow me!'),
+        const Text('News, Tips & Tricks'),
         const SizedBox(height: 8),
-        OutlinedButton(
-          onPressed: () {
-            context.getConductor<AboutViewConductor>().openTwitter();
-          },
-          child: const Text('Twitter'),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                context.getConductor<AboutViewConductor>().openTwitter();
+              },
+              child: const Text('Twitter'),
+            ),
+          ],
         ),
       ],
-    );
-  }
-}
-
-class _RepositoryView extends StatelessWidget {
-  const _RepositoryView();
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        text: 'Source code available on ',
-        style: Theme.of(context).textTheme.bodyMedium,
-        children: [
-          TextSpan(
-            text: 'GitHub',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                context.getConductor<AboutViewConductor>().openRepository();
-              },
-          ),
-        ],
-      ),
     );
   }
 }

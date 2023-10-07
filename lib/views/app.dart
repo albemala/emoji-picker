@@ -3,8 +3,8 @@ import 'package:app/conductors/preferences-conductor.dart';
 import 'package:app/conductors/routing-conductor.dart';
 import 'package:app/conductors/search-glyphs-conductor.dart';
 import 'package:app/defines/app-theme.dart';
+import 'package:app/defines/app.dart';
 import 'package:app/defines/intents-actions.dart';
-import 'package:app/functions/app.dart';
 import 'package:app/views/app-content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +30,7 @@ class AppView extends StatelessWidget {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: getAppName(),
+          title: appName,
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: themeMode,
