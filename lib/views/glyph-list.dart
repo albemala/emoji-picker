@@ -164,14 +164,14 @@ class _AdContainerView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(
-          height: 2,
+          height: 3,
           child: Material(),
         ),
         Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 480),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 32),
+              padding: const EdgeInsets.all(21),
               child: child,
             ),
           ),
