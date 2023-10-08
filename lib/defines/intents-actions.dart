@@ -16,6 +16,7 @@ class CopyGlyphAction extends Action<CopyGlyphIntent> {
   @override
   void invoke(covariant CopyGlyphIntent intent) {
     glyphDetailsConductor.copySelectedGlyphToClipboard();
+    // ignore: invalid_use_of_visible_for_testing_member
     RawKeyboard.instance.clearKeysPressed();
   }
 }
@@ -32,6 +33,7 @@ class FocusSearchAction extends Action<FocusSearchIntent> {
   @override
   void invoke(covariant FocusSearchIntent intent) {
     searchGlyphsConductor.searchFocusNode.requestFocus();
+    // ignore: invalid_use_of_visible_for_testing_member
     RawKeyboard.instance.clearKeysPressed();
   }
 }
