@@ -60,6 +60,7 @@ dev_dependencies:
   very_good_analysis: ^5.0.0+1
   # app icons
   flutter_launcher_icons_maker: ^0.10.2
+  package_rename: ^1.5.1
   # windows
   msix: ^3.7.0
 
@@ -83,6 +84,32 @@ flutter_icons:
   adaptive_icon_background: "#000000"
 #  adaptive_icon_background: "assets/app-icon/android-background.png"
   adaptive_icon_foreground: "assets/app-icon-android-foreground.png"
+
+# dart run package_rename
+package_rename_config:
+  android:
+    app_name: Ejimo
+    package_name: me.albemala.ejimo
+  ios:
+    app_name: Ejimo
+    bundle_name: Ejimo
+    package_name: me.albemala.ejimo
+  macos:
+    app_name: Ejimo
+    package_name: me.albemala.ejimo
+    copyright_notice: Copyright © 2023 Alberto Malagoli (albemala.me). All rights reserved.
+  windows:
+    app_name: Ejimo
+    organization: albemala.me
+    copyright_notice: Copyright © 2023 Alberto Malagoli (albemala.me).
+    exe_name: Ejimo
+  linux:
+    app_name: Ejimo
+    package_name: me.albemala.ejimo
+    exe_name: Ejimo
+  web:
+    app_name: Ejimo
+    description: Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo.
 
 msix_config:
   # Windows Store

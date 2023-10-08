@@ -1,11 +1,11 @@
 {
-    "name": "Ejimo - Comprehensive emoji and symbol picker",
+    "name": "Ejimo",
     "short_name": "Ejimo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#6200EE",
-    "description": "Comprehensive emoji and symbol picker",
+    "description": "Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
