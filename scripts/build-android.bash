@@ -5,9 +5,6 @@
 set -e # exit on error
 #set -x # print commands
 
-# read .env file
-source .env
-
 # clean
 flutter clean
 
@@ -16,4 +13,4 @@ flutter build appbundle --release
 
 # publish
 cd android
-fastlane android publish json_key_file:$ANDROID_JSON_KEY_FILE
+fastlane android publish

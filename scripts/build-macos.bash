@@ -6,8 +6,6 @@ set -e # exit on error
 #set -x # print commands
 
 APP_VERSION=$(sed -n 's/^version: //p' pubspec.yaml)
-# read .env file
-source .env
 
 # clean
 flutter clean
@@ -15,19 +13,19 @@ flutter clean
 # prepare build
 flutter build macos --release
 cd macos
-fastlane mac get_certificates_profiles username:$APPLE_ID
+fastlane mac get_certificates_profiles
 
 # build for app store
 rm -rf build
-fastlane mac build_app_store team_id:$TEAM_ID
+fastlane mac build_app_store
 # publish app store
-fastlane mac publish_app_store username:$APPLE_ID
+fastlane mac publish_app_store
 
 # build standalone
 rm -rf build
-fastlane mac build_standalone team_id:$TEAM_ID
+fastlane mac build_standalone
 # publish standalone
-fastlane mac publish_standalone team_id:$TEAM_ID username:$APPLE_ID password:$APPLE_APPLICATION_SPECIFIC_PASSWORD
+fastlane mac publish_standalone
 # archive standalone
 cd ..
 ARCHIVE_PATH=macos-builds/$APP_VERSION

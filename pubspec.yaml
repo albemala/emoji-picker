@@ -72,7 +72,7 @@ flutter:
     - assets/fonts/TitilliumWeb/
     - assets/images/
 
-# flutter pub run flutter_launcher_icons_maker:main && flutter clean
+# dart run flutter_launcher_icons_maker:main && flutter clean && flutter pub get
 flutter_icons:
   android: true
   ios: true

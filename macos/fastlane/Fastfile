@@ -1,17 +1,14 @@
 platform :mac do
 
   lane :generate_certificates_profiles do |options|
-    username = options[:username] # Apple ID
     match(
-      username: username,
       type: "development",
+      force_for_new_devices: true,
     )
     match(
-      username: username,
       type: "appstore",
     )
     match(
-      username: username,
       type: "developer_id",
       additional_cert_types: [
         "mac_installer_distribution",
@@ -21,23 +18,15 @@ platform :mac do
   end
 
   lane :get_certificates_profiles do |options|
-#     keychain_name = options[:keychain_name] || "login.keychain"
-    username = options[:username] # Apple ID
     match(
-#       keychain_name: keychain_name,
-      username: username,
       type: "development",
       readonly: true,
     )
     match(
-#       keychain_name: keychain_name,
-      username: username,
       type: "appstore",
       readonly: true,
     )
     match(
-#       keychain_name: keychain_name,
-      username: username,
       type: "developer_id",
       additional_cert_types: [
         "mac_installer_distribution",
@@ -48,12 +37,11 @@ platform :mac do
   end
 
   lane :build_app_store do |options|
-    team_id = options[:team_id]
     build_mac_app(
       scheme: "Runner",
       export_method: "app-store",
+      export_team_id: ENV["TEAM_ID"],
       export_options: {
-        teamID: team_id,
         provisioningProfiles: {
           "me.albemala.ejimo" => "match AppStore me.albemala.ejimo macos",
         },
@@ -63,12 +51,11 @@ platform :mac do
   end
 
   lane :build_standalone do |options|
-    team_id = options[:team_id]
     build_mac_app(
       scheme: "Runner",
       export_method: "developer-id",
+      export_team_id: ENV["TEAM_ID"],
       export_options: {
-        teamID: team_id,
         provisioningProfiles: {
           "me.albemala.ejimo" => "match Direct me.albemala.ejimo macos",
         },
@@ -78,20 +65,25 @@ platform :mac do
   end
 
   lane :publish_app_store do |options|
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APPLE_KEY_ID"],
+      issuer_id: ENV["APPLE_ISSUER_ID"],
+      key_filepath: ENV["APPLE_KEY_FILEPATH"],
+#       duration: 1200, # optional (maximum 1200)
+#       in_house: false # optional but may be required if using match/sigh
+    )
     upload_to_app_store(
-      username: options[:username],
-      app_identifier: "me.albemala.ejimo",
+      pkg: "build/Ejimo.pkg",
+      api_key: api_key,
       skip_metadata: true,
       skip_screenshots: true,
+      precheck_include_in_app_purchases: false,
     )
   end
 
   lane :publish_standalone do |options|
-    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = options[:password]
-    team_id = options[:team_id]
     notarize(
-      username: options[:username],
-      asc_provider: team_id,
+      asc_provider: ENV["TEAM_ID"],
       package: "build/Ejimo.app",
       print_log: true,
       verbose: true,

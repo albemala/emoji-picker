@@ -5,18 +5,13 @@
 set -e # exit on error
 #set -x # print commands
 
-# read .env file
-source .env
-
 # clean
 flutter clean
 rm -rf ios/build
-
 # build
 flutter build ipa --release --no-codesign
 cd ios
-fastlane ios get_certificates_profiles username:$APPLE_ID
+fastlane ios get_certificates_profiles
 fastlane ios build
-
 # publish
-fastlane ios publish username:$APPLE_ID
+fastlane ios publish

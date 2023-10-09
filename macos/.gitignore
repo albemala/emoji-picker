@@ -14,3 +14,5 @@ fastlane/test_output
 fastlane/readme.md
 
 build/
+
+AuthKey_*.p8
