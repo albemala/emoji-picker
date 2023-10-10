@@ -1,6 +1,6 @@
 # Ejimo
 
-Find and copy unicode characters, emoticons, glyphs and symbols with Ejimo.
+Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo.
 
 <img src="app-store-assets/macos/screenshots/1.0.0/screenshot-01.png" alt="Ejimo screenshot 1" width="540"/>
 <img src="app-store-assets/macos/screenshots/1.0.0/screenshot-02.png" alt="Ejimo screenshot 2" width="540"/>
