@@ -1,3 +1,13 @@
+# 2.0.1
+
+- Added kaomoji.
+- Improved the user interface across the whole app.
+- Showcasing other personal projects.
+- Fixed the issue where keyboard shortcuts would sometimes stop working.
+- Upgraded to Dart 3.0 and Flutter 3.10.
+- Updated the minimum macOS requirement to 10.14.
+- Set the minimum Android SDK to 19.
+
 # 1.3.0
 
 - Now supporting Emoji v15 (1800+ emojis) and 17000+ Unicode symbols
