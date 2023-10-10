@@ -69,6 +69,7 @@ flutter:
 
   assets:
     - assets/data/
+    - assets/fonts/NotoColorEmoji/
     - assets/fonts/TitilliumWeb/
     - assets/images/
 

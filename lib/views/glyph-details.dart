@@ -1,4 +1,5 @@
 import 'package:app/conductors/glyph-details-conductor.dart';
+import 'package:app/defines/glyphs.dart';
 import 'package:app/models/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
@@ -111,7 +112,7 @@ class _GlyphView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       glyph.glyph,
-      style: TextStyle(
+      style: getTextStyleForGlyph(glyph).copyWith(
         fontSize: glyph.type == GlyphType.kaomoji ? 32 : 56,
       ),
       overflow: TextOverflow.fade,

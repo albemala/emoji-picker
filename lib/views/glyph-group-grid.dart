@@ -24,7 +24,7 @@ class GlyphGroupGridView extends StatelessWidget {
           return GlyphViewCreator(
             glyph: glyph,
             glyphContentBuilder: (BuildContext context, Glyph glyph) {
-              return SquaredGlyphContentView(glyph: glyph.glyph);
+              return SquaredGlyphContentView(glyph: glyph);
             },
           );
         },

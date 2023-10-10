@@ -1,4 +1,5 @@
 import 'package:app/conductors/glyph-details-conductor.dart';
+import 'package:app/defines/glyphs.dart';
 import 'package:app/models/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
@@ -92,7 +93,7 @@ class GlyphView extends StatelessWidget {
 }
 
 class SquaredGlyphContentView extends StatelessWidget {
-  final String glyph;
+  final Glyph glyph;
 
   const SquaredGlyphContentView({
     super.key,
@@ -103,16 +104,15 @@ class SquaredGlyphContentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        glyph,
-        style: const TextStyle(fontSize: 32),
-        overflow: TextOverflow.ellipsis,
+        glyph.glyph,
+        style: getTextStyleForGlyph(glyph).copyWith(fontSize: 32),
       ),
     );
   }
 }
 
 class RectangularGlyphContentView extends StatelessWidget {
-  final String glyph;
+  final Glyph glyph;
 
   const RectangularGlyphContentView({
     super.key,
@@ -124,8 +124,8 @@ class RectangularGlyphContentView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Text(
-        glyph,
-        style: const TextStyle(fontSize: 18),
+        glyph.glyph,
+        style: getTextStyleForGlyph(glyph).copyWith(fontSize: 18),
         overflow: TextOverflow.fade,
         maxLines: 1,
         softWrap: false,
