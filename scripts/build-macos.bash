@@ -34,4 +34,4 @@ mkdir -p $ARCHIVE_PATH
 cp -r macos/build/Ejimo.app.zip $ARCHIVE_PATH
 cp -r macos/build/Ejimo.app.dSYM.zip $ARCHIVE_PATH
 # upload to Google Cloud Storage
-gcloud storage cp --recursive $ARCHIVE_PATH gs://ejimo-app-releases/
+gcloud storage cp --recursive $ARCHIVE_PATH gs://ejimo-app-releases
