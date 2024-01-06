@@ -1,18 +1,18 @@
 name: app
 description: Ejimo - Comprehensive emoji and symbol picker.
+version: 2.0.2+12
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 2.0.2+12
-
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  collection: ^1.17.1
+  collection: ^1.18.0
 
   json_annotation: ^4.8.1
 
@@ -23,44 +23,44 @@ dependencies:
 
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  path_provider: ^2.1.0
+  path_provider: ^2.1.1
 
   # UI
   cupertino_icons: ^1.0.6
-  flex_color_scheme: ^7.2.0
-  google_fonts: ^4.0.3
+  flex_color_scheme: ^7.3.1
+  google_fonts: ^6.1.0
   sliver_tools: ^0.2.12
   slivers: ^0.0.1+2
 
   # search
-  fuzzywuzzy: ^0.2.0
+  fuzzywuzzy: ^1.1.6
   easy_debounce: ^2.0.3
 
-  package_info_plus: ^4.0.2
+  package_info_plus: ^5.0.1
   cross_platform: ^3.0.1
   clipboard: ^0.1.3
 
-  url_launcher: ^6.1.14
-  in_app_review: ^2.0.6
-  share_plus: ^7.1.0
+  url_launcher: ^6.2.2
+  in_app_review: ^2.0.8
+  share_plus: ^7.2.1
   send_support_email:
     git:
       url: https://github.com/albemala/send_support_email.git
-      ref: 1.2.0
+      ref: 1.3.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+#  flutter_test:
+#    sdk: flutter
 
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
   json_serializable: ^6.7.1
 
-  http: ^1.1.0
+  http: ^1.1.2
   # linting
-  very_good_analysis: ^5.0.0+1
+  very_good_analysis: ^5.1.0
   # app icons
   flutter_launcher_icons_maker: ^0.10.2
-  package_rename: ^1.5.1
+  package_rename: ^1.5.3
   # windows
   msix: ^3.7.0
 
