@@ -1,4 +1,4 @@
-import 'package:app/conductors/search-glyphs-conductor.dart';
+import 'package:app/search/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';

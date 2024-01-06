@@ -1,5 +1,5 @@
-import 'package:app/defines/urls.dart';
-import 'package:app/functions/url.dart';
+import 'package:app/urls/defines.dart';
+import 'package:app/urls/functions.dart';
 import 'package:flutter/material.dart';
 
 class ExaboxAdView extends StatelessWidget {

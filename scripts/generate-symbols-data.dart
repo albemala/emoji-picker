@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/models/symbol.dart';
+import 'package:app/glyphs/symbol.dart';
 import 'package:collection/collection.dart';
 
 // Unicode Block data examples:

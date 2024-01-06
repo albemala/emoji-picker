@@ -1,4 +1,4 @@
-import 'package:app/conductors/local-storage-conductor.dart';
+import 'package:app/local-store/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
 

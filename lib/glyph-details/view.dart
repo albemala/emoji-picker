@@ -1,6 +1,6 @@
-import 'package:app/conductors/glyph-details-conductor.dart';
-import 'package:app/defines/glyphs.dart';
-import 'package:app/models/glyph.dart';
+import 'package:app/glyph-details/bloc.dart';
+import 'package:app/glyphs/functions.dart';
+import 'package:app/glyphs/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

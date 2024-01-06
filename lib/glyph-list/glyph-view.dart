@@ -1,6 +1,6 @@
-import 'package:app/conductors/glyph-details-conductor.dart';
-import 'package:app/defines/glyphs.dart';
-import 'package:app/models/glyph.dart';
+import 'package:app/glyph-details/bloc.dart';
+import 'package:app/glyphs/functions.dart';
+import 'package:app/glyphs/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
 

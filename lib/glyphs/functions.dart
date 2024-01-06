@@ -1,5 +1,23 @@
-import 'package:app/models/glyph.dart';
+import 'package:app/glyphs/glyph.dart';
+import 'package:flutter/material.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
+
+TextStyle getTextStyleForGlyph(Glyph glyph) {
+  switch (glyph.type) {
+    case GlyphType.emoji:
+      return const TextStyle(
+        fontFamilyFallback: [
+          'Apple Color Emoji', // iOS and macOS
+          'Segoe UI Emoji', // Windows
+          'Android Emoji', // Android
+        ],
+      );
+    case GlyphType.symbol:
+      return const TextStyle();
+    case GlyphType.kaomoji:
+      return const TextStyle();
+  }
+}
 
 String getGlyphHtmlCode(String glyph) {
   return '&#${glyph.runes.first.toRadixString(10).toUpperCase()};';

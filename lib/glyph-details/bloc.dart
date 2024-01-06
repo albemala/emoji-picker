@@ -1,6 +1,6 @@
-import 'package:app/conductors/routing-conductor.dart';
-import 'package:app/functions/clipboard.dart';
-import 'package:app/models/glyph.dart';
+import 'package:app/clipboard.dart';
+import 'package:app/glyphs/glyph.dart';
+import 'package:app/routing/functions.dart';
 import 'package:app/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';

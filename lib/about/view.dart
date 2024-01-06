@@ -1,10 +1,10 @@
-import 'package:app/defines/app.dart';
-import 'package:app/defines/urls.dart';
-import 'package:app/functions/app.dart';
-import 'package:app/functions/math.dart';
-import 'package:app/functions/share.dart';
-import 'package:app/functions/url.dart';
-import 'package:app/views/ads.dart';
+import 'package:app/about/functions.dart';
+import 'package:app/ads/view.dart';
+import 'package:app/app/defines.dart';
+import 'package:app/math.dart';
+import 'package:app/share.dart';
+import 'package:app/urls/defines.dart';
+import 'package:app/urls/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
 import 'package:in_app_review/in_app_review.dart';

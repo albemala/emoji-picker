@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:app/extensions/string.dart';
-import 'package:app/functions/glyphs.dart';
-import 'package:app/models/emoji.dart';
-import 'package:app/models/glyph.dart';
-import 'package:app/models/kaomoji.dart';
-import 'package:app/models/symbol.dart';
+import 'package:app/glyphs/emoji.dart';
+import 'package:app/glyphs/functions.dart';
+import 'package:app/glyphs/glyph.dart';
+import 'package:app/glyphs/kaomoji.dart';
+import 'package:app/glyphs/string.dart';
+import 'package:app/glyphs/symbol.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';

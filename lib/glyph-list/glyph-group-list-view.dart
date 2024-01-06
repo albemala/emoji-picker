@@ -1,5 +1,5 @@
-import 'package:app/models/glyph.dart';
-import 'package:app/views/glyph.dart';
+import 'package:app/glyph-list/glyph-view.dart';
+import 'package:app/glyphs/glyph.dart';
 import 'package:flutter/material.dart';
 
 class GlyphGroupListView extends StatelessWidget {

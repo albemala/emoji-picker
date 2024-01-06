@@ -1,16 +1,16 @@
-import 'package:app/conductors/glyph-details-conductor.dart';
-import 'package:app/conductors/glyphs-conductor.dart';
-import 'package:app/conductors/local-storage-conductor.dart';
-import 'package:app/conductors/preferences-conductor.dart';
-import 'package:app/conductors/routing-conductor.dart';
-import 'package:app/conductors/search-glyphs-conductor.dart';
-import 'package:app/views/app.dart';
+import 'package:app/app/view.dart';
+import 'package:app/glyph-details/bloc.dart';
+import 'package:app/glyphs/bloc.dart';
+import 'package:app/local-store/bloc.dart';
+import 'package:app/preferences/bloc.dart';
+import 'package:app/routing/functions.dart';
+import 'package:app/search/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
 

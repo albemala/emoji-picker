@@ -1,7 +1,7 @@
-import 'package:app/conductors/preferences-conductor.dart';
-import 'package:app/conductors/routing-conductor.dart';
-import 'package:app/views/about.dart';
-import 'package:app/views/search.dart';
+import 'package:app/about/view.dart';
+import 'package:app/preferences/bloc.dart';
+import 'package:app/routing/functions.dart';
+import 'package:app/search/view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_management/flutter_state_management.dart';
