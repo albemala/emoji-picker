@@ -196,15 +196,19 @@ class _AppActionsView extends StatelessWidget {
           },
           child: const Text('Rate'),
         ),
-        OutlinedButton(
-          onPressed: () {
-            context.getConductor<AboutViewConductor>().openShareApp(
-              '''
+        Builder(
+          builder: (context) {
+            return OutlinedButton(
+              onPressed: () {
+                context.getConductor<AboutViewConductor>().openShareApp(
+                  '''
 Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $repositoryUrl''',
-              getSharePosition(context),
+                  getSharePosition(context),
+                );
+              },
+              child: const Text('Share'),
             );
           },
-          child: const Text('Share'),
         ),
         FilledButton(
           onPressed: () {
