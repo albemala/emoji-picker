@@ -42,6 +42,10 @@ class GlyphViewBloc extends Cubit<GlyphViewModel> {
       _glyphDetailsBloc.hideDetails();
     }
   }
+
+  void copyGlyphToClipboard(BuildContext context, Glyph glyph) {
+    _glyphDetailsBloc.copyGlyphToClipboard(context, glyph);
+  }
 }
 
 class GlyphViewBuilder extends StatelessWidget {
@@ -89,10 +93,9 @@ class GlyphView extends StatelessWidget {
       type: MaterialType.card,
       child: InkWell(
         onTap: bloc.focusNode.requestFocus,
-        // TODO I'm not sure if this would work if there is another glyph selected
-        // onDoubleTap: () {
-        //   context.getBloc<GlyphDetailsBloc>().copySelectedGlyphToClipboard();
-        // },
+        onDoubleTap: () {
+          bloc.copyGlyphToClipboard(context, glyph);
+        },
         focusNode: bloc.focusNode,
         focusColor: Theme.of(context).colorScheme.tertiary,
         onFocusChange: (isFocused) {
