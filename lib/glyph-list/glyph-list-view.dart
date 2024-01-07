@@ -7,27 +7,22 @@ import 'package:app/glyphs/glyph.dart';
 import 'package:app/math.dart';
 import 'package:app/search/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class EmojiListViewCreator extends StatelessWidget {
-  const EmojiListViewCreator({
+class EmojiListViewBuilder extends StatelessWidget {
+  const EmojiListViewBuilder({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<SearchGlyphsConductor>(
-      builder: (context, conductor) {
-        return ValueListenableBuilder(
-          valueListenable: conductor.filteredEmoji,
-          builder: (context, filteredEmoji, _) {
-            return GroupedGlyphsView(
-              groupedGlyphs: glyphsByGroup(filteredEmoji),
-              groupBuilder: (context, glyphs) {
-                return GlyphGroupGridView(glyphs: glyphs);
-              },
-            );
+    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+      builder: (context, state) {
+        return GroupedGlyphsView(
+          groupedGlyphs: glyphsByGroup(state.filteredEmoji),
+          groupBuilder: (context, glyphs) {
+            return GlyphGroupGridView(glyphs: glyphs);
           },
         );
       },
@@ -35,24 +30,19 @@ class EmojiListViewCreator extends StatelessWidget {
   }
 }
 
-class SymbolListViewCreator extends StatelessWidget {
-  const SymbolListViewCreator({
+class SymbolListViewBuilder extends StatelessWidget {
+  const SymbolListViewBuilder({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<SearchGlyphsConductor>(
-      builder: (context, conductor) {
-        return ValueListenableBuilder(
-          valueListenable: conductor.filteredSymbols,
-          builder: (context, filteredSymbols, _) {
-            return GroupedGlyphsView(
-              groupedGlyphs: glyphsByGroup(filteredSymbols),
-              groupBuilder: (context, glyphs) {
-                return GlyphGroupGridView(glyphs: glyphs);
-              },
-            );
+    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+      builder: (context, state) {
+        return GroupedGlyphsView(
+          groupedGlyphs: glyphsByGroup(state.filteredSymbols),
+          groupBuilder: (context, glyphs) {
+            return GlyphGroupGridView(glyphs: glyphs);
           },
         );
       },
@@ -60,24 +50,19 @@ class SymbolListViewCreator extends StatelessWidget {
   }
 }
 
-class KaomojiListViewCreator extends StatelessWidget {
-  const KaomojiListViewCreator({
+class KaomojiListViewBuilder extends StatelessWidget {
+  const KaomojiListViewBuilder({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<SearchGlyphsConductor>(
-      builder: (context, conductor) {
-        return ValueListenableBuilder(
-          valueListenable: conductor.filteredKaomoji,
-          builder: (context, filteredKaomoji, _) {
-            return GroupedGlyphsView(
-              groupedGlyphs: glyphsByGroup(filteredKaomoji),
-              groupBuilder: (context, glyphs) {
-                return GlyphGroupListView(glyphs: glyphs);
-              },
-            );
+    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+      builder: (context, state) {
+        return GroupedGlyphsView(
+          groupedGlyphs: glyphsByGroup(state.filteredKaomoji),
+          groupBuilder: (context, glyphs) {
+            return GlyphGroupListView(glyphs: glyphs);
           },
         );
       },

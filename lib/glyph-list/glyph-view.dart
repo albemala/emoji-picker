@@ -1,41 +1,54 @@
 import 'package:app/glyph-details/bloc.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphViewConductor extends Conductor {
-  factory GlyphViewConductor.fromContext(BuildContext context) {
-    return GlyphViewConductor(
-      context.getConductor<GlyphDetailsConductor>(),
+@immutable
+class GlyphViewModel extends Equatable {
+  const GlyphViewModel();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class GlyphViewBloc extends Cubit<GlyphViewModel> {
+  factory GlyphViewBloc.fromContext(BuildContext context) {
+    return GlyphViewBloc(
+      context.read<GlyphDetailsBloc>(),
     );
   }
 
-  final GlyphDetailsConductor _glyphDetailsConductor;
+  final GlyphDetailsBloc _glyphDetailsBloc;
 
   final focusNode = FocusNode();
 
-  GlyphViewConductor(this._glyphDetailsConductor);
+  GlyphViewBloc(this._glyphDetailsBloc)
+      : super(
+          const GlyphViewModel(),
+        );
 
   @override
-  void dispose() {
+  Future<void> close() async {
     focusNode.dispose();
+    await super.close();
   }
 
   void onFocusChange(bool isFocused, Glyph glyph) {
     if (isFocused) {
-      _glyphDetailsConductor.showDetailsForGlyph(glyph);
+      _glyphDetailsBloc.showDetailsForGlyph(glyph);
     } else {
-      _glyphDetailsConductor.hideDetails();
+      _glyphDetailsBloc.hideDetails();
     }
   }
 }
 
-class GlyphViewCreator extends StatelessWidget {
+class GlyphViewBuilder extends StatelessWidget {
   final Glyph glyph;
   final Widget Function(BuildContext context, Glyph glyph) glyphContentBuilder;
 
-  const GlyphViewCreator({
+  const GlyphViewBuilder({
     super.key,
     required this.glyph,
     required this.glyphContentBuilder,
@@ -43,13 +56,13 @@ class GlyphViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConductorCreator(
-      create: GlyphViewConductor.fromContext,
-      child: ConductorConsumer<GlyphViewConductor>(
-        builder: (context, conductor) {
+    return BlocProvider<GlyphViewBloc>(
+      create: GlyphViewBloc.fromContext,
+      child: BlocBuilder<GlyphViewBloc, GlyphViewModel>(
+        builder: (context, viewModel) {
           return GlyphView(
             glyph: glyph,
-            conductor: conductor,
+            bloc: context.read<GlyphViewBloc>(),
             glyphContentView: glyphContentBuilder(context, glyph),
           );
         },
@@ -60,13 +73,13 @@ class GlyphViewCreator extends StatelessWidget {
 
 class GlyphView extends StatelessWidget {
   final Glyph glyph;
-  final GlyphViewConductor conductor;
+  final GlyphViewBloc bloc;
   final Widget glyphContentView;
 
   const GlyphView({
     super.key,
     required this.glyph,
-    required this.conductor,
+    required this.bloc,
     required this.glyphContentView,
   });
 
@@ -75,16 +88,15 @@ class GlyphView extends StatelessWidget {
     return Material(
       type: MaterialType.card,
       child: InkWell(
-        onTap: conductor.focusNode.requestFocus,
-        onDoubleTap: () {
-          context
-              .getConductor<GlyphDetailsConductor>()
-              .copySelectedGlyphToClipboard();
-        },
-        focusNode: conductor.focusNode,
+        onTap: bloc.focusNode.requestFocus,
+        // TODO I'm not sure if this would work if there is another glyph selected
+        // onDoubleTap: () {
+        //   context.getBloc<GlyphDetailsBloc>().copySelectedGlyphToClipboard();
+        // },
+        focusNode: bloc.focusNode,
         focusColor: Theme.of(context).colorScheme.tertiary,
         onFocusChange: (isFocused) {
-          conductor.onFocusChange(isFocused, glyph);
+          bloc.onFocusChange(isFocused, glyph);
         },
         child: glyphContentView,
       ),

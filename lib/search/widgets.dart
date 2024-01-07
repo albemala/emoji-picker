@@ -1,17 +1,17 @@
 import 'package:app/search/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchViewCreator extends StatelessWidget {
-  const SearchViewCreator({super.key});
+class SearchViewBuilder extends StatelessWidget {
+  const SearchViewBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<SearchGlyphsConductor>(
-      builder: (context, filteredGlyphsConductor) {
+    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+      builder: (context, state) {
         return SearchView(
-          filteredGlyphsConductor: filteredGlyphsConductor,
+          bloc: context.read<SearchGlyphsBloc>(),
         );
       },
     );
@@ -19,19 +19,19 @@ class SearchViewCreator extends StatelessWidget {
 }
 
 class SearchView extends StatelessWidget {
-  final SearchGlyphsConductor filteredGlyphsConductor;
+  final SearchGlyphsBloc bloc;
 
   const SearchView({
     super.key,
-    required this.filteredGlyphsConductor,
+    required this.bloc,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       autofocus: true,
-      focusNode: filteredGlyphsConductor.searchFocusNode,
-      controller: filteredGlyphsConductor.searchQueryController,
+      focusNode: bloc.searchFocusNode,
+      controller: bloc.searchQueryController,
       decoration: InputDecoration(
         hintText: 'Search for emoji and symbols',
         contentPadding: const EdgeInsets.symmetric(horizontal: 21),
@@ -40,11 +40,11 @@ class SearchView extends StatelessWidget {
           child: IconButton(
             iconSize: 16,
             icon: const Icon(CupertinoIcons.clear),
-            onPressed: filteredGlyphsConductor.clearSearch,
+            onPressed: bloc.clearSearch,
           ),
         ),
       ),
-      onChanged: filteredGlyphsConductor.setSearchQuery,
+      onChanged: bloc.setSearchQuery,
     );
   }
 }

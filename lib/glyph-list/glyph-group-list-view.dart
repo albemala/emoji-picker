@@ -16,7 +16,7 @@ class GlyphGroupListView extends StatelessWidget {
       itemCount: glyphs.length,
       itemBuilder: (context, index) {
         final glyph = glyphs.elementAt(index);
-        return GlyphViewCreator(
+        return GlyphViewBuilder(
           glyph: glyph,
           glyphContentBuilder: (BuildContext context, Glyph glyph) {
             return RectangularGlyphContentView(glyph: glyph);

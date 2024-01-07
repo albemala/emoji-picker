@@ -5,29 +5,47 @@ import 'package:app/math.dart';
 import 'package:app/share.dart';
 import 'package:app/urls/defines.dart';
 import 'package:app/urls/functions.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:send_support_email/send_support_email.dart';
 
-class AboutViewConductor extends Conductor {
-  factory AboutViewConductor.fromContext(BuildContext context) {
-    return AboutViewConductor();
+class AboutViewModel extends Equatable {
+  final String appVersion;
+
+  const AboutViewModel({
+    required this.appVersion,
+  });
+
+  @override
+  List<Object> get props => [
+        appVersion,
+      ];
+}
+
+class AboutViewBloc extends Cubit<AboutViewModel> {
+  factory AboutViewBloc.fromContext(BuildContext context) {
+    return AboutViewBloc();
   }
 
-  final appVersion = ValueNotifier<String>('...');
-
-  AboutViewConductor() {
+  AboutViewBloc()
+      : super(
+          const AboutViewModel(appVersion: '...'),
+        ) {
     _init();
   }
 
   Future<void> _init() async {
-    appVersion.value = await getAppVersion();
+    await _updateViewModel();
   }
 
-  @override
-  void dispose() {
-    appVersion.dispose();
+  Future<void> _updateViewModel() async {
+    emit(
+      AboutViewModel(
+        appVersion: await getAppVersion(),
+      ),
+    );
   }
 
   Future<void> openRateApp() async {
@@ -65,23 +83,35 @@ class AboutViewConductor extends Conductor {
   }
 }
 
-class AboutViewCreator extends StatelessWidget {
-  const AboutViewCreator({
+class AboutViewBuilder extends StatelessWidget {
+  const AboutViewBuilder({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const ConductorCreator(
-      create: AboutViewConductor.fromContext,
-      child: AboutView(),
+    return BlocProvider<AboutViewBloc>(
+      create: AboutViewBloc.fromContext,
+      child: BlocBuilder<AboutViewBloc, AboutViewModel>(
+        builder: (context, viewModel) {
+          return AboutView(
+            bloc: context.read<AboutViewBloc>(),
+            viewModel: viewModel,
+          );
+        },
+      ),
     );
   }
 }
 
 class AboutView extends StatelessWidget {
+  final AboutViewBloc bloc;
+  final AboutViewModel viewModel;
+
   const AboutView({
     super.key,
+    required this.bloc,
+    required this.viewModel,
   });
 
   @override
@@ -89,14 +119,36 @@ class AboutView extends StatelessWidget {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 480),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.all(24),
-              child: _AboutContentView(),
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _AppInfoView(
+                    appVersion: viewModel.appVersion,
+                  ),
+                  const SizedBox(height: 12),
+                  _AppActionsView(
+                    onRatePressed: bloc.openRateApp,
+                    onSharePressed: bloc.openShareApp,
+                    onOtherAppsPressed: bloc.openOtherApps,
+                  ),
+                  const SizedBox(height: 16),
+                  _SupportView(
+                    onOpenEmailPressed: bloc.openEmail,
+                    onOpenWebsitePressed: bloc.openWebsite,
+                  ),
+                  const SizedBox(height: 16),
+                  _NewsView(
+                    onOpenTwitterPressed: bloc.openTwitter,
+                  ),
+                ],
+              ),
             ),
-            Material(
+            const Material(
               type: MaterialType.card,
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -110,28 +162,12 @@ class AboutView extends StatelessWidget {
   }
 }
 
-class _AboutContentView extends StatelessWidget {
-  const _AboutContentView();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _AppInfoView(),
-        SizedBox(height: 12),
-        _AppActionsView(),
-        SizedBox(height: 16),
-        _SupportView(),
-        SizedBox(height: 16),
-        _NewsView(),
-      ],
-    );
-  }
-}
-
 class _AppInfoView extends StatelessWidget {
-  const _AppInfoView();
+  final String appVersion;
+
+  const _AppInfoView({
+    required this.appVersion,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,19 +193,13 @@ class _AppInfoView extends StatelessWidget {
             ),
             Row(
               children: [
-                ValueListenableBuilder(
-                  valueListenable:
-                      context.getConductor<AboutViewConductor>().appVersion,
-                  builder: (context, appVersion, _) {
-                    return Text(
-                      appVersion,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    );
-                  },
+                Text(
+                  appVersion,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 // const SizedBox(width: 8),
                 // LinkButton(
-                //   onPressed: context.read<AboutViewBloc>().showReleaseNotes,
+                //   onPressed: bloc.showReleaseNotes,
                 //   text: "What's new?",
                 // ),
               ],
@@ -182,7 +212,15 @@ class _AppInfoView extends StatelessWidget {
 }
 
 class _AppActionsView extends StatelessWidget {
-  const _AppActionsView();
+  final void Function() onRatePressed;
+  final void Function(String message, Rect sharePosition) onSharePressed;
+  final void Function() onOtherAppsPressed;
+
+  const _AppActionsView({
+    required this.onRatePressed,
+    required this.onSharePressed,
+    required this.onOtherAppsPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -191,16 +229,14 @@ class _AppActionsView extends StatelessWidget {
       runSpacing: 8,
       children: [
         OutlinedButton(
-          onPressed: () {
-            context.getConductor<AboutViewConductor>().openRateApp();
-          },
+          onPressed: onRatePressed,
           child: const Text('Rate'),
         ),
         Builder(
           builder: (context) {
             return OutlinedButton(
               onPressed: () {
-                context.getConductor<AboutViewConductor>().openShareApp(
+                onSharePressed(
                   '''
 Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $repositoryUrl''',
                   getSharePosition(context),
@@ -211,9 +247,7 @@ Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $reposi
           },
         ),
         FilledButton(
-          onPressed: () {
-            context.getConductor<AboutViewConductor>().openOtherApps();
-          },
+          onPressed: onOtherAppsPressed,
           child: const Text('Other Apps'),
         ),
       ],
@@ -222,7 +256,13 @@ Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $reposi
 }
 
 class _SupportView extends StatelessWidget {
-  const _SupportView();
+  final void Function() onOpenEmailPressed;
+  final void Function() onOpenWebsitePressed;
+
+  const _SupportView({
+    required this.onOpenEmailPressed,
+    required this.onOpenWebsitePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -236,15 +276,11 @@ class _SupportView extends StatelessWidget {
           runSpacing: 8,
           children: [
             OutlinedButton(
-              onPressed: () {
-                context.getConductor<AboutViewConductor>().openEmail();
-              },
+              onPressed: onOpenEmailPressed,
               child: const Text('Email'),
             ),
             OutlinedButton(
-              onPressed: () {
-                context.getConductor<AboutViewConductor>().openWebsite();
-              },
+              onPressed: onOpenWebsitePressed,
               child: const Text('Website'),
             ),
           ],
@@ -255,7 +291,11 @@ class _SupportView extends StatelessWidget {
 }
 
 class _NewsView extends StatelessWidget {
-  const _NewsView();
+  final void Function() onOpenTwitterPressed;
+
+  const _NewsView({
+    required this.onOpenTwitterPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -269,9 +309,7 @@ class _NewsView extends StatelessWidget {
           runSpacing: 8,
           children: [
             OutlinedButton(
-              onPressed: () {
-                context.getConductor<AboutViewConductor>().openTwitter();
-              },
+              onPressed: onOpenTwitterPressed,
               child: const Text('Twitter'),
             ),
           ],

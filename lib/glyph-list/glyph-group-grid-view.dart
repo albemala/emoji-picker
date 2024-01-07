@@ -21,7 +21,7 @@ class GlyphGroupGridView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           final glyph = glyphs.elementAt(index);
-          return GlyphViewCreator(
+          return GlyphViewBuilder(
             glyph: glyph,
             glyphContentBuilder: (BuildContext context, Glyph glyph) {
               return SquaredGlyphContentView(glyph: glyph);

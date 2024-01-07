@@ -4,19 +4,20 @@ import 'package:app/glyphs/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphDetailsViewCreator extends StatelessWidget {
-  const GlyphDetailsViewCreator({
+class GlyphDetailsViewBuilder extends StatelessWidget {
+  const GlyphDetailsViewBuilder({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ConductorConsumer<GlyphDetailsConductor>(
-      builder: (context, conductor) {
+    return BlocBuilder<GlyphDetailsBloc, GlyphDetailsState>(
+      builder: (context, state) {
         return GlyphDetailsView(
-          conductor: conductor,
+          bloc: context.read<GlyphDetailsBloc>(),
+          viewModel: state,
         );
       },
     );
@@ -24,80 +25,77 @@ class GlyphDetailsViewCreator extends StatelessWidget {
 }
 
 class GlyphDetailsView extends StatelessWidget {
-  final GlyphDetailsConductor conductor;
+  final GlyphDetailsBloc bloc;
+  final GlyphDetailsState viewModel;
 
   const GlyphDetailsView({
     super.key,
-    required this.conductor,
+    required this.bloc,
+    required this.viewModel,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: conductor.isGlyphDetailsVisible,
-      builder: (context, isVisible, _) {
-        if (!isVisible) {
-          return Container();
-        } else {
-          final glyph = conductor.selectedGlyph.value!;
-          return Padding(
-            padding: const EdgeInsets.all(21),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    if (!viewModel.isGlyphDetailsVisible || viewModel.selectedGlyph == null) {
+      return Container();
+    } else {
+      final glyph = viewModel.selectedGlyph!;
+      return Padding(
+        padding: const EdgeInsets.all(21),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: _GlyphNameView(glyph: glyph),
-                    ),
-                    _CloseView(onClose: conductor.hideDetails),
-                  ],
+                Expanded(
+                  child: _GlyphNameView(glyph: glyph),
                 ),
-                Wrap(
-                  spacing: 16,
-                  runSpacing: 16,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    _GlyphView(glyph: glyph),
-                    _CopyGlyphView(
-                      onCopy: () {
-                        conductor.copyGlyphToClipboard(glyph);
-                      },
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (glyph.unicode.isNotEmpty)
-                          _GlyphValueView(
-                            title: 'Unicode',
-                            value: glyph.unicode,
-                            onCopy: () {
-                              conductor.copyGlyphUnicodeToClipboard(glyph);
-                            },
-                          ),
-                        const SizedBox(width: 16),
-                        if (glyph.htmlCode.isNotEmpty)
-                          _GlyphValueView(
-                            title: 'HTML code',
-                            value: glyph.htmlCode,
-                            onCopy: () {
-                              conductor.copyGlyphHtmlCodeToClipboard(glyph);
-                            },
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
-                if (glyph.keywords.isNotEmpty) //
-                  const SizedBox(height: 16),
-                if (glyph.keywords.isNotEmpty) //
-                  _GlyphKeywordsView(glyph: glyph),
+                _CloseView(onClose: bloc.hideDetails),
               ],
             ),
-          );
-        }
-      },
-    );
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                _GlyphView(glyph: glyph),
+                _CopyGlyphView(
+                  onCopy: () {
+                    bloc.copyGlyphToClipboard(context, glyph);
+                  },
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (glyph.unicode.isNotEmpty)
+                      _GlyphValueView(
+                        title: 'Unicode',
+                        value: glyph.unicode,
+                        onCopy: () {
+                          bloc.copyGlyphUnicodeToClipboard(context, glyph);
+                        },
+                      ),
+                    const SizedBox(width: 16),
+                    if (glyph.htmlCode.isNotEmpty)
+                      _GlyphValueView(
+                        title: 'HTML code',
+                        value: glyph.htmlCode,
+                        onCopy: () {
+                          bloc.copyGlyphHtmlCodeToClipboard(context, glyph);
+                        },
+                      ),
+                  ],
+                ),
+              ],
+            ),
+            if (glyph.keywords.isNotEmpty) //
+              const SizedBox(height: 16),
+            if (glyph.keywords.isNotEmpty) //
+              _GlyphKeywordsView(glyph: glyph),
+          ],
+        ),
+      );
+    }
   }
 }
 

@@ -1,39 +1,65 @@
 import 'dart:convert';
 
-import 'package:app/glyphs/emoji.dart';
+import 'package:app/glyphs/emoji/emoji.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
-import 'package:app/glyphs/kaomoji.dart';
+import 'package:app/glyphs/kaomoji/kaomoji.dart';
 import 'package:app/glyphs/string.dart';
-import 'package:app/glyphs/symbol.dart';
+import 'package:app/glyphs/symbol/symbol.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+@immutable
+class GlyphsState extends Equatable {
+  final Iterable<Glyph> emoji;
+  final Iterable<Glyph> symbols;
+  final Iterable<Glyph> kaomoji;
+
+  const GlyphsState({
+    required this.emoji,
+    required this.symbols,
+    required this.kaomoji,
+  });
+
+  @override
+  List<Object?> get props => [
+        emoji,
+        symbols,
+        kaomoji,
+      ];
+}
 
 /// A class that loads and provides the glyphs (emoji, symbols).
-class GlyphsConductor extends Conductor {
-  factory GlyphsConductor.fromContext(BuildContext context) {
-    return GlyphsConductor();
+class GlyphsBloc extends Cubit<GlyphsState> {
+  factory GlyphsBloc.fromContext(BuildContext context) {
+    return GlyphsBloc();
   }
 
-  final emoji = ValueNotifier<Iterable<Glyph>>([]);
-  final symbols = ValueNotifier<Iterable<Glyph>>([]);
-  final kaomoji = ValueNotifier<Iterable<Glyph>>([]);
-
-  GlyphsConductor() {
+  GlyphsBloc()
+      : super(
+          const GlyphsState(
+            emoji: [],
+            symbols: [],
+            kaomoji: [],
+          ),
+        ) {
     _init();
   }
 
   Future<void> _init() async {
-    emoji.value = await loadEmoji();
-    symbols.value = await loadSymbols();
-    kaomoji.value = await loadKaomoji();
+    await _updateState();
   }
 
-  @override
-  void dispose() {
-    emoji.dispose();
-    symbols.dispose();
+  Future<void> _updateState() async {
+    emit(
+      GlyphsState(
+        emoji: await loadEmoji(),
+        symbols: await loadSymbols(),
+        kaomoji: await loadKaomoji(),
+      ),
+    );
   }
 }
 

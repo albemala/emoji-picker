@@ -2,71 +2,98 @@ import 'package:app/clipboard.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:app/routing/functions.dart';
 import 'package:app/widgets/snack-bar.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphDetailsConductor extends Conductor {
-  factory GlyphDetailsConductor.fromContext(BuildContext context) {
-    return GlyphDetailsConductor(
-      context.getConductor<RoutingConductor>(),
-    );
-  }
+class GlyphDetailsState extends Equatable {
+  final Glyph? selectedGlyph;
+  final bool isGlyphDetailsVisible;
 
-  final RoutingConductor _routingConductor;
-
-  final selectedGlyph = ValueNotifier<Glyph?>(null);
-
-  final isGlyphDetailsVisible = ValueNotifier<bool>(false);
-
-  GlyphDetailsConductor(
-    this._routingConductor,
-  ) {
-    selectedGlyph.addListener(updateIsGlyphDetailsVisible);
-  }
+  const GlyphDetailsState({
+    required this.selectedGlyph,
+    required this.isGlyphDetailsVisible,
+  });
 
   @override
-  void dispose() {
-    selectedGlyph.removeListener(updateIsGlyphDetailsVisible);
+  List<Object?> get props => [
+        selectedGlyph,
+        isGlyphDetailsVisible,
+      ];
+}
 
-    selectedGlyph.dispose();
-    isGlyphDetailsVisible.dispose();
+class GlyphDetailsBloc extends Cubit<GlyphDetailsState> {
+  factory GlyphDetailsBloc.fromContext(BuildContext context) {
+    return GlyphDetailsBloc();
   }
 
+  Glyph? _selectedGlyph;
+
+  GlyphDetailsBloc()
+      : super(
+          const GlyphDetailsState(
+            selectedGlyph: null,
+            isGlyphDetailsVisible: false,
+          ),
+        );
+
   void showDetailsForGlyph(Glyph? glyph) {
-    selectedGlyph.value = glyph;
+    _selectedGlyph = glyph;
+    _updateState();
   }
 
   void hideDetails() {
-    selectedGlyph.value = null;
+    _selectedGlyph = null;
+    _updateState();
   }
 
-  void updateIsGlyphDetailsVisible() {
-    isGlyphDetailsVisible.value = selectedGlyph.value != null;
+  void _updateState() {
+    emit(
+      GlyphDetailsState(
+        selectedGlyph: _selectedGlyph,
+        isGlyphDetailsVisible: _selectedGlyph != null,
+      ),
+    );
   }
 
-  Future<void> copySelectedGlyphToClipboard() async {
-    if (selectedGlyph.value == null) return;
-    await copyGlyphToClipboard(selectedGlyph.value!);
+  Future<void> copySelectedGlyphToClipboard(BuildContext context) async {
+    if (_selectedGlyph == null) return;
+    await copyGlyphToClipboard(
+      context,
+      _selectedGlyph!,
+    );
   }
 
-  Future<void> copyGlyphToClipboard(Glyph glyph) async {
+  Future<void> copyGlyphToClipboard(
+    BuildContext context,
+    Glyph glyph,
+  ) async {
     await copyToClipboard(glyph.glyph);
-    _routingConductor.showSnackBar(
-      (context) => createCopiedToClipboardSnackBar(glyph.glyph),
+    showSnackBar(
+      context,
+      createCopiedToClipboardSnackBar(glyph.glyph),
     );
   }
 
-  Future<void> copyGlyphUnicodeToClipboard(Glyph glyph) async {
+  Future<void> copyGlyphUnicodeToClipboard(
+    BuildContext context,
+    Glyph glyph,
+  ) async {
     await copyToClipboard(glyph.unicode);
-    _routingConductor.showSnackBar(
-      (context) => createCopiedToClipboardSnackBar(glyph.unicode),
+    showSnackBar(
+      context,
+      createCopiedToClipboardSnackBar(glyph.unicode),
     );
   }
 
-  Future<void> copyGlyphHtmlCodeToClipboard(Glyph glyph) async {
+  Future<void> copyGlyphHtmlCodeToClipboard(
+    BuildContext context,
+    Glyph glyph,
+  ) async {
     await copyToClipboard(glyph.htmlCode);
-    _routingConductor.showSnackBar(
-      (context) => createCopiedToClipboardSnackBar(glyph.htmlCode),
+    showSnackBar(
+      context,
+      createCopiedToClipboardSnackBar(glyph.htmlCode),
     );
   }
 }

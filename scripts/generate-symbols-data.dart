@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/glyphs/symbol.dart';
+import 'package:app/glyphs/symbol/symbol.dart';
 import 'package:collection/collection.dart';
 
 // Unicode Block data examples:
@@ -143,7 +143,7 @@ void main() {
       .map(parseExtendedName)
       .whereNotNull();
   final extendedNamesMap = {
-    for (var item in extendedNames) //
+    for (final item in extendedNames) //
       item.charcode: item.name,
   };
 

@@ -1,6 +1,8 @@
+import 'package:app/about/widgets.dart';
 import 'package:app/glyph-details/view.dart';
 import 'package:app/glyph-list/glyph-list-view.dart';
-import 'package:app/top-bar/view.dart';
+import 'package:app/preferences/widgets.dart';
+import 'package:app/search/widgets.dart';
 import 'package:flutter/material.dart';
 
 class AppContentView extends StatelessWidget {
@@ -18,7 +20,19 @@ class AppContentView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TopBarView(),
+                const Padding(
+                  padding: EdgeInsets.all(21),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SearchViewBuilder(),
+                      ),
+                      SizedBox(width: 12),
+                      ToggleThemeModeViewBuilder(),
+                      OpenAboutView(),
+                    ],
+                  ),
+                ),
                 LayoutBuilder(
                   builder: (context, constraints) {
                     return TabBar(
@@ -36,13 +50,13 @@ class AppContentView extends StatelessWidget {
                   child: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      EmojiListViewCreator(),
-                      SymbolListViewCreator(),
-                      KaomojiListViewCreator(),
+                      EmojiListViewBuilder(),
+                      SymbolListViewBuilder(),
+                      KaomojiListViewBuilder(),
                     ],
                   ),
                 ),
-                const GlyphDetailsViewCreator(),
+                const GlyphDetailsViewBuilder(),
               ],
             ),
           ),

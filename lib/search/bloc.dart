@@ -1,55 +1,81 @@
+import 'dart:async';
+
 import 'package:app/glyphs/bloc.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchGlyphsConductor extends Conductor {
-  factory SearchGlyphsConductor.fromContext(BuildContext context) {
-    return SearchGlyphsConductor(
-      context.getConductor<GlyphsConductor>(),
+@immutable
+class SearchGlyphsState extends Equatable {
+  final Iterable<Glyph> filteredEmoji;
+  final Iterable<Glyph> filteredSymbols;
+  final Iterable<Glyph> filteredKaomoji;
+
+  const SearchGlyphsState({
+    required this.filteredEmoji,
+    required this.filteredSymbols,
+    required this.filteredKaomoji,
+  });
+
+  @override
+  List<Object?> get props => [
+        filteredEmoji,
+        filteredSymbols,
+        filteredKaomoji,
+      ];
+}
+
+class SearchGlyphsBloc extends Cubit<SearchGlyphsState> {
+  factory SearchGlyphsBloc.fromContext(BuildContext context) {
+    return SearchGlyphsBloc(
+      context.read<GlyphsBloc>(),
     );
   }
 
-  final GlyphsConductor _glyphsConductor;
+  final GlyphsBloc _glyphsBloc;
+  StreamSubscription<GlyphsState>? _glyphsBlocSubscription;
 
   final searchFocusNode = FocusNode();
-
   final searchQueryController = TextEditingController();
 
-  final filteredEmoji = ValueNotifier<Iterable<Glyph>>([]);
-
-  final filteredSymbols = ValueNotifier<Iterable<Glyph>>([]);
-  final filteredKaomoji = ValueNotifier<Iterable<Glyph>>([]);
-
-  SearchGlyphsConductor(this._glyphsConductor) {
+  SearchGlyphsBloc(
+    this._glyphsBloc,
+  ) : super(
+          const SearchGlyphsState(
+            filteredEmoji: [],
+            filteredSymbols: [],
+            filteredKaomoji: [],
+          ),
+        ) {
     _init();
   }
 
   void _init() {
-    _glyphsConductor.emoji.addListener(_updateFilteredGlyphs);
-    _glyphsConductor.symbols.addListener(_updateFilteredGlyphs);
-    _glyphsConductor.kaomoji.addListener(_updateFilteredGlyphs);
+    _glyphsBlocSubscription = _glyphsBloc.stream.listen((_) {
+      _updateState();
+    });
+    _updateState();
 
     searchFocusNode.addListener(onSearchFocusChanged);
     searchQueryController.addListener(onSearchChanged);
   }
 
   @override
-  void dispose() {
-    _glyphsConductor.emoji.removeListener(_updateFilteredGlyphs);
-    _glyphsConductor.symbols.removeListener(_updateFilteredGlyphs);
-    _glyphsConductor.kaomoji.removeListener(_updateFilteredGlyphs);
+  Future<void> close() async {
+    await _glyphsBlocSubscription?.cancel();
 
-    searchFocusNode.removeListener(onSearchFocusChanged);
-    searchQueryController.removeListener(onSearchChanged);
+    searchFocusNode
+      ..removeListener(onSearchFocusChanged)
+      ..dispose();
 
-    searchFocusNode.dispose();
-    searchQueryController.dispose();
-    filteredEmoji.dispose();
-    filteredSymbols.dispose();
-    filteredKaomoji.dispose();
+    searchQueryController
+      ..removeListener(onSearchChanged)
+      ..dispose();
+
+    await super.close();
   }
 
   void onSearchFocusChanged() {
@@ -72,42 +98,37 @@ class SearchGlyphsConductor extends Conductor {
     );
   }
 
+  void clearSearch() {
+    searchQueryController.clear();
+  }
+
   void onSearchChanged() {
     EasyDebounce.debounce(
       'search-debounce',
       const Duration(milliseconds: 300),
-      _updateFilteredGlyphs,
+      _updateState,
     );
   }
 
-  void _updateFilteredGlyphs() {
-    if (searchQueryController.text.isEmpty) {
-      filteredEmoji.value = _glyphsConductor.emoji.value;
-      filteredSymbols.value = _glyphsConductor.symbols.value;
-      filteredKaomoji.value = _glyphsConductor.kaomoji.value;
-    } else {
-      filteredEmoji.value = _glyphsConductor.emoji.value.where(
-        (glyph) => matchesSearchTerm(
-          glyph,
-          searchQueryController.text,
-        ),
-      );
-      filteredSymbols.value = _glyphsConductor.symbols.value.where(
-        (glyph) => matchesSearchTerm(
-          glyph,
-          searchQueryController.text,
-        ),
-      );
-      filteredKaomoji.value = _glyphsConductor.kaomoji.value.where(
-        (glyph) => matchesSearchTerm(
-          glyph,
-          searchQueryController.text,
-        ),
-      );
-    }
-  }
+  void _updateState() {
+    final searchQuery = searchQueryController.text;
+    final glyphsState = _glyphsBloc.state;
+    final isSearchEmpty = searchQuery.isEmpty;
+    bool test(Glyph glyph) => matchesSearchTerm(glyph, searchQuery);
 
-  void clearSearch() {
-    searchQueryController.clear();
+    final filteredEmoji =
+        isSearchEmpty ? glyphsState.emoji : glyphsState.emoji.where(test);
+    final filteredSymbols =
+        isSearchEmpty ? glyphsState.symbols : glyphsState.symbols.where(test);
+    final filteredKaomoji =
+        isSearchEmpty ? glyphsState.kaomoji : glyphsState.kaomoji.where(test);
+
+    emit(
+      SearchGlyphsState(
+        filteredEmoji: filteredEmoji,
+        filteredSymbols: filteredSymbols,
+        filteredKaomoji: filteredKaomoji,
+      ),
+    );
   }
 }

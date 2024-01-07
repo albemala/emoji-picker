@@ -1,65 +1,90 @@
 import 'package:app/local-store/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_state_management/flutter_state_management.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PreferencesConductor extends StorableConductor {
-  factory PreferencesConductor.fromContext(BuildContext context) {
-    return PreferencesConductor(
-      ConductorStorage(
-        context.getConductor<LocalStorageConductor>(),
-      ),
+const defaultThemeMode = ThemeMode.light;
+
+@immutable
+class PreferencesState extends Equatable {
+  final ThemeMode themeMode;
+
+  const PreferencesState({
+    required this.themeMode,
+  });
+
+  @override
+  List<Object?> get props => [
+        themeMode,
+      ];
+}
+
+const _themeModeKey = 'themeMode';
+
+Map<String, dynamic> preferencesStateToMap(PreferencesState preferencesState) {
+  return {
+    _themeModeKey: preferencesState.themeMode.index,
+  };
+}
+
+PreferencesState preferencesStateFromMap(Map<String, dynamic> map) {
+  final themeModeIndex = map[_themeModeKey] as int? ?? defaultThemeMode.index;
+  return PreferencesState(
+    themeMode: ThemeMode.values[themeModeIndex],
+  );
+}
+
+const preferencesStoreName = 'preferences';
+
+class PreferencesBloc extends Cubit<PreferencesState> {
+  factory PreferencesBloc.fromContext(BuildContext context) {
+    return PreferencesBloc(
+      context.read<LocalStoreBloc>(),
     );
   }
 
-  @override
-  final ConductorStorage storage;
+  final LocalStoreBloc _localStoreBloc;
 
-  final themeMode = ValueNotifier<ThemeMode>(ThemeMode.light);
-
-  PreferencesConductor(this.storage) {
+  PreferencesBloc(
+    this._localStoreBloc,
+  ) : super(
+          const PreferencesState(
+            themeMode: defaultThemeMode,
+          ),
+        ) {
     _init();
   }
 
   Future<void> _init() async {
-    await load();
-    themeMode.addListener(_updateAndSave);
-  }
-
-  @override
-  void dispose() {
-    themeMode.removeListener(_updateAndSave);
-    themeMode.dispose();
-  }
-
-  void setThemeMode(ThemeMode mode) {
-    themeMode.value = mode;
+    await _load();
   }
 
   void toggleThemeMode() {
-    themeMode.value = themeMode.value == ThemeMode.light //
-        ? ThemeMode.dark
-        : ThemeMode.light;
+    setThemeMode(
+      state.themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+    );
   }
 
-  void _updateAndSave() {
-    save();
+  void setThemeMode(ThemeMode mode) {
+    emit(
+      PreferencesState(
+        themeMode: mode,
+      ),
+    );
+    _save();
   }
 
-  @override
-  String get storeName => 'preferences';
-
-  static const _themeModeKey = 'themeMode';
-
-  @override
-  Map<String, dynamic> toMap() {
-    return {
-      _themeModeKey: themeMode.value.index,
-    };
+  Future<void> _load() async {
+    final map = await _localStoreBloc.load(preferencesStoreName);
+    emit(
+      preferencesStateFromMap(map),
+    );
   }
 
-  @override
-  void fromMap(Map<String, dynamic> map) {
-    final themeModeIndex = map[_themeModeKey] as int? ?? ThemeMode.light.index;
-    themeMode.value = ThemeMode.values[themeModeIndex];
+  Future<void> _save() async {
+    await _localStoreBloc.save(
+      preferencesStoreName,
+      preferencesStateToMap(state),
+    );
   }
 }
