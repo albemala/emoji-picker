@@ -2,9 +2,13 @@ import 'package:app/local-store/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'bloc.g.dart';
 
 const defaultThemeMode = ThemeMode.light;
 
+@JsonSerializable()
 @immutable
 class PreferencesState extends Equatable {
   final ThemeMode themeMode;
@@ -17,33 +21,24 @@ class PreferencesState extends Equatable {
   List<Object?> get props => [
         themeMode,
       ];
+
+  factory PreferencesState.fromJson(Map<String, dynamic> json) {
+    return _$PreferencesStateFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return _$PreferencesStateToJson(this);
+  }
 }
-
-const _themeModeKey = 'themeMode';
-
-Map<String, dynamic> preferencesStateToMap(PreferencesState preferencesState) {
-  return {
-    _themeModeKey: preferencesState.themeMode.index,
-  };
-}
-
-PreferencesState preferencesStateFromMap(Map<String, dynamic> map) {
-  final themeModeIndex = map[_themeModeKey] as int? ?? defaultThemeMode.index;
-  return PreferencesState(
-    themeMode: ThemeMode.values[themeModeIndex],
-  );
-}
-
-const preferencesStoreName = 'preferences';
 
 class PreferencesBloc extends Cubit<PreferencesState> {
+  final LocalStoreBloc _localStoreBloc;
+
   factory PreferencesBloc.fromContext(BuildContext context) {
     return PreferencesBloc(
       context.read<LocalStoreBloc>(),
     );
   }
-
-  final LocalStoreBloc _localStoreBloc;
 
   PreferencesBloc(
     this._localStoreBloc,
@@ -61,30 +56,42 @@ class PreferencesBloc extends Cubit<PreferencesState> {
 
   void toggleThemeMode() {
     setThemeMode(
-      state.themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+      state.themeMode == ThemeMode.light //
+          ? ThemeMode.dark
+          : ThemeMode.light,
     );
   }
 
-  void setThemeMode(ThemeMode mode) {
+  void setThemeMode(ThemeMode themeMode) {
+    _updateStateAndSave(
+      themeMode: themeMode,
+    );
+  }
+
+  void _updateStateAndSave({
+    ThemeMode? themeMode,
+  }) {
     emit(
       PreferencesState(
-        themeMode: mode,
+        themeMode: themeMode ?? state.themeMode,
       ),
     );
     _save();
   }
 
+  static const storeName = 'preferences';
+
   Future<void> _load() async {
-    final map = await _localStoreBloc.load(preferencesStoreName);
+    final map = await _localStoreBloc.load(storeName);
     emit(
-      preferencesStateFromMap(map),
+      PreferencesState.fromJson(map),
     );
   }
 
   Future<void> _save() async {
     await _localStoreBloc.save(
-      preferencesStoreName,
-      preferencesStateToMap(state),
+      storeName,
+      state.toJson(),
     );
   }
 }
