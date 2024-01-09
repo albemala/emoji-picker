@@ -23,11 +23,11 @@ class GlyphDetailsState extends Equatable {
 }
 
 class GlyphDetailsBloc extends Cubit<GlyphDetailsState> {
+  Glyph? _selectedGlyph;
+
   factory GlyphDetailsBloc.fromContext(BuildContext context) {
     return GlyphDetailsBloc();
   }
-
-  Glyph? _selectedGlyph;
 
   GlyphDetailsBloc()
       : super(

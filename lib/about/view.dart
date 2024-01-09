@@ -132,18 +132,18 @@ class AboutView extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   _AppActionsView(
-                    onRatePressed: bloc.openRateApp,
-                    onSharePressed: bloc.openShareApp,
-                    onOtherAppsPressed: bloc.openOtherApps,
+                    onRate: bloc.openRateApp,
+                    onShare: bloc.openShareApp,
+                    onOtherApps: bloc.openOtherApps,
                   ),
                   const SizedBox(height: 16),
                   _SupportView(
-                    onOpenEmailPressed: bloc.openEmail,
-                    onOpenWebsitePressed: bloc.openWebsite,
+                    onOpenEmail: bloc.openEmail,
+                    onOpenWebsite: bloc.openWebsite,
                   ),
                   const SizedBox(height: 16),
                   _NewsView(
-                    onOpenTwitterPressed: bloc.openTwitter,
+                    onOpenTwitter: bloc.openTwitter,
                   ),
                 ],
               ),
@@ -212,14 +212,14 @@ class _AppInfoView extends StatelessWidget {
 }
 
 class _AppActionsView extends StatelessWidget {
-  final void Function() onRatePressed;
-  final void Function(String message, Rect sharePosition) onSharePressed;
-  final void Function() onOtherAppsPressed;
+  final void Function() onRate;
+  final void Function(String, Rect) onShare;
+  final void Function() onOtherApps;
 
   const _AppActionsView({
-    required this.onRatePressed,
-    required this.onSharePressed,
-    required this.onOtherAppsPressed,
+    required this.onRate,
+    required this.onShare,
+    required this.onOtherApps,
   });
 
   @override
@@ -229,14 +229,14 @@ class _AppActionsView extends StatelessWidget {
       runSpacing: 8,
       children: [
         OutlinedButton(
-          onPressed: onRatePressed,
+          onPressed: onRate,
           child: const Text('Rate'),
         ),
         Builder(
           builder: (context) {
             return OutlinedButton(
               onPressed: () {
-                onSharePressed(
+                onShare(
                   '''
 Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $repositoryUrl''',
                   getSharePosition(context),
@@ -247,7 +247,7 @@ Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $reposi
           },
         ),
         FilledButton(
-          onPressed: onOtherAppsPressed,
+          onPressed: onOtherApps,
           child: const Text('Other Apps'),
         ),
       ],
@@ -256,12 +256,12 @@ Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $reposi
 }
 
 class _SupportView extends StatelessWidget {
-  final void Function() onOpenEmailPressed;
-  final void Function() onOpenWebsitePressed;
+  final void Function() onOpenEmail;
+  final void Function() onOpenWebsite;
 
   const _SupportView({
-    required this.onOpenEmailPressed,
-    required this.onOpenWebsitePressed,
+    required this.onOpenEmail,
+    required this.onOpenWebsite,
   });
 
   @override
@@ -276,11 +276,11 @@ class _SupportView extends StatelessWidget {
           runSpacing: 8,
           children: [
             OutlinedButton(
-              onPressed: onOpenEmailPressed,
+              onPressed: onOpenEmail,
               child: const Text('Email'),
             ),
             OutlinedButton(
-              onPressed: onOpenWebsitePressed,
+              onPressed: onOpenWebsite,
               child: const Text('Website'),
             ),
           ],
@@ -291,10 +291,10 @@ class _SupportView extends StatelessWidget {
 }
 
 class _NewsView extends StatelessWidget {
-  final void Function() onOpenTwitterPressed;
+  final void Function() onOpenTwitter;
 
   const _NewsView({
-    required this.onOpenTwitterPressed,
+    required this.onOpenTwitter,
   });
 
   @override
@@ -309,7 +309,7 @@ class _NewsView extends StatelessWidget {
           runSpacing: 8,
           children: [
             OutlinedButton(
-              onPressed: onOpenTwitterPressed,
+              onPressed: onOpenTwitter,
               child: const Text('Twitter'),
             ),
           ],

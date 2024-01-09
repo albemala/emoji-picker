@@ -14,15 +14,15 @@ class GlyphViewModel extends Equatable {
 }
 
 class GlyphViewBloc extends Cubit<GlyphViewModel> {
+  final GlyphDetailsBloc _glyphDetailsBloc;
+
+  final focusNode = FocusNode();
+
   factory GlyphViewBloc.fromContext(BuildContext context) {
     return GlyphViewBloc(
       context.read<GlyphDetailsBloc>(),
     );
   }
-
-  final GlyphDetailsBloc _glyphDetailsBloc;
-
-  final focusNode = FocusNode();
 
   GlyphViewBloc(this._glyphDetailsBloc)
       : super(

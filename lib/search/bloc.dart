@@ -29,17 +29,17 @@ class SearchGlyphsState extends Equatable {
 }
 
 class SearchGlyphsBloc extends Cubit<SearchGlyphsState> {
-  factory SearchGlyphsBloc.fromContext(BuildContext context) {
-    return SearchGlyphsBloc(
-      context.read<GlyphsBloc>(),
-    );
-  }
-
   final GlyphsBloc _glyphsBloc;
   StreamSubscription<GlyphsState>? _glyphsBlocSubscription;
 
   final searchFocusNode = FocusNode();
   final searchQueryController = TextEditingController();
+
+  factory SearchGlyphsBloc.fromContext(BuildContext context) {
+    return SearchGlyphsBloc(
+      context.read<GlyphsBloc>(),
+    );
+  }
 
   SearchGlyphsBloc(
     this._glyphsBloc,

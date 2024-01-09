@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +16,11 @@ class LocalStoreState extends Equatable {
 }
 
 class LocalStoreBloc extends Cubit<LocalStoreState> {
+  bool _isInitialized = false;
+
   factory LocalStoreBloc.fromContext(BuildContext context) {
     return LocalStoreBloc();
   }
-
-  bool _isInitialized = false;
 
   LocalStoreBloc()
       : super(
