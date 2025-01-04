@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:app/glyphs/data-controller.dart';
 import 'package:app/glyphs/data-state.dart';
 import 'package:app/glyphs/defines/glyph.dart';
-import 'package:app/glyphs/functions.dart';
+import 'package:app/search/functions.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';

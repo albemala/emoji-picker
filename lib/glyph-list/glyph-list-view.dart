@@ -1,9 +1,9 @@
 import 'package:app/ads/widgets.dart';
+import 'package:app/glyph-list/functions.dart';
 import 'package:app/glyph-list/glyph-group-grid-view.dart';
 import 'package:app/glyph-list/glyph-group-list-view.dart';
 import 'package:app/glyph-list/glyph-group-title-view.dart';
 import 'package:app/glyphs/defines/glyph.dart';
-import 'package:app/glyphs/functions.dart';
 import 'package:app/math.dart';
 import 'package:app/search/bloc.dart';
 import 'package:flutter/material.dart';

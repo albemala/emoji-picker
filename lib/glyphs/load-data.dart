@@ -4,7 +4,6 @@ import 'package:app/glyphs/defines/emoji.dart';
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:app/glyphs/defines/kaomoji.dart';
 import 'package:app/glyphs/defines/symbol.dart';
-import 'package:app/glyphs/functions.dart';
 import 'package:app/string.dart';
 import 'package:flutter/services.dart';
 
@@ -88,4 +87,12 @@ Future<Iterable<Glyph>> loadKaomoji() async {
       );
     },
   );
+}
+
+String getGlyphHtmlCode(String glyph) {
+  return '&#${glyph.runes.first.toRadixString(10).toUpperCase()};';
+}
+
+String getGlyphUnicode(String glyph) {
+  return 'U+${glyph.runes.first.toRadixString(16).toUpperCase()}';
 }
