@@ -3,8 +3,8 @@ import 'package:app/routing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OpenAboutView extends StatelessWidget {
-  const OpenAboutView({
+class AboutButtonView extends StatelessWidget {
+  const AboutButtonView({
     super.key,
   });
 
@@ -15,12 +15,12 @@ class OpenAboutView extends StatelessWidget {
       height: 48,
       child: IconButton(
         onPressed: () {
-          openDialog(
+          openDialog<void>(
             context,
             const AlertDialog(
               clipBehavior: Clip.hardEdge,
               contentPadding: EdgeInsets.zero,
-              content: AboutViewBuilder(),
+              content: AboutViewCreator(),
             ),
           );
         },
