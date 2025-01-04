@@ -1,26 +1,10 @@
 import 'package:app/clipboard.dart';
+import 'package:app/glyph-details/view_state.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:app/routing.dart';
 import 'package:app/widgets/snack-bar.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class GlyphDetailsState extends Equatable {
-  final Glyph? selectedGlyph;
-  final bool isGlyphDetailsVisible;
-
-  const GlyphDetailsState({
-    required this.selectedGlyph,
-    required this.isGlyphDetailsVisible,
-  });
-
-  @override
-  List<Object?> get props => [
-        selectedGlyph,
-        isGlyphDetailsVisible,
-      ];
-}
 
 class GlyphDetailsBloc extends Cubit<GlyphDetailsState> {
   Glyph? _selectedGlyph;

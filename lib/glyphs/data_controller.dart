@@ -1,35 +1,15 @@
 import 'dart:convert';
 
+import 'package:app/glyphs/data_state.dart';
 import 'package:app/glyphs/emoji/emoji.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:app/glyphs/kaomoji/kaomoji.dart';
 import 'package:app/glyphs/string.dart';
 import 'package:app/glyphs/symbol/symbol.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-@immutable
-class GlyphsState extends Equatable {
-  final Iterable<Glyph> emoji;
-  final Iterable<Glyph> symbols;
-  final Iterable<Glyph> kaomoji;
-
-  const GlyphsState({
-    required this.emoji,
-    required this.symbols,
-    required this.kaomoji,
-  });
-
-  @override
-  List<Object?> get props => [
-        emoji,
-        symbols,
-        kaomoji,
-      ];
-}
 
 /// A class that loads and provides the glyphs (emoji, symbols).
 class GlyphsBloc extends Cubit<GlyphsState> {
