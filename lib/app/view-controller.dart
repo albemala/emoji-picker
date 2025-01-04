@@ -1,18 +1,18 @@
 import 'dart:async';
 
 import 'package:app/app/view-state.dart';
-import 'package:app/preferences/bloc.dart';
+import 'package:app/preferences/data-controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppViewController extends Cubit<AppViewState> {
-  final PreferencesBloc preferencesBloc;
+  final PreferencesDataController preferencesBloc;
 
-  StreamSubscription<PreferencesState>? preferencesBlocSubscription;
+  StreamSubscription<void>? preferencesBlocSubscription;
 
   factory AppViewController.fromContext(BuildContext context) {
     return AppViewController(
-      context.read<PreferencesBloc>(),
+      context.read<PreferencesDataController>(),
     );
   }
 

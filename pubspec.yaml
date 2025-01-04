@@ -12,16 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # state management and data storage
+  # state management
   equatable: ^2.0.7
   fast_immutable_collections: ^11.0.0
   flutter_bloc: ^8.1.6
-
-  path_provider: ^2.1.5
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-
-  json_annotation: ^4.9.0
+  # data storage
+  shared_preferences: ^2.3.5
 
   # UI
   flex_color_scheme: ^8.0.2
@@ -56,7 +52,6 @@ dev_dependencies:
   very_good_analysis: ^7.0.0
 
   build_runner: ^2.4.13
-  json_serializable: ^6.9.0
   flutter_launcher_icons_maker: ^0.10.2
   package_rename: ^1.8.0
 

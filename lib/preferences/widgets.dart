@@ -1,34 +1,35 @@
-import 'package:app/preferences/bloc.dart';
+import 'package:app/preferences/data-controller.dart';
+import 'package:app/preferences/data-state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ToggleThemeModeViewCreator extends StatelessWidget {
-  const ToggleThemeModeViewCreator({
+class ThemeModeToggleViewCreator extends StatelessWidget {
+  const ThemeModeToggleViewCreator({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PreferencesBloc, PreferencesState>(
+    return BlocBuilder<PreferencesDataController, PreferencesDataState>(
       builder: (context, state) {
-        return ToggleThemeModeView(
-          bloc: context.read<PreferencesBloc>(),
-          viewModel: state,
+        return ThemeModeToggleView(
+          controller: context.read<PreferencesDataController>(),
+          state: state,
         );
       },
     );
   }
 }
 
-class ToggleThemeModeView extends StatelessWidget {
-  final PreferencesBloc bloc;
-  final PreferencesState viewModel;
+class ThemeModeToggleView extends StatelessWidget {
+  final PreferencesDataController controller;
+  final PreferencesDataState state;
 
-  const ToggleThemeModeView({
+  const ThemeModeToggleView({
     super.key,
-    required this.bloc,
-    required this.viewModel,
+    required this.controller,
+    required this.state,
   });
 
   @override
@@ -37,8 +38,8 @@ class ToggleThemeModeView extends StatelessWidget {
       width: 48,
       height: 48,
       child: IconButton(
-        onPressed: bloc.toggleThemeMode,
-        icon: viewModel.themeMode == ThemeMode.light //
+        onPressed: controller.toggleThemeMode,
+        icon: state.themeMode == ThemeMode.light //
             ? const Icon(CupertinoIcons.moon)
             : const Icon(CupertinoIcons.sun_max),
       ),

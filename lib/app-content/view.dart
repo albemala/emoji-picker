@@ -28,7 +28,7 @@ class AppContentView extends StatelessWidget {
                         child: SearchViewCreator(),
                       ),
                       SizedBox(width: 12),
-                      ToggleThemeModeViewCreator(),
+                      ThemeModeToggleViewCreator(),
                       AboutButtonView(),
                     ],
                   ),

@@ -2,7 +2,7 @@ import 'package:app/app/view.dart';
 import 'package:app/glyph-details/view-controller.dart';
 import 'package:app/glyphs/data-controller.dart';
 import 'package:app/local-store/bloc.dart';
-import 'package:app/preferences/bloc.dart';
+import 'package:app/preferences/data-controller.dart';
 import 'package:app/search/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,8 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: const [
-        BlocProvider(create: LocalStoreBloc.fromContext),
-        BlocProvider(create: PreferencesBloc.fromContext),
+        BlocProvider(create: LocalStoreDataController.fromContext),
+        BlocProvider(create: PreferencesDataController.fromContext),
         BlocProvider(create: GlyphsBloc.fromContext),
         BlocProvider(create: SearchGlyphsBloc.fromContext),
         BlocProvider(create: GlyphDetailsBloc.fromContext),
