@@ -1,5 +1,5 @@
 import 'package:app/about/functions.dart';
-import 'package:app/about/view_state.dart';
+import 'package:app/about/view-state.dart';
 import 'package:app/app/defines.dart';
 import 'package:app/feedback.dart';
 import 'package:app/share.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app/glyphs/data_state.dart';
+import 'package:app/glyphs/data-state.dart';
 import 'package:app/glyphs/emoji/emoji.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';

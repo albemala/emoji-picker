@@ -1,6 +1,6 @@
 import 'package:app/app/view.dart';
-import 'package:app/glyph-details/view_controller.dart';
-import 'package:app/glyphs/data_controller.dart';
+import 'package:app/glyph-details/view-controller.dart';
+import 'package:app/glyphs/data-controller.dart';
 import 'package:app/local-store/bloc.dart';
 import 'package:app/preferences/bloc.dart';
 import 'package:app/search/bloc.dart';

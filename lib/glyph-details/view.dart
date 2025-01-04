@@ -1,5 +1,5 @@
-import 'package:app/glyph-details/view_controller.dart';
-import 'package:app/glyph-details/view_state.dart';
+import 'package:app/glyph-details/view-controller.dart';
+import 'package:app/glyph-details/view-state.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;

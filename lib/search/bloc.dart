@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:app/glyphs/data_controller.dart';
-import 'package:app/glyphs/data_state.dart';
+import 'package:app/glyphs/data-controller.dart';
+import 'package:app/glyphs/data-state.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:easy_debounce/easy_debounce.dart';

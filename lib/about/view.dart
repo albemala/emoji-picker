@@ -1,5 +1,5 @@
-import 'package:app/about/view_controller.dart';
-import 'package:app/about/view_state.dart';
+import 'package:app/about/view-controller.dart';
+import 'package:app/about/view-state.dart';
 import 'package:app/ads/widgets.dart';
 import 'package:app/app/defines.dart';
 import 'package:app/math.dart';
