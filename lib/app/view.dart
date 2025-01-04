@@ -1,12 +1,12 @@
 import 'package:app/app-content/view.dart';
 import 'package:app/app/defines.dart';
 import 'package:app/app/intents-actions.dart';
-import 'package:app/app/theme.dart';
 import 'package:app/glyph-details/bloc.dart';
 import 'package:app/glyphs/bloc.dart';
 import 'package:app/local-store/bloc.dart';
 import 'package:app/preferences/bloc.dart';
 import 'package:app/search/bloc.dart';
+import 'package:app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +39,8 @@ class AppView extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: appName,
-            theme: lightTheme,
-            darkTheme: darkTheme,
+            theme: getLightTheme(),
+            darkTheme: getDarkTheme(),
             themeMode: preferences.themeMode,
             home: Builder(
               builder: (context) {
