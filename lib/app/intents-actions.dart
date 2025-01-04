@@ -1,4 +1,4 @@
-import 'package:app/glyph-details/bloc.dart';
+import 'package:app/glyph-details/view_controller.dart';
 import 'package:app/search/bloc.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/services.dart';
