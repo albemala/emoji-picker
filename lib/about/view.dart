@@ -1,6 +1,7 @@
 import 'package:app/about/functions.dart';
 import 'package:app/ads/view.dart';
 import 'package:app/app/defines.dart';
+import 'package:app/feedback.dart';
 import 'package:app/math.dart';
 import 'package:app/share.dart';
 import 'package:app/urls/defines.dart';
@@ -9,7 +10,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:send_support_email/send_support_email.dart';
 
 class AboutViewModel extends Equatable {
   final String appVersion;
@@ -70,8 +70,7 @@ class AboutViewBloc extends Cubit<AboutViewModel> {
   }
 
   Future<void> openEmail() async {
-    final email = await generateSupportEmail(supportEmailUrl);
-    await openUrl(email);
+    await sendFeedback();
   }
 
   Future<void> openWebsite() async {

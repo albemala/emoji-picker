@@ -1,5 +1,5 @@
 import 'package:app/about/view.dart';
-import 'package:app/routing/functions.dart';
+import 'package:app/routing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

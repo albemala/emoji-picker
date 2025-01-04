@@ -10,7 +10,7 @@ Future<String?> shareText({
   required String text,
 }) async {
   try {
-    final result = await Share.shareWithResult(
+    final result = await Share.share(
       text,
       sharePositionOrigin: position,
     );
@@ -29,11 +29,17 @@ Future<String?> shareText({
 Future<String?> shareFile({
   required Rect position,
   required String filePath,
+  String? mimeType,
   String? text,
 }) async {
   try {
     final result = await Share.shareXFiles(
-      [filePath].map(XFile.new).toList(),
+      [
+        XFile(
+          filePath,
+          mimeType: mimeType,
+        ),
+      ],
       text: text,
       sharePositionOrigin: position,
     );
