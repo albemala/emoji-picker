@@ -1,4 +1,4 @@
-import 'package:app/ads/view.dart';
+import 'package:app/ads/widgets.dart';
 import 'package:app/glyph-list/glyph-group-grid-view.dart';
 import 'package:app/glyph-list/glyph-group-list-view.dart';
 import 'package:app/glyph-list/glyph-group-title-view.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class EmojiListViewBuilder extends StatelessWidget {
-  const EmojiListViewBuilder({
+class EmojiListViewCreator extends StatelessWidget {
+  const EmojiListViewCreator({
     super.key,
   });
 
@@ -30,8 +30,8 @@ class EmojiListViewBuilder extends StatelessWidget {
   }
 }
 
-class SymbolListViewBuilder extends StatelessWidget {
-  const SymbolListViewBuilder({
+class SymbolListViewCreator extends StatelessWidget {
+  const SymbolListViewCreator({
     super.key,
   });
 
@@ -50,8 +50,8 @@ class SymbolListViewBuilder extends StatelessWidget {
   }
 }
 
-class KaomojiListViewBuilder extends StatelessWidget {
-  const KaomojiListViewBuilder({
+class KaomojiListViewCreator extends StatelessWidget {
+  const KaomojiListViewCreator({
     super.key,
   });
 

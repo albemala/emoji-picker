@@ -1,4 +1,4 @@
-import 'package:app/glyph-list/glyph-view.dart';
+import 'package:app/glyph-list/view.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class GlyphGroupListView extends StatelessWidget {
       itemCount: glyphs.length,
       itemBuilder: (context, index) {
         final glyph = glyphs.elementAt(index);
-        return GlyphViewBuilder(
+        return GlyphViewCreator(
           glyph: glyph,
           glyphContentBuilder: (BuildContext context, Glyph glyph) {
             return RectangularGlyphContentView(glyph: glyph);

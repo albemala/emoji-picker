@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchViewBuilder extends StatelessWidget {
-  const SearchViewBuilder({super.key});
+class SearchViewCreator extends StatelessWidget {
+  const SearchViewCreator({super.key});
 
   @override
   Widget build(BuildContext context) {

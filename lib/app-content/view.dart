@@ -25,11 +25,11 @@ class AppContentView extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: SearchViewBuilder(),
+                        child: SearchViewCreator(),
                       ),
                       SizedBox(width: 12),
-                      ToggleThemeModeViewBuilder(),
-                      OpenAboutView(),
+                      ToggleThemeModeViewCreator(),
+                      AboutButtonView(),
                     ],
                   ),
                 ),
@@ -50,13 +50,13 @@ class AppContentView extends StatelessWidget {
                   child: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      EmojiListViewBuilder(),
-                      SymbolListViewBuilder(),
-                      KaomojiListViewBuilder(),
+                      EmojiListViewCreator(),
+                      SymbolListViewCreator(),
+                      KaomojiListViewCreator(),
                     ],
                   ),
                 ),
-                const GlyphDetailsViewBuilder(),
+                const GlyphDetailsViewCreator(),
               ],
             ),
           ),

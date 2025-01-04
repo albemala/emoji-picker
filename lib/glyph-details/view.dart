@@ -1,4 +1,5 @@
-import 'package:app/glyph-details/bloc.dart';
+import 'package:app/glyph-details/view_controller.dart';
+import 'package:app/glyph-details/view_state.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:app/glyphs/glyph.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
@@ -6,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphDetailsViewBuilder extends StatelessWidget {
-  const GlyphDetailsViewBuilder({
+class GlyphDetailsViewCreator extends StatelessWidget {
+  const GlyphDetailsViewCreator({
     super.key,
   });
 
