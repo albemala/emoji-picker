@@ -1,6 +1,6 @@
 import 'package:app/clipboard.dart';
 import 'package:app/glyph-details/view-state.dart';
-import 'package:app/glyphs/glyph.dart';
+import 'package:app/glyphs/defines/glyph.dart';
 import 'package:app/routing.dart';
 import 'package:app/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';

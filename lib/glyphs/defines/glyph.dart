@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 enum GlyphType {
@@ -7,7 +8,7 @@ enum GlyphType {
 }
 
 @immutable
-class Glyph {
+class Glyph extends Equatable {
   final GlyphType type;
   final String glyph;
   final String unicode;
@@ -27,12 +28,13 @@ class Glyph {
   });
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Glyph &&
-          runtimeType == other.runtimeType &&
-          glyph == other.glyph;
-
-  @override
-  int get hashCode => glyph.hashCode;
+  List<Object> get props => [
+        type,
+        glyph,
+        unicode,
+        htmlCode,
+        name,
+        keywords,
+        group,
+      ];
 }

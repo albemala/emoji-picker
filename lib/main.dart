@@ -19,7 +19,7 @@ void main() {
       providers: const [
         BlocProvider(create: LocalStoreDataController.fromContext),
         BlocProvider(create: PreferencesDataController.fromContext),
-        BlocProvider(create: GlyphsBloc.fromContext),
+        BlocProvider(create: GlyphsDataController.fromContext),
         BlocProvider(create: SearchGlyphsBloc.fromContext),
         BlocProvider(create: GlyphDetailsBloc.fromContext),
       ],

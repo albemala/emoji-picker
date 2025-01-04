@@ -1,4 +1,4 @@
-import 'package:app/glyphs/glyph.dart';
+import 'package:app/glyphs/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
 
 class GlyphDetailsState extends Equatable {

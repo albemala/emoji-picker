@@ -1,6 +1,6 @@
 import 'package:app/glyph-details/view-controller.dart';
 import 'package:app/glyph-list/view-state.dart';
-import 'package:app/glyphs/glyph.dart';
+import 'package:app/glyphs/defines/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

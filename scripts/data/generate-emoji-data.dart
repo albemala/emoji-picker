@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/glyphs/emoji/emoji.dart';
+import 'package:app/glyphs/defines/emoji.dart';
 import 'package:http/http.dart' as http;
 
 // Emoji data example:

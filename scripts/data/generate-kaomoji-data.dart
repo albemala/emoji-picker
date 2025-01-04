@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/glyphs/kaomoji/kaomoji.dart';
+import 'package:app/glyphs/defines/kaomoji.dart';
 import 'package:http/http.dart' as http;
 
 // Kaomoji data example:

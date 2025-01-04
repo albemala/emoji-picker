@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:app/glyphs/data-controller.dart';
 import 'package:app/glyphs/data-state.dart';
+import 'package:app/glyphs/defines/glyph.dart';
 import 'package:app/glyphs/functions.dart';
-import 'package:app/glyphs/glyph.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
@@ -30,15 +30,15 @@ class SearchGlyphsState extends Equatable {
 }
 
 class SearchGlyphsBloc extends Cubit<SearchGlyphsState> {
-  final GlyphsBloc _glyphsBloc;
-  StreamSubscription<GlyphsState>? _glyphsBlocSubscription;
+  final GlyphsDataController _glyphsBloc;
+  StreamSubscription<GlyphsDataState>? _glyphsBlocSubscription;
 
   final searchFocusNode = FocusNode();
   final searchQueryController = TextEditingController();
 
   factory SearchGlyphsBloc.fromContext(BuildContext context) {
     return SearchGlyphsBloc(
-      context.read<GlyphsBloc>(),
+      context.read<GlyphsDataController>(),
     );
   }
 

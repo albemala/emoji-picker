@@ -1,4 +1,4 @@
-import 'package:app/glyphs/glyph.dart';
+import 'package:app/glyphs/defines/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
