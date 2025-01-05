@@ -44,14 +44,14 @@ class Emoji extends Equatable {
         'name': final String name,
         'group': final String group,
         'skinToneSupport': final bool skinToneSupport,
-        'keywords': final List<String> keywords,
+        'keywords': final List<dynamic> keywords,
       } =>
         Emoji(
           char: char,
           name: name,
           group: group,
           skinToneSupport: skinToneSupport,
-          keywords: keywords.toIList(),
+          keywords: keywords.cast<String>().toIList(),
         ),
       _ => defaultEmoji,
     };

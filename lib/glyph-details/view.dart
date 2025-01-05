@@ -74,7 +74,9 @@ class GlyphDetailsView extends StatelessWidget {
                         value: glyph.unicode,
                         onCopy: () {
                           controller.copyGlyphUnicodeToClipboard(
-                              context, glyph);
+                            context,
+                            glyph,
+                          );
                         },
                       ),
                     const SizedBox(width: 16),
@@ -84,7 +86,9 @@ class GlyphDetailsView extends StatelessWidget {
                         value: glyph.htmlCode,
                         onCopy: () {
                           controller.copyGlyphHtmlCodeToClipboard(
-                              context, glyph);
+                            context,
+                            glyph,
+                          );
                         },
                       ),
                   ],
@@ -257,11 +261,11 @@ class _CopyGlyphView extends StatelessWidget {
 }
 
 class _CloseView extends StatelessWidget {
+  final void Function() onClose;
+
   const _CloseView({
     required this.onClose,
   });
-
-  final void Function() onClose;
 
   @override
   Widget build(BuildContext context) {

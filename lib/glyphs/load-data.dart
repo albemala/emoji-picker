@@ -13,12 +13,9 @@ Future<List<Glyph>> loadEmoji() async {
     'assets/data/emoji.json',
   );
   final emojiData = json.decode(emojiDataFile) as List<dynamic>;
-  return emojiData
-      .map(
-    (item) => Emoji.fromMap(
-      item as Map<String, dynamic>,
-    ),
-  )
+  return emojiData //
+      .cast<Map<String, dynamic>>()
+      .map(Emoji.fromMap)
       .map(
     (emoji) {
       final glyph = emoji.char;
@@ -40,12 +37,9 @@ Future<List<Glyph>> loadSymbols() async {
     'assets/data/symbols.json',
   );
   final symbolsData = json.decode(symbolsDataFile) as List<dynamic>;
-  return symbolsData
-      .map(
-    (item) => Symbol.fromMap(
-      item as Map<String, dynamic>,
-    ),
-  )
+  return symbolsData //
+      .cast<Map<String, dynamic>>()
+      .map(Symbol.fromMap)
       .map(
     (symbol) {
       final glyph = String.fromCharCode(symbol.charcode);
@@ -67,12 +61,9 @@ Future<List<Glyph>> loadKaomoji() async {
     'assets/data/kaomoji.json',
   );
   final kaomojiData = json.decode(kaomojiDataFile) as List<dynamic>;
-  return kaomojiData
-      .map(
-    (item) => Kaomoji.fromMap(
-      item as Map<String, dynamic>,
-    ),
-  )
+  return kaomojiData //
+      .cast<Map<String, dynamic>>()
+      .map(Kaomoji.fromMap)
       .map(
     (kaomoji) {
       final glyph = kaomoji.string;

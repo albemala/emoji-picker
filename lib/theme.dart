@@ -5,10 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 const _scheme = FlexScheme.material;
 const _variant = FlexSchemeVariant.vivid;
 const _keyColors = FlexKeyColors(
-  useSecondary: true,
-  useTertiary: true,
-  // useError: true,
-);
+    // useSecondary: true,
+    // useTertiary: true,
+    // useError: true,
+    );
 
 const _visualDensity = VisualDensity.compact;
 

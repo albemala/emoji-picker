@@ -29,7 +29,7 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
     emit(
       GlyphDetailsViewState(
         selectedGlyph: _selectedGlyph,
-        isGlyphDetailsVisible: _selectedGlyph == unknownGlyph,
+        isGlyphDetailsVisible: _selectedGlyph != unknownGlyph,
       ),
     );
   }

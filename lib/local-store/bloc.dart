@@ -14,7 +14,7 @@ class LocalStoreDataController extends Cubit<void> {
 
   Future<void> save(String storeName, Map<String, dynamic> map) async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonString = map.toString();
+    final jsonString = json.encode(map);
     await prefs.setString(storeName, jsonString);
   }
 

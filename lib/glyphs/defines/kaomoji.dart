@@ -26,11 +26,11 @@ class Kaomoji extends Equatable {
     return switch (map) {
       {
         'string': final String string,
-        'keywords': final List<String> keywords,
+        'keywords': final List<dynamic> keywords,
       } =>
         Kaomoji(
           string: string,
-          keywords: keywords.toIList(),
+          keywords: keywords.cast<String>().toIList(),
         ),
       _ => defaultKaomoji,
     };
