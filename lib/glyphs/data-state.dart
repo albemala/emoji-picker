@@ -1,12 +1,13 @@
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 
 @immutable
 class GlyphsDataState extends Equatable {
-  final Iterable<Glyph> emoji;
-  final Iterable<Glyph> symbols;
-  final Iterable<Glyph> kaomoji;
+  final IList<Glyph> emoji;
+  final IList<Glyph> symbols;
+  final IList<Glyph> kaomoji;
 
   const GlyphsDataState({
     required this.emoji,
@@ -15,7 +16,7 @@ class GlyphsDataState extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         emoji,
         symbols,
         kaomoji,
@@ -23,7 +24,7 @@ class GlyphsDataState extends Equatable {
 }
 
 const defaultGlyphsDataState = GlyphsDataState(
-  emoji: [],
-  symbols: [],
-  kaomoji: [],
+  emoji: IList.empty(),
+  symbols: IList.empty(),
+  kaomoji: IList.empty(),
 );

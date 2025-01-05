@@ -1,8 +1,8 @@
-import 'package:app/about/widgets.dart';
 import 'package:app/glyph-details/view.dart';
 import 'package:app/glyph-list/glyph-list-view.dart';
-import 'package:app/preferences/widgets.dart';
-import 'package:app/search/widgets.dart';
+import 'package:app/widgets/about.dart';
+import 'package:app/widgets/preferences.dart';
+import 'package:app/widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class AppContentView extends StatelessWidget {

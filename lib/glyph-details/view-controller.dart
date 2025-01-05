@@ -6,45 +6,39 @@ import 'package:app/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphDetailsBloc extends Cubit<GlyphDetailsState> {
-  Glyph? _selectedGlyph;
+class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
+  var _selectedGlyph = unknownGlyph;
 
-  factory GlyphDetailsBloc.fromContext(BuildContext context) {
-    return GlyphDetailsBloc();
+  factory GlyphDetailsViewController.fromContext(BuildContext context) {
+    return GlyphDetailsViewController();
   }
 
-  GlyphDetailsBloc()
-      : super(
-          const GlyphDetailsState(
-            selectedGlyph: null,
-            isGlyphDetailsVisible: false,
-          ),
-        );
+  GlyphDetailsViewController() : super(defaultGlyphDetailsViewState);
 
-  void showDetailsForGlyph(Glyph? glyph) {
+  void showDetailsForGlyph(Glyph glyph) {
     _selectedGlyph = glyph;
     _updateState();
   }
 
   void hideDetails() {
-    _selectedGlyph = null;
+    _selectedGlyph = unknownGlyph;
     _updateState();
   }
 
   void _updateState() {
     emit(
-      GlyphDetailsState(
+      GlyphDetailsViewState(
         selectedGlyph: _selectedGlyph,
-        isGlyphDetailsVisible: _selectedGlyph != null,
+        isGlyphDetailsVisible: _selectedGlyph == unknownGlyph,
       ),
     );
   }
 
   Future<void> copySelectedGlyphToClipboard(BuildContext context) async {
-    if (_selectedGlyph == null) return;
+    if (_selectedGlyph == unknownGlyph) return;
     await copyGlyphToClipboard(
       context,
-      _selectedGlyph!,
+      _selectedGlyph,
     );
   }
 

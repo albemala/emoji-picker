@@ -1,61 +1,36 @@
 import 'dart:async';
 
 import 'package:app/glyphs/data-controller.dart';
-import 'package:app/glyphs/data-state.dart';
 import 'package:app/glyphs/defines/glyph.dart';
+import 'package:app/search/data-state.dart';
 import 'package:app/search/functions.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:equatable/equatable.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-@immutable
-class SearchGlyphsState extends Equatable {
-  final Iterable<Glyph> filteredEmoji;
-  final Iterable<Glyph> filteredSymbols;
-  final Iterable<Glyph> filteredKaomoji;
-
-  const SearchGlyphsState({
-    required this.filteredEmoji,
-    required this.filteredSymbols,
-    required this.filteredKaomoji,
-  });
-
-  @override
-  List<Object?> get props => [
-        filteredEmoji,
-        filteredSymbols,
-        filteredKaomoji,
-      ];
-}
-
-class SearchGlyphsBloc extends Cubit<SearchGlyphsState> {
-  final GlyphsDataController _glyphsBloc;
-  StreamSubscription<GlyphsDataState>? _glyphsBlocSubscription;
+class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
+  final GlyphsDataController _glyphsDataController;
+  StreamSubscription<void>? _glyphsDataControllerSubscription;
 
   final searchFocusNode = FocusNode();
   final searchQueryController = TextEditingController();
 
-  factory SearchGlyphsBloc.fromContext(BuildContext context) {
-    return SearchGlyphsBloc(
+  factory SearchGlyphsDataController.fromContext(BuildContext context) {
+    return SearchGlyphsDataController(
       context.read<GlyphsDataController>(),
     );
   }
 
-  SearchGlyphsBloc(
-    this._glyphsBloc,
-  ) : super(
-          const SearchGlyphsState(
-            filteredEmoji: [],
-            filteredSymbols: [],
-            filteredKaomoji: [],
-          ),
-        ) {
+  SearchGlyphsDataController(
+    this._glyphsDataController,
+  ) : super(defaultSearchGlyphsDataState) {
     _init();
   }
 
   void _init() {
-    _glyphsBlocSubscription = _glyphsBloc.stream.listen((_) {
+    _glyphsDataControllerSubscription =
+        _glyphsDataController.stream.listen((_) {
       _updateState();
     });
     _updateState();
@@ -66,16 +41,13 @@ class SearchGlyphsBloc extends Cubit<SearchGlyphsState> {
 
   @override
   Future<void> close() async {
-    await _glyphsBlocSubscription?.cancel();
-
+    await _glyphsDataControllerSubscription?.cancel();
     searchFocusNode
       ..removeListener(onSearchFocusChanged)
       ..dispose();
-
     searchQueryController
       ..removeListener(onSearchChanged)
       ..dispose();
-
     await super.close();
   }
 
@@ -113,22 +85,21 @@ class SearchGlyphsBloc extends Cubit<SearchGlyphsState> {
 
   void _updateState() {
     final searchQuery = searchQueryController.text;
-    final glyphsState = _glyphsBloc.state;
-    final isSearchEmpty = searchQuery.isEmpty;
+    final state = _glyphsDataController.state;
     bool test(Glyph glyph) => matchesSearchTerm(glyph, searchQuery);
 
     final filteredEmoji =
-        isSearchEmpty ? glyphsState.emoji : glyphsState.emoji.where(test);
+        searchQuery.isEmpty ? state.emoji : state.emoji.where(test);
     final filteredSymbols =
-        isSearchEmpty ? glyphsState.symbols : glyphsState.symbols.where(test);
+        searchQuery.isEmpty ? state.symbols : state.symbols.where(test);
     final filteredKaomoji =
-        isSearchEmpty ? glyphsState.kaomoji : glyphsState.kaomoji.where(test);
+        searchQuery.isEmpty ? state.kaomoji : state.kaomoji.where(test);
 
     emit(
-      SearchGlyphsState(
-        filteredEmoji: filteredEmoji,
-        filteredSymbols: filteredSymbols,
-        filteredKaomoji: filteredKaomoji,
+      SearchGlyphsDataState(
+        filteredEmoji: filteredEmoji.toIList(),
+        filteredSymbols: filteredSymbols.toIList(),
+        filteredKaomoji: filteredKaomoji.toIList(),
       ),
     );
   }

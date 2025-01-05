@@ -18,10 +18,10 @@ class AppViewCreator extends StatelessWidget {
     return BlocProvider<AppViewController>(
       create: AppViewController.fromContext,
       child: BlocBuilder<AppViewController, AppViewState>(
-        builder: (context, viewModel) {
+        builder: (context, state) {
           return AppView(
             controller: context.read<AppViewController>(),
-            state: viewModel,
+            state: state,
           );
         },
       ),

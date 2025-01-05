@@ -5,9 +5,10 @@ import 'package:app/glyphs/defines/glyph.dart';
 import 'package:app/glyphs/defines/kaomoji.dart';
 import 'package:app/glyphs/defines/symbol.dart';
 import 'package:app/string.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/services.dart';
 
-Future<Iterable<Glyph>> loadEmoji() async {
+Future<List<Glyph>> loadEmoji() async {
   final emojiDataFile = await rootBundle.loadString(
     'assets/data/emoji.json',
   );
@@ -31,10 +32,10 @@ Future<Iterable<Glyph>> loadEmoji() async {
         group: emoji.group,
       );
     },
-  );
+  ).toList();
 }
 
-Future<Iterable<Glyph>> loadSymbols() async {
+Future<List<Glyph>> loadSymbols() async {
   final symbolsDataFile = await rootBundle.loadString(
     'assets/data/symbols.json',
   );
@@ -54,14 +55,14 @@ Future<Iterable<Glyph>> loadSymbols() async {
         unicode: getGlyphUnicode(glyph),
         htmlCode: getGlyphHtmlCode(glyph),
         name: symbol.name,
-        keywords: const [],
+        keywords: const IList.empty(),
         group: symbol.group,
       );
     },
-  );
+  ).toList();
 }
 
-Future<Iterable<Glyph>> loadKaomoji() async {
+Future<List<Glyph>> loadKaomoji() async {
   final kaomojiDataFile = await rootBundle.loadString(
     'assets/data/kaomoji.json',
   );
@@ -86,7 +87,7 @@ Future<Iterable<Glyph>> loadKaomoji() async {
         group: kaomoji.keywords.first,
       );
     },
-  );
+  ).toList();
 }
 
 String getGlyphHtmlCode(String glyph) {

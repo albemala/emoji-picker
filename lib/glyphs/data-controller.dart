@@ -1,5 +1,6 @@
 import 'package:app/glyphs/data-state.dart';
 import 'package:app/glyphs/load-data.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,11 +14,14 @@ class GlyphsDataController extends Cubit<GlyphsDataState> {
   }
 
   Future<void> _init() async {
+    final emoji = await loadEmoji();
+    final symbols = await loadSymbols();
+    final kaomoji = await loadKaomoji();
     emit(
       GlyphsDataState(
-        emoji: await loadEmoji(),
-        symbols: await loadSymbols(),
-        kaomoji: await loadKaomoji(),
+        emoji: emoji.toIList(),
+        symbols: symbols.toIList(),
+        kaomoji: kaomoji.toIList(),
       ),
     );
   }

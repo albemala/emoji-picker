@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 
 enum GlyphType {
   emoji,
   symbol,
   kaomoji,
+  unknown,
 }
 
 @immutable
@@ -14,7 +16,7 @@ class Glyph extends Equatable {
   final String unicode;
   final String htmlCode;
   final String name;
-  final List<String> keywords;
+  final IList<String> keywords;
   final String group;
 
   const Glyph({
@@ -38,3 +40,13 @@ class Glyph extends Equatable {
         group,
       ];
 }
+
+const unknownGlyph = Glyph(
+  type: GlyphType.unknown,
+  glyph: '',
+  unicode: '',
+  htmlCode: '',
+  name: '',
+  keywords: IList.empty(),
+  group: '',
+);

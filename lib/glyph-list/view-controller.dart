@@ -4,20 +4,18 @@ import 'package:app/glyphs/defines/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphViewBloc extends Cubit<GlyphViewModel> {
-  final GlyphDetailsBloc _glyphDetailsBloc;
+class GlyphViewController extends Cubit<GlyphViewState> {
+  final GlyphDetailsViewController _glyphDetailsViewcontroller;
   final focusNode = FocusNode();
 
-  factory GlyphViewBloc.fromContext(BuildContext context) {
-    return GlyphViewBloc(
-      context.read<GlyphDetailsBloc>(),
+  factory GlyphViewController.fromContext(BuildContext context) {
+    return GlyphViewController(
+      context.read<GlyphDetailsViewController>(),
     );
   }
 
-  GlyphViewBloc(this._glyphDetailsBloc)
-      : super(
-          const GlyphViewModel(),
-        );
+  GlyphViewController(this._glyphDetailsViewcontroller)
+      : super(defaultGlyphViewState);
 
   @override
   Future<void> close() async {
@@ -27,13 +25,13 @@ class GlyphViewBloc extends Cubit<GlyphViewModel> {
 
   void onFocusChange(bool isFocused, Glyph glyph) {
     if (isFocused) {
-      _glyphDetailsBloc.showDetailsForGlyph(glyph);
+      _glyphDetailsViewcontroller.showDetailsForGlyph(glyph);
     } else {
-      _glyphDetailsBloc.hideDetails();
+      _glyphDetailsViewcontroller.hideDetails();
     }
   }
 
   void copyGlyphToClipboard(BuildContext context, Glyph glyph) {
-    _glyphDetailsBloc.copyGlyphToClipboard(context, glyph);
+    _glyphDetailsViewcontroller.copyGlyphToClipboard(context, glyph);
   }
 }

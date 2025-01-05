@@ -15,5 +15,7 @@ TextStyle getTextStyleForGlyph(Glyph glyph) {
       return const TextStyle();
     case GlyphType.kaomoji:
       return const TextStyle();
+    case GlyphType.unknown:
+      return const TextStyle();
   }
 }

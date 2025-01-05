@@ -1,5 +1,5 @@
 import 'package:app/glyph-details/view-controller.dart';
-import 'package:app/search/bloc.dart';
+import 'package:app/search/data-controller.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -11,14 +11,14 @@ class CopyGlyphIntent extends Intent {
 
 class CopyGlyphAction extends Action<CopyGlyphIntent> {
   final BuildContext context;
-  final GlyphDetailsBloc glyphDetailsBloc;
+  final GlyphDetailsViewController glyphDetailsViewController;
 
   CopyGlyphAction(this.context)
-      : glyphDetailsBloc = context.read<GlyphDetailsBloc>();
+      : glyphDetailsViewController = context.read<GlyphDetailsViewController>();
 
   @override
   void invoke(covariant CopyGlyphIntent intent) {
-    glyphDetailsBloc.copySelectedGlyphToClipboard(context);
+    glyphDetailsViewController.copySelectedGlyphToClipboard(context);
     // ignore: invalid_use_of_visible_for_testing_member
     RawKeyboard.instance.clearKeysPressed();
   }
@@ -30,14 +30,14 @@ class FocusSearchIntent extends Intent {
 
 class FocusSearchAction extends Action<FocusSearchIntent> {
   final BuildContext context;
-  final SearchGlyphsBloc searchGlyphsBloc;
+  final SearchGlyphsDataController searchGlyphsDataController;
 
   FocusSearchAction(this.context)
-      : searchGlyphsBloc = context.read<SearchGlyphsBloc>();
+      : searchGlyphsDataController = context.read<SearchGlyphsDataController>();
 
   @override
   void invoke(covariant FocusSearchIntent intent) {
-    searchGlyphsBloc.searchFocusNode.requestFocus();
+    searchGlyphsDataController.searchFocusNode.requestFocus();
     // ignore: invalid_use_of_visible_for_testing_member
     RawKeyboard.instance.clearKeysPressed();
   }

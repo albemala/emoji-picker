@@ -1,4 +1,5 @@
-import 'package:app/search/bloc.dart';
+import 'package:app/search/data-controller.dart';
+import 'package:app/search/data-state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,10 +9,10 @@ class SearchViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+    return BlocBuilder<SearchGlyphsDataController, SearchGlyphsDataState>(
       builder: (context, state) {
         return SearchView(
-          bloc: context.read<SearchGlyphsBloc>(),
+          controller: context.read<SearchGlyphsDataController>(),
         );
       },
     );
@@ -19,19 +20,19 @@ class SearchViewCreator extends StatelessWidget {
 }
 
 class SearchView extends StatelessWidget {
-  final SearchGlyphsBloc bloc;
+  final SearchGlyphsDataController controller;
 
   const SearchView({
     super.key,
-    required this.bloc,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       autofocus: true,
-      focusNode: bloc.searchFocusNode,
-      controller: bloc.searchQueryController,
+      focusNode: controller.searchFocusNode,
+      controller: controller.searchQueryController,
       decoration: InputDecoration(
         hintText: 'Search for emoji and symbols',
         contentPadding: const EdgeInsets.symmetric(horizontal: 21),
@@ -40,11 +41,11 @@ class SearchView extends StatelessWidget {
           child: IconButton(
             iconSize: 16,
             icon: const Icon(CupertinoIcons.clear),
-            onPressed: bloc.clearSearch,
+            onPressed: controller.clearSearch,
           ),
         ),
       ),
-      onChanged: bloc.setSearchQuery,
+      onChanged: controller.setSearchQuery,
     );
   }
 }

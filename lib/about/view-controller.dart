@@ -9,25 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_review/in_app_review.dart';
 
-class AboutViewBloc extends Cubit<AboutViewModel> {
-  factory AboutViewBloc.fromContext(BuildContext context) {
-    return AboutViewBloc();
+class AboutViewController extends Cubit<AboutViewState> {
+  factory AboutViewController.fromContext(BuildContext context) {
+    return AboutViewController();
   }
 
-  AboutViewBloc()
-      : super(
-          const AboutViewModel(appVersion: '...'),
-        ) {
+  AboutViewController() : super(defaultAboutViewState) {
     _init();
   }
 
   Future<void> _init() async {
-    await _updateViewModel();
+    await _updateViewState();
   }
 
-  Future<void> _updateViewModel() async {
+  Future<void> _updateViewState() async {
     emit(
-      AboutViewModel(
+      AboutViewState(
         appVersion: await getAppVersion(),
       ),
     );

@@ -39,7 +39,7 @@ class PreferencesDataController extends Cubit<PreferencesDataState> {
   set themeMode(ThemeMode mode) => emit(state.copyWith(themeMode: mode));
 
   void toggleThemeMode() {
-    themeMode == ThemeMode.light //
+    themeMode = themeMode == ThemeMode.light //
         ? ThemeMode.dark
         : ThemeMode.light;
   }

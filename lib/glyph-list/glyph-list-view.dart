@@ -5,7 +5,8 @@ import 'package:app/glyph-list/glyph-group-list-view.dart';
 import 'package:app/glyph-list/glyph-group-title-view.dart';
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:app/math.dart';
-import 'package:app/search/bloc.dart';
+import 'package:app/search/data-controller.dart';
+import 'package:app/search/data-state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -17,10 +18,10 @@ class EmojiListViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+    return BlocBuilder<SearchGlyphsDataController, SearchGlyphsDataState>(
       builder: (context, state) {
         return GroupedGlyphsView(
-          groupedGlyphs: glyphsByGroup(state.filteredEmoji),
+          groupedGlyphs: glyphsByGroup(state.filteredEmoji.toList()),
           groupBuilder: (context, glyphs) {
             return GlyphGroupGridView(glyphs: glyphs);
           },
@@ -37,10 +38,10 @@ class SymbolListViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+    return BlocBuilder<SearchGlyphsDataController, SearchGlyphsDataState>(
       builder: (context, state) {
         return GroupedGlyphsView(
-          groupedGlyphs: glyphsByGroup(state.filteredSymbols),
+          groupedGlyphs: glyphsByGroup(state.filteredSymbols.toList()),
           groupBuilder: (context, glyphs) {
             return GlyphGroupGridView(glyphs: glyphs);
           },
@@ -57,10 +58,10 @@ class KaomojiListViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchGlyphsBloc, SearchGlyphsState>(
+    return BlocBuilder<SearchGlyphsDataController, SearchGlyphsDataState>(
       builder: (context, state) {
         return GroupedGlyphsView(
-          groupedGlyphs: glyphsByGroup(state.filteredKaomoji),
+          groupedGlyphs: glyphsByGroup(state.filteredKaomoji.toList()),
           groupBuilder: (context, glyphs) {
             return GlyphGroupListView(glyphs: glyphs);
           },

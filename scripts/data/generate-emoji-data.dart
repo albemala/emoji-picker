@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/glyphs/defines/emoji.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:http/http.dart' as http;
 
 // Emoji data example:
@@ -40,13 +41,13 @@ Emoji parseEmoji(
   final name = emoji['name'] as String;
   final group = emoji['group'] as String;
   final skinToneSupport = emoji['skin_tone_support'] as bool;
-  final keywords = emojiKeywords[char] ?? <dynamic>[];
+  final keywords = emojiKeywords[char] as List<dynamic>? ?? [];
   return Emoji(
     char: char,
     name: name,
     group: group,
     skinToneSupport: skinToneSupport,
-    keywords: List.from(keywords as List<dynamic>),
+    keywords: keywords.cast<String>().toIList(),
   );
 }
 

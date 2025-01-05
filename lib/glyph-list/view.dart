@@ -17,13 +17,13 @@ class GlyphViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<GlyphViewBloc>(
-      create: GlyphViewBloc.fromContext,
-      child: BlocBuilder<GlyphViewBloc, GlyphViewModel>(
-        builder: (context, viewModel) {
+    return BlocProvider<GlyphViewController>(
+      create: GlyphViewController.fromContext,
+      child: BlocBuilder<GlyphViewController, GlyphViewState>(
+        builder: (context, state) {
           return GlyphView(
             glyph: glyph,
-            bloc: context.read<GlyphViewBloc>(),
+            controller: context.read<GlyphViewController>(),
             glyphContentView: glyphContentBuilder(context, glyph),
           );
         },
@@ -34,13 +34,13 @@ class GlyphViewCreator extends StatelessWidget {
 
 class GlyphView extends StatelessWidget {
   final Glyph glyph;
-  final GlyphViewBloc bloc;
+  final GlyphViewController controller;
   final Widget glyphContentView;
 
   const GlyphView({
     super.key,
     required this.glyph,
-    required this.bloc,
+    required this.controller,
     required this.glyphContentView,
   });
 
@@ -49,14 +49,14 @@ class GlyphView extends StatelessWidget {
     return Material(
       type: MaterialType.card,
       child: InkWell(
-        onTap: bloc.focusNode.requestFocus,
+        onTap: controller.focusNode.requestFocus,
         onDoubleTap: () {
-          bloc.copyGlyphToClipboard(context, glyph);
+          controller.copyGlyphToClipboard(context, glyph);
         },
-        focusNode: bloc.focusNode,
+        focusNode: controller.focusNode,
         focusColor: Theme.of(context).colorScheme.tertiary,
         onFocusChange: (isFocused) {
-          bloc.onFocusChange(isFocused, glyph);
+          controller.onFocusChange(isFocused, glyph);
         },
         child: glyphContentView,
       ),

@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
 class Kaomoji extends Equatable {
   final String string;
-  final List<String> keywords;
+  final IList<String> keywords;
 
   const Kaomoji({
     required this.string,
@@ -29,7 +30,7 @@ class Kaomoji extends Equatable {
       } =>
         Kaomoji(
           string: string,
-          keywords: keywords,
+          keywords: keywords.toIList(),
         ),
       _ => defaultKaomoji,
     };
@@ -38,5 +39,5 @@ class Kaomoji extends Equatable {
 
 const defaultKaomoji = Kaomoji(
   string: '',
-  keywords: [],
+  keywords: IList.empty(),
 );

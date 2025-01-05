@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/glyphs/defines/kaomoji.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:http/http.dart' as http;
 
 // Kaomoji data example:
@@ -28,12 +29,10 @@ Kaomoji parseKaomoji(
   Map<String, dynamic> kaomojiAsMap,
 ) {
   final string = kaomojiAsMap['string'] as String? ?? '';
-  final keywords = List<String>.from(
-    kaomojiAsMap['tags'] as List<dynamic>? ?? [],
-  );
+  final keywords = kaomojiAsMap['tags'] as List<dynamic>? ?? [];
   return Kaomoji(
     string: string,
-    keywords: keywords,
+    keywords: keywords.cast<String>().toIList(),
   );
 }
 

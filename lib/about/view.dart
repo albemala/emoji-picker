@@ -15,13 +15,13 @@ class AboutViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AboutViewBloc>(
-      create: AboutViewBloc.fromContext,
-      child: BlocBuilder<AboutViewBloc, AboutViewModel>(
-        builder: (context, viewModel) {
+    return BlocProvider<AboutViewController>(
+      create: AboutViewController.fromContext,
+      child: BlocBuilder<AboutViewController, AboutViewState>(
+        builder: (context, state) {
           return AboutView(
-            bloc: context.read<AboutViewBloc>(),
-            viewModel: viewModel,
+            controller: context.read<AboutViewController>(),
+            state: state,
           );
         },
       ),
@@ -30,13 +30,13 @@ class AboutViewCreator extends StatelessWidget {
 }
 
 class AboutView extends StatelessWidget {
-  final AboutViewBloc bloc;
-  final AboutViewModel viewModel;
+  final AboutViewController controller;
+  final AboutViewState state;
 
   const AboutView({
     super.key,
-    required this.bloc,
-    required this.viewModel,
+    required this.controller,
+    required this.state,
   });
 
   @override
@@ -53,22 +53,22 @@ class AboutView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _AppInfoView(
-                    appVersion: viewModel.appVersion,
+                    appVersion: state.appVersion,
                   ),
                   const SizedBox(height: 12),
                   _AppActionsView(
-                    onRate: bloc.openRateApp,
-                    onShare: bloc.openShareApp,
-                    onOtherApps: bloc.openOtherApps,
+                    onRate: controller.openRateApp,
+                    onShare: controller.openShareApp,
+                    onOtherApps: controller.openOtherApps,
                   ),
                   const SizedBox(height: 16),
                   _SupportView(
-                    onOpenEmail: bloc.openEmail,
-                    onOpenWebsite: bloc.openWebsite,
+                    onOpenEmail: controller.openEmail,
+                    onOpenWebsite: controller.openWebsite,
                   ),
                   const SizedBox(height: 16),
                   _NewsView(
-                    onOpenTwitter: bloc.openTwitter,
+                    onOpenTwitter: controller.openTwitter,
                   ),
                 ],
               ),

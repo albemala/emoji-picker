@@ -1,18 +1,25 @@
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
-class GlyphDetailsState extends Equatable {
-  final Glyph? selectedGlyph;
+@immutable
+class GlyphDetailsViewState extends Equatable {
+  final Glyph selectedGlyph;
   final bool isGlyphDetailsVisible;
 
-  const GlyphDetailsState({
+  const GlyphDetailsViewState({
     required this.selectedGlyph,
     required this.isGlyphDetailsVisible,
   });
 
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         selectedGlyph,
         isGlyphDetailsVisible,
       ];
 }
+
+const defaultGlyphDetailsViewState = GlyphDetailsViewState(
+  selectedGlyph: unknownGlyph,
+  isGlyphDetailsVisible: false,
+);

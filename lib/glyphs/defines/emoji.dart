@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
@@ -7,7 +8,7 @@ class Emoji extends Equatable {
   final String name;
   final String group;
   final bool skinToneSupport;
-  final List<String> keywords;
+  final IList<String> keywords;
 
   const Emoji({
     required this.char,
@@ -50,7 +51,7 @@ class Emoji extends Equatable {
           name: name,
           group: group,
           skinToneSupport: skinToneSupport,
-          keywords: keywords,
+          keywords: keywords.toIList(),
         ),
       _ => defaultEmoji,
     };
@@ -62,5 +63,5 @@ const defaultEmoji = Emoji(
   name: '',
   group: '',
   skinToneSupport: false,
-  keywords: [],
+  keywords: IList.empty(),
 );

@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
-class AboutViewModel extends Equatable {
+@immutable
+class AboutViewState extends Equatable {
   final String appVersion;
 
-  const AboutViewModel({
+  const AboutViewState({
     required this.appVersion,
   });
 
@@ -12,3 +14,7 @@ class AboutViewModel extends Equatable {
         appVersion,
       ];
 }
+
+const defaultAboutViewState = AboutViewState(
+  appVersion: '',
+);

@@ -14,11 +14,11 @@ class GlyphDetailsViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GlyphDetailsBloc, GlyphDetailsState>(
+    return BlocBuilder<GlyphDetailsViewController, GlyphDetailsViewState>(
       builder: (context, state) {
         return GlyphDetailsView(
-          bloc: context.read<GlyphDetailsBloc>(),
-          viewModel: state,
+          controller: context.read<GlyphDetailsViewController>(),
+          state: state,
         );
       },
     );
@@ -26,21 +26,21 @@ class GlyphDetailsViewCreator extends StatelessWidget {
 }
 
 class GlyphDetailsView extends StatelessWidget {
-  final GlyphDetailsBloc bloc;
-  final GlyphDetailsState viewModel;
+  final GlyphDetailsViewController controller;
+  final GlyphDetailsViewState state;
 
   const GlyphDetailsView({
     super.key,
-    required this.bloc,
-    required this.viewModel,
+    required this.controller,
+    required this.state,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (!viewModel.isGlyphDetailsVisible || viewModel.selectedGlyph == null) {
+    if (!state.isGlyphDetailsVisible) {
       return Container();
     } else {
-      final glyph = viewModel.selectedGlyph!;
+      final glyph = state.selectedGlyph;
       return Padding(
         padding: const EdgeInsets.all(21),
         child: Column(
@@ -51,7 +51,7 @@ class GlyphDetailsView extends StatelessWidget {
                 Expanded(
                   child: _GlyphNameView(glyph: glyph),
                 ),
-                _CloseView(onClose: bloc.hideDetails),
+                _CloseView(onClose: controller.hideDetails),
               ],
             ),
             Wrap(
@@ -62,7 +62,7 @@ class GlyphDetailsView extends StatelessWidget {
                 _GlyphView(glyph: glyph),
                 _CopyGlyphView(
                   onCopy: () {
-                    bloc.copyGlyphToClipboard(context, glyph);
+                    controller.copyGlyphToClipboard(context, glyph);
                   },
                 ),
                 Row(
@@ -73,7 +73,8 @@ class GlyphDetailsView extends StatelessWidget {
                         title: 'Unicode',
                         value: glyph.unicode,
                         onCopy: () {
-                          bloc.copyGlyphUnicodeToClipboard(context, glyph);
+                          controller.copyGlyphUnicodeToClipboard(
+                              context, glyph);
                         },
                       ),
                     const SizedBox(width: 16),
@@ -82,7 +83,8 @@ class GlyphDetailsView extends StatelessWidget {
                         title: 'HTML code',
                         value: glyph.htmlCode,
                         onCopy: () {
-                          bloc.copyGlyphHtmlCodeToClipboard(context, glyph);
+                          controller.copyGlyphHtmlCodeToClipboard(
+                              context, glyph);
                         },
                       ),
                   ],
