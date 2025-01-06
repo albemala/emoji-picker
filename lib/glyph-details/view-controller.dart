@@ -1,77 +1,77 @@
-import 'package:app/clipboard.dart';
+import 'dart:async';
+
 import 'package:app/glyph-details/view-state.dart';
+import 'package:app/glyph/functions.dart';
 import 'package:app/glyphs/defines/glyph.dart';
-import 'package:app/routing.dart';
-import 'package:app/widgets/snack-bar.dart';
+import 'package:app/selected-glyph/data-controller.dart';
+import 'package:cross_platform/cross_platform.dart' as cross_platform;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
-  var _selectedGlyph = unknownGlyph;
+  final SelectedGlyphDataController _selectedGlyphDataController;
+  StreamSubscription<void>? _selectedGlyphDataControllerSubscription;
 
   factory GlyphDetailsViewController.fromContext(BuildContext context) {
-    return GlyphDetailsViewController();
+    return GlyphDetailsViewController(
+      context.read<SelectedGlyphDataController>(),
+    );
   }
 
-  GlyphDetailsViewController() : super(defaultGlyphDetailsViewState);
-
-  void showDetailsForGlyph(Glyph glyph) {
-    _selectedGlyph = glyph;
-    _updateState();
-  }
-
-  void hideDetails() {
-    _selectedGlyph = unknownGlyph;
+  GlyphDetailsViewController(
+    this._selectedGlyphDataController,
+  ) : super(defaultGlyphDetailsViewState) {
+    _selectedGlyphDataControllerSubscription =
+        _selectedGlyphDataController.stream.listen((_) {
+      _updateState();
+    });
     _updateState();
   }
 
   void _updateState() {
     emit(
       GlyphDetailsViewState(
-        selectedGlyph: _selectedGlyph,
-        isGlyphDetailsVisible: _selectedGlyph != unknownGlyph,
+        glyph: _selectedGlyphDataController.state.selectedGlyph,
       ),
     );
   }
 
-  Future<void> copySelectedGlyphToClipboard(BuildContext context) async {
-    if (_selectedGlyph == unknownGlyph) return;
-    await copyGlyphToClipboard(
-      context,
-      _selectedGlyph,
-    );
+  void closeDetailsView() {
+    _selectedGlyphDataController.selectedGlyph = unknownGlyph;
   }
 
-  Future<void> copyGlyphToClipboard(
-    BuildContext context,
-    Glyph glyph,
-  ) async {
-    await copyToClipboard(glyph.glyph);
-    showSnackBar(
-      context,
-      createCopiedToClipboardSnackBar(glyph.glyph),
-    );
+  @override
+  Future<void> close() async {
+    await _selectedGlyphDataControllerSubscription?.cancel();
+    await super.close();
   }
+}
 
-  Future<void> copyGlyphUnicodeToClipboard(
-    BuildContext context,
-    Glyph glyph,
-  ) async {
-    await copyToClipboard(glyph.unicode);
-    showSnackBar(
-      context,
-      createCopiedToClipboardSnackBar(glyph.unicode),
-    );
-  }
+final copyGlyphShortcuts = {
+  if (cross_platform.Platform.isMacOS) //
+    LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyC):
+        const CopyGlyphIntent(),
+  if (cross_platform.Platform.isWindows || cross_platform.Platform.isLinux) //
+    LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyC):
+        const CopyGlyphIntent(),
+};
 
-  Future<void> copyGlyphHtmlCodeToClipboard(
-    BuildContext context,
-    Glyph glyph,
-  ) async {
-    await copyToClipboard(glyph.htmlCode);
-    showSnackBar(
-      context,
-      createCopiedToClipboardSnackBar(glyph.htmlCode),
-    );
+class CopyGlyphIntent extends Intent {
+  const CopyGlyphIntent();
+}
+
+class CopyGlyphAction extends Action<CopyGlyphIntent> {
+  final BuildContext context;
+  final Glyph glyph;
+
+  CopyGlyphAction(
+    this.context,
+    this.glyph,
+  );
+
+  @override
+  void invoke(covariant CopyGlyphIntent intent) {
+    copyGlyphToClipboard(context, glyph);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:app/glyph-details/view-controller.dart';
 import 'package:app/glyph-details/view-state.dart';
+import 'package:app/glyph/functions.dart';
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:app/glyphs/functions.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
@@ -14,13 +15,16 @@ class GlyphDetailsViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GlyphDetailsViewController, GlyphDetailsViewState>(
-      builder: (context, state) {
-        return GlyphDetailsView(
-          controller: context.read<GlyphDetailsViewController>(),
-          state: state,
-        );
-      },
+    return BlocProvider<GlyphDetailsViewController>(
+      create: GlyphDetailsViewController.fromContext,
+      child: BlocBuilder<GlyphDetailsViewController, GlyphDetailsViewState>(
+        builder: (context, state) {
+          return GlyphDetailsView(
+            controller: context.read<GlyphDetailsViewController>(),
+            state: state,
+          );
+        },
+      ),
     );
   }
 }
@@ -37,84 +41,117 @@ class GlyphDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!state.isGlyphDetailsVisible) {
+    if (state.glyph == unknownGlyph) {
       return Container();
     } else {
-      final glyph = state.selectedGlyph;
-      return Padding(
-        padding: const EdgeInsets.all(21),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: _GlyphNameView(glyph: glyph),
-                ),
-                _CloseView(onClose: controller.hideDetails),
-              ],
-            ),
-            Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                _GlyphView(glyph: glyph),
-                _CopyGlyphView(
-                  onCopy: () {
-                    controller.copyGlyphToClipboard(context, glyph);
-                  },
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (glyph.unicode.isNotEmpty)
-                      _GlyphValueView(
-                        title: 'Unicode',
-                        value: glyph.unicode,
-                        onCopy: () {
-                          controller.copyGlyphUnicodeToClipboard(
-                            context,
-                            glyph,
-                          );
-                        },
-                      ),
-                    const SizedBox(width: 16),
-                    if (glyph.htmlCode.isNotEmpty)
-                      _GlyphValueView(
-                        title: 'HTML code',
-                        value: glyph.htmlCode,
-                        onCopy: () {
-                          controller.copyGlyphHtmlCodeToClipboard(
-                            context,
-                            glyph,
-                          );
-                        },
-                      ),
-                  ],
-                ),
-              ],
-            ),
-            if (glyph.keywords.isNotEmpty) //
-              const SizedBox(height: 16),
-            if (glyph.keywords.isNotEmpty) //
-              _GlyphKeywordsView(glyph: glyph),
-          ],
+      return Shortcuts(
+        shortcuts: copyGlyphShortcuts,
+        child: Actions(
+          actions: {
+            CopyGlyphIntent: CopyGlyphAction(context, state.glyph),
+          },
+          child: _GlyphDetailsContentView(
+            state: state,
+            controller: controller,
+          ),
         ),
       );
     }
   }
 }
 
-class _GlyphView extends StatelessWidget {
-  final Glyph glyph;
+class _GlyphDetailsContentView extends StatelessWidget {
+  final GlyphDetailsViewState state;
+  final GlyphDetailsViewController controller;
 
-  const _GlyphView({
-    required this.glyph,
+  const _GlyphDetailsContentView({
+    required this.state,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(21),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _HeaderView(
+            state: state,
+            controller: controller,
+          ),
+          Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              _GlyphView(
+                state: state,
+              ),
+              _CopyGlyphView(
+                onCopy: () {
+                  copyGlyphToClipboard(context, state.glyph);
+                },
+              ),
+              _GlyphValuesView(
+                state: state,
+                controller: controller,
+              ),
+            ],
+          ),
+          if (state.glyph.keywords.isNotEmpty) //
+            const SizedBox(height: 16),
+          if (state.glyph.keywords.isNotEmpty) //
+            _GlyphKeywordsView(
+              state: state,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HeaderView extends StatelessWidget {
+  final GlyphDetailsViewState state;
+  final GlyphDetailsViewController controller;
+
+  const _HeaderView({
+    required this.state,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            state.glyph.name,
+            style: Theme.of(context).textTheme.titleMedium,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        IconButton(
+          padding: EdgeInsets.zero,
+          icon: const Icon(CupertinoIcons.clear),
+          onPressed: controller.closeDetailsView,
+        ),
+      ],
+    );
+  }
+}
+
+class _GlyphView extends StatelessWidget {
+  final GlyphDetailsViewState state;
+
+  const _GlyphView({
+    required this.state,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final glyph = state.glyph;
     return Text(
       glyph.glyph,
       style: getTextStyleForGlyph(glyph).copyWith(
@@ -127,20 +164,69 @@ class _GlyphView extends StatelessWidget {
   }
 }
 
-class _GlyphNameView extends StatelessWidget {
-  final Glyph glyph;
+class _CopyGlyphView extends StatelessWidget {
+  final void Function() onCopy;
 
-  const _GlyphNameView({
-    required this.glyph,
+  const _CopyGlyphView({
+    required this.onCopy,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      glyph.name,
-      style: Theme.of(context).textTheme.titleMedium,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
+    return Wrap(
+      direction: Axis.vertical,
+      spacing: 8,
+      children: [
+        FilledButton(
+          onPressed: onCopy,
+          child: const Text('Copy'),
+        ),
+        if (cross_platform.Platform.isDesktop)
+          Text(
+            cross_platform.Platform.isMacOS //
+                ? 'or ⌘C or double-click to copy'
+                : 'or Ctrl C or double-click to copy',
+            style: Theme.of(context).textTheme.bodySmall,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+      ],
+    );
+  }
+}
+
+class _GlyphValuesView extends StatelessWidget {
+  final GlyphDetailsViewState state;
+  final GlyphDetailsViewController controller;
+
+  const _GlyphValuesView({
+    required this.state,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (state.glyph.unicode.isNotEmpty)
+          _GlyphValueView(
+            title: 'Unicode',
+            value: state.glyph.unicode,
+            onCopy: () {
+              copyGlyphUnicodeToClipboard(context, state.glyph);
+            },
+          ),
+        const SizedBox(width: 16),
+        if (state.glyph.htmlCode.isNotEmpty)
+          _GlyphValueView(
+            title: 'HTML code',
+            value: state.glyph.htmlCode,
+            onCopy: () {
+              copyGlyphHtmlCodeToClipboard(context, state.glyph);
+            },
+          ),
+      ],
     );
   }
 }
@@ -197,10 +283,10 @@ class _GlyphValueView extends StatelessWidget {
 }
 
 class _GlyphKeywordsView extends StatelessWidget {
-  final Glyph glyph;
+  final GlyphDetailsViewState state;
 
   const _GlyphKeywordsView({
-    required this.glyph,
+    required this.state,
   });
 
   @override
@@ -209,7 +295,7 @@ class _GlyphKeywordsView extends StatelessWidget {
       spacing: 4,
       runSpacing: 4,
       children: [
-        for (final keyword in glyph.keywords)
+        for (final keyword in state.glyph.keywords)
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 8,
@@ -225,54 +311,6 @@ class _GlyphKeywordsView extends StatelessWidget {
             ),
           ),
       ],
-    );
-  }
-}
-
-class _CopyGlyphView extends StatelessWidget {
-  final void Function() onCopy;
-
-  const _CopyGlyphView({
-    required this.onCopy,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      direction: Axis.vertical,
-      spacing: 8,
-      children: [
-        FilledButton(
-          onPressed: onCopy,
-          child: const Text('Copy'),
-        ),
-        if (cross_platform.Platform.isDesktop)
-          Text(
-            cross_platform.Platform.isMacOS //
-                ? 'or ⌘C or double-click to copy'
-                : 'or Ctrl C or double-click to copy',
-            style: Theme.of(context).textTheme.bodySmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-      ],
-    );
-  }
-}
-
-class _CloseView extends StatelessWidget {
-  final void Function() onClose;
-
-  const _CloseView({
-    required this.onClose,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      padding: EdgeInsets.zero,
-      icon: const Icon(CupertinoIcons.clear),
-      onPressed: onClose,
     );
   }
 }

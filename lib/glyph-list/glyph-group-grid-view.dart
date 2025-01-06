@@ -1,4 +1,4 @@
-import 'package:app/glyph-list/view.dart';
+import 'package:app/glyph/view.dart';
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:flutter/material.dart';
 

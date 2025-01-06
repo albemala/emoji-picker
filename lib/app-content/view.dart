@@ -1,13 +1,42 @@
+import 'package:app/app-content/view-controller.dart';
+import 'package:app/app-content/view-state.dart';
 import 'package:app/glyph-details/view.dart';
-import 'package:app/glyph-list/glyph-list-view.dart';
+import 'package:app/glyph-list/view.dart';
 import 'package:app/widgets/about.dart';
 import 'package:app/widgets/preferences.dart';
 import 'package:app/widgets/search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class AppContentViewCreator extends StatelessWidget {
+  const AppContentViewCreator({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<AppContentViewController>(
+      create: AppContentViewController.fromContext,
+      child: BlocBuilder<AppContentViewController, AppContentViewState>(
+        builder: (context, state) {
+          return AppContentView(
+            controller: context.read<AppContentViewController>(),
+            state: state,
+          );
+        },
+      ),
+    );
+  }
+}
 
 class AppContentView extends StatelessWidget {
+  final AppContentViewController controller;
+  final AppContentViewState state;
+
   const AppContentView({
     super.key,
+    required this.controller,
+    required this.state,
   });
 
   @override
@@ -56,7 +85,7 @@ class AppContentView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const GlyphDetailsViewCreator(),
+                GlyphDetailsViewCreator(),
               ],
             ),
           ),

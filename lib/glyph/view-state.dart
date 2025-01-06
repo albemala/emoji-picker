@@ -1,12 +1,12 @@
 import 'package:app/glyphs/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 @immutable
-class GlyphDetailsViewState extends Equatable {
+class GlyphViewState extends Equatable {
   final Glyph glyph;
 
-  const GlyphDetailsViewState({
+  const GlyphViewState({
     required this.glyph,
   });
 
@@ -16,6 +16,6 @@ class GlyphDetailsViewState extends Equatable {
       ];
 }
 
-const defaultGlyphDetailsViewState = GlyphDetailsViewState(
+const defaultGlyphViewState = GlyphViewState(
   glyph: unknownGlyph,
 );
