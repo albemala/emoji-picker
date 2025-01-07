@@ -99,7 +99,7 @@ BEGIN
             VALUE "FileDescription", "Ejimo" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Ejimo" "\0"
-            VALUE "LegalCopyright", "Copyright © 2023 Alberto Malagoli (albemala.me)." "\0"
+            VALUE "LegalCopyright", "Copyright © 2025 Alberto Malagoli (albemala.me)." "\0"
             VALUE "OriginalFilename", "Ejimo.exe" "\0"
             VALUE "ProductName", "Ejimo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
