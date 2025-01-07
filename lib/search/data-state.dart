@@ -8,11 +8,13 @@ class SearchGlyphsDataState extends Equatable {
   final IList<Glyph> filteredEmoji;
   final IList<Glyph> filteredSymbols;
   final IList<Glyph> filteredKaomoji;
+  final String searchQuery;
 
   const SearchGlyphsDataState({
     required this.filteredEmoji,
     required this.filteredSymbols,
     required this.filteredKaomoji,
+    required this.searchQuery,
   });
 
   @override
@@ -20,11 +22,27 @@ class SearchGlyphsDataState extends Equatable {
         filteredEmoji,
         filteredSymbols,
         filteredKaomoji,
+        searchQuery,
       ];
+
+  SearchGlyphsDataState copyWith({
+    IList<Glyph>? filteredEmoji,
+    IList<Glyph>? filteredSymbols,
+    IList<Glyph>? filteredKaomoji,
+    String? searchQuery,
+  }) {
+    return SearchGlyphsDataState(
+      filteredEmoji: filteredEmoji ?? this.filteredEmoji,
+      filteredSymbols: filteredSymbols ?? this.filteredSymbols,
+      filteredKaomoji: filteredKaomoji ?? this.filteredKaomoji,
+      searchQuery: searchQuery ?? this.searchQuery,
+    );
+  }
 }
 
 const defaultSearchGlyphsDataState = SearchGlyphsDataState(
   filteredEmoji: IList.empty(),
   filteredSymbols: IList.empty(),
   filteredKaomoji: IList.empty(),
+  searchQuery: '',
 );

@@ -2,9 +2,9 @@ import 'package:app/app-content/view-controller.dart';
 import 'package:app/app-content/view-state.dart';
 import 'package:app/glyph-details/view.dart';
 import 'package:app/glyphs/view.dart';
+import 'package:app/search/view.dart';
 import 'package:app/widgets/about.dart';
 import 'package:app/widgets/preferences.dart';
-import 'package:app/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

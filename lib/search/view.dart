@@ -1,5 +1,4 @@
-import 'package:app/search/data-controller.dart';
-import 'package:app/search/data-state.dart';
+import 'package:app/search/view-controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,18 +8,21 @@ class SearchViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchGlyphsDataController, SearchGlyphsDataState>(
-      builder: (context, state) {
-        return SearchView(
-          controller: context.read<SearchGlyphsDataController>(),
-        );
-      },
+    return BlocProvider<SearchGlyphsViewController>(
+      create: SearchGlyphsViewController.fromContext,
+      child: BlocBuilder<SearchGlyphsViewController, void>(
+        builder: (context, state) {
+          return SearchView(
+            controller: context.read<SearchGlyphsViewController>(),
+          );
+        },
+      ),
     );
   }
 }
 
 class SearchView extends StatelessWidget {
-  final SearchGlyphsDataController controller;
+  final SearchGlyphsViewController controller;
 
   const SearchView({
     super.key,
@@ -31,8 +33,8 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       autofocus: true,
-      focusNode: controller.searchFocusNode,
-      controller: controller.searchQueryController,
+      focusNode: controller.focusNode,
+      controller: controller.queryController,
       decoration: InputDecoration(
         hintText: 'Search for emoji and symbols',
         contentPadding: const EdgeInsets.symmetric(horizontal: 21),
@@ -45,7 +47,6 @@ class SearchView extends StatelessWidget {
           ),
         ),
       ),
-      onChanged: controller.setSearchQuery,
     );
   }
 }
