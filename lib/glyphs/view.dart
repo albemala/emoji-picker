@@ -138,27 +138,24 @@ class _GlyphGroupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).colorScheme.surfaceContainerHighest,
-      child: CustomScrollView(
-        slivers: groups.map((group) {
-          return MultiSliver(
-            pushPinnedChildren: true,
-            children: [
-              SliverPinnedHeader(
-                child: _GlyphGroupTitleView(title: group.title),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.all(21),
-                sliver: groupBuilder(context, group.glyphs.toList()),
-              ),
-              _AdView(
-                adType: group.ad,
-              ),
-            ],
-          );
-        }).toList(),
-      ),
+    return CustomScrollView(
+      slivers: groups.map((group) {
+        return MultiSliver(
+          pushPinnedChildren: true,
+          children: [
+            SliverPinnedHeader(
+              child: _GlyphGroupTitleView(title: group.title),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(21),
+              sliver: groupBuilder(context, group.glyphs.toList()),
+            ),
+            _AdView(
+              adType: group.ad,
+            ),
+          ],
+        );
+      }).toList(),
     );
   }
 }
@@ -283,23 +280,20 @@ class _AdContainerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const SizedBox(
-          height: 3,
-          child: Material(),
-        ),
-        Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 480),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 21),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 480),
+          child: Material(
+            borderRadius: BorderRadius.circular(16),
             child: Padding(
               padding: const EdgeInsets.all(21),
               child: child,
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

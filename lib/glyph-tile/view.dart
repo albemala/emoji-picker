@@ -50,8 +50,9 @@ class GlyphTileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      type: MaterialType.card,
-      color: state.isSelected ? Theme.of(context).colorScheme.tertiary : null,
+      color: state.isSelected
+          ? Theme.of(context).colorScheme.tertiaryContainer
+          : null,
       child: InkWell(
         onTap: controller.focusNode.requestFocus,
         onDoubleTap: () {

@@ -74,7 +74,6 @@ class AboutView extends StatelessWidget {
               ),
             ),
             const Material(
-              type: MaterialType.card,
               child: Padding(
                 padding: EdgeInsets.all(24),
                 child: _AdView(),

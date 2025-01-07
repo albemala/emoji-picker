@@ -62,41 +62,50 @@ class _GlyphDetailsContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(21),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _HeaderView(
-            state: state,
-            controller: controller,
-          ),
-          Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              _GlyphView(
-                state: state,
-              ),
-              _CopyGlyphView(
-                onCopy: () {
-                  copyGlyphToClipboard(context, state.glyph);
-                },
-              ),
-              _GlyphValuesView(
-                state: state,
-                controller: controller,
-              ),
-            ],
-          ),
-          if (state.glyph.keywords.isNotEmpty) //
-            const SizedBox(height: 16),
-          if (state.glyph.keywords.isNotEmpty) //
-            _GlyphKeywordsView(
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.6),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(21),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _HeaderView(
               state: state,
+              controller: controller,
             ),
-        ],
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                _GlyphView(
+                  state: state,
+                ),
+                _CopyGlyphView(
+                  onCopy: () {
+                    copyGlyphToClipboard(context, state.glyph);
+                  },
+                ),
+                _GlyphValuesView(
+                  state: state,
+                  controller: controller,
+                ),
+              ],
+            ),
+            if (state.glyph.keywords.isNotEmpty) //
+              const SizedBox(height: 16),
+            if (state.glyph.keywords.isNotEmpty) //
+              _GlyphKeywordsView(
+                state: state,
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -293,7 +302,7 @@ class _GlyphKeywordsView extends StatelessWidget {
               vertical: 2,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerHigh,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(

@@ -42,18 +42,16 @@ class AppContentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Material(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _HeaderView(),
-              Expanded(
-                child: GlyphsViewCreator(),
-              ),
-              GlyphDetailsViewCreator(),
-            ],
-          ),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _HeaderView(),
+            Expanded(
+              child: GlyphsViewCreator(),
+            ),
+            GlyphDetailsViewCreator(),
+          ],
         ),
       ),
     );
