@@ -1,7 +1,7 @@
 import 'package:app/app-content/view-controller.dart';
 import 'package:app/app-content/view-state.dart';
 import 'package:app/glyph-details/view.dart';
-import 'package:app/glyph-list/view.dart';
+import 'package:app/glyphs/view.dart';
 import 'package:app/widgets/about.dart';
 import 'package:app/widgets/preferences.dart';
 import 'package:app/widgets/search.dart';
@@ -41,55 +41,41 @@ class AppContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Material(
         child: SafeArea(
-          child: DefaultTabController(
-            length: 3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(21),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: SearchViewCreator(),
-                      ),
-                      SizedBox(width: 12),
-                      ThemeModeToggleViewCreator(),
-                      AboutButtonView(),
-                    ],
-                  ),
-                ),
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return TabBar(
-                      isScrollable: constraints.maxWidth > 480,
-                      labelPadding: const EdgeInsets.symmetric(horizontal: 21),
-                      tabs: const [
-                        Tab(text: 'Emoji'),
-                        Tab(text: 'Symbols'),
-                        Tab(text: 'Kaomoji'),
-                      ],
-                    );
-                  },
-                ),
-                const Expanded(
-                  child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      EmojiListViewCreator(),
-                      SymbolListViewCreator(),
-                      KaomojiListViewCreator(),
-                    ],
-                  ),
-                ),
-                GlyphDetailsViewCreator(),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _HeaderView(),
+              Expanded(
+                child: GlyphsViewCreator(),
+              ),
+              GlyphDetailsViewCreator(),
+            ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _HeaderView extends StatelessWidget {
+  const _HeaderView();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(21),
+      child: Row(
+        children: [
+          Expanded(
+            child: SearchViewCreator(),
+          ),
+          SizedBox(width: 12),
+          ThemeModeToggleViewCreator(),
+          AboutButtonView(),
+        ],
       ),
     );
   }

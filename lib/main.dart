@@ -1,5 +1,5 @@
 import 'package:app/app/view.dart';
-import 'package:app/glyphs/data-controller.dart';
+import 'package:app/glyph-data/data-controller.dart';
 import 'package:app/local-store/bloc.dart';
 import 'package:app/preferences/data-controller.dart';
 import 'package:app/search/data-controller.dart';

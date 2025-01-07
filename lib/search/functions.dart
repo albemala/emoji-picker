@@ -1,4 +1,4 @@
-import 'package:app/glyphs/defines/glyph.dart';
+import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
 bool matchesSearchTerm(Glyph glyph, String searchTerm) {

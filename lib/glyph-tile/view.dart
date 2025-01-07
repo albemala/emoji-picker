@@ -1,16 +1,15 @@
-import 'package:app/glyph/functions.dart';
-import 'package:app/glyph/view-controller.dart';
-import 'package:app/glyph/view-state.dart';
-import 'package:app/glyphs/defines/glyph.dart';
-import 'package:app/glyphs/functions.dart';
+import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/glyph-tile/functions.dart';
+import 'package:app/glyph-tile/view-controller.dart';
+import 'package:app/glyph-tile/view-state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphViewCreator extends StatelessWidget {
+class GlyphTileViewCreator extends StatelessWidget {
   final Glyph glyph;
   final Widget Function(BuildContext context, Glyph glyph) glyphContentBuilder;
 
-  const GlyphViewCreator({
+  const GlyphTileViewCreator({
     super.key,
     required this.glyph,
     required this.glyphContentBuilder,
@@ -18,16 +17,16 @@ class GlyphViewCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<GlyphViewController>(
-      create: (context) => GlyphViewController.fromContext(
+    return BlocProvider<GlyphTileViewController>(
+      create: (context) => GlyphTileViewController.fromContext(
         context,
         glyph,
       ),
-      child: BlocBuilder<GlyphViewController, GlyphViewState>(
+      child: BlocBuilder<GlyphTileViewController, GlyphTileViewState>(
         builder: (context, state) {
-          return GlyphView(
+          return GlyphTileView(
             state: state,
-            controller: context.read<GlyphViewController>(),
+            controller: context.read<GlyphTileViewController>(),
             glyphContentView: glyphContentBuilder(context, state.glyph),
           );
         },
@@ -36,12 +35,12 @@ class GlyphViewCreator extends StatelessWidget {
   }
 }
 
-class GlyphView extends StatelessWidget {
-  final GlyphViewState state;
-  final GlyphViewController controller;
+class GlyphTileView extends StatelessWidget {
+  final GlyphTileViewState state;
+  final GlyphTileViewController controller;
   final Widget glyphContentView;
 
-  const GlyphView({
+  const GlyphTileView({
     super.key,
     required this.state,
     required this.controller,
@@ -66,10 +65,10 @@ class GlyphView extends StatelessWidget {
   }
 }
 
-class SquaredGlyphContentView extends StatelessWidget {
+class SquaredGlyphTileContentView extends StatelessWidget {
   final Glyph glyph;
 
-  const SquaredGlyphContentView({
+  const SquaredGlyphTileContentView({
     super.key,
     required this.glyph,
   });
@@ -85,10 +84,10 @@ class SquaredGlyphContentView extends StatelessWidget {
   }
 }
 
-class RectangularGlyphContentView extends StatelessWidget {
+class RectangularGlyphTileContentView extends StatelessWidget {
   final Glyph glyph;
 
-  const RectangularGlyphContentView({
+  const RectangularGlyphTileContentView({
     super.key,
     required this.glyph,
   });

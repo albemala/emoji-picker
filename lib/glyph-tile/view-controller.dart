@@ -1,30 +1,30 @@
-import 'package:app/glyph/view-state.dart';
-import 'package:app/glyphs/defines/glyph.dart';
+import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/glyph-tile/view-state.dart';
 import 'package:app/selected-glyph/data-controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphViewController extends Cubit<GlyphViewState> {
+class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   final SelectedGlyphDataController _selectedGlyphDataController;
 
   final focusNode = FocusNode();
 
-  factory GlyphViewController.fromContext(
+  factory GlyphTileViewController.fromContext(
     BuildContext context,
     Glyph glyph,
   ) {
-    return GlyphViewController(
+    return GlyphTileViewController(
       context.read<SelectedGlyphDataController>(),
       glyph,
     );
   }
 
-  GlyphViewController(
+  GlyphTileViewController(
     this._selectedGlyphDataController,
     Glyph glyph,
-  ) : super(defaultGlyphViewState) {
+  ) : super(defaultGlyphTileViewState) {
     emit(
-      GlyphViewState(
+      GlyphTileViewState(
         glyph: glyph,
       ),
     );

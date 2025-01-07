@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:app/glyphs/defines/emoji.dart';
-import 'package:app/glyphs/defines/glyph.dart';
-import 'package:app/glyphs/defines/kaomoji.dart';
-import 'package:app/glyphs/defines/symbol.dart';
+import 'package:app/glyph-data/defines/emoji.dart';
+import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/glyph-data/defines/kaomoji.dart';
+import 'package:app/glyph-data/defines/symbol.dart';
 import 'package:app/string.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/services.dart';

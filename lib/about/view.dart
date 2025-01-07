@@ -1,10 +1,10 @@
 import 'package:app/about/view-controller.dart';
 import 'package:app/about/view-state.dart';
-import 'package:app/ads/widgets.dart';
 import 'package:app/app/defines.dart';
 import 'package:app/math.dart';
 import 'package:app/share.dart';
 import 'package:app/urls/defines.dart';
+import 'package:app/widgets/ads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-details/view-state.dart';
-import 'package:app/glyph/functions.dart';
-import 'package:app/glyphs/defines/glyph.dart';
+import 'package:app/glyph-tile/functions.dart';
 import 'package:app/selected-glyph/data-controller.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/services.dart';
