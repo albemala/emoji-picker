@@ -281,7 +281,11 @@ class _AdContainerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 21),
+      padding: const EdgeInsets.only(
+        left: 21,
+        right: 21,
+        bottom: 21,
+      ),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 480),
