@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-tile/view-state.dart';
 import 'package:app/selected-glyph/data-controller.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   final SelectedGlyphDataController _selectedGlyphDataController;
+  StreamSubscription<void>? _selectedGlyphDataControllerSubscription;
 
   final focusNode = FocusNode();
 
@@ -14,26 +17,42 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
     Glyph glyph,
   ) {
     return GlyphTileViewController(
-      context.read<SelectedGlyphDataController>(),
       glyph,
+      context.read<SelectedGlyphDataController>(),
     );
   }
 
   GlyphTileViewController(
-    this._selectedGlyphDataController,
     Glyph glyph,
+    this._selectedGlyphDataController,
   ) : super(defaultGlyphTileViewState) {
     emit(
-      GlyphTileViewState(
+      state.copyWith(
         glyph: glyph,
       ),
     );
+    _selectedGlyphDataControllerSubscription =
+        _selectedGlyphDataController.stream.listen((_) {
+      _updateState();
+    });
   }
 
   @override
   Future<void> close() {
     focusNode.dispose();
+    _selectedGlyphDataControllerSubscription?.cancel();
     return super.close();
+  }
+
+  void _updateState() {
+    if (_selectedGlyphDataController.selectedGlyph == unknownGlyph) {
+      focusNode.unfocus();
+    }
+    emit(
+      state.copyWith(
+        isSelected: state.glyph == _selectedGlyphDataController.selectedGlyph,
+      ),
+    );
   }
 
   void onFocusChange(bool isFocused) {
@@ -42,5 +61,9 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
     } else {
       _selectedGlyphDataController.selectedGlyph = unknownGlyph;
     }
+  }
+
+  void selectGlyph() {
+    _selectedGlyphDataController.selectedGlyph = state.glyph;
   }
 }

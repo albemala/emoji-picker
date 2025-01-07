@@ -51,13 +51,13 @@ class GlyphTileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       type: MaterialType.card,
+      color: state.isSelected ? Theme.of(context).colorScheme.tertiary : null,
       child: InkWell(
         onTap: controller.focusNode.requestFocus,
         onDoubleTap: () {
           copyGlyphToClipboard(context, state.glyph);
         },
         focusNode: controller.focusNode,
-        focusColor: Theme.of(context).colorScheme.tertiary,
         onFocusChange: controller.onFocusChange,
         child: glyphContentView,
       ),
