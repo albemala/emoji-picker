@@ -31,9 +31,9 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   }
 
   @override
-  Future<void> close() async {
+  Future<void> close() {
     focusNode.dispose();
-    await super.close();
+    return super.close();
   }
 
   void onFocusChange(bool isFocused) {

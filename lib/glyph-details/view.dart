@@ -43,17 +43,9 @@ class GlyphDetailsView extends StatelessWidget {
     if (state.glyph == unknownGlyph) {
       return Container();
     } else {
-      return Shortcuts(
-        shortcuts: copyGlyphShortcuts,
-        child: Actions(
-          actions: {
-            CopyGlyphIntent: CopyGlyphAction(context, state.glyph),
-          },
-          child: _GlyphDetailsContentView(
-            state: state,
-            controller: controller,
-          ),
-        ),
+      return _GlyphDetailsContentView(
+        state: state,
+        controller: controller,
       );
     }
   }

@@ -9,8 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SearchGlyphsViewController extends Cubit<void> {
   final SearchGlyphsDataController _searchGlyphsDataController;
 
-  final focusNode = FocusNode();
   final queryController = TextEditingController();
+
+  FocusNode get focusNode => _searchGlyphsDataController.focusNode;
 
   factory SearchGlyphsViewController.fromContext(BuildContext context) {
     return SearchGlyphsViewController(
@@ -21,22 +22,16 @@ class SearchGlyphsViewController extends Cubit<void> {
   SearchGlyphsViewController(
     this._searchGlyphsDataController,
   ) : super(defaultSearchGlyphsDataState) {
-    focusNode.addListener(onFocusChanged);
     queryController.addListener(onQueryChanged);
   }
 
   @override
-  Future<void> close() async {
-    focusNode
-      ..removeListener(onFocusChanged)
-      ..dispose();
+  Future<void> close() {
     queryController
       ..removeListener(onQueryChanged)
       ..dispose();
-    await super.close();
+    return super.close();
   }
-
-  void onFocusChanged() {}
 
   void clearSearch() {
     queryController.clear();

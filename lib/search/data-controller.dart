@@ -12,6 +12,8 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   final GlyphsDataController _glyphsDataController;
   StreamSubscription<void>? _glyphsDataControllerSubscription;
 
+  final focusNode = FocusNode();
+
   factory SearchGlyphsDataController.fromContext(BuildContext context) {
     return SearchGlyphsDataController(
       context.read<GlyphsDataController>(),
@@ -33,9 +35,9 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   }
 
   @override
-  Future<void> close() async {
-    await _glyphsDataControllerSubscription?.cancel();
-    await super.close();
+  Future<void> close() {
+    _glyphsDataControllerSubscription?.cancel();
+    return super.close();
   }
 
   void setSearchQuery(String value) {

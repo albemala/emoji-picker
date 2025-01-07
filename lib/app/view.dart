@@ -1,8 +1,8 @@
 import 'package:app/app-content/view.dart';
 import 'package:app/app/defines.dart';
-import 'package:app/app/intents-actions.dart';
 import 'package:app/app/view-controller.dart';
 import 'package:app/app/view-state.dart';
+import 'package:app/shortcuts/intents-actions.dart';
 import 'package:app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,14 +55,19 @@ class AppView extends StatelessWidget {
       theme: getLightTheme(),
       darkTheme: getDarkTheme(),
       themeMode: state.themeMode,
-      home: Shortcuts(
-        shortcuts: shortcuts,
-        child: Actions(
-          actions: {
-            FocusSearchIntent: FocusSearchAction(context),
-          },
-          child: const AppContentViewCreator(),
-        ),
+      home: Builder(
+        builder: (context) {
+          return Shortcuts(
+            shortcuts: shortcuts,
+            child: Actions(
+              actions: {
+                FocusSearchIntent: FocusSearchAction(context),
+                CopyGlyphIntent: CopyGlyphAction(context),
+              },
+              child: const AppContentViewCreator(),
+            ),
+          );
+        },
       ),
     );
   }

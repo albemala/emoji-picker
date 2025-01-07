@@ -6,8 +6,8 @@ void showSnackBar(
 ) {
   if (!context.mounted) return;
   ScaffoldMessenger.of(context)
-      // ..clearSnackBars()
-      .showSnackBar(snackBar);
+    ..clearSnackBars()
+    ..showSnackBar(snackBar);
 }
 
 Future<ReturnType?> openDialog<ReturnType>(
