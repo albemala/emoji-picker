@@ -12,26 +12,22 @@ flutter clean
 
 # prepare build
 flutter build macos --release
-cd macos
-fastlane mac get_certificates_profiles
 
+cd macos
 # build for app store
 rm -rf build
-fastlane mac build_app_store
-# publish app store
-fastlane mac publish_app_store
-
+fastlane mac production_store
 # build standalone
 rm -rf build
-fastlane mac build_standalone
-# publish standalone
-fastlane mac publish_standalone
-# archive standalone
+fastlane mac production_standalone
 cd ..
+
+# archive standalone
 ARCHIVE_PATH=macos-builds/$APP_VERSION
 rm -rf $ARCHIVE_PATH
 mkdir -p $ARCHIVE_PATH
-cp -r macos/build/Ejimo.app.zip $ARCHIVE_PATH
-cp -r macos/build/Ejimo.app.dSYM.zip $ARCHIVE_PATH
+cp -r "macos/build/Ejimo.app.zip" $ARCHIVE_PATH
+cp -r "macos/build/Ejimo.app.dSYM.zip" $ARCHIVE_PATH
 # upload to Google Cloud Storage
 gcloud storage cp --recursive $ARCHIVE_PATH gs://ejimo-app-releases
+  

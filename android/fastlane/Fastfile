@@ -1,9 +1,19 @@
 platform :android do
 
-  lane :publish do |options|
+  lane :production do |options|
     upload_to_play_store(
       aab: '../build/app/outputs/bundle/release/app-release.aab',
       track: 'production',
+      json_key: ENV["ANDROID_JSON_KEY_FILE"], # google auth key
+      skip_upload_images: true, # banner, icon
+      skip_upload_screenshots: true,
+    )
+  end
+
+  lane :beta do |options|
+    upload_to_play_store(
+      aab: '../build/app/outputs/bundle/release/app-release.aab',
+      track: 'internal',
       json_key: ENV["ANDROID_JSON_KEY_FILE"], # google auth key
     )
   end

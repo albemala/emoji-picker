@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
+# Usage: bash scripts/build-web.bash
+
 set -e # exit on error
 #set -x # print commands
-
-# Usage: bash scripts/build-web.bash
 
 APP_VERSION=$(sed -n 's/^version: //p' pubspec.yaml)
 # read .env file
@@ -31,3 +31,4 @@ sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT finalize $SENTRY_RELEASE
 
 # upload to Firebase Hosting
 firebase deploy --only hosting
+  
