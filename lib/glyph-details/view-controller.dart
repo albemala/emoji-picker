@@ -7,8 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
-  final SelectedGlyphDataController _selectedGlyphDataController;
-  StreamSubscription<void>? _selectedGlyphDataControllerSubscription;
+  final SelectedGlyphDataController selectedGlyphDataController;
+  StreamSubscription<void>? selectedGlyphDataControllerSubscription;
 
   factory GlyphDetailsViewController.fromContext(BuildContext context) {
     return GlyphDetailsViewController(
@@ -17,30 +17,30 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
   }
 
   GlyphDetailsViewController(
-    this._selectedGlyphDataController,
+    this.selectedGlyphDataController,
   ) : super(defaultGlyphDetailsViewState) {
-    _selectedGlyphDataControllerSubscription =
-        _selectedGlyphDataController.stream.listen((_) {
-      _updateState();
+    selectedGlyphDataControllerSubscription =
+        selectedGlyphDataController.stream.listen((_) {
+      updateState();
     });
-    _updateState();
+    updateState();
   }
 
   @override
   Future<void> close() {
-    _selectedGlyphDataControllerSubscription?.cancel();
+    selectedGlyphDataControllerSubscription?.cancel();
     return super.close();
   }
 
-  void _updateState() {
+  void updateState() {
     emit(
       GlyphDetailsViewState(
-        glyph: _selectedGlyphDataController.state.selectedGlyph,
+        glyph: selectedGlyphDataController.state.selectedGlyph,
       ),
     );
   }
 
   void closeDetailsView() {
-    _selectedGlyphDataController.selectedGlyph = unknownGlyph;
+    selectedGlyphDataController.selectedGlyph = unknownGlyph;
   }
 }

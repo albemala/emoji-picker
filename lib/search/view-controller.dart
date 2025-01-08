@@ -7,11 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchGlyphsViewController extends Cubit<void> {
-  final SearchGlyphsDataController _searchGlyphsDataController;
+  final SearchGlyphsDataController searchGlyphsDataController;
 
   final queryController = TextEditingController();
 
-  FocusNode get focusNode => _searchGlyphsDataController.focusNode;
+  FocusNode get focusNode => searchGlyphsDataController.focusNode;
 
   factory SearchGlyphsViewController.fromContext(BuildContext context) {
     return SearchGlyphsViewController(
@@ -20,7 +20,7 @@ class SearchGlyphsViewController extends Cubit<void> {
   }
 
   SearchGlyphsViewController(
-    this._searchGlyphsDataController,
+    this.searchGlyphsDataController,
   ) : super(defaultSearchGlyphsDataState) {
     queryController.addListener(onQueryChanged);
   }
@@ -47,6 +47,6 @@ class SearchGlyphsViewController extends Cubit<void> {
 
   void updateDataController() {
     final query = queryController.text;
-    _searchGlyphsDataController.setSearchQuery(query);
+    searchGlyphsDataController.setSearchQuery(query);
   }
 }

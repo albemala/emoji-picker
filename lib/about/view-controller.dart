@@ -15,14 +15,10 @@ class AboutViewController extends Cubit<AboutViewState> {
   }
 
   AboutViewController() : super(defaultAboutViewState) {
-    _init();
+    updateViewState();
   }
 
-  Future<void> _init() async {
-    await _updateViewState();
-  }
-
-  Future<void> _updateViewState() async {
+  Future<void> updateViewState() async {
     emit(
       AboutViewState(
         appVersion: await getAppVersion(),

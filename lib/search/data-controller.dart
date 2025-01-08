@@ -9,8 +9,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
-  final GlyphsDataController _glyphsDataController;
-  StreamSubscription<void>? _glyphsDataControllerSubscription;
+  final GlyphsDataController glyphsDataController;
+  StreamSubscription<void>? glyphsDataControllerSubscription;
 
   final focusNode = FocusNode();
 
@@ -21,34 +21,29 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   }
 
   SearchGlyphsDataController(
-    this._glyphsDataController,
+    this.glyphsDataController,
   ) : super(defaultSearchGlyphsDataState) {
-    _init();
-  }
-
-  void _init() {
-    _glyphsDataControllerSubscription =
-        _glyphsDataController.stream.listen((_) {
-      _updateFilteredData();
+    glyphsDataControllerSubscription = glyphsDataController.stream.listen((_) {
+      updateFilteredData();
     });
-    _updateFilteredData();
+    updateFilteredData();
   }
 
   @override
   Future<void> close() {
-    _glyphsDataControllerSubscription?.cancel();
+    glyphsDataControllerSubscription?.cancel();
     return super.close();
   }
 
   void setSearchQuery(String value) {
     emit(state.copyWith(searchQuery: value));
-    _updateFilteredData();
+    updateFilteredData();
   }
 
-  void _updateFilteredData() {
+  void updateFilteredData() {
     bool test(Glyph glyph) => matchesSearchTerm(glyph, state.searchQuery);
 
-    final glyphData = _glyphsDataController.state;
+    final glyphData = glyphsDataController.state;
     final filteredEmoji = state.searchQuery.isEmpty
         ? glyphData.emoji
         : glyphData.emoji.where(test);

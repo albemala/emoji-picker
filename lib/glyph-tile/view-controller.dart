@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphTileViewController extends Cubit<GlyphTileViewState> {
-  final SelectedGlyphDataController _selectedGlyphDataController;
-  StreamSubscription<void>? _selectedGlyphDataControllerSubscription;
+  final SelectedGlyphDataController selectedGlyphDataController;
+  StreamSubscription<void>? selectedGlyphDataControllerSubscription;
 
   final focusNode = FocusNode();
 
@@ -24,46 +24,46 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
 
   GlyphTileViewController(
     Glyph glyph,
-    this._selectedGlyphDataController,
+    this.selectedGlyphDataController,
   ) : super(defaultGlyphTileViewState) {
     emit(
       state.copyWith(
         glyph: glyph,
       ),
     );
-    _selectedGlyphDataControllerSubscription =
-        _selectedGlyphDataController.stream.listen((_) {
-      _updateState();
+    selectedGlyphDataControllerSubscription =
+        selectedGlyphDataController.stream.listen((_) {
+      updateState();
     });
   }
 
   @override
   Future<void> close() {
     focusNode.dispose();
-    _selectedGlyphDataControllerSubscription?.cancel();
+    selectedGlyphDataControllerSubscription?.cancel();
     return super.close();
   }
 
-  void _updateState() {
-    if (_selectedGlyphDataController.selectedGlyph == unknownGlyph) {
+  void updateState() {
+    if (selectedGlyphDataController.selectedGlyph == unknownGlyph) {
       focusNode.unfocus();
     }
     emit(
       state.copyWith(
-        isSelected: state.glyph == _selectedGlyphDataController.selectedGlyph,
+        isSelected: state.glyph == selectedGlyphDataController.selectedGlyph,
       ),
     );
   }
 
   void onFocusChange(bool isFocused) {
     if (isFocused) {
-      _selectedGlyphDataController.selectedGlyph = state.glyph;
+      selectedGlyphDataController.selectedGlyph = state.glyph;
     } else {
-      _selectedGlyphDataController.selectedGlyph = unknownGlyph;
+      selectedGlyphDataController.selectedGlyph = unknownGlyph;
     }
   }
 
   void selectGlyph() {
-    _selectedGlyphDataController.selectedGlyph = state.glyph;
+    selectedGlyphDataController.selectedGlyph = state.glyph;
   }
 }

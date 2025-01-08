@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PreferencesDataController extends Cubit<PreferencesDataState> {
-  final LocalStoreDataController _localStoreDataController;
+  final LocalStoreDataController localStoreDataController;
 
-  StreamSubscription<void>? _selfSubscription;
+  StreamSubscription<void>? selfSubscription;
 
   factory PreferencesDataController.fromContext(BuildContext context) {
     return PreferencesDataController(
@@ -17,21 +17,21 @@ class PreferencesDataController extends Cubit<PreferencesDataState> {
   }
 
   PreferencesDataController(
-    this._localStoreDataController,
+    this.localStoreDataController,
   ) : super(defaultPreferencesDataState) {
     _init();
   }
 
   Future<void> _init() async {
-    await _load();
-    _selfSubscription = stream.listen((_) {
-      _save();
+    await load();
+    selfSubscription = stream.listen((_) {
+      save();
     });
   }
 
   @override
   Future<void> close() {
-    _selfSubscription?.cancel();
+    selfSubscription?.cancel();
     return super.close();
   }
 
@@ -46,15 +46,15 @@ class PreferencesDataController extends Cubit<PreferencesDataState> {
 
   static const storeName = 'preferences';
 
-  Future<void> _load() async {
-    final map = await _localStoreDataController.load(storeName);
+  Future<void> load() async {
+    final map = await localStoreDataController.load(storeName);
     emit(
       PreferencesDataState.fromMap(map),
     );
   }
 
-  Future<void> _save() async {
-    await _localStoreDataController.save(
+  Future<void> save() async {
+    await localStoreDataController.save(
       storeName,
       state.toMap(),
     );

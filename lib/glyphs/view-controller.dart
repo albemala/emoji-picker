@@ -9,8 +9,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphsViewController extends Cubit<GlyphsViewState> {
-  final SearchGlyphsDataController _searchGlyphsDataController;
-  StreamSubscription<void>? _searchGlyphsDataControllerSubscription;
+  final SearchGlyphsDataController searchGlyphsDataController;
+  StreamSubscription<void>? searchGlyphsDataControllerSubscription;
 
   factory GlyphsViewController.fromContext(BuildContext context) {
     return GlyphsViewController(
@@ -19,10 +19,10 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
   }
 
   GlyphsViewController(
-    this._searchGlyphsDataController,
+    this.searchGlyphsDataController,
   ) : super(defaultGlyphsViewState) {
-    _searchGlyphsDataControllerSubscription =
-        _searchGlyphsDataController.stream.listen((_) {
+    searchGlyphsDataControllerSubscription =
+        searchGlyphsDataController.stream.listen((_) {
       updateViewState();
     });
     updateViewState();
@@ -30,7 +30,7 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
 
   @override
   Future<void> close() {
-    _searchGlyphsDataControllerSubscription?.cancel();
+    searchGlyphsDataControllerSubscription?.cancel();
     return super.close();
   }
 
@@ -38,13 +38,13 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
     if (isClosed) return;
 
     final emoji = groupGlyphsByGroup(
-      _searchGlyphsDataController.state.filteredEmoji.toList(),
+      searchGlyphsDataController.state.filteredEmoji.toList(),
     );
     final symbols = groupGlyphsByGroup(
-      _searchGlyphsDataController.state.filteredSymbols.toList(),
+      searchGlyphsDataController.state.filteredSymbols.toList(),
     );
     final kaomoji = groupGlyphsByGroup(
-      _searchGlyphsDataController.state.filteredKaomoji.toList(),
+      searchGlyphsDataController.state.filteredKaomoji.toList(),
     );
     emit(
       state.copyWith(
