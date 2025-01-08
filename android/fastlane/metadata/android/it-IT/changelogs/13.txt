@@ -1,8 +1,8 @@
-🎨 Nuovo Look
-• Rinnovamento completo dell'interfaccia per un'esperienza più moderna e intuitiva
-• Design visivo migliorato con tipografia e schema colori ottimizzati
-• Layout raffinati per una migliore organizzazione dei contenuti
+Nuovo Look
+- Rinnovamento completo dell'interfaccia per un'esperienza più moderna e intuitiva
+- Design visivo migliorato con tipografia e schema colori ottimizzati
+- Layout raffinati per una migliore organizzazione dei contenuti
 
-⚡️ Miglioramenti Prestazioni
-• Stabilità generale dell'app migliorata
-• Ottimizzazioni generali delle prestazioni
+Miglioramenti Prestazioni
+- Stabilità generale dell'app migliorata
+- Ottimizzazioni generali delle prestazioni
