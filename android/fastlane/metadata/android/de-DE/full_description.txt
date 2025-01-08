@@ -1,0 +1,25 @@
+Ejimo ist ein umfassender Emoji- und Symbol-Picker, der dir alle benötigten Zeichen zur Verfügung stellt. Egal ob
+Designer, Entwickler oder Autor, Ejimo macht es einfach, das gesuchte Zeichen zu finden. Mit über 3000 Emojis und
+Symbolen ist Ejimo das perfekte Werkzeug für jedes Projekt, Social-Media-Strategie, Artikel und Präsentation.
+
+1800+ Emojis und 17000+ Symbole verfügbar: Smileys, Menschen, Tiere, Essen, Objekte, Pfeile, Buchstaben,
+Satzzeichen und vieles mehr!
+
+Einfaches Kopieren und Einfügen: Wähle einfach das gewünschte Emoji oder Symbol aus und kopiere es in die Zwischenablage.
+
+Schnelle Suche: Gib ein beliebiges Wort ein und Ejimo zeigt dir alle passenden Emoji und Symbole.
+
+Wähle zwischen hellem und dunklem Design passend zu deiner Stimmung oder deinem Stil.
+
+Offline nutzbar: Ejimo benötigt keine Internetverbindung, du kannst es jederzeit und überall verwenden.
+
+Datenschutzfreundlich: Wir sammeln keine persönlichen Daten von dir oder deiner App-Nutzung. Deine Privatsphäre ist
+uns wichtig und wird respektiert.
+
+Verwende Tastaturkürzel für schnelleres Arbeiten:
+
+- Cmd/Strg+F zum Suchen eines Zeichens
+- Pfeiltasten zur Navigation zwischen Emoji und Symbolen
+- Cmd/Strg+C zum Kopieren des ausgewählten Emoji oder Symbols
+
+Ejimo ist Open-Source und hier verfügbar: https://github.com/albemala/emoji-picker

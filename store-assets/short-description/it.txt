@@ -1,0 +1,1 @@
+Trova e copia caratteri unicode, emoji, kaomoji e simboli con Ejimo.
