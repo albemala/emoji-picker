@@ -1,0 +1,1 @@
+unicode,emoji,emoticon,symbol,glyph,picker,search,find,offline,keyboard
