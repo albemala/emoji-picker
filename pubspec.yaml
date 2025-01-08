@@ -56,6 +56,7 @@ dev_dependencies:
   package_rename: ^1.8.0
 
   http: ^1.2.0
+  path: ^1.9.1
 
   # windows
   msix: ^3.7.0

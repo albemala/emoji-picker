@@ -23,4 +23,3 @@ Use keyboard shortcuts to work faster:
 - Cmd/Ctrl+C to copy the selected emoji or symbol to your clipboard
 
 Ejimo is open-source and available here: https://github.com/albemala/emoji-picker
-
