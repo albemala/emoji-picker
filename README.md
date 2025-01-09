@@ -2,10 +2,10 @@
 
 Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo.
 
-<img src="app-store-assets/macos/screenshots/1.0.0/screenshot-01.png" alt="Ejimo screenshot 1" width="540"/>
-<img src="app-store-assets/macos/screenshots/1.0.0/screenshot-02.png" alt="Ejimo screenshot 2" width="540"/>
-<img src="app-store-assets/macos/screenshots/1.0.0/screenshot-03.png" alt="Ejimo screenshot 3" width="540"/>
-<img src="app-store-assets/macos/screenshots/1.0.0/screenshot-04.png" alt="Ejimo screenshot 4" width="540"/>
+<img src="https://raw.githubusercontent.com/albemala/emoji-picker/refs/heads/main/macos/fastlane/screenshots/en-US/0_APP_DESKTOP_0.png" alt="Ejimo screenshot 1" width="540"/>
+<img src="https://raw.githubusercontent.com/albemala/emoji-picker/refs/heads/main/macos/fastlane/screenshots/en-US/1_APP_DESKTOP_1.png" alt="Ejimo screenshot 2" width="540"/>
+<img src="https://raw.githubusercontent.com/albemala/emoji-picker/refs/heads/main/macos/fastlane/screenshots/en-US/2_APP_DESKTOP_2.png" alt="Ejimo screenshot 3" width="540"/>
+<img src="https://raw.githubusercontent.com/albemala/emoji-picker/refs/heads/main/macos/fastlane/screenshots/en-US/3_APP_DESKTOP_3.png" alt="Ejimo screenshot 4" width="540"/>
 
 Ejimo is a comprehensive emoji and symbol picker that puts every character you need at your fingertips. Whether you're a
 designer, developer or writer, Ejimo makes it easy to find the missing character you need. With over 3000 emojis and
@@ -57,26 +57,17 @@ Setup, how to run and build: https://docs.flutter.dev/desktop
 
 ## Support this project
 
-<a href="https://www.buymeacoffee.com/albemala" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+- [GitHub Sponsor](https://github.com/sponsors/albemala)
+- [Buy Me A Coffee](https://www.buymeacoffee.com/albemala)
 
 ## Other projects
 
-🎨 **[Hexee Pro](https://hexee.app/)** — Palette editor & Advanced color toolkit
-
-🧰 **[exabox](https://exabox.app/)** — Essential tools for developers: All the tools you need in one single app.
-
-[//]: # (😃 **[Ejimo]&#40;https://github.com/albemala/emoji-picker&#41;** — Emoji and symbol picker)
-
-🗺️ **[WMap](https://wmap.albemala.me/)** — Create beautiful, minimal, custom map wallpapers and backgrounds for your phone or tablet.
-
-🎨 **[iro‿iro](https://iro-iro.albemala.me/)** — Rearrange the colors to form beautiful patterns in this relaxing color puzzle game.
+[All my projects](https://projects.albemala.me/)
 
 ## Credits
 
 Created by [@albemala](https://github.com/albemala) ([Twitter](https://twitter.com/albemala))
 
-Emoji data: [unicode-emoji-json](https://github.com/muan/unicode-emoji-json), [emojilib](https://github.com/muan/emojilib)
-
-Symbol data: [Glyphr-Studio-1](https://raw.githubusercontent.com/glyphr-studio/Glyphr-Studio-1/master/dev/js/lib_unicode_blocks.js), [reactos](https://raw.githubusercontent.com/reactos/reactos/master/dll/win32/getuname/lang/en-US.rc) 
-
-Kaomoji data: [kaomoji](https://github.com/itsmeichigo/peachy/)
+- Emoji data: [unicode-emoji-json](https://github.com/muan/unicode-emoji-json), [emojilib](https://github.com/muan/emojilib)
+- Symbol data: [Glyphr-Studio-1](https://raw.githubusercontent.com/glyphr-studio/Glyphr-Studio-1/master/dev/js/lib_unicode_blocks.js), [reactos](https://raw.githubusercontent.com/reactos/reactos/master/dll/win32/getuname/lang/en-US.rc)
+- Kaomoji data: [kaomoji](https://github.com/itsmeichigo/peachy/)
