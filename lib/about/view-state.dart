@@ -13,6 +13,14 @@ class AboutViewState extends Equatable {
   List<Object> get props => [
         appVersion,
       ];
+
+  AboutViewState copyWith({
+    String? appVersion,
+  }) {
+    return AboutViewState(
+      appVersion: appVersion ?? this.appVersion,
+    );
+  }
 }
 
 const defaultAboutViewState = AboutViewState(
