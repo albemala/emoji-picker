@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyphs/view-state.dart';
-import 'package:app/math.dart';
 import 'package:app/search/data-controller.dart';
+import 'package:app/widgets/ads.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,19 +65,14 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
       );
     }
     return groupMap.entries.map((entry) {
+      final adType = selectRandomAdType(
+        includeNone: true,
+      );
       return GlyphGroupViewState(
         title: entry.key,
         glyphs: entry.value.toIList(),
-        ad: selectAdType(),
+        ad: adType,
       );
     }).toList();
-  }
-
-  AdType selectAdType() {
-    final index = randomInt(0, AdType.values.length + 3);
-    if (index >= 0 && index < AdType.values.length - 1) {
-      return AdType.values[index];
-    }
-    return AdType.none;
   }
 }

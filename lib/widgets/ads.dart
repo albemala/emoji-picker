@@ -1,6 +1,25 @@
+import 'package:app/math.dart';
 import 'package:app/urls/defines.dart';
 import 'package:app/urls/functions.dart';
 import 'package:flutter/material.dart';
+
+enum AdType {
+  exabox,
+  hexee,
+  wmap,
+  iroiro,
+  none,
+}
+
+AdType selectRandomAdType({
+  required bool includeNone,
+}) {
+  final maxIndex = includeNone //
+      ? AdType.values.length - 1
+      : AdType.values.length - 2;
+  final index = randomInt(0, maxIndex);
+  return AdType.values[index];
+}
 
 class ExaboxAdView extends StatelessWidget {
   const ExaboxAdView({super.key});

@@ -1,7 +1,6 @@
 import 'package:app/about/view-controller.dart';
 import 'package:app/about/view-state.dart';
 import 'package:app/app/defines.dart';
-import 'package:app/math.dart';
 import 'package:app/share.dart';
 import 'package:app/urls/defines.dart';
 import 'package:app/widgets/ads.dart';
@@ -73,10 +72,12 @@ class AboutView extends StatelessWidget {
                 ],
               ),
             ),
-            const Material(
+            Material(
               child: Padding(
-                padding: EdgeInsets.all(24),
-                child: _AdView(),
+                padding: const EdgeInsets.all(24),
+                child: _AdView(
+                  state: state,
+                ),
               ),
             ),
           ],
@@ -244,16 +245,25 @@ class _NewsView extends StatelessWidget {
 }
 
 class _AdView extends StatelessWidget {
-  const _AdView();
+  final AboutViewState state;
+
+  const _AdView({
+    required this.state,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // randomize which ad to show
-    final random = randomInt(1, 4);
-    if (random == 1) return const ExaboxAdView();
-    if (random == 2) return const HexeeProAdView();
-    if (random == 3) return const WMapAdView();
-    if (random == 4) return const IroIronAdView();
-    return const SizedBox();
+    switch (state.adType) {
+      case AdType.exabox:
+        return const ExaboxAdView();
+      case AdType.hexee:
+        return const HexeeProAdView();
+      case AdType.wmap:
+        return const WMapAdView();
+      case AdType.iroiro:
+        return const IroIronAdView();
+      case AdType.none:
+        return const SizedBox();
+    }
   }
 }

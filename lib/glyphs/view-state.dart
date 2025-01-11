@@ -1,4 +1,5 @@
 import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/widgets/ads.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
@@ -65,14 +66,6 @@ class GlyphGroupViewState extends Equatable {
       ad: ad ?? this.ad,
     );
   }
-}
-
-enum AdType {
-  exabox,
-  hexee,
-  wmap,
-  iroiro,
-  none,
 }
 
 const defaultGlyphsViewState = GlyphsViewState(
