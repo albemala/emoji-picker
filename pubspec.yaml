@@ -69,7 +69,27 @@ flutter:
   assets:
     - assets/data/
     - assets/fonts/TitilliumWeb/
+    - assets/fonts/Noto_Color_Emoji/
     - assets/images/
+  fonts:
+    # https://github.com/notofonts/notofonts.github.io/tree/main/megamerge
+    - family: Noto Sans Living
+      fonts:
+        - asset: assets/fonts/NotoSans/NotoSansLiving-Regular.ttf
+          weight: 400
+    # https://github.com/notofonts/noto-cjk/tree/main/Sans/SubsetOTF
+    - family: Noto Sans Japanese
+      fonts:
+        - asset: assets/fonts/NotoSans/NotoSansJP-Regular.otf
+          weight: 400
+    - family: Noto Sans Korean
+      fonts:
+        - asset: assets/fonts/NotoSans/NotoSansKR-Regular.otf
+          weight: 400
+    - family: Noto Sans Simplified Chinese
+      fonts:
+        - asset: assets/fonts/NotoSans/NotoSansSC-Regular.otf
+          weight: 400
 
 # dart run flutter_launcher_icons_maker:main && flutter clean && flutter pub get
 flutter_icons:
