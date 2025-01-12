@@ -46,19 +46,19 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
     final glyphData = glyphsDataController.state;
     final filteredEmoji = state.searchQuery.isEmpty
         ? glyphData.emoji
-        : glyphData.emoji.where(test);
+        : glyphData.emoji.where(test).toIList();
     final filteredSymbols = state.searchQuery.isEmpty
         ? glyphData.symbols
-        : glyphData.symbols.where(test);
+        : glyphData.symbols.where(test).toIList();
     final filteredKaomoji = state.searchQuery.isEmpty
         ? glyphData.kaomoji
-        : glyphData.kaomoji.where(test);
+        : glyphData.kaomoji.where(test).toIList();
 
     emit(
       state.copyWith(
-        filteredEmoji: filteredEmoji.toIList(),
-        filteredSymbols: filteredSymbols.toIList(),
-        filteredKaomoji: filteredKaomoji.toIList(),
+        filteredEmoji: filteredEmoji,
+        filteredSymbols: filteredSymbols,
+        filteredKaomoji: filteredKaomoji,
       ),
     );
   }

@@ -1,29 +1,16 @@
-import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
 class AppContentViewState extends Equatable {
-  final Glyph selectedGlyph;
-
-  const AppContentViewState({
-    required this.selectedGlyph,
-  });
+  const AppContentViewState();
 
   @override
-  List<Object> get props => [
-        selectedGlyph,
-      ];
+  List<Object> get props => [];
 
-  AppContentViewState copyWith({
-    Glyph? selectedGlyph,
-  }) {
-    return AppContentViewState(
-      selectedGlyph: selectedGlyph ?? this.selectedGlyph,
-    );
+  AppContentViewState copyWith() {
+    return const AppContentViewState();
   }
 }
 
-const defaultAppContentViewState = AppContentViewState(
-  selectedGlyph: unknownGlyph,
-);
+const defaultAppContentViewState = AppContentViewState();

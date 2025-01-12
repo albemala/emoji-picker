@@ -88,3 +88,16 @@ String getGlyphHtmlCode(String glyph) {
 String getGlyphUnicode(String glyph) {
   return 'U+${glyph.runes.first.toRadixString(16).toUpperCase()}';
 }
+
+Map<String, List<Glyph>> groupGlyphsByGroup(List<Glyph> glyphs) {
+  return glyphs.fold(
+    <String, List<Glyph>>{},
+    (groups, glyph) {
+      return groups
+        ..putIfAbsent(
+          glyph.group,
+          () => [],
+        ).add(glyph);
+    },
+  );
+}

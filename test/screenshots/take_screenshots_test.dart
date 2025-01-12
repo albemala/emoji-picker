@@ -1,15 +1,12 @@
 import 'dart:io';
-import 'dart:ui';
 
-import 'package:app/preferences/data-controller.dart';
 import 'package:app/theme.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'data.dart';
-import 'defines.dart';
 import 'functions.dart';
 
 Future<void> main() async {
@@ -17,12 +14,8 @@ Future<void> main() async {
 
   // this is very important, otherwise the fonts will not be loaded properly
   await GoogleFonts.pendingFonts([
-    // GoogleFonts.zenMaruGothic(), // Japanese
-    // GoogleFonts.notoSansJp(), // Japanese
-    // GoogleFonts.notoSansKr(), // Korean
-    // GoogleFonts.notoSansSc(), // Simplified Chinese
-    // GoogleFonts.maShanZheng(), // Simplified Chinese
     GoogleFonts.titilliumWeb(),
+    GoogleFonts.notoColorEmoji(), // Emoji
   ]);
 
   final tempDir = Directory('temp');
@@ -75,14 +68,8 @@ Future<void> takeDeviceScreenshot({
   required Locale locale,
 }) async {
   final theme = getLightTheme();
-
-  final child = BlocProvider<PreferencesDataController>.value(
-    value: MockPreferencesDataController(),
-    child: screenshotData.view,
-  );
-
+  final child = screenshotData.view;
   final goldenFileName = screenshotData.fileName;
-
   await takeScreenshot(
     tester: tester,
     device: device,

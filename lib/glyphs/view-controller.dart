@@ -37,13 +37,13 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
   void updateViewState() {
     if (isClosed) return;
 
-    final emoji = groupGlyphsByGroup(
+    final emoji = groupGlyphs(
       searchGlyphsDataController.state.filteredEmoji.toList(),
     );
-    final symbols = groupGlyphsByGroup(
+    final symbols = groupGlyphs(
       searchGlyphsDataController.state.filteredSymbols.toList(),
     );
-    final kaomoji = groupGlyphsByGroup(
+    final kaomoji = groupGlyphs(
       searchGlyphsDataController.state.filteredKaomoji.toList(),
     );
     emit(
@@ -55,24 +55,21 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
     );
   }
 
-  List<GlyphGroupViewState> groupGlyphsByGroup(List<Glyph> glyphs) {
-    final groupMap = <String, List<Glyph>>{};
+  List<GlyphGroupViewState> groupGlyphs(List<Glyph> glyphs) {
+    final groups = <String, GlyphGroupViewState>{};
     for (final glyph in glyphs) {
-      groupMap.update(
+      groups.update(
         glyph.group,
-        ifAbsent: () => [glyph],
-        (value) => value..add(glyph),
+        (existing) => existing.copyWith(
+          glyphs: existing.glyphs.add(glyph),
+        ),
+        ifAbsent: () => GlyphGroupViewState(
+          title: glyph.group,
+          glyphs: IList([glyph]),
+          ad: selectRandomAdType(includeNone: true),
+        ),
       );
     }
-    return groupMap.entries.map((entry) {
-      final adType = selectRandomAdType(
-        includeNone: true,
-      );
-      return GlyphGroupViewState(
-        title: entry.key,
-        glyphs: entry.value.toIList(),
-        ad: adType,
-      );
-    }).toList();
+    return groups.values.toList();
   }
 }

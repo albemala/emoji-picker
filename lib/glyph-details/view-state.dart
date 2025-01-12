@@ -14,6 +14,14 @@ class GlyphDetailsViewState extends Equatable {
   List<Object> get props => [
         glyph,
       ];
+
+  GlyphDetailsViewState copyWith({
+    Glyph? glyph,
+  }) {
+    return GlyphDetailsViewState(
+      glyph: glyph ?? this.glyph,
+    );
+  }
 }
 
 const defaultGlyphDetailsViewState = GlyphDetailsViewState(
