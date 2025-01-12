@@ -9,9 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppContentViewCreator extends StatelessWidget {
-  const AppContentViewCreator({
-    super.key,
-  });
+  const AppContentViewCreator({super.key});
 
   @override
   Widget build(BuildContext context) {

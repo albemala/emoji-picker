@@ -9,9 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppViewCreator extends StatelessWidget {
-  const AppViewCreator({
-    super.key,
-  });
+  const AppViewCreator({super.key});
 
   @override
   Widget build(BuildContext context) {

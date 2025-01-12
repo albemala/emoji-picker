@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphDetailsViewCreator extends StatelessWidget {
-  const GlyphDetailsViewCreator({
-    super.key,
-  });
+  const GlyphDetailsViewCreator({super.key});
 
   @override
   Widget build(BuildContext context) {
