@@ -2,6 +2,7 @@ import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-tile/view.dart';
 import 'package:app/glyphs/view-controller.dart';
 import 'package:app/glyphs/view-state.dart';
+import 'package:app/selected-tab/data-controller.dart';
 import 'package:app/widgets/ads.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
@@ -39,36 +40,37 @@ class GlyphsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return TabBar(
-                isScrollable: constraints.maxWidth > 480,
-                labelPadding: const EdgeInsets.symmetric(horizontal: 21),
-                tabs: const [
-                  Tab(text: 'Emoji'),
-                  Tab(text: 'Symbols'),
-                  Tab(text: 'Kaomoji'),
-                ],
-              );
-            },
-          ),
-          Expanded(
-            child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _EmojiView(state: state),
-                _SymbolsView(state: state),
-                _KaomojiView(state: state),
+    final tabController =
+        context.read<SelectedTabDataController>().tabController;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return TabBar(
+              controller: tabController,
+              isScrollable: constraints.maxWidth > 480,
+              labelPadding: const EdgeInsets.symmetric(horizontal: 21),
+              tabs: const [
+                Tab(text: 'Emoji'),
+                Tab(text: 'Symbols'),
+                Tab(text: 'Kaomoji'),
               ],
-            ),
+            );
+          },
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: tabController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              _EmojiView(state: state),
+              _SymbolsView(state: state),
+              _KaomojiView(state: state),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

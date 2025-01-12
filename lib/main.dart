@@ -4,6 +4,7 @@ import 'package:app/local-store/bloc.dart';
 import 'package:app/preferences/data-controller.dart';
 import 'package:app/search/data-controller.dart';
 import 'package:app/selected-glyph/data-controller.dart';
+import 'package:app/selected-tab/data-controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,7 @@ void main() {
         BlocProvider(create: GlyphsDataController.fromContext),
         BlocProvider(create: SearchGlyphsDataController.fromContext),
         BlocProvider(create: SelectedGlyphDataController.fromContext),
+        BlocProvider(create: SelectedTabDataController.fromContext),
       ],
       child: const AppViewCreator(),
     ),
