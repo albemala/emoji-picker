@@ -18,7 +18,6 @@ class AboutButtonView extends StatelessWidget {
           openDialog<void>(
             context,
             const AlertDialog(
-              clipBehavior: Clip.hardEdge,
               contentPadding: EdgeInsets.zero,
               content: AboutViewCreator(),
             ),

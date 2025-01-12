@@ -72,11 +72,14 @@ class AboutView extends StatelessWidget {
                 ],
               ),
             ),
-            Material(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: _AdView(
-                  state: state,
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(32)),
+              child: Material(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: _AdView(
+                    state: state,
+                  ),
                 ),
               ),
             ),
