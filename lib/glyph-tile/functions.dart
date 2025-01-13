@@ -9,11 +9,11 @@ TextStyle getTextStyleForGlyph(Glyph glyph) {
   switch (glyph.type) {
     case GlyphType.emoji:
       return TextStyle(
-        fontFamily: GoogleFonts.notoColorEmoji().fontFamily,
         fontFamilyFallback: [
-          // 'Apple Color Emoji', // iOS and macOS
-          // 'Segoe UI Emoji', // Windows
-          // 'Android Emoji', // Android
+          'Apple Color Emoji', // iOS and macOS
+          'Segoe UI Emoji', // Windows
+          'Android Emoji', // Android
+          GoogleFonts.notoColorEmoji().fontFamily ?? '', // Web
         ],
       );
     case GlyphType.symbol:
