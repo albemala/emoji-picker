@@ -1,3 +1,4 @@
+import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,4 +53,38 @@ ThemeData getDarkTheme() {
 
 ThemeData _applyThemeDefaults(ThemeData themeData) {
   return themeData.copyWith();
+}
+
+TextStyle getTextStyleForGlyph(Glyph glyph) {
+  switch (glyph.type) {
+    case GlyphType.emoji:
+      return TextStyle(
+        fontFamilyFallback: [
+          'Apple Color Emoji', // iOS and macOS
+          'Segoe UI Emoji', // Windows
+          'Android Emoji', // Android
+          GoogleFonts.notoColorEmoji().fontFamily ?? '', // Web
+        ],
+      );
+    case GlyphType.symbol:
+      return const TextStyle(
+        fontFamily: 'Noto Sans Living',
+        fontFamilyFallback: [
+          'Noto Sans Japanese',
+          'Noto Sans Korean',
+          'Noto Sans Simplified Chinese',
+        ],
+      );
+    case GlyphType.kaomoji:
+      return const TextStyle(
+        fontFamily: 'Noto Sans Living',
+        fontFamilyFallback: [
+          'Noto Sans Japanese',
+          'Noto Sans Korean',
+          'Noto Sans Simplified Chinese',
+        ],
+      );
+    case GlyphType.unknown:
+      return const TextStyle();
+  }
 }
