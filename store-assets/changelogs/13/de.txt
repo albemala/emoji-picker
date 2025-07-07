@@ -1,8 +1,0 @@
-Frischer neuer Look
-- Komplett überarbeitete Benutzeroberfläche für eine modernere und intuitivere Nutzung
-- Verbessertes visuelles Design mit optimierter Typografie und Farbschema
-- Verfeinerte Layouts für bessere Inhaltsorganisation
-
-Leistungsverbesserungen
-- Verbesserte App-Stabilität
-- Allgemeine Leistungsoptimierungen

@@ -1,1 +1,0 @@
-Encuentra y copia caracteres Unicode, emoji, kaomoji y símbolos con Ejimo.

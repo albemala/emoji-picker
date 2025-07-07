@@ -1,8 +1,0 @@
-Fresh New Look
-- Complete UI refresh for a more modern and intuitive experience
-- Enhanced visual design with improved typography and color scheme
-- Refined layouts for better content organization
-
-Performance Improvements
-- Enhanced overall app stability
-- General performance tweaks
