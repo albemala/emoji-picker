@@ -18,12 +18,30 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: const [
-        BlocProvider(create: LocalStoreDataController.fromContext),
-        BlocProvider(create: PreferencesDataController.fromContext),
-        BlocProvider(create: GlyphsDataController.fromContext),
-        BlocProvider(create: SearchGlyphsDataController.fromContext),
-        BlocProvider(create: SelectedGlyphDataController.fromContext),
-        BlocProvider(create: SelectedTabDataController.fromContext),
+        BlocProvider(
+          create: LocalStoreDataController.fromContext,
+          lazy: false, //
+        ),
+        BlocProvider(
+          create: PreferencesDataController.fromContext,
+          lazy: false, //
+        ),
+        BlocProvider(
+          create: GlyphsDataController.fromContext,
+          lazy: false, //
+        ),
+        BlocProvider(
+          create: SearchGlyphsDataController.fromContext,
+          lazy: false, //
+        ),
+        BlocProvider(
+          create: SelectedGlyphDataController.fromContext,
+          lazy: false, //
+        ),
+        BlocProvider(
+          create: SelectedTabDataController.fromContext,
+          lazy: false, //
+        ),
       ],
       child: const AppViewCreator(),
     ),
