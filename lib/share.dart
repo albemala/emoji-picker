@@ -10,11 +10,10 @@ Future<String?> shareText({
   required String text,
 }) async {
   try {
-    final result = await Share.share(
-      text,
-      sharePositionOrigin: position,
-    );
-    return result.status == ShareResultStatus.success //
+    final result = await Share.share(text, sharePositionOrigin: position);
+    return result.status ==
+            ShareResultStatus
+                .success //
         ? result.raw
         : null;
   } catch (exception) {
@@ -34,16 +33,13 @@ Future<String?> shareFile({
 }) async {
   try {
     final result = await Share.shareXFiles(
-      [
-        XFile(
-          filePath,
-          mimeType: mimeType,
-        ),
-      ],
+      [XFile(filePath, mimeType: mimeType)],
       text: text,
       sharePositionOrigin: position,
     );
-    return result.status == ShareResultStatus.success //
+    return result.status ==
+            ShareResultStatus
+                .success //
         ? result.raw
         : null;
   } catch (exception) {

@@ -36,10 +36,7 @@ Future<void> takeScreenshot({
 
   await tester.pumpFrames(widget, const Duration(seconds: 1));
 
-  await tester.expectScreenshot(
-    device.device,
-    goldenFileName,
-  );
+  await tester.expectScreenshot(device.device, goldenFileName);
 
   debugDisableShadows = true;
 }

@@ -17,11 +17,7 @@ class Symbol extends Equatable {
   List<Object> get props => [charcode, name, group];
 
   Map<String, dynamic> toMap() {
-    return {
-      'charcode': charcode,
-      'name': name,
-      'group': group,
-    };
+    return {'charcode': charcode, 'name': name, 'group': group};
   }
 
   factory Symbol.fromMap(Map<String, dynamic> map) {
@@ -31,18 +27,10 @@ class Symbol extends Equatable {
         'name': final String name,
         'group': final String group,
       } =>
-        Symbol(
-          charcode: charcode,
-          name: name,
-          group: group,
-        ),
+        Symbol(charcode: charcode, name: name, group: group),
       _ => defaultSymbol,
     };
   }
 }
 
-const defaultSymbol = Symbol(
-  charcode: 0,
-  name: '',
-  group: '',
-);
+const defaultSymbol = Symbol(charcode: 0, name: '', group: '');

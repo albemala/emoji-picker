@@ -21,15 +21,8 @@ class AboutViewController extends Cubit<AboutViewState> {
 
   Future<void> updateViewState() async {
     final appVersion = await getAppVersion();
-    final adType = selectRandomAdType(
-      includeNone: false,
-    );
-    emit(
-      AboutViewState(
-        appVersion: appVersion,
-        adType: adType,
-      ),
-    );
+    final adType = selectRandomAdType(includeNone: false);
+    emit(AboutViewState(appVersion: appVersion, adType: adType));
   }
 
   Future<void> openRateApp() async {
@@ -39,14 +32,8 @@ class AboutViewController extends Cubit<AboutViewState> {
     );
   }
 
-  Future<void> openShareApp(
-    String message,
-    Rect sharePosition,
-  ) async {
-    await shareText(
-      position: sharePosition,
-      text: message,
-    );
+  Future<void> openShareApp(String message, Rect sharePosition) async {
+    await shareText(position: sharePosition, text: message);
   }
 
   Future<void> openOtherApps() async {

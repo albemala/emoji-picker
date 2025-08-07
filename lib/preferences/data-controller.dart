@@ -11,14 +11,11 @@ class PreferencesDataController extends Cubit<PreferencesDataState> {
   StreamSubscription<void>? selfSubscription;
 
   factory PreferencesDataController.fromContext(BuildContext context) {
-    return PreferencesDataController(
-      context.read<LocalStoreDataController>(),
-    );
+    return PreferencesDataController(context.read<LocalStoreDataController>());
   }
 
-  PreferencesDataController(
-    this.localStoreDataController,
-  ) : super(defaultPreferencesDataState) {
+  PreferencesDataController(this.localStoreDataController)
+    : super(defaultPreferencesDataState) {
     _init();
   }
 
@@ -39,24 +36,22 @@ class PreferencesDataController extends Cubit<PreferencesDataState> {
   set themeMode(ThemeMode mode) => emit(state.copyWith(themeMode: mode));
 
   void toggleThemeMode() {
-    themeMode = themeMode == ThemeMode.light //
-        ? ThemeMode.dark
-        : ThemeMode.light;
+    themeMode =
+        themeMode ==
+                ThemeMode
+                    .light //
+            ? ThemeMode.dark
+            : ThemeMode.light;
   }
 
   static const storeName = 'preferences';
 
   Future<void> load() async {
     final map = await localStoreDataController.load(storeName);
-    emit(
-      PreferencesDataState.fromMap(map),
-    );
+    emit(PreferencesDataState.fromMap(map));
   }
 
   Future<void> save() async {
-    await localStoreDataController.save(
-      storeName,
-      state.toMap(),
-    );
+    await localStoreDataController.save(storeName, state.toMap());
   }
 }

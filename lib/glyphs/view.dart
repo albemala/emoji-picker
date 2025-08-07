@@ -32,11 +32,7 @@ class GlyphsView extends StatelessWidget {
   final GlyphsViewController controller;
   final GlyphsViewState state;
 
-  const GlyphsView({
-    super.key,
-    required this.controller,
-    required this.state,
-  });
+  const GlyphsView({super.key, required this.controller, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +74,7 @@ class GlyphsView extends StatelessWidget {
 class _EmojiView extends StatelessWidget {
   final GlyphsViewState state;
 
-  const _EmojiView({
-    required this.state,
-  });
+  const _EmojiView({required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +90,7 @@ class _EmojiView extends StatelessWidget {
 class _SymbolsView extends StatelessWidget {
   final GlyphsViewState state;
 
-  const _SymbolsView({
-    required this.state,
-  });
+  const _SymbolsView({required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -114,9 +106,7 @@ class _SymbolsView extends StatelessWidget {
 class _KaomojiView extends StatelessWidget {
   final GlyphsViewState state;
 
-  const _KaomojiView({
-    required this.state,
-  });
+  const _KaomojiView({required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -133,31 +123,27 @@ class _GlyphGroupView extends StatelessWidget {
   final IList<GlyphGroupViewState> groups;
   final Widget Function(BuildContext, List<Glyph>) groupBuilder;
 
-  const _GlyphGroupView({
-    required this.groups,
-    required this.groupBuilder,
-  });
+  const _GlyphGroupView({required this.groups, required this.groupBuilder});
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: groups.map((group) {
-        return MultiSliver(
-          pushPinnedChildren: true,
-          children: [
-            SliverPinnedHeader(
-              child: _GlyphGroupTitleView(title: group.title),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.all(21),
-              sliver: groupBuilder(context, group.glyphs.toList()),
-            ),
-            _AdView(
-              adType: group.ad,
-            ),
-          ],
-        );
-      }).toList(),
+      slivers:
+          groups.map((group) {
+            return MultiSliver(
+              pushPinnedChildren: true,
+              children: [
+                SliverPinnedHeader(
+                  child: _GlyphGroupTitleView(title: group.title),
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.all(21),
+                  sliver: groupBuilder(context, group.glyphs.toList()),
+                ),
+                _AdView(adType: group.ad),
+              ],
+            );
+          }).toList(),
     );
   }
 }
@@ -165,9 +151,7 @@ class _GlyphGroupView extends StatelessWidget {
 class _GlyphGroupTitleView extends StatelessWidget {
   final String title;
 
-  const _GlyphGroupTitleView({
-    required this.title,
-  });
+  const _GlyphGroupTitleView({required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -186,9 +170,7 @@ class _GlyphGroupTitleView extends StatelessWidget {
 class _GlyphGroupGridView extends StatelessWidget {
   final List<Glyph> glyphs;
 
-  const _GlyphGroupGridView({
-    required this.glyphs,
-  });
+  const _GlyphGroupGridView({required this.glyphs});
 
   @override
   Widget build(BuildContext context) {
@@ -198,18 +180,15 @@ class _GlyphGroupGridView extends StatelessWidget {
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final glyph = glyphs.elementAt(index);
-          return GlyphTileViewCreator(
-            glyph: glyph,
-            glyphContentBuilder: (BuildContext context, Glyph glyph) {
-              return SquaredGlyphTileContentView(glyph: glyph);
-            },
-          );
-        },
-        childCount: glyphs.length,
-      ),
+      delegate: SliverChildBuilderDelegate((context, index) {
+        final glyph = glyphs.elementAt(index);
+        return GlyphTileViewCreator(
+          glyph: glyph,
+          glyphContentBuilder: (BuildContext context, Glyph glyph) {
+            return SquaredGlyphTileContentView(glyph: glyph);
+          },
+        );
+      }, childCount: glyphs.length),
     );
   }
 }
@@ -217,9 +196,7 @@ class _GlyphGroupGridView extends StatelessWidget {
 class _GlyphGroupListView extends StatelessWidget {
   final List<Glyph> glyphs;
 
-  const _GlyphGroupListView({
-    required this.glyphs,
-  });
+  const _GlyphGroupListView({required this.glyphs});
 
   @override
   Widget build(BuildContext context) {
@@ -244,29 +221,19 @@ class _GlyphGroupListView extends StatelessWidget {
 class _AdView extends StatelessWidget {
   final AdType adType;
 
-  const _AdView({
-    required this.adType,
-  });
+  const _AdView({required this.adType});
 
   @override
   Widget build(BuildContext context) {
     switch (adType) {
       case AdType.exabox:
-        return const _AdContainerView(
-          child: ExaboxAdView(),
-        );
+        return const _AdContainerView(child: ExaboxAdView());
       case AdType.hexee:
-        return const _AdContainerView(
-          child: HexeeProAdView(),
-        );
+        return const _AdContainerView(child: HexeeProAdView());
       case AdType.wmap:
-        return const _AdContainerView(
-          child: WMapAdView(),
-        );
+        return const _AdContainerView(child: WMapAdView());
       case AdType.iroiro:
-        return const _AdContainerView(
-          child: IroIronAdView(),
-        );
+        return const _AdContainerView(child: IroIronAdView());
       case AdType.none:
         return const SizedBox();
     }
@@ -276,27 +243,18 @@ class _AdView extends StatelessWidget {
 class _AdContainerView extends StatelessWidget {
   final Widget child;
 
-  const _AdContainerView({
-    required this.child,
-  });
+  const _AdContainerView({required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 21,
-        right: 21,
-        bottom: 21,
-      ),
+      padding: const EdgeInsets.only(left: 21, right: 21, bottom: 21),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 480),
           child: Material(
             borderRadius: BorderRadius.circular(16),
-            child: Padding(
-              padding: const EdgeInsets.all(21),
-              child: child,
-            ),
+            child: Padding(padding: const EdgeInsets.all(21), child: child),
           ),
         ),
       ),

@@ -19,11 +19,11 @@ class SearchGlyphsDataState extends Equatable {
 
   @override
   List<Object> get props => [
-        filteredEmoji,
-        filteredSymbols,
-        filteredKaomoji,
-        searchQuery,
-      ];
+    filteredEmoji,
+    filteredSymbols,
+    filteredKaomoji,
+    searchQuery,
+  ];
 
   SearchGlyphsDataState copyWith({
     IList<Glyph>? filteredEmoji,

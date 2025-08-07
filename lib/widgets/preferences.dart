@@ -37,9 +37,12 @@ class ThemeModeToggleView extends StatelessWidget {
       height: 48,
       child: IconButton(
         onPressed: controller.toggleThemeMode,
-        icon: state.themeMode == ThemeMode.light //
-            ? const Icon(CupertinoIcons.moon)
-            : const Icon(CupertinoIcons.sun_max),
+        icon:
+            state.themeMode ==
+                    ThemeMode
+                        .light //
+                ? const Icon(CupertinoIcons.moon)
+                : const Icon(CupertinoIcons.sun_max),
       ),
     );
   }

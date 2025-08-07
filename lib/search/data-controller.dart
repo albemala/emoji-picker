@@ -15,14 +15,11 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   final focusNode = FocusNode();
 
   factory SearchGlyphsDataController.fromContext(BuildContext context) {
-    return SearchGlyphsDataController(
-      context.read<GlyphsDataController>(),
-    );
+    return SearchGlyphsDataController(context.read<GlyphsDataController>());
   }
 
-  SearchGlyphsDataController(
-    this.glyphsDataController,
-  ) : super(defaultSearchGlyphsDataState) {
+  SearchGlyphsDataController(this.glyphsDataController)
+    : super(defaultSearchGlyphsDataState) {
     glyphsDataControllerSubscription = glyphsDataController.stream.listen((_) {
       updateFilteredData();
     });
@@ -44,15 +41,18 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
     bool test(Glyph glyph) => matchesSearchTerm(glyph, state.searchQuery);
 
     final glyphData = glyphsDataController.state;
-    final filteredEmoji = state.searchQuery.isEmpty
-        ? glyphData.emoji
-        : glyphData.emoji.where(test).toIList();
-    final filteredSymbols = state.searchQuery.isEmpty
-        ? glyphData.symbols
-        : glyphData.symbols.where(test).toIList();
-    final filteredKaomoji = state.searchQuery.isEmpty
-        ? glyphData.kaomoji
-        : glyphData.kaomoji.where(test).toIList();
+    final filteredEmoji =
+        state.searchQuery.isEmpty
+            ? glyphData.emoji
+            : glyphData.emoji.where(test).toIList();
+    final filteredSymbols =
+        state.searchQuery.isEmpty
+            ? glyphData.symbols
+            : glyphData.symbols.where(test).toIList();
+    final filteredKaomoji =
+        state.searchQuery.isEmpty
+            ? glyphData.kaomoji
+            : glyphData.kaomoji.where(test).toIList();
 
     emit(
       state.copyWith(

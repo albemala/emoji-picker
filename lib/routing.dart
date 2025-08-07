@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-void showSnackBar(
-  BuildContext context,
-  SnackBar snackBar,
-) {
+void showSnackBar(BuildContext context, SnackBar snackBar) {
   if (!context.mounted) return;
   ScaffoldMessenger.of(context)
     ..clearSnackBars()
@@ -15,10 +12,7 @@ Future<ReturnType?> openDialog<ReturnType>(
   Widget dialog,
 ) async {
   if (!context.mounted) return null;
-  return showDialog<ReturnType>(
-    context: context,
-    builder: (_) => dialog,
-  );
+  return showDialog<ReturnType>(context: context, builder: (_) => dialog);
 }
 
 Future<ReturnType?> openBottomSheet<ReturnType>(
@@ -46,10 +40,7 @@ Future<ReturnType?> openScreen<ReturnType>(
   );
 }
 
-void closeCurrentView<ReturnType>(
-  BuildContext context, [
-  ReturnType? result,
-]) {
+void closeCurrentView<ReturnType>(BuildContext context, [ReturnType? result]) {
   if (!context.mounted) return;
   Navigator.of(context).pop(result);
 }

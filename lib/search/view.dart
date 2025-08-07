@@ -24,10 +24,7 @@ class SearchViewCreator extends StatelessWidget {
 class SearchView extends StatelessWidget {
   final SearchGlyphsViewController controller;
 
-  const SearchView({
-    super.key,
-    required this.controller,
-  });
+  const SearchView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

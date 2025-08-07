@@ -19,13 +19,7 @@ class Emoji extends Equatable {
   });
 
   @override
-  List<Object> get props => [
-        char,
-        name,
-        group,
-        skinToneSupport,
-        keywords,
-      ];
+  List<Object> get props => [char, name, group, skinToneSupport, keywords];
 
   Map<String, dynamic> toMap() {
     return {

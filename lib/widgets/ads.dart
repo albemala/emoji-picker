@@ -3,20 +3,13 @@ import 'package:app/urls/defines.dart';
 import 'package:app/urls/functions.dart';
 import 'package:flutter/material.dart';
 
-enum AdType {
-  exabox,
-  hexee,
-  wmap,
-  iroiro,
-  none,
-}
+enum AdType { exabox, hexee, wmap, iroiro, none }
 
-AdType selectRandomAdType({
-  required bool includeNone,
-}) {
-  final maxIndex = includeNone //
-      ? AdType.values.length - 1
-      : AdType.values.length - 2;
+AdType selectRandomAdType({required bool includeNone}) {
+  final maxIndex =
+      includeNone //
+          ? AdType.values.length - 1
+          : AdType.values.length - 2;
   final index = randomInt(0, maxIndex);
   return AdType.values[index];
 }
@@ -125,15 +118,9 @@ class _BaseAdView extends StatelessWidget {
           style: Theme.of(context).textTheme.labelSmall,
         ),
         const SizedBox(height: 4),
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        Text(title, style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
-        Text(
-          description,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
+        Text(description, style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 4),
         Align(
           alignment: Alignment.centerRight,

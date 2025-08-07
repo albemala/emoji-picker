@@ -76,9 +76,10 @@ class GlyphTileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: state.isSelected
-          ? Theme.of(context).colorScheme.tertiaryContainer
-          : null,
+      color:
+          state.isSelected
+              ? Theme.of(context).colorScheme.tertiaryContainer
+              : null,
       child: InkWell(
         onTap: controller.focusNode.requestFocus,
         onDoubleTap: () {
@@ -95,10 +96,7 @@ class GlyphTileView extends StatelessWidget {
 class SquaredGlyphTileContentView extends StatelessWidget {
   final Glyph glyph;
 
-  const SquaredGlyphTileContentView({
-    super.key,
-    required this.glyph,
-  });
+  const SquaredGlyphTileContentView({super.key, required this.glyph});
 
   @override
   Widget build(BuildContext context) {
@@ -114,10 +112,7 @@ class SquaredGlyphTileContentView extends StatelessWidget {
 class RectangularGlyphTileContentView extends StatelessWidget {
   final Glyph glyph;
 
-  const RectangularGlyphTileContentView({
-    super.key,
-    required this.glyph,
-  });
+  const RectangularGlyphTileContentView({super.key, required this.glyph});
 
   @override
   Widget build(BuildContext context) {

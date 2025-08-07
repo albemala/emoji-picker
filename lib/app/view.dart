@@ -31,19 +31,16 @@ class AppView extends StatelessWidget {
   final AppViewController controller;
   final AppViewState state;
 
-  const AppView({
-    required this.controller,
-    required this.state,
-    super.key,
-  });
+  const AppView({required this.controller, required this.state, super.key});
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarBrightness: state.themeMode == ThemeMode.dark
-            ? Brightness.dark
-            : Brightness.light,
+        statusBarBrightness:
+            state.themeMode == ThemeMode.dark
+                ? Brightness.dark
+                : Brightness.light,
       ),
     );
 

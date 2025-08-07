@@ -42,10 +42,7 @@ class GlyphDetailsView extends StatelessWidget {
     if (state.glyph == unknownGlyph) {
       return Container();
     } else {
-      return _GlyphDetailsContentView(
-        state: state,
-        controller: controller,
-      );
+      return _GlyphDetailsContentView(state: state, controller: controller);
     }
   }
 }
@@ -74,35 +71,25 @@ class _GlyphDetailsContentView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _HeaderView(
-              state: state,
-              controller: controller,
-            ),
+            _HeaderView(state: state, controller: controller),
             Wrap(
               spacing: 16,
               runSpacing: 16,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                _GlyphView(
-                  state: state,
-                ),
+                _GlyphView(state: state),
                 _CopyGlyphView(
                   onCopy: () {
                     copyGlyphToClipboard(context, state.glyph);
                   },
                 ),
-                _GlyphValuesView(
-                  state: state,
-                  controller: controller,
-                ),
+                _GlyphValuesView(state: state, controller: controller),
               ],
             ),
             if (state.glyph.keywords.isNotEmpty) //
               const SizedBox(height: 16),
             if (state.glyph.keywords.isNotEmpty) //
-              _GlyphKeywordsView(
-                state: state,
-              ),
+              _GlyphKeywordsView(state: state),
           ],
         ),
       ),
@@ -114,10 +101,7 @@ class _HeaderView extends StatelessWidget {
   final GlyphDetailsViewState state;
   final GlyphDetailsViewController controller;
 
-  const _HeaderView({
-    required this.state,
-    required this.controller,
-  });
+  const _HeaderView({required this.state, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -144,18 +128,16 @@ class _HeaderView extends StatelessWidget {
 class _GlyphView extends StatelessWidget {
   final GlyphDetailsViewState state;
 
-  const _GlyphView({
-    required this.state,
-  });
+  const _GlyphView({required this.state});
 
   @override
   Widget build(BuildContext context) {
     final glyph = state.glyph;
     return Text(
       glyph.glyph,
-      style: getTextStyleForGlyph(glyph).copyWith(
-        fontSize: glyph.type == GlyphType.kaomoji ? 32 : 56,
-      ),
+      style: getTextStyleForGlyph(
+        glyph,
+      ).copyWith(fontSize: glyph.type == GlyphType.kaomoji ? 32 : 56),
       overflow: TextOverflow.fade,
       maxLines: 1,
       softWrap: false,
@@ -166,9 +148,7 @@ class _GlyphView extends StatelessWidget {
 class _CopyGlyphView extends StatelessWidget {
   final void Function() onCopy;
 
-  const _CopyGlyphView({
-    required this.onCopy,
-  });
+  const _CopyGlyphView({required this.onCopy});
 
   @override
   Widget build(BuildContext context) {
@@ -176,13 +156,12 @@ class _CopyGlyphView extends StatelessWidget {
       direction: Axis.vertical,
       spacing: 8,
       children: [
-        FilledButton(
-          onPressed: onCopy,
-          child: const Text('Copy'),
-        ),
+        FilledButton(onPressed: onCopy, child: const Text('Copy')),
         if (cross_platform.Platform.isDesktop)
           Text(
-            cross_platform.Platform.isMacOS //
+            cross_platform
+                    .Platform
+                    .isMacOS //
                 ? 'or ⌘C or double-click to copy'
                 : 'or Ctrl C or double-click to copy',
             style: Theme.of(context).textTheme.bodySmall,
@@ -198,10 +177,7 @@ class _GlyphValuesView extends StatelessWidget {
   final GlyphDetailsViewState state;
   final GlyphDetailsViewController controller;
 
-  const _GlyphValuesView({
-    required this.state,
-    required this.controller,
-  });
+  const _GlyphValuesView({required this.state, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -284,9 +260,7 @@ class _GlyphValueView extends StatelessWidget {
 class _GlyphKeywordsView extends StatelessWidget {
   final GlyphDetailsViewState state;
 
-  const _GlyphKeywordsView({
-    required this.state,
-  });
+  const _GlyphKeywordsView({required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -296,10 +270,7 @@ class _GlyphKeywordsView extends StatelessWidget {
       children: [
         for (final keyword in state.glyph.keywords)
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 2,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.circular(4),

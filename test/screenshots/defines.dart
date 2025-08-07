@@ -13,10 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockBuildContext //
-    extends Mock implements BuildContext {}
+    extends Mock
+    implements BuildContext {}
 
 class MockPreferencesDataController //
-    extends Mock implements PreferencesDataController {
+    extends Mock
+    implements PreferencesDataController {
   @override
   Stream<PreferencesDataState> get stream {
     return Stream.value(defaultPreferencesDataState);
@@ -29,7 +31,8 @@ class MockPreferencesDataController //
 }
 
 class MockGlyphsDataController //
-    extends Mock implements GlyphsDataController {
+    extends Mock
+    implements GlyphsDataController {
   final GlyphsDataState? initialState;
 
   MockGlyphsDataController({this.initialState});
@@ -46,7 +49,8 @@ class MockGlyphsDataController //
 }
 
 class MockSearchGlyphsDataController //
-    extends Mock implements SearchGlyphsDataController {
+    extends Mock
+    implements SearchGlyphsDataController {
   final SearchGlyphsDataState? initialState;
 
   MockSearchGlyphsDataController({this.initialState});
@@ -66,7 +70,8 @@ class MockSearchGlyphsDataController //
 }
 
 class MockSelectedGlyphDataController //
-    extends Mock implements SelectedGlyphDataController {
+    extends Mock
+    implements SelectedGlyphDataController {
   final SelectedGlyphDataState? initialState;
 
   MockSelectedGlyphDataController({this.initialState});
@@ -86,7 +91,9 @@ class MockSelectedGlyphDataController //
 }
 
 class MockAboutViewController //
-    extends Mock implements AboutViewController {}
+    extends Mock
+    implements AboutViewController {}
 
 class MockAppContentViewController //
-    extends Mock implements AppContentViewController {}
+    extends Mock
+    implements AppContentViewController {}

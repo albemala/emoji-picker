@@ -4,15 +4,8 @@ SnackBar createCopiedToClipboardSnackBar(String char) {
   return SnackBar(
     content: Row(
       children: [
-        Flexible(
-          child: Text(
-            char,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        const Text(
-          ' copied to clipboard',
-        ),
+        Flexible(child: Text(char, overflow: TextOverflow.ellipsis)),
+        const Text(' copied to clipboard'),
       ],
     ),
     behavior: SnackBarBehavior.floating,

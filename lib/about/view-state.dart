@@ -7,21 +7,12 @@ class AboutViewState extends Equatable {
   final String appVersion;
   final AdType adType;
 
-  const AboutViewState({
-    required this.appVersion,
-    this.adType = AdType.none,
-  });
+  const AboutViewState({required this.appVersion, this.adType = AdType.none});
 
   @override
-  List<Object> get props => [
-        appVersion,
-        adType,
-      ];
+  List<Object> get props => [appVersion, adType];
 
-  AboutViewState copyWith({
-    String? appVersion,
-    AdType? adType,
-  }) {
+  AboutViewState copyWith({String? appVersion, AdType? adType}) {
     return AboutViewState(
       appVersion: appVersion ?? this.appVersion,
       adType: adType ?? this.adType,

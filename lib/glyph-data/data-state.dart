@@ -16,11 +16,7 @@ class GlyphsDataState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
-        emoji,
-        symbols,
-        kaomoji,
-      ];
+  List<Object> get props => [emoji, symbols, kaomoji];
 }
 
 const defaultGlyphsDataState = GlyphsDataState(

@@ -19,9 +19,8 @@ class SearchGlyphsViewController extends Cubit<void> {
     );
   }
 
-  SearchGlyphsViewController(
-    this.searchGlyphsDataController,
-  ) : super(defaultSearchGlyphsDataState) {
+  SearchGlyphsViewController(this.searchGlyphsDataController)
+    : super(defaultSearchGlyphsDataState) {
     queryController.addListener(onQueryChanged);
   }
 

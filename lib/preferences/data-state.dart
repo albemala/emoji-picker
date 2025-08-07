@@ -5,37 +5,24 @@ import 'package:flutter/material.dart';
 class PreferencesDataState extends Equatable {
   final ThemeMode themeMode;
 
-  const PreferencesDataState({
-    required this.themeMode,
-  });
+  const PreferencesDataState({required this.themeMode});
 
   @override
-  List<Object> get props => [
-        themeMode,
-      ];
+  List<Object> get props => [themeMode];
 
-  PreferencesDataState copyWith({
-    ThemeMode? themeMode,
-  }) {
-    return PreferencesDataState(
-      themeMode: themeMode ?? this.themeMode,
-    );
+  PreferencesDataState copyWith({ThemeMode? themeMode}) {
+    return PreferencesDataState(themeMode: themeMode ?? this.themeMode);
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'themeMode': themeMode.name,
-    };
+    return {'themeMode': themeMode.name};
   }
 
   factory PreferencesDataState.fromMap(Map<String, dynamic> map) {
     return switch (map) {
-      {
-        'themeMode': final String themeMode,
-      } =>
-        PreferencesDataState(
-          themeMode: ThemeMode.values.byName(themeMode),
-        ),
+      {'themeMode': final String themeMode} => PreferencesDataState(
+        themeMode: ThemeMode.values.byName(themeMode),
+      ),
       _ => defaultPreferencesDataState,
     };
   }

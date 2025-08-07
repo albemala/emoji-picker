@@ -13,18 +13,15 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
   StreamSubscription<void>? searchGlyphsDataControllerSubscription;
 
   factory GlyphsViewController.fromContext(BuildContext context) {
-    return GlyphsViewController(
-      context.read<SearchGlyphsDataController>(),
-    );
+    return GlyphsViewController(context.read<SearchGlyphsDataController>());
   }
 
-  GlyphsViewController(
-    this.searchGlyphsDataController,
-  ) : super(defaultGlyphsViewState) {
-    searchGlyphsDataControllerSubscription =
-        searchGlyphsDataController.stream.listen((_) {
-      updateViewState();
-    });
+  GlyphsViewController(this.searchGlyphsDataController)
+    : super(defaultGlyphsViewState) {
+    searchGlyphsDataControllerSubscription = searchGlyphsDataController.stream
+        .listen((_) {
+          updateViewState();
+        });
     updateViewState();
   }
 
@@ -60,14 +57,13 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
     for (final glyph in glyphs) {
       groups.update(
         glyph.group,
-        (existing) => existing.copyWith(
-          glyphs: existing.glyphs.add(glyph),
-        ),
-        ifAbsent: () => GlyphGroupViewState(
-          title: glyph.group,
-          glyphs: IList([glyph]),
-          ad: selectRandomAdType(includeNone: true),
-        ),
+        (existing) => existing.copyWith(glyphs: existing.glyphs.add(glyph)),
+        ifAbsent:
+            () => GlyphGroupViewState(
+              title: glyph.group,
+              glyphs: IList([glyph]),
+              ad: selectRandomAdType(includeNone: true),
+            ),
       );
     }
     return groups.values.toList();

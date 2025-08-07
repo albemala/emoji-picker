@@ -9,27 +9,24 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/services.dart';
 
 Future<List<Glyph>> loadEmoji() async {
-  final emojiDataFile = await rootBundle.loadString(
-    'assets/data/emoji.json',
-  );
+  final emojiDataFile = await rootBundle.loadString('assets/data/emoji.json');
   final emojiData = json.decode(emojiDataFile) as List<dynamic>;
   return emojiData //
       .cast<Map<String, dynamic>>()
       .map(Emoji.fromMap)
-      .map(
-    (emoji) {
-      final glyph = emoji.char;
-      return Glyph(
-        type: GlyphType.emoji,
-        glyph: glyph,
-        unicode: getGlyphUnicode(glyph),
-        htmlCode: getGlyphHtmlCode(glyph),
-        name: emoji.name.toFirstUpperCase(),
-        keywords: emoji.keywords,
-        group: emoji.group,
-      );
-    },
-  ).toList();
+      .map((emoji) {
+        final glyph = emoji.char;
+        return Glyph(
+          type: GlyphType.emoji,
+          glyph: glyph,
+          unicode: getGlyphUnicode(glyph),
+          htmlCode: getGlyphHtmlCode(glyph),
+          name: emoji.name.toFirstUpperCase(),
+          keywords: emoji.keywords,
+          group: emoji.group,
+        );
+      })
+      .toList();
 }
 
 Future<List<Glyph>> loadSymbols() async {
@@ -40,20 +37,19 @@ Future<List<Glyph>> loadSymbols() async {
   return symbolsData //
       .cast<Map<String, dynamic>>()
       .map(Symbol.fromMap)
-      .map(
-    (symbol) {
-      final glyph = String.fromCharCode(symbol.charcode);
-      return Glyph(
-        type: GlyphType.symbol,
-        glyph: glyph,
-        unicode: getGlyphUnicode(glyph),
-        htmlCode: getGlyphHtmlCode(glyph),
-        name: symbol.name,
-        keywords: const IList.empty(),
-        group: symbol.group,
-      );
-    },
-  ).toList();
+      .map((symbol) {
+        final glyph = String.fromCharCode(symbol.charcode);
+        return Glyph(
+          type: GlyphType.symbol,
+          glyph: glyph,
+          unicode: getGlyphUnicode(glyph),
+          htmlCode: getGlyphHtmlCode(glyph),
+          name: symbol.name,
+          keywords: const IList.empty(),
+          group: symbol.group,
+        );
+      })
+      .toList();
 }
 
 Future<List<Glyph>> loadKaomoji() async {
@@ -64,21 +60,20 @@ Future<List<Glyph>> loadKaomoji() async {
   return kaomojiData //
       .cast<Map<String, dynamic>>()
       .map(Kaomoji.fromMap)
-      .map(
-    (kaomoji) {
-      final glyph = kaomoji.string;
-      return Glyph(
-        type: GlyphType.kaomoji,
-        glyph: glyph,
-        unicode: '',
-        htmlCode: '',
-        name: kaomoji.keywords.first.toFirstUpperCase(),
-        keywords: kaomoji.keywords,
-        // group: '',
-        group: kaomoji.keywords.first,
-      );
-    },
-  ).toList();
+      .map((kaomoji) {
+        final glyph = kaomoji.string;
+        return Glyph(
+          type: GlyphType.kaomoji,
+          glyph: glyph,
+          unicode: '',
+          htmlCode: '',
+          name: kaomoji.keywords.first.toFirstUpperCase(),
+          keywords: kaomoji.keywords,
+          // group: '',
+          group: kaomoji.keywords.first,
+        );
+      })
+      .toList();
 }
 
 String getGlyphHtmlCode(String glyph) {
@@ -90,14 +85,7 @@ String getGlyphUnicode(String glyph) {
 }
 
 Map<String, List<Glyph>> groupGlyphsByGroup(List<Glyph> glyphs) {
-  return glyphs.fold(
-    <String, List<Glyph>>{},
-    (groups, glyph) {
-      return groups
-        ..putIfAbsent(
-          glyph.group,
-          () => [],
-        ).add(glyph);
-    },
-  );
+  return glyphs.fold(<String, List<Glyph>>{}, (groups, glyph) {
+    return groups..putIfAbsent(glyph.group, () => []).add(glyph);
+  });
 }

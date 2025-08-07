@@ -7,19 +7,13 @@ class Kaomoji extends Equatable {
   final String string;
   final IList<String> keywords;
 
-  const Kaomoji({
-    required this.string,
-    required this.keywords,
-  });
+  const Kaomoji({required this.string, required this.keywords});
 
   @override
   List<Object> get props => [string, keywords];
 
   Map<String, dynamic> toMap() {
-    return {
-      'string': string,
-      'keywords': keywords,
-    };
+    return {'string': string, 'keywords': keywords};
   }
 
   factory Kaomoji.fromMap(Map<String, dynamic> map) {
@@ -28,16 +22,10 @@ class Kaomoji extends Equatable {
         'string': final String string,
         'keywords': final List<dynamic> keywords,
       } =>
-        Kaomoji(
-          string: string,
-          keywords: keywords.cast<String>().toIList(),
-        ),
+        Kaomoji(string: string, keywords: keywords.cast<String>().toIList()),
       _ => defaultKaomoji,
     };
   }
 }
 
-const defaultKaomoji = Kaomoji(
-  string: '',
-  keywords: IList.empty(),
-);
+const defaultKaomoji = Kaomoji(string: '', keywords: IList.empty());

@@ -45,9 +45,7 @@ class AppContentView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _HeaderView(),
-            Expanded(
-              child: GlyphsViewCreator(),
-            ),
+            Expanded(child: GlyphsViewCreator()),
             GlyphDetailsViewCreator(),
           ],
         ),
@@ -65,9 +63,7 @@ class _HeaderView extends StatelessWidget {
       padding: EdgeInsets.all(21),
       child: Row(
         children: [
-          Expanded(
-            child: SearchViewCreator(),
-          ),
+          Expanded(child: SearchViewCreator()),
           SizedBox(width: 12),
           ThemeModeToggleViewCreator(),
           AboutButtonView(),

@@ -5,24 +5,14 @@ import 'package:flutter/material.dart';
 class AppViewState extends Equatable {
   final ThemeMode themeMode;
 
-  const AppViewState({
-    required this.themeMode,
-  });
+  const AppViewState({required this.themeMode});
 
   @override
-  List<Object> get props => [
-        themeMode,
-      ];
+  List<Object> get props => [themeMode];
 
-  AppViewState copyWith({
-    ThemeMode? themeMode,
-  }) {
-    return AppViewState(
-      themeMode: themeMode ?? this.themeMode,
-    );
+  AppViewState copyWith({ThemeMode? themeMode}) {
+    return AppViewState(themeMode: themeMode ?? this.themeMode);
   }
 }
 
-const defaultAppViewState = AppViewState(
-  themeMode: ThemeMode.light,
-);
+const defaultAppViewState = AppViewState(themeMode: ThemeMode.light);

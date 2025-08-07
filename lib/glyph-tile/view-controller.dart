@@ -12,29 +12,20 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
 
   final focusNode = FocusNode();
 
-  factory GlyphTileViewController.fromContext(
-    BuildContext context
-  ) {
-    return GlyphTileViewController(
-      context.read<SelectedGlyphDataController>(),
-    );
+  factory GlyphTileViewController.fromContext(BuildContext context) {
+    return GlyphTileViewController(context.read<SelectedGlyphDataController>());
   }
 
-  GlyphTileViewController(
-    this.selectedGlyphDataController,
-  ) : super(defaultGlyphTileViewState) {
-    selectedGlyphDataControllerSubscription =
-        selectedGlyphDataController.stream.listen((_) {
-      updateState();
-    });
+  GlyphTileViewController(this.selectedGlyphDataController)
+    : super(defaultGlyphTileViewState) {
+    selectedGlyphDataControllerSubscription = selectedGlyphDataController.stream
+        .listen((_) {
+          updateState();
+        });
   }
 
   void setGlyph(Glyph glyph) {
-    emit(
-      state.copyWith(
-        glyph: glyph,
-      ),
-    );
+    emit(state.copyWith(glyph: glyph));
   }
 
   @override

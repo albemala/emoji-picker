@@ -10,18 +10,15 @@ class AppViewController extends Cubit<AppViewState> {
   StreamSubscription<void>? preferencesDataControllerSubscription;
 
   factory AppViewController.fromContext(BuildContext context) {
-    return AppViewController(
-      context.read<PreferencesDataController>(),
-    );
+    return AppViewController(context.read<PreferencesDataController>());
   }
 
-  AppViewController(
-    this.preferencesDataController,
-  ) : super(defaultAppViewState) {
-    preferencesDataControllerSubscription =
-        preferencesDataController.stream.listen((_) {
-      updateViewState();
-    });
+  AppViewController(this.preferencesDataController)
+    : super(defaultAppViewState) {
+    preferencesDataControllerSubscription = preferencesDataController.stream
+        .listen((_) {
+          updateViewState();
+        });
     updateViewState();
   }
 
@@ -32,10 +29,6 @@ class AppViewController extends Cubit<AppViewState> {
   }
 
   void updateViewState() {
-    emit(
-      state.copyWith(
-        themeMode: preferencesDataController.state.themeMode,
-      ),
-    );
+    emit(state.copyWith(themeMode: preferencesDataController.state.themeMode));
   }
 }

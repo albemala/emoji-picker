@@ -4,9 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AboutButtonView extends StatelessWidget {
-  const AboutButtonView({
-    super.key,
-  });
+  const AboutButtonView({super.key});
 
   @override
   Widget build(BuildContext context) {

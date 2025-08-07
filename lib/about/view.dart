@@ -30,11 +30,7 @@ class AboutView extends StatelessWidget {
   final AboutViewController controller;
   final AboutViewState state;
 
-  const AboutView({
-    super.key,
-    required this.controller,
-    required this.state,
-  });
+  const AboutView({super.key, required this.controller, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +45,7 @@ class AboutView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _AppInfoView(
-                    appVersion: state.appVersion,
-                  ),
+                  _AppInfoView(appVersion: state.appVersion),
                   const SizedBox(height: 12),
                   _AppActionsView(
                     onRate: controller.openRateApp,
@@ -64,9 +58,7 @@ class AboutView extends StatelessWidget {
                     onOpenWebsite: controller.openWebsite,
                   ),
                   const SizedBox(height: 16),
-                  _NewsView(
-                    onOpenTwitter: controller.openTwitter,
-                  ),
+                  _NewsView(onOpenTwitter: controller.openTwitter),
                 ],
               ),
             ),
@@ -75,9 +67,7 @@ class AboutView extends StatelessWidget {
               child: Material(
                 child: Padding(
                   padding: const EdgeInsets.all(24),
-                  child: _AdView(
-                    state: state,
-                  ),
+                  child: _AdView(state: state),
                 ),
               ),
             ),
@@ -91,9 +81,7 @@ class AboutView extends StatelessWidget {
 class _AppInfoView extends StatelessWidget {
   final String appVersion;
 
-  const _AppInfoView({
-    required this.appVersion,
-  });
+  const _AppInfoView({required this.appVersion});
 
   @override
   Widget build(BuildContext context) {
@@ -113,16 +101,10 @@ class _AppInfoView extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              appName,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            Text(appName, style: Theme.of(context).textTheme.headlineSmall),
             Row(
               children: [
-                Text(
-                  appVersion,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+                Text(appVersion, style: Theme.of(context).textTheme.bodySmall),
                 // const SizedBox(width: 8),
                 // LinkButton(
                 //   onPressed: bloc.showReleaseNotes,
@@ -154,10 +136,7 @@ class _AppActionsView extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: [
-        OutlinedButton(
-          onPressed: onRate,
-          child: const Text('Rate'),
-        ),
+        OutlinedButton(onPressed: onRate, child: const Text('Rate')),
         Builder(
           builder: (context) {
             return OutlinedButton(
@@ -172,10 +151,7 @@ Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $reposi
             );
           },
         ),
-        FilledButton(
-          onPressed: onOtherApps,
-          child: const Text('Other Apps'),
-        ),
+        FilledButton(onPressed: onOtherApps, child: const Text('Other Apps')),
       ],
     );
   }
@@ -185,10 +161,7 @@ class _SupportView extends StatelessWidget {
   final void Function() onOpenEmail;
   final void Function() onOpenWebsite;
 
-  const _SupportView({
-    required this.onOpenEmail,
-    required this.onOpenWebsite,
-  });
+  const _SupportView({required this.onOpenEmail, required this.onOpenWebsite});
 
   @override
   Widget build(BuildContext context) {
@@ -201,10 +174,7 @@ class _SupportView extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: [
-            OutlinedButton(
-              onPressed: onOpenEmail,
-              child: const Text('Email'),
-            ),
+            OutlinedButton(onPressed: onOpenEmail, child: const Text('Email')),
             OutlinedButton(
               onPressed: onOpenWebsite,
               child: const Text('Website'),
@@ -219,9 +189,7 @@ class _SupportView extends StatelessWidget {
 class _NewsView extends StatelessWidget {
   final void Function() onOpenTwitter;
 
-  const _NewsView({
-    required this.onOpenTwitter,
-  });
+  const _NewsView({required this.onOpenTwitter});
 
   @override
   Widget build(BuildContext context) {
@@ -248,9 +216,7 @@ class _NewsView extends StatelessWidget {
 class _AdView extends StatelessWidget {
   final AboutViewState state;
 
-  const _AdView({
-    required this.state,
-  });
+  const _AdView({required this.state});
 
   @override
   Widget build(BuildContext context) {

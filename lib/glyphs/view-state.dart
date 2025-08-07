@@ -17,11 +17,7 @@ class GlyphsViewState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
-        emoji,
-        symbols,
-        kaomoji,
-      ];
+  List<Object> get props => [emoji, symbols, kaomoji];
 
   GlyphsViewState copyWith({
     IList<GlyphGroupViewState>? emoji,
@@ -49,11 +45,7 @@ class GlyphGroupViewState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
-        title,
-        glyphs,
-        ad,
-      ];
+  List<Object> get props => [title, glyphs, ad];
 
   GlyphGroupViewState copyWith({
     String? title,

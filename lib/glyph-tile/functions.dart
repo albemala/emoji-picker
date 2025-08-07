@@ -4,15 +4,9 @@ import 'package:app/routing.dart';
 import 'package:app/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';
 
-Future<void> copyGlyphToClipboard(
-  BuildContext context,
-  Glyph glyph,
-) async {
+Future<void> copyGlyphToClipboard(BuildContext context, Glyph glyph) async {
   await copyToClipboard(glyph.glyph);
-  showSnackBar(
-    context,
-    createCopiedToClipboardSnackBar(glyph.glyph),
-  );
+  showSnackBar(context, createCopiedToClipboardSnackBar(glyph.glyph));
 }
 
 Future<void> copyGlyphUnicodeToClipboard(
@@ -20,10 +14,7 @@ Future<void> copyGlyphUnicodeToClipboard(
   Glyph glyph,
 ) async {
   await copyToClipboard(glyph.unicode);
-  showSnackBar(
-    context,
-    createCopiedToClipboardSnackBar(glyph.unicode),
-  );
+  showSnackBar(context, createCopiedToClipboardSnackBar(glyph.unicode));
 }
 
 Future<void> copyGlyphHtmlCodeToClipboard(
@@ -31,8 +22,5 @@ Future<void> copyGlyphHtmlCodeToClipboard(
   Glyph glyph,
 ) async {
   await copyToClipboard(glyph.htmlCode);
-  showSnackBar(
-    context,
-    createCopiedToClipboardSnackBar(glyph.htmlCode),
-  );
+  showSnackBar(context, createCopiedToClipboardSnackBar(glyph.htmlCode));
 }

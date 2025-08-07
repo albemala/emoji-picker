@@ -109,10 +109,7 @@ ScreenshotData createAboutViewScreenshotData() {
     view: ScreenshotDialogView(
       child: AboutView(
         controller: MockAboutViewController(),
-        state: AboutViewState(
-          appVersion: '3.0.0',
-          adType: AdType.values.first,
-        ),
+        state: AboutViewState(appVersion: '3.0.0', adType: AdType.values.first),
       ),
     ),
     fileName: 'about_view',
@@ -224,19 +221,13 @@ class ScreenshotData {
   final Widget view;
   final String fileName;
 
-  const ScreenshotData({
-    required this.view,
-    required this.fileName,
-  });
+  const ScreenshotData({required this.view, required this.fileName});
 }
 
 class ScreenshotDialogView extends StatelessWidget {
   final Widget child;
 
-  const ScreenshotDialogView({
-    super.key,
-    required this.child,
-  });
+  const ScreenshotDialogView({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

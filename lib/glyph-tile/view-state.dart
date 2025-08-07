@@ -7,21 +7,12 @@ class GlyphTileViewState extends Equatable {
   final Glyph glyph;
   final bool isSelected;
 
-  const GlyphTileViewState({
-    required this.glyph,
-    required this.isSelected,
-  });
+  const GlyphTileViewState({required this.glyph, required this.isSelected});
 
   @override
-  List<Object> get props => [
-        glyph,
-        isSelected,
-      ];
+  List<Object> get props => [glyph, isSelected];
 
-  GlyphTileViewState copyWith({
-    Glyph? glyph,
-    bool? isSelected,
-  }) {
+  GlyphTileViewState copyWith({Glyph? glyph, bool? isSelected}) {
     return GlyphTileViewState(
       glyph: glyph ?? this.glyph,
       isSelected: isSelected ?? this.isSelected,

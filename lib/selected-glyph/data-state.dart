@@ -6,18 +6,12 @@ import 'package:flutter/foundation.dart';
 class SelectedGlyphDataState extends Equatable {
   final Glyph selectedGlyph;
 
-  const SelectedGlyphDataState({
-    required this.selectedGlyph,
-  });
+  const SelectedGlyphDataState({required this.selectedGlyph});
 
   @override
-  List<Object> get props => [
-        selectedGlyph,
-      ];
+  List<Object> get props => [selectedGlyph];
 
-  SelectedGlyphDataState copyWith({
-    Glyph? selectedGlyph,
-  }) {
+  SelectedGlyphDataState copyWith({Glyph? selectedGlyph}) {
     return SelectedGlyphDataState(
       selectedGlyph: selectedGlyph ?? this.selectedGlyph,
     );

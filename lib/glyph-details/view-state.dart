@@ -6,24 +6,14 @@ import 'package:flutter/foundation.dart';
 class GlyphDetailsViewState extends Equatable {
   final Glyph glyph;
 
-  const GlyphDetailsViewState({
-    required this.glyph,
-  });
+  const GlyphDetailsViewState({required this.glyph});
 
   @override
-  List<Object> get props => [
-        glyph,
-      ];
+  List<Object> get props => [glyph];
 
-  GlyphDetailsViewState copyWith({
-    Glyph? glyph,
-  }) {
-    return GlyphDetailsViewState(
-      glyph: glyph ?? this.glyph,
-    );
+  GlyphDetailsViewState copyWith({Glyph? glyph}) {
+    return GlyphDetailsViewState(glyph: glyph ?? this.glyph);
   }
 }
 
-const defaultGlyphDetailsViewState = GlyphDetailsViewState(
-  glyph: unknownGlyph,
-);
+const defaultGlyphDetailsViewState = GlyphDetailsViewState(glyph: unknownGlyph);

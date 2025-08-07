@@ -16,13 +16,12 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
     );
   }
 
-  GlyphDetailsViewController(
-    this.selectedGlyphDataController,
-  ) : super(defaultGlyphDetailsViewState) {
-    selectedGlyphDataControllerSubscription =
-        selectedGlyphDataController.stream.listen((_) {
-      updateState();
-    });
+  GlyphDetailsViewController(this.selectedGlyphDataController)
+    : super(defaultGlyphDetailsViewState) {
+    selectedGlyphDataControllerSubscription = selectedGlyphDataController.stream
+        .listen((_) {
+          updateState();
+        });
     updateState();
   }
 
