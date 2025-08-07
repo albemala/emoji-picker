@@ -13,7 +13,7 @@ if (keystorePropertiesFile.exists()) {
 
 android { 
     namespace "me.albemala.ejimo"
-    compileSdk 34
+    compileSdk 35
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId "me.albemala.ejimo"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
