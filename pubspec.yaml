@@ -14,14 +14,18 @@ dependencies:
 
   # state management
   equatable: ^2.0.7
-  fast_immutable_collections: ^11.0.0
-  flutter_bloc: ^8.1.6
+  fast_immutable_collections: ^11.0.4
+  flutter_bloc: ^9.0.0
   # data storage
+  flutter_data_storage:
+    git:
+      url: https://github.com/albemala/flutter_data_storage.git
+      ref: 3.2.1
   shared_preferences: ^2.3.5
 
   # UI
-  flex_color_scheme: ^8.0.2
-  google_fonts: ^6.2.1
+  flex_color_scheme: ^8.2.0
+  google_fonts: ^6.3.0
   cupertino_icons: ^1.0.8
   sliver_tools: ^0.2.12
   slivers: ^0.0.1+2
@@ -32,33 +36,34 @@ dependencies:
 
   # utils
   collection: ^1.18.0
-  clipboard: ^0.1.3
+  clipboard: ^2.0.2
   cross_platform: ^3.0.1
 
-  package_info_plus: ^8.1.1
-  device_info_plus: ^11.1.1
-  share_plus: ^10.1.2
-  url_launcher: ^6.3.1
+  # support
+  package_info_plus: ^8.3.0
+  device_info_plus: ^11.4.0
+  share_plus: ^11.0.0
+  url_launcher: ^6.3.2
   in_app_review: ^2.0.10
   send_support_email:
     git:
       url: https://github.com/albemala/send_support_email.git
-      ref: 2.1.0
+      ref: 3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4
   # flutter test --update-goldens test/screenshots/take_screenshots_test.dart
-  golden_screenshot: ^3.1.3
+  golden_screenshot: ^3.3.0
 
-  very_good_analysis: ^7.0.0
+  very_good_analysis: ^9.0.0
 
-  build_runner: ^2.4.13
+  build_runner: ^2.6.0
   flutter_launcher_icons_maker: ^0.10.2
-  package_rename: ^1.8.0
+  package_rename: ^1.10.0
 
-  http: ^1.2.0
+  http: ^1.5.0
   path: ^1.9.0
 
   # windows
