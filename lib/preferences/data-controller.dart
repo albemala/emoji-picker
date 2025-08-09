@@ -1,35 +1,28 @@
-import 'dart:async';
-
-import 'package:app/local-store/bloc.dart';
 import 'package:app/preferences/data-state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_data_storage/flutter_data_storage.dart';
 
-class PreferencesDataController extends Cubit<PreferencesDataState> {
-  final LocalStoreDataController localStoreDataController;
-
-  StreamSubscription<void>? selfSubscription;
-
+class PreferencesDataController extends StoredCubit<PreferencesDataState> {
   factory PreferencesDataController.fromContext(BuildContext context) {
-    return PreferencesDataController(context.read<LocalStoreDataController>());
+    return PreferencesDataController();
   }
 
-  PreferencesDataController(this.localStoreDataController)
-    : super(defaultPreferencesDataState) {
-    _init();
-  }
+  PreferencesDataController() : super(defaultPreferencesDataState);
 
-  Future<void> _init() async {
-    await load();
-    selfSubscription = stream.listen((_) {
-      save();
-    });
+  @override
+  Future<void> migrateData() async {}
+
+  @override
+  String get storeName => 'preferences';
+
+  @override
+  PreferencesDataState fromMap(Map<String, dynamic> json) {
+    return PreferencesDataState.fromMap(json);
   }
 
   @override
-  Future<void> close() {
-    selfSubscription?.cancel();
-    return super.close();
+  Map<String, dynamic> toMap(PreferencesDataState state) {
+    return state.toMap();
   }
 
   ThemeMode get themeMode => state.themeMode;
@@ -42,16 +35,5 @@ class PreferencesDataController extends Cubit<PreferencesDataState> {
                     .light //
             ? ThemeMode.dark
             : ThemeMode.light;
-  }
-
-  static const storeName = 'preferences';
-
-  Future<void> load() async {
-    final map = await localStoreDataController.load(storeName);
-    emit(PreferencesDataState.fromMap(map));
-  }
-
-  Future<void> save() async {
-    await localStoreDataController.save(storeName, state.toMap());
   }
 }
