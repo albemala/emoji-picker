@@ -2,7 +2,8 @@ import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-details/view-controller.dart';
 import 'package:app/glyph-details/view-state.dart';
 import 'package:app/glyph-tile/functions.dart';
-import 'package:app/theme.dart';
+import 'package:app/theme/text.dart';
+import 'package:app/widgets/ads.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,68 +59,72 @@ class _GlyphDetailsContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.6),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(21),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _HeaderView(state: state, controller: controller),
-            Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                _GlyphView(state: state),
-                _CopyGlyphView(
-                  onCopy: () {
-                    copyGlyphToClipboard(context, state.glyph);
-                  },
-                ),
-                _GlyphValuesView(state: state, controller: controller),
-              ],
-            ),
-            if (state.glyph.keywords.isNotEmpty) //
-              const SizedBox(height: 16),
-            if (state.glyph.keywords.isNotEmpty) //
-              _GlyphKeywordsView(state: state),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _HeaderView extends StatelessWidget {
-  final GlyphDetailsViewState state;
-  final GlyphDetailsViewController controller;
-
-  const _HeaderView({required this.state, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: 24,
       children: [
-        Expanded(
-          child: Text(
-            state.glyph.name,
-            style: Theme.of(context).textTheme.titleMedium,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+        // Hero Section - Glyph Display
+        _SectionCard(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            // spacing: 16,
+            children: [
+              _GlyphView(state: state),
+              Text(
+                state.glyph.name,
+                style: getHeadlineTextStyle(context).copyWith(
+                  color: Theme.of(context).colorScheme.onTertiaryFixed,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
-        IconButton(
-          padding: EdgeInsets.zero,
-          icon: const Icon(CupertinoIcons.clear),
-          onPressed: controller.closeDetailsView,
-        ),
+
+        // Primary Action Section
+        _CopyGlyphView(controller: controller),
+
+        // Technical Information Section
+        if (state.glyph.unicode.isNotEmpty || state.glyph.htmlCode.isNotEmpty)
+          Row(
+            spacing: 16,
+            children: [
+              if (state.glyph.unicode.isNotEmpty)
+                _GlyphValueView(
+                  title: 'Unicode',
+                  value: state.glyph.unicode,
+                  onCopy: () {
+                    copyGlyphUnicodeToClipboard(context, state.glyph);
+                  },
+                ),
+              if (state.glyph.htmlCode.isNotEmpty)
+                _GlyphValueView(
+                  title: 'HTML Code',
+                  value: state.glyph.htmlCode,
+                  onCopy: () {
+                    copyGlyphHtmlCodeToClipboard(context, state.glyph);
+                  },
+                ),
+            ],
+          ),
+
+        // Keywords Section
+        if (state.glyph.keywords.isNotEmpty)
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 8,
+            children: [
+              Text(
+                'Keywords'.toUpperCase(),
+                style: getSubtitleTextStyle(context),
+              ),
+              _GlyphKeywordsView(state: state),
+            ],
+          ),
+
+        // Ad Section
+        _SectionCard(child: AdView(adData: state.adData)),
       ],
     );
   }
@@ -137,7 +142,7 @@ class _GlyphView extends StatelessWidget {
       glyph.glyph,
       style: getTextStyleForGlyph(
         glyph,
-      ).copyWith(fontSize: glyph.type == GlyphType.kaomoji ? 32 : 56),
+      ).copyWith(fontSize: glyph.type == GlyphType.kaomoji ? 48 : 72),
       overflow: TextOverflow.fade,
       maxLines: 1,
       softWrap: false,
@@ -146,60 +151,37 @@ class _GlyphView extends StatelessWidget {
 }
 
 class _CopyGlyphView extends StatelessWidget {
-  final void Function() onCopy;
-
-  const _CopyGlyphView({required this.onCopy});
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      direction: Axis.vertical,
-      spacing: 8,
-      children: [
-        FilledButton(onPressed: onCopy, child: const Text('Copy')),
-        if (cross_platform.Platform.isDesktop)
-          Text(
-            cross_platform
-                    .Platform
-                    .isMacOS //
-                ? 'or ⌘C or double-click to copy'
-                : 'or Ctrl C or double-click to copy',
-            style: Theme.of(context).textTheme.bodySmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-      ],
-    );
-  }
-}
-
-class _GlyphValuesView extends StatelessWidget {
-  final GlyphDetailsViewState state;
   final GlyphDetailsViewController controller;
 
-  const _GlyphValuesView({required this.state, required this.controller});
+  const _CopyGlyphView({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      spacing: 8,
       children: [
-        if (state.glyph.unicode.isNotEmpty)
-          _GlyphValueView(
-            title: 'Unicode',
-            value: state.glyph.unicode,
-            onCopy: () {
-              copyGlyphUnicodeToClipboard(context, state.glyph);
-            },
+        FilledButton.icon(
+          onPressed: () => controller.copyGlyphToClipboard(context),
+          icon: Icon(
+            CupertinoIcons.doc_on_clipboard,
+            color: Theme.of(context).colorScheme.onPrimary,
+            size: 18,
           ),
-        const SizedBox(width: 16),
-        if (state.glyph.htmlCode.isNotEmpty)
-          _GlyphValueView(
-            title: 'HTML code',
-            value: state.glyph.htmlCode,
-            onCopy: () {
-              copyGlyphHtmlCodeToClipboard(context, state.glyph);
-            },
+          label: Text(
+            'Copy',
+            style: getTitleTextStyle(context).copyWith(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+          ),
+          style: FilledButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+          ),
+        ),
+        if (cross_platform.Platform.isDesktop)
+          Text(
+            cross_platform.Platform.isMacOS ? 'or ⌘C' : 'or Ctrl C',
+            style: getBodyTextStyle(context),
           ),
       ],
     );
@@ -219,40 +201,24 @@ class _GlyphValueView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title.toUpperCase(),
-            style: Theme.of(context).textTheme.bodySmall,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 8,
+      children: [
+        Text(
+          title.toUpperCase(),
+          style: getSubtitleTextStyle(context),
+        ),
+        OutlinedButton.icon(
+          onPressed: onCopy,
+          label: Text(
+            value,
           ),
-          InkWell(
-            onTap: onCopy,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Text(
-                    value,
-                    style: Theme.of(context).textTheme.titleLarge,
-                    overflow: TextOverflow.fade,
-                    maxLines: 1,
-                    softWrap: false,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(
-                  CupertinoIcons.doc_on_clipboard,
-                  size: 18,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ],
-            ),
+          icon: const Icon(
+            CupertinoIcons.doc_on_clipboard,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -265,22 +231,45 @@ class _GlyphKeywordsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 4,
-      runSpacing: 4,
+      spacing: 8,
+      runSpacing: 8,
       children: [
         for (final keyword in state.glyph.keywords)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.tertiaryContainer,
+              color: Theme.of(context).colorScheme.tertiaryFixed,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
               '#$keyword',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: getBodyTextStyle(context).copyWith(
+                color: Theme.of(context).colorScheme.onTertiaryFixed,
+              ),
             ),
           ),
       ],
+    );
+  }
+}
+
+/// Reusable card container widget for consistent section styling
+class _SectionCard extends StatelessWidget {
+  final Widget child;
+
+  const _SectionCard({
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.tertiaryFixed,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: child,
     );
   }
 }

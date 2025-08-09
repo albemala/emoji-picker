@@ -1,13 +1,16 @@
 import 'dart:async';
 
 import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/glyph-details/dialog.dart';
 import 'package:app/glyph-tile/view-state.dart';
+import 'package:app/responsive.dart';
 import 'package:app/selected-glyph/data-controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   final SelectedGlyphDataController selectedGlyphDataController;
+
   StreamSubscription<void>? selectedGlyphDataControllerSubscription;
 
   final focusNode = FocusNode();
@@ -36,9 +39,9 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   }
 
   void updateState() {
-    if (selectedGlyphDataController.selectedGlyph == unknownGlyph) {
-      focusNode.unfocus();
-    }
+    // if (selectedGlyphDataController.selectedGlyph == unknownGlyph) {
+    //   focusNode.unfocus();
+    // }
     emit(
       state.copyWith(
         isSelected: state.glyph == selectedGlyphDataController.selectedGlyph,
@@ -50,11 +53,20 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
     if (isFocused) {
       selectedGlyphDataController.selectedGlyph = state.glyph;
     } else {
-      selectedGlyphDataController.selectedGlyph = unknownGlyph;
+      // selectedGlyphDataController.selectedGlyph = unknownGlyph;
     }
   }
 
-  void selectGlyph() {
-    selectedGlyphDataController.selectedGlyph = state.glyph;
+  Future<void> onTap(BuildContext context) async {
+    focusNode.requestFocus();
+    if (isMobileScreen(context)) {
+      // On mobile, show full-screen dialog
+      await showGlyphDetailsDialog(context);
+      focusNode.unfocus();
+    }
+    // else {
+    // On desktop, use existing focus behavior
+    // focusNode.requestFocus();
+    // }
   }
 }

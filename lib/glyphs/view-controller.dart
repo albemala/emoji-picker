@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyphs/view-state.dart';
 import 'package:app/search/data-controller.dart';
-import 'package:app/widgets/ads.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,13 +56,15 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
     for (final glyph in glyphs) {
       groups.update(
         glyph.group,
-        (existing) => existing.copyWith(glyphs: existing.glyphs.add(glyph)),
-        ifAbsent:
-            () => GlyphGroupViewState(
-              title: glyph.group,
-              glyphs: IList([glyph]),
-              ad: selectRandomAdType(includeNone: true),
-            ),
+        (existing) {
+          return existing.copyWith(glyphs: existing.glyphs.add(glyph));
+        },
+        ifAbsent: () {
+          return GlyphGroupViewState(
+            title: glyph.group,
+            glyphs: IList([glyph]),
+          );
+        },
       );
     }
     return groups.values.toList();

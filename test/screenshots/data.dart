@@ -11,7 +11,6 @@ import 'package:app/search/data-state.dart';
 import 'package:app/selected-glyph/data-controller.dart';
 import 'package:app/selected-glyph/data-state.dart';
 import 'package:app/selected-tab/data-controller.dart';
-import 'package:app/widgets/ads.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,7 +108,7 @@ ScreenshotData createAboutViewScreenshotData() {
     view: ScreenshotDialogView(
       child: AboutView(
         controller: MockAboutViewController(),
-        state: AboutViewState(appVersion: '3.0.0', adType: AdType.values.first),
+        state: const AboutViewState(appVersion: '3.0.0'),
       ),
     ),
     fileName: 'about_view',

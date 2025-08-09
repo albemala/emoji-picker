@@ -71,10 +71,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/app-icon/
     - assets/data/
     - assets/fonts/TitilliumWeb/
     - assets/fonts/Noto_Color_Emoji/
-    - assets/images/
+    - assets/other_apps_icons/
   fonts:
     # https://github.com/notofonts/notofonts.github.io/tree/main/megamerge
     - family: Noto Sans Living

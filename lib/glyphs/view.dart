@@ -2,8 +2,9 @@ import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-tile/view.dart';
 import 'package:app/glyphs/view-controller.dart';
 import 'package:app/glyphs/view-state.dart';
+import 'package:app/responsive.dart';
 import 'package:app/selected-tab/data-controller.dart';
-import 'package:app/widgets/ads.dart';
+import 'package:app/theme/text.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,64 @@ class GlyphsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // On desktop screens, show all three content sections side by side
+    if (isDesktopScreen(context)) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Emoji section
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 21, vertical: 16),
+                  child: Text(
+                    'Emoji',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(child: _EmojiView(state: state)),
+              ],
+            ),
+          ),
+          // Symbols section
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 21, vertical: 16),
+                  child: Text(
+                    'Symbols',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(child: _SymbolsView(state: state)),
+              ],
+            ),
+          ),
+          // Kaomoji section
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 21, vertical: 16),
+                  child: Text(
+                    'Kaomoji',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(child: _KaomojiView(state: state)),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+
+    // On mobile and tablet screens, use the tabbed interface
     final tabController =
         context.read<SelectedTabDataController>().tabController;
     return Column(
@@ -140,7 +199,6 @@ class _GlyphGroupView extends StatelessWidget {
                   padding: const EdgeInsets.all(21),
                   sliver: groupBuilder(context, group.glyphs.toList()),
                 ),
-                _AdView(adType: group.ad),
               ],
             );
           }).toList(),
@@ -160,7 +218,7 @@ class _GlyphGroupTitleView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 8),
         child: Text(
           title.toUpperCase(),
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: getBodyTextStyle(context),
         ),
       ),
     );
@@ -177,8 +235,8 @@ class _GlyphGroupGridView extends StatelessWidget {
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 56,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        crossAxisSpacing: 4,
+        mainAxisSpacing: 4,
       ),
       delegate: SliverChildBuilderDelegate((context, index) {
         final glyph = glyphs.elementAt(index);
@@ -212,52 +270,8 @@ class _GlyphGroupListView extends StatelessWidget {
         );
       },
       separatorBuilder: (context, index) {
-        return const SizedBox(height: 8);
+        return const SizedBox(height: 4);
       },
-    );
-  }
-}
-
-class _AdView extends StatelessWidget {
-  final AdType adType;
-
-  const _AdView({required this.adType});
-
-  @override
-  Widget build(BuildContext context) {
-    switch (adType) {
-      case AdType.exabox:
-        return const _AdContainerView(child: ExaboxAdView());
-      case AdType.hexee:
-        return const _AdContainerView(child: HexeeProAdView());
-      case AdType.wmap:
-        return const _AdContainerView(child: WMapAdView());
-      case AdType.iroiro:
-        return const _AdContainerView(child: IroIronAdView());
-      case AdType.none:
-        return const SizedBox();
-    }
-  }
-}
-
-class _AdContainerView extends StatelessWidget {
-  final Widget child;
-
-  const _AdContainerView({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 21, right: 21, bottom: 21),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
-          child: Material(
-            borderRadius: BorderRadius.circular(16),
-            child: Padding(padding: const EdgeInsets.all(21), child: child),
-          ),
-        ),
-      ),
     );
   }
 }

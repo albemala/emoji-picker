@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   final GlyphsDataController glyphsDataController;
+
   StreamSubscription<void>? glyphsDataControllerSubscription;
 
   final focusNode = FocusNode();

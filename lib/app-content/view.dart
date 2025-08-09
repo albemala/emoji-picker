@@ -2,6 +2,7 @@ import 'package:app/app-content/view-controller.dart';
 import 'package:app/app-content/view-state.dart';
 import 'package:app/glyph-details/view.dart';
 import 'package:app/glyphs/view.dart';
+import 'package:app/responsive.dart';
 import 'package:app/search/view.dart';
 import 'package:app/widgets/about.dart';
 import 'package:app/widgets/preferences.dart';
@@ -39,14 +40,38 @@ class AppContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _HeaderView(),
-            Expanded(child: GlyphsViewCreator()),
-            GlyphDetailsViewCreator(),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HeaderView(),
+                  Expanded(child: GlyphsViewCreator()),
+                ],
+              ),
+            ),
+            // Show inline glyph details on tablet and desktop screens
+            if (isTabletScreen(context) || isDesktopScreen(context))
+              SizedBox(
+                width: 420,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: GlyphDetailsViewCreator(),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -54,8 +79,8 @@ class AppContentView extends StatelessWidget {
   }
 }
 
-class _HeaderView extends StatelessWidget {
-  const _HeaderView();
+class HeaderView extends StatelessWidget {
+  const HeaderView({super.key});
 
   @override
   Widget build(BuildContext context) {

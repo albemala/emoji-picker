@@ -2,7 +2,7 @@ import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-tile/functions.dart';
 import 'package:app/glyph-tile/view-controller.dart';
 import 'package:app/glyph-tile/view-state.dart';
-import 'package:app/theme.dart';
+import 'package:app/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -78,10 +78,13 @@ class GlyphTileView extends StatelessWidget {
     return Material(
       color:
           state.isSelected
-              ? Theme.of(context).colorScheme.tertiaryContainer
-              : null,
+              ? Theme.of(context).colorScheme.primaryContainer
+              : Theme.of(context).colorScheme.tertiaryContainer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
       child: InkWell(
-        onTap: controller.focusNode.requestFocus,
+        onTap: () => controller.onTap(context),
         onDoubleTap: () {
           copyGlyphToClipboard(context, state.glyph);
         },

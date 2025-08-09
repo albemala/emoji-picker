@@ -1,13 +1,17 @@
 import 'dart:async';
 
-import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/clipboard.dart';
 import 'package:app/glyph-details/view-state.dart';
+import 'package:app/routing.dart';
 import 'package:app/selected-glyph/data-controller.dart';
+import 'package:app/widgets/ads.dart';
+import 'package:app/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
   final SelectedGlyphDataController selectedGlyphDataController;
+
   StreamSubscription<void>? selectedGlyphDataControllerSubscription;
 
   factory GlyphDetailsViewController.fromContext(BuildContext context) {
@@ -32,14 +36,20 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
   }
 
   void updateState() {
+    final selectedGlyph = selectedGlyphDataController.state.selectedGlyph;
+    final adData = selectRandomAdData(); // Always select an ad
+
     emit(
       GlyphDetailsViewState(
-        glyph: selectedGlyphDataController.state.selectedGlyph,
+        glyph: selectedGlyph,
+        adData: adData,
       ),
     );
   }
 
-  void closeDetailsView() {
-    selectedGlyphDataController.selectedGlyph = unknownGlyph;
+  Future<void> copyGlyphToClipboard(BuildContext context) async {
+    final glyph = state.glyph;
+    await copyToClipboard(glyph.glyph);
+    showSnackBar(context, createCopiedToClipboardSnackBar(glyph.glyph));
   }
 }

@@ -5,7 +5,6 @@ import 'package:app/feedback.dart';
 import 'package:app/share.dart';
 import 'package:app/urls/defines.dart';
 import 'package:app/urls/functions.dart';
-import 'package:app/widgets/ads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -21,8 +20,7 @@ class AboutViewController extends Cubit<AboutViewState> {
 
   Future<void> updateViewState() async {
     final appVersion = await getAppVersion();
-    final adType = selectRandomAdType(includeNone: false);
-    emit(AboutViewState(appVersion: appVersion, adType: adType));
+    emit(AboutViewState(appVersion: appVersion));
   }
 
   Future<void> openRateApp() async {

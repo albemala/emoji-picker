@@ -36,26 +36,22 @@ class GlyphsViewState extends Equatable {
 class GlyphGroupViewState extends Equatable {
   final String title;
   final IList<Glyph> glyphs;
-  final AdType ad;
 
   const GlyphGroupViewState({
     required this.title,
     required this.glyphs,
-    required this.ad,
   });
 
   @override
-  List<Object> get props => [title, glyphs, ad];
+  List<Object> get props => [title, glyphs];
 
   GlyphGroupViewState copyWith({
     String? title,
     IList<Glyph>? glyphs,
-    AdType? ad,
   }) {
     return GlyphGroupViewState(
       title: title ?? this.title,
       glyphs: glyphs ?? this.glyphs,
-      ad: ad ?? this.ad,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app/theme.dart';
+import 'package:app/theme/data.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
