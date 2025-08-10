@@ -6,7 +6,7 @@ import 'package:app/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlyphTileViewCreator extends StatefulWidget {
+class GlyphTileViewCreator extends StatelessWidget {
   final Glyph glyph;
   final Widget Function(BuildContext context, Glyph glyph) glyphContentBuilder;
 
@@ -17,47 +17,20 @@ class GlyphTileViewCreator extends StatefulWidget {
   });
 
   @override
-  State<GlyphTileViewCreator> createState() => _GlyphTileViewCreatorState();
-}
-
-class _GlyphTileViewCreatorState extends State<GlyphTileViewCreator> {
-  late final GlyphTileViewController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = GlyphTileViewController.fromContext(context);
-    _controller.setGlyph(widget.glyph);
-  }
-
-  @override
-  void didUpdateWidget(covariant GlyphTileViewCreator oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.glyph != widget.glyph) {
-      _controller.setGlyph(widget.glyph);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _controller,
+    return BlocProvider<GlyphTileViewController>(
+      key: ValueKey(glyph),
+      create: (context) => GlyphTileViewController.fromContext(context, glyph),
       child: BlocBuilder<GlyphTileViewController, GlyphTileViewState>(
         builder: (context, state) {
           return GlyphTileView(
             state: state,
             controller: context.read<GlyphTileViewController>(),
-            glyphContentView: widget.glyphContentBuilder(context, state.glyph),
+            glyphContentView: glyphContentBuilder(context, state.glyph),
           );
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.close();
-    super.dispose();
   }
 }
 
