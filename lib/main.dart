@@ -1,4 +1,5 @@
 import 'package:app/app/view.dart';
+import 'package:app/app_usage/data-controller.dart';
 import 'package:app/glyph-data/data-controller.dart';
 import 'package:app/preferences/data-controller.dart';
 import 'package:app/search/data-controller.dart';
@@ -17,6 +18,10 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: const [
+        BlocProvider(
+          create: AppUsageDataController.fromContext,
+          lazy: false, //
+        ),
         BlocProvider(
           create: PreferencesDataController.fromContext,
           lazy: false, //

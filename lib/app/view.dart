@@ -50,20 +50,23 @@ class AppView extends StatelessWidget {
       theme: getLightTheme(),
       darkTheme: getDarkTheme(),
       themeMode: state.themeMode,
-      home: Builder(
-        builder: (context) {
-          return Shortcuts(
-            shortcuts: shortcuts,
-            child: Actions(
-              actions: {
-                FocusSearchIntent: FocusSearchAction(context),
-                CopyGlyphIntent: CopyGlyphAction(context),
-              },
-              child: const AppContentViewCreator(),
-            ),
-          );
-        },
-      ),
+      home:
+          state.isLoading
+              ? const Scaffold(body: Center(child: CircularProgressIndicator()))
+              : Builder(
+                builder: (context) {
+                  return Shortcuts(
+                    shortcuts: shortcuts,
+                    child: Actions(
+                      actions: {
+                        FocusSearchIntent: FocusSearchAction(context),
+                        CopyGlyphIntent: CopyGlyphAction(context),
+                      },
+                      child: const AppContentViewCreator(),
+                    ),
+                  );
+                },
+              ),
     );
   }
 }

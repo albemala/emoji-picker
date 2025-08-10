@@ -4,15 +4,22 @@ import 'package:flutter/material.dart';
 @immutable
 class AppViewState extends Equatable {
   final ThemeMode themeMode;
+  final bool isLoading;
 
-  const AppViewState({required this.themeMode});
+  const AppViewState({required this.themeMode, required this.isLoading});
 
   @override
-  List<Object> get props => [themeMode];
+  List<Object> get props => [themeMode, isLoading];
 
-  AppViewState copyWith({ThemeMode? themeMode}) {
-    return AppViewState(themeMode: themeMode ?? this.themeMode);
+  AppViewState copyWith({ThemeMode? themeMode, bool? isLoading}) {
+    return AppViewState(
+      themeMode: themeMode ?? this.themeMode,
+      isLoading: isLoading ?? this.isLoading,
+    );
   }
 }
 
-const defaultAppViewState = AppViewState(themeMode: ThemeMode.light);
+const defaultAppViewState = AppViewState(
+  themeMode: ThemeMode.light,
+  isLoading: true,
+);
