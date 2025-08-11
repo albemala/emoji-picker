@@ -61,7 +61,7 @@ dev_dependencies:
   very_good_analysis: ^9.0.0
 
   build_runner: ^2.6.0
-  flutter_launcher_icons_maker: ^0.10.2
+  icons_launcher: ^3.0.1
   package_rename: ^1.10.0
 
   http: ^1.5.0
@@ -98,18 +98,22 @@ flutter:
         - asset: assets/fonts/NotoSans/NotoSansSC-Regular.otf
           weight: 400
 
-# dart run flutter_launcher_icons_maker:main && flutter clean && flutter pub get
-flutter_icons:
-  android: true
-  ios: true
-  macos: true
-  windows: true
-  web: true
-  image_path: "assets/images/app-icon.png"
-  image_path_ios: "assets/app-icon-ios.png"
-  adaptive_icon_background: "#000000"
-#  adaptive_icon_background: "assets/app-icon/android-background.png"
-  adaptive_icon_foreground: "assets/app-icon-android-foreground.png"
+# dart run icons_launcher:create && flutter clean && flutter pub get
+icons_launcher:
+  image_path: "assets/app-icon/app-icon.png"
+  platforms:
+    android:
+      enable: false
+    ios:
+      enable: false
+    macos:
+      enable: true
+    windows:
+      enable: false
+    linux:
+      enable: false
+    web:
+      enable: false
 
 # dart run package_rename
 package_rename_config:
