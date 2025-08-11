@@ -49,6 +49,8 @@ dependencies:
       url: https://github.com/albemala/send_support_email.git
       ref: 3.0.0
 
+  sentry_flutter: ^9.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
