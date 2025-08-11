@@ -84,6 +84,24 @@ class _GlyphDetailsContentView extends StatelessWidget {
         // Primary Action Section
         _CopyGlyphView(controller: controller),
 
+        Row(
+          children: [
+            OutlinedButton.icon(
+              onPressed: controller.toggleFavorite,
+              icon: Icon(
+                controller.state.isFavorite
+                    ? CupertinoIcons.star_fill
+                    : CupertinoIcons.star,
+              ),
+              label: Text(
+                controller.state.isFavorite
+                    ? 'Remove from Favorites'
+                    : 'Add to Favorites',
+              ),
+            ),
+          ],
+        ),
+
         // Technical Information Section
         if (state.glyph.unicode.isNotEmpty || state.glyph.htmlCode.isNotEmpty)
           Row(

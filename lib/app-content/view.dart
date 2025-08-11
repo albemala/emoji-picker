@@ -58,16 +58,17 @@ class AppContentView extends StatelessWidget {
             if (isTabletScreen(context) || isDesktopScreen(context))
               SizedBox(
                 width: 420,
+                height: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(32),
+                    child: ColoredBox(
                       color: Theme.of(context).colorScheme.tertiaryContainer,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(16),
-                      child: GlyphDetailsViewCreator(),
+                      child: const SingleChildScrollView(
+                        padding: EdgeInsets.all(16),
+                        child: GlyphDetailsViewCreator(),
+                      ),
                     ),
                   ),
                 ),

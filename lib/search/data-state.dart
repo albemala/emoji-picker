@@ -5,44 +5,50 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class SearchGlyphsDataState extends Equatable {
+  final String searchQuery;
   final IList<Glyph> filteredEmoji;
   final IList<Glyph> filteredSymbols;
   final IList<Glyph> filteredKaomoji;
-  final String searchQuery;
+  final IList<Glyph> filteredFavorites;
 
   const SearchGlyphsDataState({
+    required this.searchQuery,
     required this.filteredEmoji,
     required this.filteredSymbols,
     required this.filteredKaomoji,
-    required this.searchQuery,
+    required this.filteredFavorites,
   });
 
   @override
   List<Object> get props => [
+    searchQuery,
     filteredEmoji,
     filteredSymbols,
     filteredKaomoji,
-    searchQuery,
+    filteredFavorites,
   ];
 
   SearchGlyphsDataState copyWith({
+    String? searchQuery,
     IList<Glyph>? filteredEmoji,
     IList<Glyph>? filteredSymbols,
     IList<Glyph>? filteredKaomoji,
-    String? searchQuery,
+    IList<Glyph>? filteredFavorites,
   }) {
     return SearchGlyphsDataState(
+      searchQuery: searchQuery ?? this.searchQuery,
       filteredEmoji: filteredEmoji ?? this.filteredEmoji,
       filteredSymbols: filteredSymbols ?? this.filteredSymbols,
       filteredKaomoji: filteredKaomoji ?? this.filteredKaomoji,
-      searchQuery: searchQuery ?? this.searchQuery,
+      filteredFavorites: filteredFavorites ?? this.filteredFavorites,
     );
   }
 }
 
 const defaultSearchGlyphsDataState = SearchGlyphsDataState(
+  searchQuery: '',
   filteredEmoji: IList.empty(),
   filteredSymbols: IList.empty(),
   filteredKaomoji: IList.empty(),
-  searchQuery: '',
+  filteredFavorites: IList.empty(),
 );

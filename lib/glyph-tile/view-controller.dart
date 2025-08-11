@@ -42,9 +42,6 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   }
 
   void updateState() {
-    // if (selectedGlyphDataController.selectedGlyph == unknownGlyph) {
-    //   focusNode.unfocus();
-    // }
     emit(
       state.copyWith(
         isSelected: state.glyph == selectedGlyphDataController.selectedGlyph,
@@ -55,8 +52,6 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   void onFocusChange(bool isFocused) {
     if (isFocused) {
       selectedGlyphDataController.selectedGlyph = state.glyph;
-    } else {
-      // selectedGlyphDataController.selectedGlyph = unknownGlyph;
     }
   }
 
@@ -65,11 +60,6 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
     if (isMobileScreen(context)) {
       // On mobile, show full-screen dialog
       await showGlyphDetailsDialog(context);
-      focusNode.unfocus();
     }
-    // else {
-    // On desktop, use existing focus behavior
-    // focusNode.requestFocus();
-    // }
   }
 }

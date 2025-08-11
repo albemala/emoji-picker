@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectedTabDataController extends Cubit<void> implements TickerProvider {
   late final TabController tabController = TabController(
-    length: 3,
+    length: 4,
     vsync: this,
   );
 

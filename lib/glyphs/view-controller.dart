@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphsViewController extends Cubit<GlyphsViewState> {
   final SearchGlyphsDataController searchGlyphsDataController;
+
   StreamSubscription<void>? searchGlyphsDataControllerSubscription;
 
   factory GlyphsViewController.fromContext(BuildContext context) {
@@ -42,11 +43,15 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
     final kaomoji = groupGlyphs(
       searchGlyphsDataController.state.filteredKaomoji.toList(),
     );
+    final favorites = groupFavoriteGlyphsByType(
+      searchGlyphsDataController.state.filteredFavorites.toList(),
+    );
     emit(
       state.copyWith(
         emoji: emoji.toIList(),
         symbols: symbols.toIList(),
         kaomoji: kaomoji.toIList(),
+        favorites: favorites.toIList(),
       ),
     );
   }
@@ -68,5 +73,33 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
       );
     }
     return groups.values.toList();
+  }
+
+  List<GlyphGroupViewState> groupFavoriteGlyphsByType(List<Glyph> glyphs) {
+    final emoji = <Glyph>[];
+    final symbols = <Glyph>[];
+    final kaomoji = <Glyph>[];
+
+    for (final glyph in glyphs) {
+      switch (glyph.type) {
+        case GlyphType.emoji:
+          emoji.add(glyph);
+        case GlyphType.symbol:
+          symbols.add(glyph);
+        case GlyphType.kaomoji:
+          kaomoji.add(glyph);
+        case GlyphType.unknown:
+          throw UnimplementedError();
+      }
+    }
+
+    return [
+      if (emoji.isNotEmpty)
+        GlyphGroupViewState(title: 'Emoji', glyphs: emoji.toIList()),
+      if (symbols.isNotEmpty)
+        GlyphGroupViewState(title: 'Symbols', glyphs: symbols.toIList()),
+      if (kaomoji.isNotEmpty)
+        GlyphGroupViewState(title: 'Kaomoji', glyphs: kaomoji.toIList()),
+    ];
   }
 }

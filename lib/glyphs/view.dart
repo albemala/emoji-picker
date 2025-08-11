@@ -90,6 +90,22 @@ class GlyphsView extends StatelessWidget {
               ],
             ),
           ),
+          // Favorites section
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 21, vertical: 16),
+                  child: Text(
+                    'Favorites',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(child: _FavoritesView(state: state)),
+              ],
+            ),
+          ),
         ],
       );
     }
@@ -110,6 +126,7 @@ class GlyphsView extends StatelessWidget {
                 Tab(text: 'Emoji'),
                 Tab(text: 'Symbols'),
                 Tab(text: 'Kaomoji'),
+                Tab(text: 'Favorites'),
               ],
             );
           },
@@ -122,6 +139,7 @@ class GlyphsView extends StatelessWidget {
               _EmojiView(state: state),
               _SymbolsView(state: state),
               _KaomojiView(state: state),
+              _FavoritesView(state: state),
             ],
           ),
         ),
@@ -173,6 +191,29 @@ class _KaomojiView extends StatelessWidget {
       groups: state.kaomoji,
       groupBuilder: (context, glyphs) {
         return _GlyphGroupListView(glyphs: glyphs);
+      },
+    );
+  }
+}
+
+class _FavoritesView extends StatelessWidget {
+  final GlyphsViewState state;
+
+  const _FavoritesView({required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.favorites.isEmpty) {
+      return const Center(
+        child: Text('Your favorite glyphs will appear here.'),
+      );
+    }
+    return _GlyphGroupView(
+      groups: state.favorites,
+      groupBuilder: (context, glyphs) {
+        return glyphs.first.type == GlyphType.kaomoji
+            ? _GlyphGroupListView(glyphs: glyphs)
+            : _GlyphGroupGridView(glyphs: glyphs);
       },
     );
   }

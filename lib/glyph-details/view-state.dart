@@ -7,16 +7,26 @@ import 'package:flutter/foundation.dart';
 class GlyphDetailsViewState extends Equatable {
   final Glyph glyph;
   final AdData adData;
+  final bool isFavorite;
 
-  const GlyphDetailsViewState({required this.glyph, required this.adData});
+  const GlyphDetailsViewState({
+    required this.glyph,
+    required this.adData,
+    required this.isFavorite,
+  });
 
   @override
-  List<Object> get props => [glyph, adData];
+  List<Object> get props => [glyph, adData, isFavorite];
 
-  GlyphDetailsViewState copyWith({Glyph? glyph, AdData? adData}) {
+  GlyphDetailsViewState copyWith({
+    Glyph? glyph,
+    AdData? adData,
+    bool? isFavorite,
+  }) {
     return GlyphDetailsViewState(
       glyph: glyph ?? this.glyph,
       adData: adData ?? this.adData,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 }
@@ -24,4 +34,5 @@ class GlyphDetailsViewState extends Equatable {
 final defaultGlyphDetailsViewState = GlyphDetailsViewState(
   glyph: unknownGlyph,
   adData: adsData.first,
+  isFavorite: false,
 );

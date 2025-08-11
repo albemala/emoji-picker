@@ -1,5 +1,6 @@
 import 'package:app/app/view.dart';
 import 'package:app/app_usage/data-controller.dart';
+import 'package:app/favorites/data-controller.dart';
 import 'package:app/glyph-data/data-controller.dart';
 import 'package:app/preferences/data-controller.dart';
 import 'package:app/search/data-controller.dart';
@@ -33,6 +34,10 @@ Future<void> main() async {
             ),
             BlocProvider(
               create: GlyphsDataController.fromContext,
+              lazy: false, //
+            ),
+            BlocProvider(
+              create: FavoritesDataController.fromContext,
               lazy: false, //
             ),
             BlocProvider(
