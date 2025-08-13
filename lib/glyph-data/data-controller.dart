@@ -17,11 +17,20 @@ class GlyphsDataController extends Cubit<GlyphsDataState> {
     final emoji = await loadEmoji();
     final symbols = await loadSymbols();
     final kaomoji = await loadKaomoji();
+
+    // Build unified map for fast lookups
+    final allGlyphsMap = IMap.fromEntries([
+      ...emoji.map((glyph) => MapEntry(glyph.glyph, glyph)),
+      ...symbols.map((glyph) => MapEntry(glyph.glyph, glyph)),
+      ...kaomoji.map((glyph) => MapEntry(glyph.glyph, glyph)),
+    ]);
+
     emit(
       GlyphsDataState(
         emoji: emoji.toIList(),
         symbols: symbols.toIList(),
         kaomoji: kaomoji.toIList(),
+        allGlyphsMap: allGlyphsMap,
       ),
     );
   }

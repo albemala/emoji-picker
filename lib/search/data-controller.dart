@@ -80,42 +80,60 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
             ? glyphData.kaomoji
             : glyphData.kaomoji.where(test).toIList();
 
+    // Step 1: Lookup - Convert glyph strings to actual Glyph objects using map lookups
     final favoriteGlyphStrings = favoritesDataController.state.favoriteGlyphs;
-    bool isFavorite(Glyph g) => favoriteGlyphStrings.contains(g.glyph);
-
-    final filteredFavorites =
-        [
-          ...filteredEmoji.where(isFavorite),
-          ...filteredSymbols.where(isFavorite),
-          ...filteredKaomoji.where(isFavorite),
-        ].toIList();
-
-    // Filter recent glyphs by type and search query
     final recentGlyphStrings = recentDataController.getRecentGlyphStrings();
-    bool isRecent(Glyph g) => recentGlyphStrings.contains(g.glyph);
+
+    final favoriteGlyphs =
+        favoriteGlyphStrings
+            .map((glyphString) => glyphData.allGlyphsMap[glyphString])
+            .whereType<Glyph>() // Filter out nulls
+            .toIList();
+
+    final recentGlyphs =
+        recentGlyphStrings
+            .map((glyphString) => glyphData.allGlyphsMap[glyphString])
+            .whereType<Glyph>() // Filter out nulls
+            .toIList();
+
+    // Step 2: Categorize recent glyphs by type
+    final recentEmoji =
+        recentGlyphs.where((g) => g.type == GlyphType.emoji).toIList();
+    final recentSymbols =
+        recentGlyphs.where((g) => g.type == GlyphType.symbol).toIList();
+    final recentKaomoji =
+        recentGlyphs.where((g) => g.type == GlyphType.kaomoji).toIList();
+
+    // Step 3: Apply search query filtering using consistent where pattern
+    final filteredFavorites =
+        state.searchQuery.isEmpty
+            ? favoriteGlyphs
+            : favoriteGlyphs.where(test).toIList();
 
     final filteredRecentEmoji =
         state.searchQuery.isEmpty
-            ? filteredEmoji.where(isRecent).toIList()
-            : filteredEmoji.where((g) => isRecent(g) && test(g)).toIList();
+            ? recentEmoji
+            : recentEmoji.where(test).toIList();
+
     final filteredRecentSymbols =
         state.searchQuery.isEmpty
-            ? filteredSymbols.where(isRecent).toIList()
-            : filteredSymbols.where((g) => isRecent(g) && test(g)).toIList();
+            ? recentSymbols
+            : recentSymbols.where(test).toIList();
+
     final filteredRecentKaomoji =
         state.searchQuery.isEmpty
-            ? filteredKaomoji.where(isRecent).toIList()
-            : filteredKaomoji.where((g) => isRecent(g) && test(g)).toIList();
+            ? recentKaomoji
+            : recentKaomoji.where(test).toIList();
 
     emit(
       state.copyWith(
         filteredEmoji: filteredEmoji,
         filteredSymbols: filteredSymbols,
         filteredKaomoji: filteredKaomoji,
-        filteredFavorites: filteredFavorites,
-        filteredRecentEmoji: filteredRecentEmoji,
-        filteredRecentSymbols: filteredRecentSymbols,
-        filteredRecentKaomoji: filteredRecentKaomoji,
+        filteredFavorites: filteredFavorites.toIList(),
+        filteredRecentEmoji: filteredRecentEmoji.toIList(),
+        filteredRecentSymbols: filteredRecentSymbols.toIList(),
+        filteredRecentKaomoji: filteredRecentKaomoji.toIList(),
       ),
     );
   }
