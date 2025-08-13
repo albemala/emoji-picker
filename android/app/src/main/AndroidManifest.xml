@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.albemala.ejimo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <queries>
         <!-- If your app opens https URLs -->
         <intent>

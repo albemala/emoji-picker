@@ -13,6 +13,8 @@ The application prioritizes user experience with fast search capabilities, offli
 - **17000+ Symbols**: Extensive symbol library covering arrows, letters, punctuation, mathematical symbols, and special characters
 - **Kaomoji Support**: Japanese emoticons and text-based expressions
 - **Categorized Organization**: Characters organized by type for easy browsing
+- **Favorites**: Users can save their most-used characters for quick access.
+- **Recent Glyphs**: Automatically keeps track of recently used characters.
 
 ### User Experience
 - **Copy & Paste Integration**: One-click copying to system clipboard
@@ -24,10 +26,9 @@ The application prioritizes user experience with fast search capabilities, offli
 - **Theme Support**: Light and dark theme options
 - **Offline Operation**: Full functionality without internet connection
 
-### Privacy & Performance
+### Privacy
 - **Privacy-Friendly**: No personal data collection or tracking
 - **Local Data Storage**: All character data stored locally for fast access
-- **Cross-Platform Consistency**: Uniform experience across all supported platforms
 
 ## Technical Stack
 
@@ -41,32 +42,6 @@ The application prioritizes user experience with fast search capabilities, offli
 - **Primary Library**: `flutter_bloc` ^8.1.6
 - **State Utilities**: `equatable` ^2.0.7, `fast_immutable_collections` ^11.0.0
 
-### Key Dependencies
-
-#### UI & Theming
-- `flex_color_scheme` ^8.0.2 - Advanced theming system
-- `google_fonts` ^6.2.1 - Typography and font management
-- `cupertino_icons` ^1.0.8 - iOS-style icons
-- `sliver_tools` ^0.2.12 - Advanced scrollable layouts
-
-#### Search & Data Processing
-- `fuzzywuzzy` ^1.2.0 - Fuzzy string matching for search
-- `easy_debounce` ^2.0.3 - Search input debouncing
-- `collection` ^1.18.0 - Data structure utilities
-
-#### System Integration
-- `clipboard` ^0.1.3 - Clipboard operations
-- `share_plus` ^10.1.2 - Native sharing functionality
-- `url_launcher` ^6.3.1 - External URL handling
-- `shared_preferences` ^2.3.5 - Local data persistence
-
-#### Platform Services
-- `package_info_plus` ^8.1.1 - App metadata access
-- `device_info_plus` ^11.1.1 - Device information
-- `in_app_review` ^2.0.10 - App store review prompts
-
-### Architecture Patterns
-
 #### BLoC Controllers
 - **GlyphsDataController**: Manages emoji, symbol, and kaomoji data loading
 - **SearchGlyphsDataController**: Handles search functionality and filtering
@@ -74,6 +49,37 @@ The application prioritizes user experience with fast search capabilities, offli
 - **SelectedGlyphDataController**: Current character selection state
 - **SelectedTabDataController**: Navigation and tab state management
 - **AppViewController**: Application-level state and theme management
+- **FavoritesDataController**: Manages favorite glyphs.
+- **RecentDataController**: Manages recently used glyphs.
+
+### Key Dependencies
+
+#### State Management & Data
+- `flutter_bloc` ^9.0.0 - Primary BLoC library
+- `equatable` ^2.0.7 - State equality checking
+- `fast_immutable_collections` ^11.0.4 - Immutable data structures
+- `flutter_data_storage` 3.2.1 - Data persistence for BLoC/Cubit
+- `collection` ^1.18.0 - Data structure utilities
+
+#### UI & Theming
+- `flex_color_scheme` ^8.0.2 - Advanced theming system
+- `google_fonts` ^6.2.1 - Typography and font management
+- `cupertino_icons` ^1.0.8 - iOS-style icons
+- `sliver_tools` ^0.2.12 - Advanced scrollable layouts
+
+#### Search
+- `fuzzywuzzy` ^1.2.0 - Fuzzy string matching for search
+- `easy_debounce` ^2.0.3 - Search input debouncing
+
+#### System Integration & Platform Services
+- `clipboard` ^0.1.3 - Clipboard operations
+- `share_plus` ^10.1.2 - Native sharing functionality
+- `url_launcher` ^6.3.1 - External URL handling
+- `package_info_plus` ^8.1.1 - App metadata access
+- `device_info_plus` ^11.1.1 - Device information
+- `in_app_review` ^2.0.10 - App store review prompts
+
+### Architecture Patterns
 
 #### Data Flow
 - Immutable state management using `fast_immutable_collections`
@@ -84,37 +90,24 @@ The application prioritizes user experience with fast search capabilities, offli
 
 ### Core Application (`lib/`)
 
-#### Application Layer
-- `app/` - Application configuration, main view, and global definitions
-  - `defines.dart` - App constants and configuration values
-  - `view.dart` - Main application widget and theme setup
-  - `view-controller.dart` - Application-level state management
-
-#### Feature Modules
-- `glyph-data/` - Character data management and loading
-- `search/` - Search functionality and filtering logic
-- `preferences/` - User settings and preferences handling
-- `selected-glyph/` - Character selection state management
-- `selected-tab/` - Navigation and tab management
-- `glyph-details/` - Character detail view and interactions
-- `glyph-tile/` - Individual character display components
-- `glyphs/` - Character grid and list views
-
-#### Shared Components
-- `widgets/` - Reusable UI components
-- `shortcuts/` - Keyboard shortcut definitions and actions
-- `local-store/` - Local data persistence layer
-- `urls/` - URL handling and external link management
-
-#### Utilities
-- `analytics.dart` - Usage analytics (privacy-compliant)
-- `clipboard.dart` - Clipboard integration utilities
-- `feedback.dart` - User feedback and support systems
-- `routing.dart` - Navigation and dialog management
-- `share.dart` - Content sharing functionality
-- `theme.dart` - Theme definitions and styling
-- `math.dart` - Mathematical utilities
-- `string.dart` - String processing helpers
+- **Application Layer** (`app/`): Main configuration, view, and global definitions.
+- **Feature Modules**:
+    - `glyph-data/`: Character data management.
+    - `search/`: Search and filtering logic.
+    - `preferences/`: User settings.
+    - `favorites/`: Favorites management.
+    - `recent/`: Recently used glyphs tracking.
+    - `selected-glyph/`: Character selection state.
+    - `selected-tab/`: Navigation and tab state.
+    - `glyph-details/`: Character detail view.
+    - `glyph-tile/`: Individual character components.
+    - `glyphs/`: Character grid and list views.
+- **Shared Components**:
+    - `widgets/`: Reusable UI components.
+    - `shortcuts/`: Keyboard shortcuts.
+    - `local-store/`: Local data persistence.
+    - `urls/`: URL handling.
+- **Utilities**: Helper functions for analytics, clipboard, feedback, routing, sharing, theming, math, and string processing.
 
 ### Assets & Data (`assets/`)
 
@@ -152,19 +145,9 @@ The application prioritizes user experience with fast search capabilities, offli
 
 ## Supported Platforms
 
-### Primary Platforms
-- **iOS**: Native iOS application via App Store
-- **Android**: Native Android application via Google Play Store
-- **Web**: Progressive Web App accessible via browsers
-- **macOS**: Native macOS application via Mac App Store
-- **Windows**: Native Windows application via Microsoft Store
-- **Linux**: Snap package distribution (planned)
-
-### Platform-Specific Features
-- **Mobile**: Touch-optimized interface with haptic feedback
-- **Desktop**: Keyboard shortcuts and window management
-- **Web**: Responsive design with PWA capabilities
-- **Cross-Platform**: Consistent UI/UX across all platforms
+- **iOS & Android**: Native mobile applications with touch-optimized UI.
+- **macOS, Windows, & Linux**: Native desktop applications with keyboard shortcuts and window management.
+- **Web**: Progressive Web App with responsive design.
 
 ### Distribution Channels
 - Official app stores for each platform
@@ -176,28 +159,22 @@ The application prioritizes user experience with fast search capabilities, offli
 ### Build Requirements
 - Flutter SDK >=3.24.0
 - Dart SDK >=3.5.0
-- Platform-specific development tools (Xcode for iOS/macOS, Android Studio for Android)
+- Platform-specific development tools (Xcode, Android Studio)
 
-### Key Configuration Files
-- `pubspec.yaml` - Dependencies, assets, and build configuration
-- `analysis_options.yaml` - Code quality and linting rules
-- `firebase.json` - Web hosting configuration
-- `codemagic.yaml` - CI/CD pipeline configuration
+### Configuration
+- `pubspec.yaml`: Dependencies, assets, and build configuration.
+- `analysis_options.yaml`: Code quality and linting rules.
+- `firebase.json`: Web hosting configuration.
+- `codemagic.yaml`: CI/CD pipeline configuration.
 
 ### Data Management
-- **Local Storage**: Character data loaded from JSON assets
-- **Preferences**: User settings persisted via SharedPreferences
-- **No External APIs**: Fully offline operation with local data sources
+- Character data is loaded from local JSON assets.
+- User preferences and other data are persisted using `flutter_data_storage`, which builds on top of `StoredCubit`.
+- State is managed by `StoredCubit` classes, which automatically handle data persistence.
+- The app operates fully offline with no external API dependencies.
 
-### Development Workflow
-- **State Management**: BLoC pattern with immutable state
-- **Code Quality**: Very Good Analysis linting rules
-- **Testing**: Unit tests with golden screenshot testing
-- **Build Automation**: Platform-specific build scripts in `scripts/` directory
-- **CI/CD**: Automated builds and deployments via Codemagic
-
-### Performance Considerations
-- **Lazy Loading**: BLoC providers configured for optimal initialization
-- **Efficient Search**: Debounced search with fuzzy matching algorithms
-- **Memory Management**: Immutable collections for efficient state updates
-- **Font Optimization**: Runtime font fetching disabled for performance
+### Workflow
+- **State Management**: BLoC pattern with `StoredCubit` for automatic persistence.
+- **Code Quality**: Very Good Analysis linting rules.
+- **Testing**: Unit tests with golden screenshot testing.
+- **CI/CD**: Automated builds and deployments via Codemagic and `scripts/` directory.
