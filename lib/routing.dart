@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 void showSnackBar(BuildContext context, SnackBar snackBar) {
   if (!context.mounted) return;
   ScaffoldMessenger.of(context)
-  // ..clearSnackBars()
-  .showSnackBar(snackBar);
+    ..clearSnackBars()
+    ..showSnackBar(snackBar);
 }
 
 Future<ReturnType?> openDialog<ReturnType>(
