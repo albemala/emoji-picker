@@ -47,7 +47,7 @@ class CopyGlyphAction extends Action<CopyGlyphIntent> {
 
 // ------ Shortcuts ------
 
-final shortcuts = {
+final Map<LogicalKeySet, Intent> shortcuts = {
   // focus search
   if (cross_platform.Platform.isMacOS) //
     LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyF):

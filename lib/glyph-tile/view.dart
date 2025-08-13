@@ -58,9 +58,7 @@ class GlyphTileView extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () => controller.onTap(context),
-        onDoubleTap: () {
-          copyGlyphToClipboard(context, state.glyph);
-        },
+        onDoubleTap: () => controller.onDoubleTap(context),
         focusNode: controller.focusNode,
         onFocusChange: controller.onFocusChange,
         child: glyphContentView,

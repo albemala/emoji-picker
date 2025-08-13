@@ -46,12 +46,29 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
     final favorites = groupFavoriteGlyphsByType(
       searchGlyphsDataController.state.filteredFavorites.toList(),
     );
+
+    final recentEmoji = groupRecentGlyphs(
+      searchGlyphsDataController.state.filteredRecentEmoji.toList(),
+      'Recent Emoji',
+    );
+    final recentSymbols = groupRecentGlyphs(
+      searchGlyphsDataController.state.filteredRecentSymbols.toList(),
+      'Recent Symbols',
+    );
+    final recentKaomoji = groupRecentGlyphs(
+      searchGlyphsDataController.state.filteredRecentKaomoji.toList(),
+      'Recent Kaomoji',
+    );
+
     emit(
       state.copyWith(
         emoji: emoji.toIList(),
         symbols: symbols.toIList(),
         kaomoji: kaomoji.toIList(),
         favorites: favorites.toIList(),
+        recentEmoji: recentEmoji.toIList(),
+        recentSymbols: recentSymbols.toIList(),
+        recentKaomoji: recentKaomoji.toIList(),
       ),
     );
   }
@@ -100,6 +117,16 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
         GlyphGroupViewState(title: 'Symbols', glyphs: symbols.toIList()),
       if (kaomoji.isNotEmpty)
         GlyphGroupViewState(title: 'Kaomoji', glyphs: kaomoji.toIList()),
+    ];
+  }
+
+  List<GlyphGroupViewState> groupRecentGlyphs(
+    List<Glyph> glyphs,
+    String title,
+  ) {
+    if (glyphs.isEmpty) return [];
+    return [
+      GlyphGroupViewState(title: title, glyphs: glyphs.toIList()),
     ];
   }
 }

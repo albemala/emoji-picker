@@ -1,5 +1,5 @@
+import 'package:app/ads.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/widgets/ads.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
@@ -33,6 +33,6 @@ class GlyphDetailsViewState extends Equatable {
 
 final defaultGlyphDetailsViewState = GlyphDetailsViewState(
   glyph: unknownGlyph,
-  adData: adsData.first,
+  adData: allAdsData.first,
   isFavorite: false,
 );

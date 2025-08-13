@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app/favorites/data-controller.dart';
 import 'package:app/glyph-data/data-controller.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:app/recent/data-controller.dart';
 import 'package:app/search/data-state.dart';
 import 'package:app/search/functions.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
@@ -12,9 +13,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   final GlyphsDataController glyphsDataController;
   final FavoritesDataController favoritesDataController;
+  final RecentDataController recentDataController;
 
   StreamSubscription<void>? glyphsDataControllerSubscription;
   StreamSubscription<void>? favoritesDataControllerSubscription;
+  StreamSubscription<void>? recentDataControllerSubscription;
 
   final focusNode = FocusNode();
 
@@ -22,17 +25,24 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
     return SearchGlyphsDataController(
       context.read<GlyphsDataController>(),
       context.read<FavoritesDataController>(),
+      context.read<RecentDataController>(),
     );
   }
 
   SearchGlyphsDataController(
     this.glyphsDataController,
     this.favoritesDataController,
+    this.recentDataController,
   ) : super(defaultSearchGlyphsDataState) {
     glyphsDataControllerSubscription = glyphsDataController.stream.listen((_) {
       updateFilteredData();
     });
     favoritesDataControllerSubscription = favoritesDataController.stream.listen(
+      (_) {
+        updateFilteredData();
+      },
+    );
+    recentDataControllerSubscription = recentDataController.stream.listen(
       (_) {
         updateFilteredData();
       },
@@ -44,6 +54,7 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   Future<void> close() {
     glyphsDataControllerSubscription?.cancel();
     favoritesDataControllerSubscription?.cancel();
+    recentDataControllerSubscription?.cancel();
     return super.close();
   }
 
@@ -79,12 +90,32 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
           ...filteredKaomoji.where(isFavorite),
         ].toIList();
 
+    // Filter recent glyphs by type and search query
+    final recentGlyphStrings = recentDataController.getRecentGlyphStrings();
+    bool isRecent(Glyph g) => recentGlyphStrings.contains(g.glyph);
+
+    final filteredRecentEmoji =
+        state.searchQuery.isEmpty
+            ? filteredEmoji.where(isRecent).toIList()
+            : filteredEmoji.where((g) => isRecent(g) && test(g)).toIList();
+    final filteredRecentSymbols =
+        state.searchQuery.isEmpty
+            ? filteredSymbols.where(isRecent).toIList()
+            : filteredSymbols.where((g) => isRecent(g) && test(g)).toIList();
+    final filteredRecentKaomoji =
+        state.searchQuery.isEmpty
+            ? filteredKaomoji.where(isRecent).toIList()
+            : filteredKaomoji.where((g) => isRecent(g) && test(g)).toIList();
+
     emit(
       state.copyWith(
         filteredEmoji: filteredEmoji,
         filteredSymbols: filteredSymbols,
         filteredKaomoji: filteredKaomoji,
         filteredFavorites: filteredFavorites,
+        filteredRecentEmoji: filteredRecentEmoji,
+        filteredRecentSymbols: filteredRecentSymbols,
+        filteredRecentKaomoji: filteredRecentKaomoji,
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:app/app_usage/data-controller.dart';
 import 'package:app/favorites/data-controller.dart';
 import 'package:app/glyph-data/data-controller.dart';
 import 'package:app/preferences/data-controller.dart';
+import 'package:app/recent/data-controller.dart';
 import 'package:app/search/data-controller.dart';
 import 'package:app/selected-glyph/data-controller.dart';
 import 'package:app/selected-tab/data-controller.dart';
@@ -38,6 +39,10 @@ Future<void> main() async {
             ),
             BlocProvider(
               create: FavoritesDataController.fromContext,
+              lazy: false, //
+            ),
+            BlocProvider(
+              create: RecentDataController.fromContext,
               lazy: false, //
             ),
             BlocProvider(

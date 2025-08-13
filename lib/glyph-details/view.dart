@@ -3,7 +3,7 @@ import 'package:app/glyph-details/view-controller.dart';
 import 'package:app/glyph-details/view-state.dart';
 import 'package:app/glyph-tile/functions.dart';
 import 'package:app/theme/text.dart';
-import 'package:app/widgets/ads.dart';
+import 'package:app/ads.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -180,7 +180,7 @@ class _CopyGlyphView extends StatelessWidget {
       spacing: 8,
       children: [
         FilledButton.icon(
-          onPressed: () => controller.copyGlyphToClipboard(context),
+          onPressed: () => controller.copyGlyph(context),
           icon: Icon(
             CupertinoIcons.doc_on_clipboard,
             color: Theme.of(context).colorScheme.onPrimary,

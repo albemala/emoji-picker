@@ -10,6 +10,9 @@ class SearchGlyphsDataState extends Equatable {
   final IList<Glyph> filteredSymbols;
   final IList<Glyph> filteredKaomoji;
   final IList<Glyph> filteredFavorites;
+  final IList<Glyph> filteredRecentEmoji;
+  final IList<Glyph> filteredRecentSymbols;
+  final IList<Glyph> filteredRecentKaomoji;
 
   const SearchGlyphsDataState({
     required this.searchQuery,
@@ -17,6 +20,9 @@ class SearchGlyphsDataState extends Equatable {
     required this.filteredSymbols,
     required this.filteredKaomoji,
     required this.filteredFavorites,
+    required this.filteredRecentEmoji,
+    required this.filteredRecentSymbols,
+    required this.filteredRecentKaomoji,
   });
 
   @override
@@ -26,6 +32,9 @@ class SearchGlyphsDataState extends Equatable {
     filteredSymbols,
     filteredKaomoji,
     filteredFavorites,
+    filteredRecentEmoji,
+    filteredRecentSymbols,
+    filteredRecentKaomoji,
   ];
 
   SearchGlyphsDataState copyWith({
@@ -34,6 +43,9 @@ class SearchGlyphsDataState extends Equatable {
     IList<Glyph>? filteredSymbols,
     IList<Glyph>? filteredKaomoji,
     IList<Glyph>? filteredFavorites,
+    IList<Glyph>? filteredRecentEmoji,
+    IList<Glyph>? filteredRecentSymbols,
+    IList<Glyph>? filteredRecentKaomoji,
   }) {
     return SearchGlyphsDataState(
       searchQuery: searchQuery ?? this.searchQuery,
@@ -41,6 +53,11 @@ class SearchGlyphsDataState extends Equatable {
       filteredSymbols: filteredSymbols ?? this.filteredSymbols,
       filteredKaomoji: filteredKaomoji ?? this.filteredKaomoji,
       filteredFavorites: filteredFavorites ?? this.filteredFavorites,
+      filteredRecentEmoji: filteredRecentEmoji ?? this.filteredRecentEmoji,
+      filteredRecentSymbols:
+          filteredRecentSymbols ?? this.filteredRecentSymbols,
+      filteredRecentKaomoji:
+          filteredRecentKaomoji ?? this.filteredRecentKaomoji,
     );
   }
 }
@@ -51,4 +68,7 @@ const defaultSearchGlyphsDataState = SearchGlyphsDataState(
   filteredSymbols: IList.empty(),
   filteredKaomoji: IList.empty(),
   filteredFavorites: IList.empty(),
+  filteredRecentEmoji: IList.empty(),
+  filteredRecentSymbols: IList.empty(),
+  filteredRecentKaomoji: IList.empty(),
 );

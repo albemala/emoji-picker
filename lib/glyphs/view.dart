@@ -155,8 +155,12 @@ class _EmojiView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allGroups = [
+      ...state.recentEmoji,
+      ...state.emoji,
+    ];
     return _GlyphGroupView(
-      groups: state.emoji,
+      groups: allGroups.toIList(),
       groupBuilder: (context, glyphs) {
         return _GlyphGroupGridView(glyphs: glyphs);
       },
@@ -171,8 +175,12 @@ class _SymbolsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allGroups = [
+      ...state.recentSymbols,
+      ...state.symbols,
+    ];
     return _GlyphGroupView(
-      groups: state.symbols,
+      groups: allGroups.toIList(),
       groupBuilder: (context, glyphs) {
         return _GlyphGroupGridView(glyphs: glyphs);
       },
@@ -187,8 +195,12 @@ class _KaomojiView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allGroups = [
+      ...state.recentKaomoji,
+      ...state.kaomoji,
+    ];
     return _GlyphGroupView(
-      groups: state.kaomoji,
+      groups: allGroups.toIList(),
       groupBuilder: (context, glyphs) {
         return _GlyphGroupListView(glyphs: glyphs);
       },

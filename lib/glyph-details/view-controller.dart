@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:app/clipboard.dart';
 import 'package:app/favorites/data-controller.dart';
 import 'package:app/glyph-details/view-state.dart';
-import 'package:app/routing.dart';
+import 'package:app/glyph-tile/functions.dart';
 import 'package:app/selected-glyph/data-controller.dart';
-import 'package:app/widgets/ads.dart';
-import 'package:app/widgets/snack-bar.dart';
+import 'package:app/ads.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -64,9 +62,8 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
     favoritesDataController.toggleFavorite(state.glyph);
   }
 
-  Future<void> copyGlyphToClipboard(BuildContext context) async {
+  Future<void> copyGlyph(BuildContext context) async {
     final glyph = state.glyph;
-    await copyToClipboard(glyph.glyph);
-    showSnackBar(context, createCopiedToClipboardSnackBar(glyph.glyph));
+    await copyGlyphToClipboard(context, glyph);
   }
 }

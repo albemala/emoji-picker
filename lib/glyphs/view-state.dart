@@ -9,28 +9,48 @@ class GlyphsViewState extends Equatable {
   final IList<GlyphGroupViewState> symbols;
   final IList<GlyphGroupViewState> kaomoji;
   final IList<GlyphGroupViewState> favorites;
+  final IList<GlyphGroupViewState> recentEmoji;
+  final IList<GlyphGroupViewState> recentSymbols;
+  final IList<GlyphGroupViewState> recentKaomoji;
 
   const GlyphsViewState({
     required this.emoji,
     required this.symbols,
     required this.kaomoji,
     required this.favorites,
+    required this.recentEmoji,
+    required this.recentSymbols,
+    required this.recentKaomoji,
   });
 
   @override
-  List<Object> get props => [emoji, symbols, kaomoji, favorites];
+  List<Object> get props => [
+    emoji,
+    symbols,
+    kaomoji,
+    favorites,
+    recentEmoji,
+    recentSymbols,
+    recentKaomoji,
+  ];
 
   GlyphsViewState copyWith({
     IList<GlyphGroupViewState>? emoji,
     IList<GlyphGroupViewState>? symbols,
     IList<GlyphGroupViewState>? kaomoji,
     IList<GlyphGroupViewState>? favorites,
+    IList<GlyphGroupViewState>? recentEmoji,
+    IList<GlyphGroupViewState>? recentSymbols,
+    IList<GlyphGroupViewState>? recentKaomoji,
   }) {
     return GlyphsViewState(
       emoji: emoji ?? this.emoji,
       symbols: symbols ?? this.symbols,
       kaomoji: kaomoji ?? this.kaomoji,
       favorites: favorites ?? this.favorites,
+      recentEmoji: recentEmoji ?? this.recentEmoji,
+      recentSymbols: recentSymbols ?? this.recentSymbols,
+      recentKaomoji: recentKaomoji ?? this.recentKaomoji,
     );
   }
 }
@@ -64,4 +84,7 @@ const defaultGlyphsViewState = GlyphsViewState(
   symbols: IList.empty(),
   kaomoji: IList.empty(),
   favorites: IList.empty(),
+  recentEmoji: IList.empty(),
+  recentSymbols: IList.empty(),
+  recentKaomoji: IList.empty(),
 );
