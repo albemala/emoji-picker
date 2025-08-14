@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyphs/view-state.dart';
 import 'package:app/search/data-controller.dart';
+import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,22 +75,14 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
   }
 
   List<GlyphGroupViewState> groupGlyphs(List<Glyph> glyphs) {
-    final groups = <String, GlyphGroupViewState>{};
-    for (final glyph in glyphs) {
-      groups.update(
-        glyph.group,
-        (existing) {
-          return existing.copyWith(glyphs: existing.glyphs.add(glyph));
-        },
-        ifAbsent: () {
-          return GlyphGroupViewState(
-            title: glyph.group,
-            glyphs: IList([glyph]),
-          );
-        },
-      );
-    }
-    return groups.values.toList();
+    return groupBy(glyphs, (glyph) => glyph.group).entries
+        .map(
+          (entry) => GlyphGroupViewState(
+            title: entry.key,
+            glyphs: entry.value.toIList(),
+          ),
+        )
+        .toList();
   }
 
   List<GlyphGroupViewState> groupFavoriteGlyphsByType(List<Glyph> glyphs) {

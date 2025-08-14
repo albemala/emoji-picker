@@ -285,21 +285,22 @@ class _GlyphGroupGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid(
+    return SliverGrid.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 56,
         crossAxisSpacing: 4,
         mainAxisSpacing: 4,
       ),
-      delegate: SliverChildBuilderDelegate((context, index) {
-        final glyph = glyphs.elementAt(index);
+      itemCount: glyphs.length,
+      itemBuilder: (context, index) {
+        final glyph = glyphs[index];
         return GlyphTileViewCreator(
           glyph: glyph,
-          glyphContentBuilder: (BuildContext context, Glyph glyph) {
+          glyphContentBuilder: (Glyph glyph) {
             return SquaredGlyphTileContentView(glyph: glyph);
           },
         );
-      }, childCount: glyphs.length),
+      },
     );
   }
 }
@@ -314,10 +315,10 @@ class _GlyphGroupListView extends StatelessWidget {
     return SliverList.separated(
       itemCount: glyphs.length,
       itemBuilder: (context, index) {
-        final glyph = glyphs.elementAt(index);
+        final glyph = glyphs[index];
         return GlyphTileViewCreator(
           glyph: glyph,
-          glyphContentBuilder: (BuildContext context, Glyph glyph) {
+          glyphContentBuilder: (Glyph glyph) {
             return RectangularGlyphTileContentView(glyph: glyph);
           },
         );

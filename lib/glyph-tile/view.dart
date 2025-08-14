@@ -1,5 +1,4 @@
 import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/glyph-tile/functions.dart';
 import 'package:app/glyph-tile/view-controller.dart';
 import 'package:app/glyph-tile/view-state.dart';
 import 'package:app/theme/text.dart';
@@ -8,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlyphTileViewCreator extends StatelessWidget {
   final Glyph glyph;
-  final Widget Function(BuildContext context, Glyph glyph) glyphContentBuilder;
+  final Widget Function(Glyph glyph) glyphContentBuilder;
 
   const GlyphTileViewCreator({
     super.key,
@@ -26,7 +25,7 @@ class GlyphTileViewCreator extends StatelessWidget {
           return GlyphTileView(
             state: state,
             controller: context.read<GlyphTileViewController>(),
-            glyphContentView: glyphContentBuilder(context, state.glyph),
+            glyphContentView: glyphContentBuilder(state.glyph),
           );
         },
       ),
