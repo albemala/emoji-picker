@@ -6,16 +6,26 @@ import 'package:flutter/material.dart';
 class GlyphTileViewState extends Equatable {
   final Glyph glyph;
   final bool isSelected;
+  final bool isFocused;
 
-  const GlyphTileViewState({required this.glyph, required this.isSelected});
+  const GlyphTileViewState({
+    required this.glyph,
+    required this.isSelected,
+    required this.isFocused,
+  });
 
   @override
-  List<Object> get props => [glyph, isSelected];
+  List<Object> get props => [glyph, isSelected, isFocused];
 
-  GlyphTileViewState copyWith({Glyph? glyph, bool? isSelected}) {
+  GlyphTileViewState copyWith({
+    Glyph? glyph,
+    bool? isSelected,
+    bool? isFocused,
+  }) {
     return GlyphTileViewState(
       glyph: glyph ?? this.glyph,
       isSelected: isSelected ?? this.isSelected,
+      isFocused: isFocused ?? this.isFocused,
     );
   }
 }
@@ -23,4 +33,5 @@ class GlyphTileViewState extends Equatable {
 const defaultGlyphTileViewState = GlyphTileViewState(
   glyph: unknownGlyph,
   isSelected: false,
+  isFocused: false,
 );

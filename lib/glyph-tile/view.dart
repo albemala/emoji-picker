@@ -48,16 +48,25 @@ class GlyphTileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      clipBehavior: Clip.hardEdge,
       color:
           state.isSelected
               ? Theme.of(context).colorScheme.primaryContainer
               : Theme.of(context).colorScheme.tertiaryContainer,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(8),
+        borderRadius: BorderRadius.circular(8),
+        side:
+            state.isFocused
+                ? BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                )
+                : BorderSide.none,
       ),
       child: InkWell(
         onTap: () => controller.onTap(context),
         onDoubleTap: () => controller.onDoubleTap(context),
+        onLongPress: () => controller.onLongPress(context),
         focusNode: controller.focusNode,
         onFocusChange: controller.onFocusChange,
         child: glyphContentView,

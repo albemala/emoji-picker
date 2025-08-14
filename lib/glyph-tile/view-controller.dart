@@ -27,7 +27,13 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   }
 
   GlyphTileViewController(this.selectedGlyphDataController, Glyph glyph)
-    : super(GlyphTileViewState(glyph: glyph, isSelected: false)) {
+    : super(
+        GlyphTileViewState(
+          glyph: glyph,
+          isSelected: false,
+          isFocused: false,
+        ),
+      ) {
     selectedGlyphDataControllerSubscription = selectedGlyphDataController.stream
         .listen((_) {
           updateState();
@@ -54,6 +60,7 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
     if (isFocused) {
       selectedGlyphDataController.selectedGlyph = state.glyph;
     }
+    emit(state.copyWith(isFocused: isFocused));
   }
 
   Future<void> onTap(BuildContext context) async {
@@ -65,6 +72,10 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   }
 
   void onDoubleTap(BuildContext context) {
+    copyGlyphToClipboard(context, state.glyph);
+  }
+
+  void onLongPress(BuildContext context) {
     copyGlyphToClipboard(context, state.glyph);
   }
 }
