@@ -6,6 +6,7 @@ import 'package:app/responsive.dart';
 import 'package:app/search/view.dart';
 import 'package:app/widgets/about.dart';
 import 'package:app/widgets/preferences.dart';
+import 'package:app/widgets/testing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -93,6 +94,7 @@ class HeaderView extends StatelessWidget {
           SizedBox(width: 12),
           ThemeModeToggleViewCreator(),
           AboutButtonView(),
+          TestingButtonView(),
         ],
       ),
     );

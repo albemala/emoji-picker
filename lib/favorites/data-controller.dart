@@ -1,5 +1,6 @@
 import 'package:app/favorites/data-state.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_data_storage/flutter_data_storage.dart';
 
@@ -35,4 +36,8 @@ class FavoritesDataController extends StoredCubit<FavoritesDataState> {
   }
 
   bool isFavorite(Glyph glyph) => state.favoriteGlyphs.contains(glyph.glyph);
+
+  void clearFavorites() {
+    emit(state.copyWith(favoriteGlyphs: IList()));
+  }
 }
