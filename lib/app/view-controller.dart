@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app/app/view-state.dart';
 import 'package:app/app_usage/data-controller.dart';
 import 'package:app/preferences/data-controller.dart';
+import 'package:app/review.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +48,16 @@ class AppViewController extends Cubit<AppViewState> {
     // Increment usage count after initialization is complete
     appUsageDataController.incrementUsageCount();
 
+    if (_shouldShowReviewDialog()) {
+      unawaited(showReviewDialog());
+    }
+
     updateViewState();
+  }
+
+  bool _shouldShowReviewDialog() {
+    return appUsageDataController.usageCount > 0 &&
+        appUsageDataController.usageCount % 3 == 0;
   }
 
   void updateViewState() {
