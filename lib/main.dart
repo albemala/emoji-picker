@@ -3,6 +3,7 @@ import 'package:app/app_usage/data-controller.dart';
 import 'package:app/favorites/data-controller.dart';
 import 'package:app/glyph-data/data-controller.dart';
 import 'package:app/preferences/data-controller.dart';
+import 'package:app/purchases/data-controller.dart';
 import 'package:app/recent/data-controller.dart';
 import 'package:app/search/data-controller.dart';
 import 'package:app/selected-glyph/data-controller.dart';
@@ -25,6 +26,10 @@ Future<void> main() async {
       runApp(
         MultiBlocProvider(
           providers: const [
+            BlocProvider(
+              create: PurchasesDataController.fromContext,
+              lazy: false, //
+            ),
             BlocProvider(
               create: AppUsageDataController.fromContext,
               lazy: false, //
