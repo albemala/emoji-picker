@@ -2,10 +2,15 @@ import 'package:app/about/view-state.dart';
 import 'package:app/about/view.dart';
 import 'package:app/app-content/view-state.dart';
 import 'package:app/app-content/view.dart';
+import 'package:app/favorites/data-controller.dart';
+import 'package:app/favorites/data-state.dart';
 import 'package:app/glyph-data/data-controller.dart';
+import 'package:app/glyph-data/data-state.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-data/functions.dart';
-import 'package:app/preferences/data-controller.dart';
+import 'package:app/glyph-details/dialog.dart';
+import 'package:app/recent/data-controller.dart';
+import 'package:app/recent/data-state.dart';
 import 'package:app/search/data-controller.dart';
 import 'package:app/search/data-state.dart';
 import 'package:app/selected-glyph/data-controller.dart';
@@ -15,92 +20,81 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'defines.dart';
+import 'controllers.dart';
+import 'views.dart';
 
 Future<List<ScreenshotData>> createScreenshotData() async {
   final emoji = await loadEmoji();
   final symbols = await loadSymbols();
   final kaomoji = await loadKaomoji();
-  // final emojiByGroup = groupGlyphsByGroup(emoji);
-  // final symbolByGroup = groupGlyphsByGroup(symbols);
-  // final kaomojiByGroup = groupGlyphsByGroup(kaomoji);
   return [
     createAboutViewScreenshotData(),
-    createContentViewScreenshotData(
-      tabIndex: 0,
-      filteredEmoji: emoji,
-      filteredSymbols: [],
-      filteredKaomoji: [],
-      fileName: 'emoji_view',
-    ),
-    createContentViewScreenshotData(
-      tabIndex: 1,
-      filteredEmoji: [],
-      filteredSymbols: symbols,
-      filteredKaomoji: [],
-      fileName: 'symbols_view',
-    ),
-    createContentViewScreenshotData(
-      tabIndex: 2,
-      filteredEmoji: [],
-      filteredSymbols: [],
-      filteredKaomoji: kaomoji,
-      fileName: 'kaomoji_view',
-    ),
-    createSelectedGlyphScreenshotData(
-      tabIndex: 0,
-      emoji: emoji,
-      symbols: [],
-      kaomoji: [],
-      fileName: 'selected_emoji',
+
+    // Glyph Details Screenshots
+    createGlyphDetailsScreenshotData(
       selectedGlyph: emoji[2],
+      fileName: 'glyph_details_emoji',
     ),
-    createSelectedGlyphScreenshotData(
-      tabIndex: 1,
-      emoji: [],
-      symbols: symbols,
-      kaomoji: [],
-      fileName: 'selected_symbol',
+    createGlyphDetailsScreenshotData(
       selectedGlyph: symbols.where((e) => e.glyph == '&').first,
+      fileName: 'glyph_details_symbol',
     ),
-    createSelectedGlyphScreenshotData(
-      tabIndex: 2,
-      emoji: [],
-      symbols: [],
-      kaomoji: kaomoji,
-      fileName: 'selected_kaomoji',
+    createGlyphDetailsScreenshotData(
+      selectedGlyph: kaomoji[0],
+      fileName: 'glyph_details_kaomoji',
+      isFavorite: true,
+    ),
+
+    // App Content View Screenshots
+    createAppContentViewScreenshotData(
+      fileName: 'app_content_view_emoji',
+      selectedTabIndex: 0,
+      emoji: emoji.take(20).toList(),
+      symbols: symbols.take(20).toList(),
+      kaomoji: kaomoji.take(10).toList(),
+      favorites: [emoji[1], symbols[5], kaomoji[2]],
+      recentEmoji: emoji.take(5).toList(),
+      recentSymbols: symbols.take(5).toList(),
+      recentKaomoji: kaomoji.take(3).toList(),
+      selectedGlyph: emoji[0],
+    ),
+    createAppContentViewScreenshotData(
+      fileName: 'app_content_view_symbols',
+      selectedTabIndex: 1,
+      emoji: emoji.take(20).toList(),
+      symbols: symbols.take(20).toList(),
+      kaomoji: kaomoji.take(10).toList(),
+      favorites: [emoji[1], symbols[5], kaomoji[2]],
+      recentEmoji: emoji.take(5).toList(),
+      recentSymbols: symbols.take(5).toList(),
+      recentKaomoji: kaomoji.take(3).toList(),
+      selectedGlyph: symbols[0],
+    ),
+    createAppContentViewScreenshotData(
+      fileName: 'app_content_view_kaomoji',
+      selectedTabIndex: 2,
+      emoji: emoji.take(20).toList(),
+      symbols: symbols.take(20).toList(),
+      kaomoji: kaomoji.take(10).toList(),
+      favorites: [emoji[1], symbols[5], kaomoji[2]],
+      recentEmoji: emoji.take(5).toList(),
+      recentSymbols: symbols.take(5).toList(),
+      recentKaomoji: kaomoji.take(3).toList(),
       selectedGlyph: kaomoji[0],
     ),
-    // for (final entry in emojiByGroup.entries)
-    //   createContentViewScreenshotData(
-    //     tabIndex: 0,
-    //     filteredEmoji: entry.value,
-    //     filteredSymbols: [],
-    //     filteredKaomoji: [],
-    //     fileName: '${filterAlphabetic(entry.key)}_emoji_view',
-    //   ),
-    // for (final entry in symbolByGroup.entries)
-    //   createContentViewScreenshotData(
-    //     tabIndex: 1,
-    //     filteredEmoji: [],
-    //     filteredSymbols: entry.value,
-    //     filteredKaomoji: [],
-    //     fileName: '${filterAlphabetic(entry.key)}_symbols_view',
-    //   ),
-    // for (final entry in kaomojiByGroup.entries)
-    //   createContentViewScreenshotData(
-    //     tabIndex: 2,
-    //     filteredEmoji: [],
-    //     filteredSymbols: [],
-    //     filteredKaomoji: entry.value,
-    //     fileName: '${filterAlphabetic(entry.key)}_kaomoji_view',
-    //   ),
+    createAppContentViewScreenshotData(
+      fileName: 'app_content_view_favorites',
+      selectedTabIndex: 3,
+      emoji: emoji.take(20).toList(),
+      symbols: symbols.take(20).toList(),
+      kaomoji: kaomoji.take(10).toList(),
+      favorites: [emoji[1], symbols[5], kaomoji[2]],
+      recentEmoji: emoji.take(5).toList(),
+      recentSymbols: symbols.take(5).toList(),
+      recentKaomoji: kaomoji.take(3).toList(),
+      selectedGlyph: emoji[1],
+    ),
   ];
-}
-
-String filterAlphabetic(String input) {
-  final regExp = RegExp('[^a-z]');
-  return input.toLowerCase().replaceAll(regExp, '');
 }
 
 ScreenshotData createAboutViewScreenshotData() {
@@ -108,75 +102,134 @@ ScreenshotData createAboutViewScreenshotData() {
     view: ScreenshotDialogView(
       child: AboutView(
         controller: MockAboutViewController(),
-        state: const AboutViewState(appVersion: '3.0.0'),
+        state: const AboutViewState(appVersion: '4.0.0'),
       ),
     ),
     fileName: 'about_view',
   );
 }
 
-ScreenshotData createContentViewScreenshotData({
-  required int tabIndex,
-  required List<Glyph> filteredEmoji,
-  required List<Glyph> filteredSymbols,
-  required List<Glyph> filteredKaomoji,
+ScreenshotData createGlyphDetailsScreenshotData({
+  required Glyph selectedGlyph,
   required String fileName,
+  bool isFavorite = false,
 }) {
-  final selectedTabDataController = SelectedTabDataController();
-  selectedTabDataController.tabController.animateTo(
-    tabIndex,
-    duration: Duration.zero,
+  final selectedGlyphController = MockSelectedGlyphDataController(
+    initialState: defaultSelectedGlyphDataState.copyWith(
+      selectedGlyph: selectedGlyph,
+    ),
+  );
+
+  final favoritesController = MockFavoritesDataController(
+    initialState: defaultFavoritesDataState.copyWith(
+      favoriteGlyphs: isFavorite ? IList([selectedGlyph.glyph]) : IList(),
+    ),
   );
 
   return ScreenshotData(
     view: MultiBlocProvider(
       providers: [
-        BlocProvider<PreferencesDataController>.value(
-          value: MockPreferencesDataController(),
-        ),
-        BlocProvider<GlyphsDataController>.value(
-          value: MockGlyphsDataController(),
-        ),
-        BlocProvider<SearchGlyphsDataController>.value(
-          value: MockSearchGlyphsDataController(
-            initialState: defaultSearchGlyphsDataState.copyWith(
-              filteredEmoji: filteredEmoji.toIList(),
-              filteredSymbols: filteredSymbols.toIList(),
-              filteredKaomoji: filteredKaomoji.toIList(),
-            ),
-          ),
-        ),
         BlocProvider<SelectedGlyphDataController>.value(
-          value: MockSelectedGlyphDataController(),
+          value: selectedGlyphController,
         ),
-        BlocProvider<SelectedTabDataController>.value(
-          value: selectedTabDataController,
+        BlocProvider<FavoritesDataController>.value(
+          value: favoritesController,
         ),
       ],
-      child: AppContentView(
-        controller: MockAppContentViewController(),
-        state: defaultAppContentViewState,
-      ),
+      child: const GlyphDetailsDialog(),
     ),
     fileName: fileName,
   );
 }
 
-ScreenshotData createSelectedGlyphScreenshotData({
-  required int tabIndex,
+ScreenshotData createAppContentViewScreenshotData({
+  required String fileName,
+  required int selectedTabIndex,
   required List<Glyph> emoji,
   required List<Glyph> symbols,
   required List<Glyph> kaomoji,
-  required String fileName,
+  required List<Glyph> favorites,
+  required List<Glyph> recentEmoji,
+  required List<Glyph> recentSymbols,
+  required List<Glyph> recentKaomoji,
+  String searchQuery = '',
   required Glyph selectedGlyph,
 }) {
-  final selectedTabDataController = SelectedTabDataController();
-  selectedTabDataController.tabController.animateTo(
-    tabIndex,
-    duration: Duration.zero,
+  // Create recent glyph entries with timestamps
+  List<RecentGlyphEntry> mapGlyphsToRecentEntries(List<Glyph> glyphs) {
+    return glyphs
+        .map(
+          (glyph) => RecentGlyphEntry(
+            glyph: glyph.glyph,
+            timestamp: DateTime.now().subtract(
+              Duration(minutes: glyphs.indexOf(glyph)),
+            ),
+          ),
+        )
+        .toList();
+  }
+
+  final recentEmojiEntries = mapGlyphsToRecentEntries(recentEmoji);
+  final recentSymbolsEntries = mapGlyphsToRecentEntries(recentSymbols);
+  final recentKaomojiEntries = mapGlyphsToRecentEntries(recentKaomoji);
+
+  // Create mock controllers
+  final allGlyphs = [
+    ...emoji,
+    ...symbols,
+    ...kaomoji,
+  ];
+  final allGlyphsMap =
+      <String, Glyph>{
+        for (final glyph in allGlyphs) glyph.glyph: glyph,
+      }.toIMap();
+
+  final glyphsDataController = MockGlyphsDataController(
+    initialState: GlyphsDataState(
+      emoji: emoji.toIList(),
+      symbols: symbols.toIList(),
+      kaomoji: kaomoji.toIList(),
+      allGlyphsMap: allGlyphsMap,
+    ),
   );
 
-  final selectedGlyphController = MockSelectedGlyphDataController(
+  final favoritesDataController = MockFavoritesDataController(
+    initialState: defaultFavoritesDataState.copyWith(
+      favoriteGlyphs: favorites.map((glyph) => glyph.glyph).toIList(),
+    ),
+  );
+
+  final recentDataController = MockRecentDataController(
+    initialState: defaultRecentDataState.copyWith(
+      recentGlyphs:
+          [
+            ...recentEmojiEntries,
+            ...recentSymbolsEntries,
+            ...recentKaomojiEntries,
+          ].toIList(),
+    ),
+  );
+
+  final searchGlyphsDataController = MockSearchGlyphsDataController(
+    initialState: defaultSearchGlyphsDataState.copyWith(
+      searchQuery: searchQuery,
+      filteredEmoji: emoji.toIList(),
+      filteredSymbols: symbols.toIList(),
+      filteredKaomoji: kaomoji.toIList(),
+      filteredFavorites: favorites.toIList(),
+      filteredRecentEmoji: recentEmoji.toIList(),
+      filteredRecentSymbols: recentSymbols.toIList(),
+      filteredRecentKaomoji: recentKaomoji.toIList(),
+    ),
+  );
+
+  // Create tab controller (needed for all views)
+  final selectedTabDataController = MockSelectedTabDataController(
+    initialIndex: selectedTabIndex,
+  );
+
+  // Instantiate MockSelectedGlyphDataController as per user's instruction
+  final selectedGlyphDataController = MockSelectedGlyphDataController(
     initialState: defaultSelectedGlyphDataState.copyWith(
       selectedGlyph: selectedGlyph,
     ),
@@ -185,26 +238,23 @@ ScreenshotData createSelectedGlyphScreenshotData({
   return ScreenshotData(
     view: MultiBlocProvider(
       providers: [
-        BlocProvider<PreferencesDataController>.value(
-          value: MockPreferencesDataController(),
-        ),
         BlocProvider<GlyphsDataController>.value(
-          value: MockGlyphsDataController(),
+          value: glyphsDataController,
+        ),
+        BlocProvider<FavoritesDataController>.value(
+          value: favoritesDataController,
+        ),
+        BlocProvider<RecentDataController>.value(
+          value: recentDataController,
         ),
         BlocProvider<SearchGlyphsDataController>.value(
-          value: MockSearchGlyphsDataController(
-            initialState: defaultSearchGlyphsDataState.copyWith(
-              filteredEmoji: emoji.toIList(),
-              filteredSymbols: symbols.toIList(),
-              filteredKaomoji: kaomoji.toIList(),
-            ),
-          ),
-        ),
-        BlocProvider<SelectedGlyphDataController>.value(
-          value: selectedGlyphController,
+          value: searchGlyphsDataController,
         ),
         BlocProvider<SelectedTabDataController>.value(
           value: selectedTabDataController,
+        ),
+        BlocProvider<SelectedGlyphDataController>.value(
+          value: selectedGlyphDataController,
         ),
       ],
       child: AppContentView(
@@ -221,26 +271,4 @@ class ScreenshotData {
   final String fileName;
 
   const ScreenshotData({required this.view, required this.fileName});
-}
-
-class ScreenshotDialogView extends StatelessWidget {
-  final Widget child;
-
-  const ScreenshotDialogView({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.black54,
-      child: Center(
-        child: AlertDialog(
-          contentPadding: EdgeInsets.zero,
-          content: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 400),
-            child: child,
-          ),
-        ),
-      ),
-    );
-  }
 }

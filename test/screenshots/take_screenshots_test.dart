@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:app/preferences/data-controller.dart';
 import 'package:app/theme/data.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'data.dart';
+import 'controllers.dart';
 import 'functions.dart';
 
 Future<void> main() async {
@@ -45,7 +48,7 @@ Future<void> main() async {
   for (final device in devices) {
     for (final locale in locales) {
       for (final data in screenshotData) {
-        testWidgets(
+        testGoldens(
           '${locale.languageCode} - ${device.name} - ${data.fileName}',
           (tester) async {
             await takeDeviceScreenshot(
@@ -68,8 +71,18 @@ Future<void> takeDeviceScreenshot({
   required Locale locale,
 }) async {
   final theme = getLightTheme();
-  final child = screenshotData.view;
+
+  final child = MultiBlocProvider(
+    providers: [
+      BlocProvider<PreferencesDataController>.value(
+        value: MockPreferencesDataController(),
+      ),
+    ],
+    child: screenshotData.view,
+  );
+
   final goldenFileName = screenshotData.fileName;
+
   await takeScreenshot(
     tester: tester,
     device: device,

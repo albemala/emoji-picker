@@ -1,3 +1,5 @@
+// import 'package:app/generated/l10n.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
@@ -10,10 +12,26 @@ Future<void> takeScreenshot({
   required String goldenFileName,
   Locale locale = const Locale('en'),
 }) async {
-  debugDisableShadows = false;
-
   ScreenshotDevice.screenshotsFolder =
       '../../temp/screenshots/${locale.languageCode}/';
+
+  final customDevice = ScreenshotDevice(
+    platform: device.device.platform,
+    resolution: device.device.resolution,
+    pixelRatio: device.device.pixelRatio,
+    goldenSubFolder: device.device.goldenSubFolder,
+    frameBuilder: ({
+      required device,
+      required frameColors,
+      required child,
+    }) {
+      return ScreenshotFrame.noFrame(
+        device: device,
+        frameColors: frameColors,
+        child: child,
+      );
+    },
+  );
 
   final widget = ScreenshotApp(
     // localizationsDelegates: const [
@@ -25,18 +43,17 @@ Future<void> takeScreenshot({
     // supportedLocales: S.delegate.supportedLocales,
     locale: locale,
     theme: theme,
-    device: device.device,
+    device: customDevice,
     child: child,
   );
-  await tester.pumpWidget(widget);
 
+  await tester.runAsync(() => tester.pumpWidget(widget));
   await tester.precacheImagesInWidgetTree();
   await tester.precacheTopbarImages();
   await tester.loadFonts();
-
   await tester.pumpFrames(widget, const Duration(seconds: 1));
-
-  await tester.expectScreenshot(device.device, goldenFileName);
-
-  debugDisableShadows = true;
+  await tester.expectScreenshot(
+    device.device,
+    goldenFileName,
+  );
 }
