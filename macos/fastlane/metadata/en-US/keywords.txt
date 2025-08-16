@@ -1,1 +1,1 @@
-Emoji,Kaomoji,Symbols,unicode,emoticon,symbol,picker,keyboard,smiley,emoticon,reaction,imoji,gemoji
+Emoji,Kaomoji,Symbols,unicode,emoticon,symbol,picker,keyboard,smiley,emoticon,reaction
