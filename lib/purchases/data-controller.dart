@@ -19,7 +19,10 @@ class PurchasesDataController extends StoredCubit<PurchasesDataState> {
       );
 
   @override
-  Future<void> migrateData() async {}
+  Future<void> migrateData() async {
+    if (await dataStore.dataExists) return;
+    await dataStore.writeImmediately(defaultPurchasesDataState.toMap());
+  }
 
   @override
   String get storeName => purchasesDataStoreName;
