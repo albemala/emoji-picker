@@ -1,0 +1,8 @@
+Nuevo Aspecto
+- Renovación completa de la interfaz para una experiencia más moderna e intuitiva
+- Diseño visual mejorado con mejor tipografía y esquema de colores
+- Diseños refinados para mejor organización del contenido
+
+Mejoras de Rendimiento
+- Mayor estabilidad general de la aplicación
+- Ajustes generales de rendimiento

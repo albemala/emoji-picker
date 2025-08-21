@@ -1,6 +1,6 @@
 name: app
 description: Ejimo - Comprehensive emoji and symbol picker.
-version: 4.0.1+17
+version: 4.0.2+18
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
