@@ -5,8 +5,8 @@ version: 4.0.2+18
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=3.7.0 <4.0.0'
-  flutter: ">=3.29.0"
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: ">=3.35.0"
 
 dependencies:
   flutter:
@@ -23,8 +23,8 @@ dependencies:
       ref: 3.2.1
 
   # UI
-  flex_color_scheme: ^8.2.0
-  google_fonts: ^6.3.0
+  flex_color_scheme: ^8.3.0
+  google_fonts: ^6.3.2
   cupertino_icons: ^1.0.8
   sliver_tools: ^0.2.12
   slivers: ^0.0.1+2
@@ -39,29 +39,29 @@ dependencies:
   cross_platform: ^3.0.1
 
   # support
-  package_info_plus: ^8.3.0
-  device_info_plus: ^11.4.0
-  share_plus: ^11.0.0
+  package_info_plus: ^8.3.1
+  device_info_plus: ^11.5.0
+  share_plus: ^12.0.1
   url_launcher: ^6.3.2
-  in_app_review: ^2.0.10
+  in_app_review: ^2.0.11
   send_support_email:
     git:
       url: https://github.com/albemala/send_support_email.git
       ref: 3.0.0
 
-  sentry_flutter: ^9.5.0
+  sentry_flutter: ^9.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4
   # flutter test --update-goldens test/screenshots/take_screenshots_test.dart
-  golden_screenshot: ^3.3.0
+  golden_screenshot: ^5.1.0
 
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
 
-  build_runner: ^2.6.0
-  icons_launcher: ^3.0.1
+  build_runner: ^2.10.0
+  icons_launcher: ^3.0.3
   package_rename: ^1.10.0
 
   http: ^1.5.0

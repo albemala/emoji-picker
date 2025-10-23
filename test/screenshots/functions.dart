@@ -20,17 +20,18 @@ Future<void> takeScreenshot({
     resolution: device.device.resolution,
     pixelRatio: device.device.pixelRatio,
     goldenSubFolder: device.device.goldenSubFolder,
-    frameBuilder: ({
-      required device,
-      required frameColors,
-      required child,
-    }) {
-      return ScreenshotFrame.noFrame(
-        device: device,
-        frameColors: frameColors,
-        child: child,
-      );
-    },
+    frameBuilder:
+        ({
+          required device,
+          required frameColors,
+          required child,
+        }) {
+          return ScreenshotFrame.noFrame(
+            device: device,
+            frameColors: frameColors,
+            child: child,
+          );
+        },
   );
 
   final widget = ScreenshotApp(
@@ -44,7 +45,7 @@ Future<void> takeScreenshot({
     locale: locale,
     theme: theme,
     device: customDevice,
-    child: child,
+    home: child,
   );
 
   await tester.runAsync(() => tester.pumpWidget(widget));
