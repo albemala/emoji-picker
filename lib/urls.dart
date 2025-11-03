@@ -11,7 +11,7 @@ String get otherProjectsUrl {
   switch (Platform.operatingSystem) {
     case 'ios':
     case 'macos':
-      return 'https://apps.apple.com/us/app/emoji-kaomoji-symbols-ejimo/id1598944603';
+      return 'https://apps.apple.com/us/developer/alberto-malagoli/id965971566';
     default:
       return 'https://projects.albemala.me/?ref=ejimo-app';
   }
