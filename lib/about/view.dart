@@ -3,7 +3,7 @@ import 'package:app/about/view-state.dart';
 import 'package:app/app/defines.dart';
 import 'package:app/share.dart';
 import 'package:app/theme/text.dart';
-import 'package:app/urls/defines.dart';
+import 'package:app/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

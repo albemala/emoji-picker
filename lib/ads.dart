@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:app/theme/text.dart';
-import 'package:app/urls/functions.dart';
+import 'package:app/urls.dart';
 import 'package:flutter/material.dart';
 
 class AdData {

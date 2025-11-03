@@ -330,11 +330,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "3.2.1"
-      resolved-ref: "0ccfcacf268cb173753b2eb3dcab90eff5564d80"
+      ref: "3.4.0"
+      resolved-ref: "41cffdec706f7d2f0709ceb0d42f8e67996cb5a2"
       url: "https://github.com/albemala/flutter_data_storage.git"
     source: git
-    version: "3.2.1"
+    version: "3.4.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
