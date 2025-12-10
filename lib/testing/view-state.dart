@@ -5,6 +5,10 @@ import 'package:flutter/foundation.dart';
 class TestingViewState extends Equatable {
   const TestingViewState();
 
+  factory TestingViewState.initial() {
+    return const TestingViewState();
+  }
+
   @override
   List<Object> get props => [];
 
@@ -12,5 +16,3 @@ class TestingViewState extends Equatable {
     return const TestingViewState();
   }
 }
-
-const defaultTestingViewState = TestingViewState();

@@ -115,13 +115,13 @@ ScreenshotData createGlyphDetailsScreenshotData({
   bool isFavorite = false,
 }) {
   final selectedGlyphController = MockSelectedGlyphDataController(
-    initialState: defaultSelectedGlyphDataState.copyWith(
+    initialState: SelectedGlyphDataState.initial().copyWith(
       selectedGlyph: selectedGlyph,
     ),
   );
 
   final favoritesController = MockFavoritesDataController(
-    initialState: defaultFavoritesDataState.copyWith(
+    initialState: FavoritesDataState.initial().copyWith(
       favoriteGlyphs: isFavorite ? IList([selectedGlyph.glyph]) : IList(),
     ),
   );
@@ -179,10 +179,9 @@ ScreenshotData createAppContentViewScreenshotData({
     ...symbols,
     ...kaomoji,
   ];
-  final allGlyphsMap =
-      <String, Glyph>{
-        for (final glyph in allGlyphs) glyph.glyph: glyph,
-      }.toIMap();
+  final allGlyphsMap = <String, Glyph>{
+    for (final glyph in allGlyphs) glyph.glyph: glyph,
+  }.toIMap();
 
   final glyphsDataController = MockGlyphsDataController(
     initialState: GlyphsDataState(
@@ -194,24 +193,23 @@ ScreenshotData createAppContentViewScreenshotData({
   );
 
   final favoritesDataController = MockFavoritesDataController(
-    initialState: defaultFavoritesDataState.copyWith(
+    initialState: FavoritesDataState.initial().copyWith(
       favoriteGlyphs: favorites.map((glyph) => glyph.glyph).toIList(),
     ),
   );
 
   final recentDataController = MockRecentDataController(
-    initialState: defaultRecentDataState.copyWith(
-      recentGlyphs:
-          [
-            ...recentEmojiEntries,
-            ...recentSymbolsEntries,
-            ...recentKaomojiEntries,
-          ].toIList(),
+    initialState: RecentDataState.initial().copyWith(
+      recentGlyphs: [
+        ...recentEmojiEntries,
+        ...recentSymbolsEntries,
+        ...recentKaomojiEntries,
+      ].toIList(),
     ),
   );
 
   final searchGlyphsDataController = MockSearchGlyphsDataController(
-    initialState: defaultSearchGlyphsDataState.copyWith(
+    initialState: SearchGlyphsDataState.initial().copyWith(
       searchQuery: searchQuery,
       filteredEmoji: emoji.toIList(),
       filteredSymbols: symbols.toIList(),
@@ -230,7 +228,7 @@ ScreenshotData createAppContentViewScreenshotData({
 
   // Instantiate MockSelectedGlyphDataController as per user's instruction
   final selectedGlyphDataController = MockSelectedGlyphDataController(
-    initialState: defaultSelectedGlyphDataState.copyWith(
+    initialState: SelectedGlyphDataState.initial().copyWith(
       selectedGlyph: selectedGlyph,
     ),
   );
@@ -259,7 +257,7 @@ ScreenshotData createAppContentViewScreenshotData({
       ],
       child: AppContentView(
         controller: MockAppContentViewController(),
-        state: defaultAppContentViewState,
+        state: AppContentViewState.initial(),
       ),
     ),
     fileName: fileName,

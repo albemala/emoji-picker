@@ -53,6 +53,18 @@ class GlyphsViewState extends Equatable {
       recentKaomoji: recentKaomoji ?? this.recentKaomoji,
     );
   }
+
+  factory GlyphsViewState.initial() {
+    return const GlyphsViewState(
+      emoji: IList.empty(),
+      symbols: IList.empty(),
+      kaomoji: IList.empty(),
+      favorites: IList.empty(),
+      recentEmoji: IList.empty(),
+      recentSymbols: IList.empty(),
+      recentKaomoji: IList.empty(),
+    );
+  }
 }
 
 @immutable
@@ -78,13 +90,3 @@ class GlyphGroupViewState extends Equatable {
     );
   }
 }
-
-const defaultGlyphsViewState = GlyphsViewState(
-  emoji: IList.empty(),
-  symbols: IList.empty(),
-  kaomoji: IList.empty(),
-  favorites: IList.empty(),
-  recentEmoji: IList.empty(),
-  recentSymbols: IList.empty(),
-  recentKaomoji: IList.empty(),
-);

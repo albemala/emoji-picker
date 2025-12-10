@@ -11,7 +11,7 @@ class PurchasesDataController extends StoredCubit<PurchasesDataState> {
 
   PurchasesDataController()
     : super(
-        defaultPurchasesDataState,
+        PurchasesDataState.initial(),
         dataStore: DataStore(
           storeName: purchasesDataStoreName,
           store: SharedPreferencesStore(storeName: purchasesDataStoreName),
@@ -21,7 +21,7 @@ class PurchasesDataController extends StoredCubit<PurchasesDataState> {
   @override
   Future<void> migrateData() async {
     if (await dataStore.dataExists) return;
-    await dataStore.writeImmediately(defaultPurchasesDataState.toMap());
+    await dataStore.writeImmediately(PurchasesDataState.initial().toMap());
   }
 
   @override

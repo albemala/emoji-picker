@@ -9,7 +9,7 @@ class AppUsageDataController extends StoredCubit<AppUsageDataState> {
     return AppUsageDataController();
   }
 
-  AppUsageDataController() : super(defaultAppUsageDataState);
+  AppUsageDataController() : super(AppUsageDataState.initial());
 
   @override
   Future<void> migrateData() async {}

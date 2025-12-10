@@ -8,7 +8,7 @@ class SelectedGlyphDataController extends Cubit<SelectedGlyphDataState> {
     return SelectedGlyphDataController();
   }
 
-  SelectedGlyphDataController() : super(defaultSelectedGlyphDataState);
+  SelectedGlyphDataController() : super(SelectedGlyphDataState.initial());
 
   Glyph get selectedGlyph => state.selectedGlyph;
   set selectedGlyph(Glyph value) => emit(state.copyWith(selectedGlyph: value));

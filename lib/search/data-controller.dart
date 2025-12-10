@@ -33,7 +33,7 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
     this.glyphsDataController,
     this.favoritesDataController,
     this.recentDataController,
-  ) : super(defaultSearchGlyphsDataState) {
+  ) : super(SearchGlyphsDataState.initial()) {
     glyphsDataControllerSubscription = glyphsDataController.stream.listen((_) {
       updateFilteredData();
     });

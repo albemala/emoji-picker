@@ -23,7 +23,7 @@ class AppViewController extends Cubit<AppViewState> {
   AppViewController(
     this.appUsageDataController,
     this.preferencesDataController,
-  ) : super(defaultAppViewState) {
+  ) : super(AppViewState.initial()) {
     preferencesDataControllerSubscription = preferencesDataController.stream
         .listen((_) {
           updateViewState();

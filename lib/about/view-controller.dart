@@ -12,7 +12,7 @@ class AboutViewController extends Cubit<AboutViewState> {
     return AboutViewController();
   }
 
-  AboutViewController() : super(defaultAboutViewState) {
+  AboutViewController() : super(AboutViewState.initial()) {
     updateViewState();
   }
 

@@ -22,6 +22,12 @@ class PreferencesDataState extends Equatable {
     );
   }
 
+  factory PreferencesDataState.initial() {
+    return const PreferencesDataState(
+      themeMode: ThemeMode.light,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'themeMode': themeMode.name,
@@ -36,11 +42,7 @@ class PreferencesDataState extends Equatable {
         PreferencesDataState(
           themeMode: ThemeMode.values.byName(themeMode),
         ),
-      _ => defaultPreferencesDataState,
+      _ => PreferencesDataState.initial(),
     };
   }
 }
-
-const defaultPreferencesDataState = PreferencesDataState(
-  themeMode: ThemeMode.light,
-);

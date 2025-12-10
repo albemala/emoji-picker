@@ -18,7 +18,7 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
   }
 
   GlyphsViewController(this.searchGlyphsDataController)
-    : super(defaultGlyphsViewState) {
+    : super(GlyphsViewState.initial()) {
     searchGlyphsDataControllerSubscription = searchGlyphsDataController.stream
         .listen((_) {
           updateViewState();

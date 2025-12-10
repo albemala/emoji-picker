@@ -9,7 +9,7 @@ class GlyphsDataController extends Cubit<GlyphsDataState> {
     return GlyphsDataController();
   }
 
-  GlyphsDataController() : super(defaultGlyphsDataState) {
+  GlyphsDataController() : super(GlyphsDataState.initial()) {
     _init();
   }
 

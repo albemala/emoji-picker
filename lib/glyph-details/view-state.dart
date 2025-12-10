@@ -9,11 +9,19 @@ class GlyphDetailsViewState extends Equatable {
   final AdData adData;
   final bool isFavorite;
 
-  const GlyphDetailsViewState({
+  GlyphDetailsViewState({
     required this.glyph,
     required this.adData,
     required this.isFavorite,
   });
+
+  factory GlyphDetailsViewState.initial() {
+    return GlyphDetailsViewState(
+      glyph: unknownGlyph,
+      adData: allAdsData.first,
+      isFavorite: false,
+    );
+  }
 
   @override
   List<Object> get props => [glyph, adData, isFavorite];
@@ -30,9 +38,3 @@ class GlyphDetailsViewState extends Equatable {
     );
   }
 }
-
-final defaultGlyphDetailsViewState = GlyphDetailsViewState(
-  glyph: unknownGlyph,
-  adData: allAdsData.first,
-  isFavorite: false,
-);

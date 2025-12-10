@@ -7,10 +7,17 @@ class RecentGlyphEntry extends Equatable {
   final String glyph;
   final DateTime timestamp;
 
-  const RecentGlyphEntry({
+  RecentGlyphEntry({
     required this.glyph,
     required this.timestamp,
   });
+
+  factory RecentGlyphEntry.initial() {
+    return RecentGlyphEntry(
+      glyph: '',
+      timestamp: DateTime.fromMillisecondsSinceEpoch(0),
+    );
+  }
 
   @override
   List<Object> get props => [glyph, timestamp];
@@ -32,23 +39,22 @@ class RecentGlyphEntry extends Equatable {
           glyph: glyph,
           timestamp: DateTime.fromMillisecondsSinceEpoch(timestamp),
         ),
-      _ => defaultRecentGlyphEntry,
+      _ => RecentGlyphEntry.initial(),
     };
   }
 }
-
-final defaultRecentGlyphEntry = RecentGlyphEntry(
-  glyph: '',
-  timestamp: DateTime.fromMillisecondsSinceEpoch(0),
-);
 
 @immutable
 class RecentDataState extends Equatable {
   final IList<RecentGlyphEntry> recentGlyphs;
 
-  const RecentDataState({
+  RecentDataState({
     required this.recentGlyphs,
   });
+
+  factory RecentDataState.initial() {
+    return RecentDataState(recentGlyphs: IList());
+  }
 
   @override
   List<Object> get props => [recentGlyphs];
@@ -73,15 +79,12 @@ class RecentDataState extends Equatable {
         'recentGlyphs': final List<dynamic> recentGlyphs,
       } =>
         RecentDataState(
-          recentGlyphs:
-              recentGlyphs
-                  .cast<Map<String, dynamic>>()
-                  .map(RecentGlyphEntry.fromMap)
-                  .toIList(),
+          recentGlyphs: recentGlyphs
+              .cast<Map<String, dynamic>>()
+              .map(RecentGlyphEntry.fromMap)
+              .toIList(),
         ),
-      _ => defaultRecentDataState,
+      _ => RecentDataState.initial(),
     };
   }
 }
-
-final defaultRecentDataState = RecentDataState(recentGlyphs: IList());

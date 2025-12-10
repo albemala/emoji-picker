@@ -29,12 +29,12 @@ class MockPreferencesDataController //
     implements PreferencesDataController {
   @override
   Stream<PreferencesDataState> get stream {
-    return Stream.value(defaultPreferencesDataState);
+    return Stream.value(PreferencesDataState.initial());
   }
 
   @override
   PreferencesDataState get state {
-    return defaultPreferencesDataState;
+    return PreferencesDataState.initial();
   }
 }
 
@@ -47,12 +47,12 @@ class MockGlyphsDataController //
 
   @override
   Stream<GlyphsDataState> get stream {
-    return Stream.value(initialState ?? defaultGlyphsDataState);
+    return Stream.value(initialState ?? GlyphsDataState.initial());
   }
 
   @override
   GlyphsDataState get state {
-    return initialState ?? defaultGlyphsDataState;
+    return initialState ?? GlyphsDataState.initial();
   }
 }
 
@@ -65,12 +65,12 @@ class MockSearchGlyphsDataController //
 
   @override
   Stream<SearchGlyphsDataState> get stream {
-    return Stream.value(initialState ?? defaultSearchGlyphsDataState);
+    return Stream.value(initialState ?? SearchGlyphsDataState.initial());
   }
 
   @override
   SearchGlyphsDataState get state {
-    return initialState ?? defaultSearchGlyphsDataState;
+    return initialState ?? SearchGlyphsDataState.initial();
   }
 
   @override
@@ -86,12 +86,12 @@ class MockSelectedGlyphDataController //
 
   @override
   Stream<SelectedGlyphDataState> get stream {
-    return Stream.value(initialState ?? defaultSelectedGlyphDataState);
+    return Stream.value(initialState ?? SelectedGlyphDataState.initial());
   }
 
   @override
   SelectedGlyphDataState get state {
-    return initialState ?? defaultSelectedGlyphDataState;
+    return initialState ?? SelectedGlyphDataState.initial();
   }
 
   @override
@@ -107,12 +107,12 @@ class MockFavoritesDataController //
 
   @override
   Stream<FavoritesDataState> get stream {
-    return Stream.value(initialState ?? defaultFavoritesDataState);
+    return Stream.value(initialState ?? FavoritesDataState.initial());
   }
 
   @override
   FavoritesDataState get state {
-    return initialState ?? defaultFavoritesDataState;
+    return initialState ?? FavoritesDataState.initial();
   }
 
   @override
@@ -130,12 +130,12 @@ class MockGlyphDetailsViewController //
 
   @override
   Stream<GlyphDetailsViewState> get stream {
-    return Stream.value(initialState ?? defaultGlyphDetailsViewState);
+    return Stream.value(initialState ?? GlyphDetailsViewState.initial());
   }
 
   @override
   GlyphDetailsViewState get state {
-    return initialState ?? defaultGlyphDetailsViewState;
+    return initialState ?? GlyphDetailsViewState.initial();
   }
 }
 
@@ -148,12 +148,12 @@ class MockRecentDataController //
 
   @override
   Stream<RecentDataState> get stream {
-    return Stream.value(initialState ?? defaultRecentDataState);
+    return Stream.value(initialState ?? RecentDataState.initial());
   }
 
   @override
   RecentDataState get state {
-    return initialState ?? defaultRecentDataState;
+    return initialState ?? RecentDataState.initial();
   }
 
   @override

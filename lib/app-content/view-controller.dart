@@ -22,7 +22,7 @@ class AppContentViewController extends Cubit<AppContentViewState> {
   AppContentViewController(
     this.glyphsDataController,
     this.selectedGlyphDataController,
-  ) : super(defaultAppContentViewState) {
+  ) : super(AppContentViewState.initial()) {
     glyphsDataControllerSubscription = glyphsDataController.stream.listen((_) {
       _selectFirstEmojiIfAvailable();
     });

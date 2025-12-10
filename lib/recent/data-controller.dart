@@ -11,7 +11,7 @@ class RecentDataController extends StoredCubit<RecentDataState> {
     return RecentDataController();
   }
 
-  RecentDataController() : super(defaultRecentDataState);
+  RecentDataController() : super(RecentDataState.initial());
 
   @override
   Future<void> migrateData() async {}

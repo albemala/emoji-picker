@@ -10,6 +10,12 @@ class FavoritesDataState extends Equatable {
     required this.favoriteGlyphs,
   });
 
+  factory FavoritesDataState.initial() {
+    return FavoritesDataState(
+      favoriteGlyphs: IList(),
+    );
+  }
+
   @override
   List<Object> get props => [favoriteGlyphs];
 
@@ -35,9 +41,7 @@ class FavoritesDataState extends Equatable {
         FavoritesDataState(
           favoriteGlyphs: favoriteGlyphs.cast<String>().toIList(),
         ),
-      _ => defaultFavoritesDataState,
+      _ => FavoritesDataState.initial(),
     };
   }
 }
-
-final defaultFavoritesDataState = FavoritesDataState(favoriteGlyphs: IList());

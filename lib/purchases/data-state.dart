@@ -16,6 +16,13 @@ class PurchasesDataState extends Equatable {
     );
   }
 
+  factory PurchasesDataState.initial() {
+    return const PurchasesDataState(
+      // New users get lifetime free access to the app by default
+      isLifetimeFreeUser: true,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {'isLifetimeFreeUser': isLifetimeFreeUser};
   }
@@ -24,12 +31,7 @@ class PurchasesDataState extends Equatable {
     return switch (map) {
       {'isLifetimeFreeUser': final bool isLifetimeFreeUser} =>
         PurchasesDataState(isLifetimeFreeUser: isLifetimeFreeUser),
-      _ => defaultPurchasesDataState,
+      _ => PurchasesDataState.initial(),
     };
   }
 }
-
-const defaultPurchasesDataState = PurchasesDataState(
-  // New users get lifetime free access to the app by default
-  isLifetimeFreeUser: true,
-);

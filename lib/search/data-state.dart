@@ -25,6 +25,19 @@ class SearchGlyphsDataState extends Equatable {
     required this.filteredRecentKaomoji,
   });
 
+  factory SearchGlyphsDataState.initial() {
+    return const SearchGlyphsDataState(
+      searchQuery: '',
+      filteredEmoji: IList.empty(),
+      filteredSymbols: IList.empty(),
+      filteredKaomoji: IList.empty(),
+      filteredFavorites: IList.empty(),
+      filteredRecentEmoji: IList.empty(),
+      filteredRecentSymbols: IList.empty(),
+      filteredRecentKaomoji: IList.empty(),
+    );
+  }
+
   @override
   List<Object> get props => [
     searchQuery,
@@ -61,14 +74,3 @@ class SearchGlyphsDataState extends Equatable {
     );
   }
 }
-
-const defaultSearchGlyphsDataState = SearchGlyphsDataState(
-  searchQuery: '',
-  filteredEmoji: IList.empty(),
-  filteredSymbols: IList.empty(),
-  filteredKaomoji: IList.empty(),
-  filteredFavorites: IList.empty(),
-  filteredRecentEmoji: IList.empty(),
-  filteredRecentSymbols: IList.empty(),
-  filteredRecentKaomoji: IList.empty(),
-);

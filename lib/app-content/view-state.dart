@@ -5,6 +5,10 @@ import 'package:flutter/foundation.dart';
 class AppContentViewState extends Equatable {
   const AppContentViewState();
 
+  factory AppContentViewState.initial() {
+    return const AppContentViewState();
+  }
+
   @override
   List<Object> get props => [];
 
@@ -12,5 +16,3 @@ class AppContentViewState extends Equatable {
     return const AppContentViewState();
   }
 }
-
-const defaultAppContentViewState = AppContentViewState();

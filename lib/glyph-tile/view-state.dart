@@ -14,6 +14,14 @@ class GlyphTileViewState extends Equatable {
     required this.isFocused,
   });
 
+  factory GlyphTileViewState.initial() {
+    return const GlyphTileViewState(
+      glyph: unknownGlyph,
+      isSelected: false,
+      isFocused: false,
+    );
+  }
+
   @override
   List<Object> get props => [glyph, isSelected, isFocused];
 
@@ -29,9 +37,3 @@ class GlyphTileViewState extends Equatable {
     );
   }
 }
-
-const defaultGlyphTileViewState = GlyphTileViewState(
-  glyph: unknownGlyph,
-  isSelected: false,
-  isFocused: false,
-);

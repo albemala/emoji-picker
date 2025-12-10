@@ -7,6 +7,12 @@ class AboutViewState extends Equatable {
 
   const AboutViewState({required this.appVersion});
 
+  factory AboutViewState.initial() {
+    return const AboutViewState(
+      appVersion: '',
+    );
+  }
+
   @override
   List<Object> get props => [appVersion];
 
@@ -16,7 +22,3 @@ class AboutViewState extends Equatable {
     );
   }
 }
-
-const defaultAboutViewState = AboutViewState(
-  appVersion: '',
-);

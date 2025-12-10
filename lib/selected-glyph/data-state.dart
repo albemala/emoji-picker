@@ -8,6 +8,12 @@ class SelectedGlyphDataState extends Equatable {
 
   const SelectedGlyphDataState({required this.selectedGlyph});
 
+  factory SelectedGlyphDataState.initial() {
+    return const SelectedGlyphDataState(
+      selectedGlyph: unknownGlyph,
+    );
+  }
+
   @override
   List<Object> get props => [selectedGlyph];
 
@@ -17,7 +23,3 @@ class SelectedGlyphDataState extends Equatable {
     );
   }
 }
-
-const defaultSelectedGlyphDataState = SelectedGlyphDataState(
-  selectedGlyph: unknownGlyph,
-);

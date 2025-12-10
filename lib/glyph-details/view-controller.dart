@@ -25,7 +25,7 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
   GlyphDetailsViewController(
     this.selectedGlyphDataController,
     this.favoritesDataController,
-  ) : super(defaultGlyphDetailsViewState) {
+  ) : super(GlyphDetailsViewState.initial()) {
     selectedGlyphDataControllerSubscription = selectedGlyphDataController.stream
         .listen((_) {
           updateState();

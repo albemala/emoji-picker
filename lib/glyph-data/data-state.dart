@@ -17,6 +17,15 @@ class GlyphsDataState extends Equatable {
     required this.allGlyphsMap,
   });
 
+  factory GlyphsDataState.initial() {
+    return const GlyphsDataState(
+      emoji: IList.empty(),
+      symbols: IList.empty(),
+      kaomoji: IList.empty(),
+      allGlyphsMap: IMap.empty(),
+    );
+  }
+
   @override
   List<Object> get props => [
     emoji,
@@ -25,10 +34,3 @@ class GlyphsDataState extends Equatable {
     allGlyphsMap,
   ];
 }
-
-const defaultGlyphsDataState = GlyphsDataState(
-  emoji: IList.empty(),
-  symbols: IList.empty(),
-  kaomoji: IList.empty(),
-  allGlyphsMap: IMap.empty(),
-);

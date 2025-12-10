@@ -7,7 +7,7 @@ class PreferencesDataController extends StoredCubit<PreferencesDataState> {
     return PreferencesDataController();
   }
 
-  PreferencesDataController() : super(defaultPreferencesDataState);
+  PreferencesDataController() : super(PreferencesDataState.initial());
 
   @override
   Future<void> migrateData() async {}

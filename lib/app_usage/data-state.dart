@@ -14,6 +14,10 @@ class AppUsageDataState extends Equatable {
     return AppUsageDataState(usageCount: usageCount ?? this.usageCount);
   }
 
+  factory AppUsageDataState.initial() {
+    return const AppUsageDataState(usageCount: 0);
+  }
+
   Map<String, dynamic> toMap() {
     return {'usageCount': usageCount};
   }
@@ -23,9 +27,7 @@ class AppUsageDataState extends Equatable {
       {'usageCount': final int usageCount} => AppUsageDataState(
         usageCount: usageCount,
       ),
-      _ => defaultAppUsageDataState,
+      _ => AppUsageDataState.initial(),
     };
   }
 }
-
-const defaultAppUsageDataState = AppUsageDataState(usageCount: 0);

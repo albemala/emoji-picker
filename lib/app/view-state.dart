@@ -8,6 +8,13 @@ class AppViewState extends Equatable {
 
   const AppViewState({required this.themeMode, required this.isLoading});
 
+  factory AppViewState.initial() {
+    return const AppViewState(
+      themeMode: ThemeMode.light,
+      isLoading: true,
+    );
+  }
+
   @override
   List<Object> get props => [themeMode, isLoading];
 
@@ -18,8 +25,3 @@ class AppViewState extends Equatable {
     );
   }
 }
-
-const defaultAppViewState = AppViewState(
-  themeMode: ThemeMode.light,
-  isLoading: true,
-);

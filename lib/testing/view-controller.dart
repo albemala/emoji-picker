@@ -18,7 +18,7 @@ class TestingViewController extends Cubit<TestingViewState> {
   TestingViewController(
     this._favoritesController,
     this._recentController,
-  ) : super(defaultTestingViewState);
+  ) : super(TestingViewState.initial());
 
   void clearFavorites() {
     _favoritesController.clearFavorites();
