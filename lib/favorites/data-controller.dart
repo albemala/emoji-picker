@@ -28,10 +28,9 @@ class FavoritesDataController extends StoredCubit<FavoritesDataState> {
   }
 
   void toggleFavorite(Glyph glyph) {
-    final newSet =
-        state.favoriteGlyphs.contains(glyph.glyph)
-            ? state.favoriteGlyphs.remove(glyph.glyph)
-            : state.favoriteGlyphs.add(glyph.glyph);
+    final newSet = state.favoriteGlyphs.contains(glyph.glyph)
+        ? state.favoriteGlyphs.remove(glyph.glyph)
+        : state.favoriteGlyphs.add(glyph.glyph);
     emit(state.copyWith(favoriteGlyphs: newSet));
   }
 

@@ -11,8 +11,8 @@ class PreferencesDataState extends Equatable {
 
   @override
   List<Object> get props => [
-        themeMode,
-      ];
+    themeMode,
+  ];
 
   PreferencesDataState copyWith({
     ThemeMode? themeMode,

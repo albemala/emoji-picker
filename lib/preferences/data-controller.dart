@@ -31,9 +31,9 @@ class PreferencesDataController extends StoredCubit<PreferencesDataState> {
   void toggleThemeMode() {
     themeMode =
         themeMode ==
-                ThemeMode
-                    .light //
-            ? ThemeMode.dark
-            : ThemeMode.light;
+            ThemeMode
+                .light //
+        ? ThemeMode.dark
+        : ThemeMode.light;
   }
 }

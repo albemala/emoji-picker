@@ -67,63 +67,57 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
     bool test(Glyph glyph) => matchesSearchTerm(glyph, state.searchQuery);
 
     final glyphData = glyphsDataController.state;
-    final filteredEmoji =
-        state.searchQuery.isEmpty
-            ? glyphData.emoji
-            : glyphData.emoji.where(test).toIList();
-    final filteredSymbols =
-        state.searchQuery.isEmpty
-            ? glyphData.symbols
-            : glyphData.symbols.where(test).toIList();
-    final filteredKaomoji =
-        state.searchQuery.isEmpty
-            ? glyphData.kaomoji
-            : glyphData.kaomoji.where(test).toIList();
+    final filteredEmoji = state.searchQuery.isEmpty
+        ? glyphData.emoji
+        : glyphData.emoji.where(test).toIList();
+    final filteredSymbols = state.searchQuery.isEmpty
+        ? glyphData.symbols
+        : glyphData.symbols.where(test).toIList();
+    final filteredKaomoji = state.searchQuery.isEmpty
+        ? glyphData.kaomoji
+        : glyphData.kaomoji.where(test).toIList();
 
     // Step 1: Lookup - Convert glyph strings to actual Glyph objects using map lookups
     final favoriteGlyphStrings = favoritesDataController.state.favoriteGlyphs;
     final recentGlyphStrings = recentDataController.getRecentGlyphStrings();
 
-    final favoriteGlyphs =
-        favoriteGlyphStrings
-            .map((glyphString) => glyphData.allGlyphsMap[glyphString])
-            .whereType<Glyph>() // Filter out nulls
-            .toIList();
+    final favoriteGlyphs = favoriteGlyphStrings
+        .map((glyphString) => glyphData.allGlyphsMap[glyphString])
+        .whereType<Glyph>() // Filter out nulls
+        .toIList();
 
-    final recentGlyphs =
-        recentGlyphStrings
-            .map((glyphString) => glyphData.allGlyphsMap[glyphString])
-            .whereType<Glyph>() // Filter out nulls
-            .toIList();
+    final recentGlyphs = recentGlyphStrings
+        .map((glyphString) => glyphData.allGlyphsMap[glyphString])
+        .whereType<Glyph>() // Filter out nulls
+        .toIList();
 
     // Step 2: Categorize recent glyphs by type
-    final recentEmoji =
-        recentGlyphs.where((g) => g.type == GlyphType.emoji).toIList();
-    final recentSymbols =
-        recentGlyphs.where((g) => g.type == GlyphType.symbol).toIList();
-    final recentKaomoji =
-        recentGlyphs.where((g) => g.type == GlyphType.kaomoji).toIList();
+    final recentEmoji = recentGlyphs
+        .where((g) => g.type == GlyphType.emoji)
+        .toIList();
+    final recentSymbols = recentGlyphs
+        .where((g) => g.type == GlyphType.symbol)
+        .toIList();
+    final recentKaomoji = recentGlyphs
+        .where((g) => g.type == GlyphType.kaomoji)
+        .toIList();
 
     // Step 3: Apply search query filtering using consistent where pattern
-    final filteredFavorites =
-        state.searchQuery.isEmpty
-            ? favoriteGlyphs
-            : favoriteGlyphs.where(test).toIList();
+    final filteredFavorites = state.searchQuery.isEmpty
+        ? favoriteGlyphs
+        : favoriteGlyphs.where(test).toIList();
 
-    final filteredRecentEmoji =
-        state.searchQuery.isEmpty
-            ? recentEmoji
-            : recentEmoji.where(test).toIList();
+    final filteredRecentEmoji = state.searchQuery.isEmpty
+        ? recentEmoji
+        : recentEmoji.where(test).toIList();
 
-    final filteredRecentSymbols =
-        state.searchQuery.isEmpty
-            ? recentSymbols
-            : recentSymbols.where(test).toIList();
+    final filteredRecentSymbols = state.searchQuery.isEmpty
+        ? recentSymbols
+        : recentSymbols.where(test).toIList();
 
-    final filteredRecentKaomoji =
-        state.searchQuery.isEmpty
-            ? recentKaomoji
-            : recentKaomoji.where(test).toIList();
+    final filteredRecentKaomoji = state.searchQuery.isEmpty
+        ? recentKaomoji
+        : recentKaomoji.where(test).toIList();
 
     emit(
       state.copyWith(

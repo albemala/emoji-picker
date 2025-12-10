@@ -39,10 +39,10 @@ class ThemeModeToggleView extends StatelessWidget {
         onPressed: controller.toggleThemeMode,
         icon:
             state.themeMode ==
-                    ThemeMode
-                        .light //
-                ? const Icon(CupertinoIcons.moon)
-                : const Icon(CupertinoIcons.sun_max),
+                ThemeMode
+                    .light //
+            ? const Icon(CupertinoIcons.moon)
+            : const Icon(CupertinoIcons.sun_max),
       ),
     );
   }

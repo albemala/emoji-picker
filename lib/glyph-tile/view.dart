@@ -49,19 +49,17 @@ class GlyphTileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       clipBehavior: Clip.hardEdge,
-      color:
-          state.isSelected
-              ? Theme.of(context).colorScheme.primaryContainer
-              : Theme.of(context).colorScheme.tertiaryContainer,
+      color: state.isSelected
+          ? Theme.of(context).colorScheme.primaryContainer
+          : Theme.of(context).colorScheme.tertiaryContainer,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side:
-            state.isFocused
-                ? BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 2,
-                )
-                : BorderSide.none,
+        side: state.isFocused
+            ? BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 2,
+              )
+            : BorderSide.none,
       ),
       child: InkWell(
         onTap: () => controller.onTap(context),

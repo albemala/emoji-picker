@@ -34,10 +34,9 @@ class RecentDataController extends StoredCubit<RecentDataState> {
     final glyphString = glyph.glyph;
 
     // Remove existing entry if it exists
-    final filteredList =
-        state.recentGlyphs
-            .where((entry) => entry.glyph != glyphString)
-            .toList();
+    final filteredList = state.recentGlyphs
+        .where((entry) => entry.glyph != glyphString)
+        .toList();
 
     // Add new entry at the beginning
     final newEntry = RecentGlyphEntry(glyph: glyphString, timestamp: now);

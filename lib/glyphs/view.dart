@@ -111,8 +111,9 @@ class GlyphsView extends StatelessWidget {
     }
 
     // On mobile and tablet screens, use the tabbed interface
-    final tabController =
-        context.read<SelectedTabDataController>().tabController;
+    final tabController = context
+        .read<SelectedTabDataController>()
+        .tabController;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -240,21 +241,20 @@ class _GlyphGroupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers:
-          groups.map((group) {
-            return MultiSliver(
-              pushPinnedChildren: true,
-              children: [
-                SliverPinnedHeader(
-                  child: _GlyphGroupTitleView(title: group.title),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(21),
-                  sliver: groupBuilder(context, group.glyphs.toList()),
-                ),
-              ],
-            );
-          }).toList(),
+      slivers: groups.map((group) {
+        return MultiSliver(
+          pushPinnedChildren: true,
+          children: [
+            SliverPinnedHeader(
+              child: _GlyphGroupTitleView(title: group.title),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(21),
+              sliver: groupBuilder(context, group.glyphs.toList()),
+            ),
+          ],
+        );
+      }).toList(),
     );
   }
 }
