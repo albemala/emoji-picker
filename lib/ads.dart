@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -10,7 +11,7 @@ class AdData {
   final String overline;
   final String title;
   final String description;
-  final String Function() url;
+  final String url;
 
   const AdData({
     required this.iconAssetPath,
@@ -21,87 +22,105 @@ class AdData {
   });
 }
 
-const exaboxAdData = AdData(
+final exaboxAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/exabox.png',
   overline: 'Your coding companion',
   title: 'Exabox: Essential tools for developers',
   description: '''
 The ultimate developer toolkit in your pocket. Transform, inspect, and manipulate data with 30+ essential utilities.''',
-  url: getExaboxUrl,
+  url: exaboxUrl,
 );
 
-const hexeeProAdData = AdData(
+final hexeeProAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/hexee-pro.png',
   overline: 'Your color workspace',
   title: 'Hexee Pro: Advanced palette & color tools',
   description: '''
 Advanced color tools for designers and artists in one unified workspace. Create, edit, and organize palettes, fine-tune colors, and check accessibility.''',
-  url: getHexeeProUrl,
+  url: hexeeProUrl,
 );
 
-const paletteConverterAdData = AdData(
+final paletteConverterAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/upc.png',
   overline: 'Color palettes, simplified',
   title: 'Universal Palette Converter',
   description: '''
-Universal Palette Converter is the ultimate solution for managing and converting color palettes across various formats.''',
-  url: getPaletteConverterUrl,
+The ultimate solution for managing and converting color palettes across various formats.''',
+  url: paletteConverterUrl,
 );
 
-const wmapAdData = AdData(
+final wmapAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/wmap.png',
   overline: 'Your world, your wallpaper',
   title: 'WMap: Map Wallpapers & Backgrounds',
   description: '''
 Create beautiful, minimal, custom map wallpapers and backgrounds for your phone or tablet.''',
-  url: getWmapUrl,
+  url: wmapUrl,
 );
 
-const iroIroAdData = AdData(
+final iroIroAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/iro-iro.png',
   overline: 'Color sorting game',
   title: 'Iro-Iro: Relaxing Color Puzzle',
   description: '''
 Arrange colors to form amazing patterns in this relaxing colour puzzle game!''',
-  url: getIroIroUrl,
+  url: iroIroUrl,
 );
 
-const ejimoAdData = AdData(
+final ejimoAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/ejimo.png',
   overline: 'Characters at your fingertips',
   title: 'Ejimo: Emoji & Symbol Picker',
   description: '''
-Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo.''',
-  url: getEjimoUrl,
+Find and copy unicode characters, emoji, kaomoji and symbols.''',
+  url: ejimoUrl,
 );
 
-const luvAdData = AdData(
+final luvAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/luv.png',
   overline: 'Design Inspiration',
   title: 'LUV: Design Inspiration',
   description: '''
 Endless inspiration for designers, powered by COLOURlovers: colors, palettes, and patterns.''',
-  url: getLuvUrl,
+  url: luvUrl,
 );
 
-const catIdentifierAdData = AdData(
+final catIdentifierAdData = AdData(
   iconAssetPath: 'assets/other_apps_icons/cat_identifier.png',
   overline: 'AI Identifier',
   title: 'Cat Breed Identification App',
   description: '''
 Identify cat breeds from photographs using AI.''',
-  url: getCatIdentifierUrl,
+  url: catIdentifierUrl,
 );
 
-String getExaboxUrl() => switch (Platform.operatingSystem) {
-  _ => 'https://exabox.app/?ref=emoji_picker',
+final textmineAdData = AdData(
+  iconAssetPath: 'assets/other_apps_icons/textmine.png',
+  overline: 'Extract emails, dates & more',
+  title: 'TextMine: Text to Data',
+  description: '''
+Extract emails, phone numbers, dates, and more from any text or file. Fast, accurate, and private.''',
+  url: textmineUrl,
+);
+
+final clarityAdData = AdData(
+  iconAssetPath: 'assets/other_apps_icons/clarity.png',
+  overline: 'Contrast checker for designers',
+  title: 'Clarity: Color Accessibility Check',
+  description: '''
+Check WCAG accessibility guidelines, verify contrast ratios, and build color palettes with ease.''',
+  url: clarityUrl,
+);
+
+String get exaboxUrl => switch (Platform.operatingSystem) {
+  _ => 'https://exabox.app/',
 };
 
-String getHexeeProUrl() => switch (Platform.operatingSystem) {
-  _ => 'https://hexee.app/?ref=emoji_picker',
+String get hexeeProUrl => switch (Platform.operatingSystem) {
+  _ => 'https://hexee.app/',
 };
 
-String getPaletteConverterUrl() => switch (Platform.operatingSystem) {
+String get paletteConverterUrl => switch (Platform.operatingSystem) {
   'ios' || 'macos' =>
     'https://apps.apple.com/us/app/color-palette-conversion-upc/id6480113031',
   'android' =>
@@ -109,40 +128,52 @@ String getPaletteConverterUrl() => switch (Platform.operatingSystem) {
   _ => '',
 };
 
-String getWmapUrl() => switch (Platform.operatingSystem) {
+String get wmapUrl => switch (Platform.operatingSystem) {
   'ios' => 'https://apps.apple.com/app/id1481230214',
   'android' => 'https://play.google.com/store/apps/details?id=me.albemala.wmap',
-  _ => 'https://wmap.albemala.me/?ref=emoji_picker',
+  _ => 'https://wmap.albemala.me/',
 };
 
-String getIroIroUrl() => switch (Platform.operatingSystem) {
+String get iroIroUrl => switch (Platform.operatingSystem) {
   'ios' || 'macos' =>
     'https://apps.apple.com/us/app/iro-iro-relaxing-color-puzzle/id1563030881/',
   'android' =>
     'https://play.google.com/store/apps/details?id=me.albemala.iro_iro',
-  _ => 'https://iro-iro.albemala.me/?ref=emoji_picker',
+  _ => 'https://iro-iro.albemala.me/',
 };
 
-String getEjimoUrl() => switch (Platform.operatingSystem) {
+String get ejimoUrl => switch (Platform.operatingSystem) {
   'ios' || 'macos' => 'https://apps.apple.com/us/app/ejimo/id1598944603',
   'android' =>
     'https://play.google.com/store/apps/details?id=me.albemala.ejimo',
   _ => 'https://github.com/albemala/emoji-picker',
 };
 
-String getLuvUrl() => switch (Platform.operatingSystem) {
-  'ios' || 'macos' =>
-    'https://play.google.com/store/apps/details?id=me.albemala.luv&hl=en',
+String get luvUrl => switch (Platform.operatingSystem) {
+  'ios' ||
+  'macos' => 'https://apps.apple.com/us/app/color-picker-luv/id1438312561',
   'android' =>
     'https://play.google.com/store/apps/details?id=me.albemala.luv&hl=en',
   _ => 'https://github.com/albemala/colourlovers-app',
 };
 
-String getCatIdentifierUrl() => switch (Platform.operatingSystem) {
+String get catIdentifierUrl => switch (Platform.operatingSystem) {
   'ios' || 'macos' =>
     'https://apps.apple.com/us/app/cat-breed-identifier-cat-id/id6749202141',
   'android' =>
     'https://play.google.com/store/apps/details?id=me.albemala.catbreedidentifier',
+  _ => '',
+};
+
+String get textmineUrl => switch (Platform.operatingSystem) {
+  'ios' ||
+  'macos' => 'https://apps.apple.com/us/app/textmine-text-to-data/id6754284922',
+  _ => '',
+};
+
+String get clarityUrl => switch (Platform.operatingSystem) {
+  'ios' || 'macos' =>
+    'https://apps.apple.com/us/app/color-accessibility-check/id6752328976',
   _ => '',
 };
 
@@ -155,6 +186,8 @@ final List<AdData> allAdsData = [
   // ejimoAdData,
   luvAdData,
   catIdentifierAdData,
+  textmineAdData,
+  clarityAdData,
 ];
 
 AdData selectRandomAdData() {
@@ -219,7 +252,7 @@ class AdView extends StatelessWidget {
           alignment: Alignment.bottomRight,
           child: OutlinedButton(
             onPressed: () {
-              openUrl(adData.url());
+              unawaited(openUrl(adData.url));
             },
             child: const Text('Learn more'),
           ),
