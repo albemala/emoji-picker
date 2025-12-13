@@ -47,17 +47,12 @@ class AppViewController extends Cubit<AppViewState> {
 
     // Increment usage count after initialization is complete
     appUsageDataController.incrementUsageCount();
-
-    if (_shouldShowReviewDialog()) {
+    if (appUsageDataController.usageCount > 0 &&
+        appUsageDataController.usageCount % 3 == 0) {
       unawaited(showReviewDialog());
     }
 
     updateViewState();
-  }
-
-  bool _shouldShowReviewDialog() {
-    return appUsageDataController.usageCount > 0 &&
-        appUsageDataController.usageCount % 3 == 0;
   }
 
   void updateViewState() {

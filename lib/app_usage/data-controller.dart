@@ -32,4 +32,11 @@ class AppUsageDataController extends StoredCubit<AppUsageDataState> {
 
   void incrementUsageCount() =>
       emit(state.copyWith(usageCount: state.usageCount + 1));
+
+  int get glyphCopiedCount => state.glyphCopiedCount;
+  set glyphCopiedCount(int count) =>
+      emit(state.copyWith(glyphCopiedCount: count));
+
+  void incrementGlyphCopiedCount() =>
+      emit(state.copyWith(glyphCopiedCount: state.glyphCopiedCount + 1));
 }
