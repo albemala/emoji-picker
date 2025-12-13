@@ -17,6 +17,7 @@ cd macos
 # build for app store
 rm -rf build
 fastlane mac production_store
+exit
 # build standalone
 rm -rf build
 fastlane mac production_standalone

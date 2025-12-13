@@ -1,1 +1,2 @@
 username ENV["APPLE_ID"] # Apple Developer Portal email
+force true
