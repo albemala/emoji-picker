@@ -49,9 +49,7 @@ Future<void> takeScreenshot({
   );
 
   await tester.runAsync(() => tester.pumpWidget(widget));
-  await tester.precacheImagesInWidgetTree();
-  await tester.precacheTopbarImages();
-  await tester.loadFonts();
+  await tester.loadAssets();
   await tester.pumpFrames(widget, const Duration(seconds: 1));
   await tester.expectScreenshot(
     device.device,

@@ -8,8 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'data.dart';
 import 'controllers.dart';
+import 'data.dart';
 import 'functions.dart';
 
 Future<void> main() async {
@@ -28,8 +28,8 @@ Future<void> main() async {
 
   final devices = [
     GoldenScreenshotDevices.macbook,
-    GoldenScreenshotDevices.newerIpad,
-    GoldenScreenshotDevices.newerIphone,
+    GoldenScreenshotDevices.ipad,
+    GoldenScreenshotDevices.iphone,
   ];
 
   final locales = [
