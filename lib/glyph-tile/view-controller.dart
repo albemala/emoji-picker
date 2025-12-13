@@ -42,9 +42,9 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     focusNode.dispose();
-    selectedGlyphDataControllerSubscription?.cancel();
+    await selectedGlyphDataControllerSubscription?.cancel();
     return super.close();
   }
 
@@ -71,11 +71,11 @@ class GlyphTileViewController extends Cubit<GlyphTileViewState> {
     }
   }
 
-  void onDoubleTap(BuildContext context) {
-    copyGlyphToClipboard(context, state.glyph);
+  Future<void> onDoubleTap(BuildContext context) async {
+    await copyGlyphToClipboard(context, state.glyph);
   }
 
-  void onLongPress(BuildContext context) {
-    copyGlyphToClipboard(context, state.glyph);
+  Future<void> onLongPress(BuildContext context) async {
+    await copyGlyphToClipboard(context, state.glyph);
   }
 }

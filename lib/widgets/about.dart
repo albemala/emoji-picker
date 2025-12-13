@@ -12,8 +12,8 @@ class AboutButtonView extends StatelessWidget {
       width: 48,
       height: 48,
       child: IconButton(
-        onPressed: () {
-          openDialog<void>(
+        onPressed: () async {
+          await openDialog<void>(
             context,
             const AlertDialog(
               contentPadding: EdgeInsets.zero,

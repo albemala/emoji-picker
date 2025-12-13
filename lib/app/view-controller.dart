@@ -31,12 +31,12 @@ class AppViewController extends Cubit<AppViewState> {
     updateViewState();
 
     // Wait for data controllers initialization
-    _waitForInitialization();
+    unawaited(_waitForInitialization());
   }
 
   @override
-  Future<void> close() {
-    preferencesDataControllerSubscription?.cancel();
+  Future<void> close() async {
+    await preferencesDataControllerSubscription?.cancel();
     return super.close();
   }
 

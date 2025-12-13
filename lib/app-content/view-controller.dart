@@ -30,8 +30,8 @@ class AppContentViewController extends Cubit<AppContentViewState> {
   }
 
   @override
-  Future<void> close() {
-    glyphsDataControllerSubscription?.cancel();
+  Future<void> close() async {
+    await glyphsDataControllerSubscription?.cancel();
     return super.close();
   }
 

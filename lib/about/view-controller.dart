@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/about/functions.dart';
 import 'package:app/about/view-state.dart';
 import 'package:app/feedback.dart';
@@ -8,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AboutViewController extends Cubit<AboutViewState> {
-  factory AboutViewController.fromContext(BuildContext context) {
+  factory AboutViewController.fromContext(BuildContext _) {
     return AboutViewController();
   }
 
   AboutViewController() : super(AboutViewState.initial()) {
-    updateViewState();
+    unawaited(updateViewState());
   }
 
   Future<void> updateViewState() async {

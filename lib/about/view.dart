@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/about/view-controller.dart';
 import 'package:app/about/view-state.dart';
 import 'package:app/app/defines.dart';
@@ -123,10 +125,12 @@ class _AppActionsView extends StatelessWidget {
             builder: (context) {
               return FilledButton(
                 onPressed: () {
-                  controller.openShareApp(
-                    '''
+                  unawaited(
+                    controller.openShareApp(
+                      '''
         Find and copy unicode characters, emoji, kaomoji and symbols with Ejimo: $repositoryUrl''',
-                    getSharePosition(context),
+                      getSharePosition(context),
+                    ),
                   );
                 },
                 child: const Text(

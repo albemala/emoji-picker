@@ -7,7 +7,7 @@ import 'package:flutter_data_storage/flutter_data_storage.dart';
 class RecentDataController extends StoredCubit<RecentDataState> {
   static const int maxRecentItems = 30;
 
-  factory RecentDataController.fromContext(BuildContext context) {
+  factory RecentDataController.fromContext(BuildContext _) {
     return RecentDataController();
   }
 

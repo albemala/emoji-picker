@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -10,14 +9,16 @@ Future<String?> shareText({
   required String text,
 }) async {
   try {
-    final result = await Share.share(text, sharePositionOrigin: position);
+    final result = await SharePlus.instance.share(
+      ShareParams(text: text, sharePositionOrigin: position),
+    );
     return result.status ==
             ShareResultStatus
                 .success //
         ? result.raw
         : null;
   } catch (exception) {
-    if (kDebugMode) print('Failed to share text $exception');
+    debugPrint('Failed to share text $exception');
     return null;
   }
 }
@@ -32,10 +33,12 @@ Future<String?> shareFile({
   String? text,
 }) async {
   try {
-    final result = await Share.shareXFiles(
-      [XFile(filePath, mimeType: mimeType)],
-      text: text,
-      sharePositionOrigin: position,
+    final result = await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(filePath, mimeType: mimeType)],
+        text: text,
+        sharePositionOrigin: position,
+      ),
     );
     return result.status ==
             ShareResultStatus
@@ -43,7 +46,7 @@ Future<String?> shareFile({
         ? result.raw
         : null;
   } catch (exception) {
-    if (kDebugMode) print('Failed to share file $exception');
+    debugPrint('Failed to share file $exception');
     return null;
   }
 }

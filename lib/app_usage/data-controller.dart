@@ -5,7 +5,7 @@ import 'package:flutter_data_storage/flutter_data_storage.dart';
 const appUsageDataStoreName = 'app_usage';
 
 class AppUsageDataController extends StoredCubit<AppUsageDataState> {
-  factory AppUsageDataController.fromContext(BuildContext context) {
+  factory AppUsageDataController.fromContext(BuildContext _) {
     return AppUsageDataController();
   }
 

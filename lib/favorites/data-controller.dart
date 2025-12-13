@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_data_storage/flutter_data_storage.dart';
 
 class FavoritesDataController extends StoredCubit<FavoritesDataState> {
-  factory FavoritesDataController.fromContext(BuildContext context) {
+  factory FavoritesDataController.fromContext(BuildContext _) {
     return FavoritesDataController();
   }
 

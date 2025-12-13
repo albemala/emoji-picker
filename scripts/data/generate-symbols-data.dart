@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/glyph-data/defines/symbol.dart';
-import 'package:collection/collection.dart';
 
 // Unicode Block data examples:
 // {begin: 0x0000, end: 0x007F, name: 'Basic Latin'},
@@ -131,17 +130,18 @@ void main() {
   final blocks = unicodeBlocksFile
       .readAsLinesSync()
       .map(parseBlock)
-      .whereNotNull()
+      .nonNulls
       .toList();
 
   // load unicode-names-extended.txt
   // source: https://raw.githubusercontent.com/reactos/reactos/master/dll/win32/getuname/lang/en-US.rc
-  final unicodeNamesExtendedFile =
-      File('scripts/data/unicode-names-extended.txt');
+  final unicodeNamesExtendedFile = File(
+    'scripts/data/unicode-names-extended.txt',
+  );
   final extendedNames = unicodeNamesExtendedFile
       .readAsLinesSync()
       .map(parseExtendedName)
-      .whereNotNull();
+      .nonNulls;
   final extendedNamesMap = {
     for (final item in extendedNames) //
       item.charcode: item.name,
@@ -153,7 +153,7 @@ void main() {
   final symbols = unicodeNamesFile
       .readAsLinesSync()
       .map((line) => parseSymbol(line, blocks, extendedNamesMap))
-      .whereNotNull()
+      .nonNulls
       .toList();
 
   // write symbols to assets/data/symbols2.json

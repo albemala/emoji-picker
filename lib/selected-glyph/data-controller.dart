@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectedGlyphDataController extends Cubit<SelectedGlyphDataState> {
-  factory SelectedGlyphDataController.fromContext(BuildContext context) {
+  factory SelectedGlyphDataController.fromContext(BuildContext _) {
     return SelectedGlyphDataController();
   }
 

@@ -9,7 +9,7 @@ class GlyphDetailsViewState extends Equatable {
   final AdData adData;
   final bool isFavorite;
 
-  GlyphDetailsViewState({
+  const GlyphDetailsViewState({
     required this.glyph,
     required this.adData,
     required this.isFavorite,

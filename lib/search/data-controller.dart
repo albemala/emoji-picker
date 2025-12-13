@@ -51,10 +51,10 @@ class SearchGlyphsDataController extends Cubit<SearchGlyphsDataState> {
   }
 
   @override
-  Future<void> close() {
-    glyphsDataControllerSubscription?.cancel();
-    favoritesDataControllerSubscription?.cancel();
-    recentDataControllerSubscription?.cancel();
+  Future<void> close() async {
+    await glyphsDataControllerSubscription?.cancel();
+    await favoritesDataControllerSubscription?.cancel();
+    await recentDataControllerSubscription?.cancel();
     return super.close();
   }
 

@@ -1,9 +1,9 @@
+import 'package:app/ads.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-details/view-controller.dart';
 import 'package:app/glyph-details/view-state.dart';
 import 'package:app/glyph-tile/functions.dart';
 import 'package:app/theme/text.dart';
-import 'package:app/ads.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -111,16 +111,16 @@ class _GlyphDetailsContentView extends StatelessWidget {
                 _GlyphValueView(
                   title: 'Unicode',
                   value: state.glyph.unicode,
-                  onCopy: () {
-                    copyGlyphUnicodeToClipboard(context, state.glyph);
+                  onCopy: () async {
+                    await copyGlyphUnicodeToClipboard(context, state.glyph);
                   },
                 ),
               if (state.glyph.htmlCode.isNotEmpty)
                 _GlyphValueView(
                   title: 'HTML Code',
                   value: state.glyph.htmlCode,
-                  onCopy: () {
-                    copyGlyphHtmlCodeToClipboard(context, state.glyph);
+                  onCopy: () async {
+                    await copyGlyphHtmlCodeToClipboard(context, state.glyph);
                   },
                 ),
             ],

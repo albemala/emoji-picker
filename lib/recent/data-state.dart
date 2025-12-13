@@ -7,7 +7,7 @@ class RecentGlyphEntry extends Equatable {
   final String glyph;
   final DateTime timestamp;
 
-  RecentGlyphEntry({
+  const RecentGlyphEntry({
     required this.glyph,
     required this.timestamp,
   });
@@ -48,7 +48,7 @@ class RecentGlyphEntry extends Equatable {
 class RecentDataState extends Equatable {
   final IList<RecentGlyphEntry> recentGlyphs;
 
-  RecentDataState({
+  const RecentDataState({
     required this.recentGlyphs,
   });
 

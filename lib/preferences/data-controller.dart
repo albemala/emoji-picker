@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_data_storage/flutter_data_storage.dart';
 
 class PreferencesDataController extends StoredCubit<PreferencesDataState> {
-  factory PreferencesDataController.fromContext(BuildContext context) {
+  factory PreferencesDataController.fromContext(BuildContext _) {
     return PreferencesDataController();
   }
 

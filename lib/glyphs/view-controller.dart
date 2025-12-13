@@ -27,8 +27,8 @@ class GlyphsViewController extends Cubit<GlyphsViewState> {
   }
 
   @override
-  Future<void> close() {
-    searchGlyphsDataControllerSubscription?.cancel();
+  Future<void> close() async {
+    await searchGlyphsDataControllerSubscription?.cancel();
     return super.close();
   }
 

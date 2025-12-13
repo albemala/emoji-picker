@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/glyph-tile/functions.dart';
 import 'package:app/search/data-controller.dart';
@@ -40,7 +42,7 @@ class CopyGlyphAction extends Action<CopyGlyphIntent> {
     final controller = context.read<SelectedGlyphDataController>();
     final selectedGlyph = controller.state.selectedGlyph;
     if (selectedGlyph != unknownGlyph) {
-      copyGlyphToClipboard(context, selectedGlyph);
+      unawaited(copyGlyphToClipboard(context, selectedGlyph));
     }
   }
 }

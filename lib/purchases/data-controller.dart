@@ -5,7 +5,7 @@ import 'package:flutter_data_storage/flutter_data_storage.dart';
 const purchasesDataStoreName = 'purchases';
 
 class PurchasesDataController extends StoredCubit<PurchasesDataState> {
-  factory PurchasesDataController.fromContext(BuildContext context) {
+  factory PurchasesDataController.fromContext(BuildContext _) {
     return PurchasesDataController();
   }
 

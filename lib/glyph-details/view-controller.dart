@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:app/ads.dart';
 import 'package:app/favorites/data-controller.dart';
 import 'package:app/glyph-details/view-state.dart';
 import 'package:app/glyph-tile/functions.dart';
 import 'package:app/selected-glyph/data-controller.dart';
-import 'package:app/ads.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,9 +39,9 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
   }
 
   @override
-  Future<void> close() {
-    selectedGlyphDataControllerSubscription?.cancel();
-    favoritesDataControllerSubscription?.cancel();
+  Future<void> close() async {
+    await selectedGlyphDataControllerSubscription?.cancel();
+    await favoritesDataControllerSubscription?.cancel();
     return super.close();
   }
 

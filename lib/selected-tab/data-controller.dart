@@ -8,7 +8,7 @@ class SelectedTabDataController extends Cubit<void> implements TickerProvider {
     vsync: this,
   );
 
-  factory SelectedTabDataController.fromContext(BuildContext context) {
+  factory SelectedTabDataController.fromContext(BuildContext _) {
     return SelectedTabDataController();
   }
 
