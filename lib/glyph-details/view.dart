@@ -73,7 +73,7 @@ class _GlyphDetailsContentView extends StatelessWidget {
               Text(
                 state.glyph.name,
                 style: getHeadlineTextStyle(context).copyWith(
-                  color: Theme.of(context).colorScheme.onTertiaryFixed,
+                  color: Theme.of(context).colorScheme.onTertiaryContainer,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -158,9 +158,13 @@ class _GlyphView extends StatelessWidget {
     final glyph = state.glyph;
     return Text(
       glyph.glyph,
-      style: getTextStyleForGlyph(
-        glyph,
-      ).copyWith(fontSize: glyph.type == GlyphType.kaomoji ? 48 : 72),
+      style:
+          getTextStyleForGlyph(
+            glyph,
+          ).copyWith(
+            color: Theme.of(context).colorScheme.onTertiaryContainer,
+            fontSize: glyph.type == GlyphType.kaomoji ? 48 : 72,
+          ),
       overflow: TextOverflow.fade,
       maxLines: 1,
       softWrap: false,
@@ -256,13 +260,13 @@ class _GlyphKeywordsView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.tertiaryFixed,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
               '#$keyword',
               style: getBodyTextStyle(context).copyWith(
-                color: Theme.of(context).colorScheme.onTertiaryFixed,
+                color: Theme.of(context).colorScheme.onTertiaryContainer,
               ),
             ),
           ),
@@ -284,7 +288,7 @@ class _SectionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.tertiaryFixed,
+        color: Theme.of(context).colorScheme.tertiaryContainer,
         borderRadius: BorderRadius.circular(16),
       ),
       child: child,

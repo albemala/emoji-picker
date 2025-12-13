@@ -65,7 +65,7 @@ class AppContentView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(32),
                     child: ColoredBox(
-                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      color: Theme.of(context).colorScheme.surfaceBright,
                       child: const SingleChildScrollView(
                         padding: EdgeInsets.all(16),
                         child: GlyphDetailsViewCreator(),

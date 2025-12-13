@@ -229,11 +229,19 @@ class AdView extends StatelessWidget {
                     children: [
                       Text(
                         adData.overline.toUpperCase(),
-                        style: getSubtitleTextStyle(context),
+                        style: getSubtitleTextStyle(context).copyWith(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onTertiaryContainer,
+                        ),
                       ),
                       Text(
                         adData.title,
-                        style: getTitleTextStyle(context),
+                        style: getTitleTextStyle(context).copyWith(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onTertiaryContainer,
+                        ),
                         softWrap: true,
                       ),
                     ],
@@ -245,7 +253,9 @@ class AdView extends StatelessWidget {
         ),
         Text(
           adData.description,
-          style: getBodyTextStyle(context),
+          style: getBodyTextStyle(context).copyWith(
+            color: Theme.of(context).colorScheme.onTertiaryContainer,
+          ),
           softWrap: true,
         ),
         Align(
@@ -254,7 +264,12 @@ class AdView extends StatelessWidget {
             onPressed: () {
               unawaited(openUrl(adData.url));
             },
-            child: const Text('Learn more'),
+            child: Text(
+              'Learn more',
+              style: getBodyTextStyle(context).copyWith(
+                color: Theme.of(context).colorScheme.onTertiaryContainer,
+              ),
+            ),
           ),
         ),
       ],

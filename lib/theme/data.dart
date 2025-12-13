@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const FlexScheme _scheme = FlexScheme.material;
-const FlexSchemeVariant _variant = FlexSchemeVariant.candyPop;
+const FlexSchemeVariant _lightVariant = FlexSchemeVariant.candyPop;
+const FlexSchemeVariant _darkVariant = FlexSchemeVariant.highContrast;
 const _keyColors = FlexKeyColors(
   useSecondary: true,
   // useTertiary: true,
@@ -28,7 +29,7 @@ ThemeData getLightTheme() {
     FlexThemeData.light(
       scheme: _scheme,
       keyColors: _keyColors,
-      variant: _variant,
+      variant: _lightVariant,
       subThemesData: _subThemesData,
       visualDensity: _visualDensity,
       fontFamily: _fontFamily,
@@ -41,7 +42,7 @@ ThemeData getDarkTheme() {
     FlexThemeData.dark(
       scheme: _scheme,
       keyColors: _keyColors,
-      variant: _variant,
+      variant: _darkVariant,
       subThemesData: _subThemesData,
       visualDensity: _visualDensity,
       fontFamily: _fontFamily,
