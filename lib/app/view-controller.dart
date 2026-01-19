@@ -49,7 +49,7 @@ class AppViewController extends Cubit<AppViewState> {
     appUsageDataController.incrementUsageCount();
     if (appUsageDataController.usageCount > 0 &&
         appUsageDataController.usageCount % 3 == 0) {
-      unawaited(showReviewDialog());
+      Future.delayed(const Duration(seconds: 1), showReviewDialog);
     }
 
     updateViewState();
