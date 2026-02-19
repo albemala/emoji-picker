@@ -5,26 +5,26 @@ version: 4.0.3+19
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=3.9.0 <4.0.0'
-  flutter: ">=3.35.0"
+  sdk: '>=3.11.0 <4.0.0'
+  flutter: ">=3.41.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   # state management
-  equatable: ^2.0.7
+  equatable: ^2.0.8
   fast_immutable_collections: ^11.1.0
   flutter_bloc: ^9.0.0
   # data storage
   flutter_data_storage:
     git:
       url: https://github.com/albemala/flutter_data_storage.git
-      ref: 3.4.0
+      ref: 3.5.0
 
   # UI
-  flex_color_scheme: ^8.3.1
-  google_fonts: ^6.3.3
+  flex_color_scheme: ^8.4.0
+  google_fonts: ^8.0.2
   cupertino_icons: ^1.0.8
   sliver_tools: ^0.2.12
   slivers: ^0.0.1+2
@@ -35,7 +35,7 @@ dependencies:
 
   # utils
   collection: ^1.18.0
-  clipboard: ^3.0.8
+  clipboard: ^3.0.14
   cross_platform: ^3.0.1
 
   # support
@@ -49,18 +49,18 @@ dependencies:
       url: https://github.com/albemala/send_support_email.git
       ref: 3.0.0
 
-  sentry_flutter: ^9.8.0
+  sentry_flutter: ^9.13.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4
   # flutter test --update-goldens test/screenshots/take_screenshots_test.dart
-  golden_screenshot: ^9.1.2
+  golden_screenshot: ^10.0.0
 
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.2.0
 
-  build_runner: ^2.10.4
+  build_runner: ^2.11.1
   icons_launcher: ^3.0.3
   package_rename: ^1.10.1
 
@@ -68,7 +68,7 @@ dev_dependencies:
   path: ^1.9.0
 
   # windows
-  msix: ^3.7.0
+  msix: ^3.16.13
 
 flutter:
   uses-material-design: true

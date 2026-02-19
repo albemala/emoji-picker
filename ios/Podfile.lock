@@ -1,18 +1,15 @@
 PODS:
+  - clipboard (3.0.9):
+    - Flutter
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
   - in_app_review (2.0.0):
     - Flutter
-  - objective_c (0.0.1):
-    - Flutter
   - package_info_plus (0.4.5):
     - Flutter
-  - path_provider_foundation (0.0.1):
-    - Flutter
-    - FlutterMacOS
   - Sentry/HybridSDK (8.56.2)
-  - sentry_flutter (9.8.0):
+  - sentry_flutter (9.13.0):
     - Flutter
     - FlutterMacOS
     - Sentry/HybridSDK (= 8.56.2)
@@ -25,12 +22,11 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - clipboard (from `.symlinks/plugins/clipboard/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - in_app_review (from `.symlinks/plugins/in_app_review/ios`)
-  - objective_c (from `.symlinks/plugins/objective_c/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -41,18 +37,16 @@ SPEC REPOS:
     - Sentry
 
 EXTERNAL SOURCES:
+  clipboard:
+    :path: ".symlinks/plugins/clipboard/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
   in_app_review:
     :path: ".symlinks/plugins/in_app_review/ios"
-  objective_c:
-    :path: ".symlinks/plugins/objective_c/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
-  path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   sentry_flutter:
     :path: ".symlinks/plugins/sentry_flutter/ios"
   share_plus:
@@ -63,14 +57,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  clipboard: 85f02e190f24debf05943aff98c26644b2a90245
   device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   in_app_review: 7dd1ea365263f834b8464673f9df72c80c17c937
-  objective_c: 89e720c30d716b036faf9c9684022048eee1eee2
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
-  path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
   Sentry: b53951377b78e21a734f5dc8318e333dbfc682d7
-  sentry_flutter: 4c33648b7e83310aa1fdb1b10c5491027d9643f0
+  sentry_flutter: dbed9a62ae39716b685a80140705c330d200d941
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
   shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
   url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
