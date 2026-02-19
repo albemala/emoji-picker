@@ -47,9 +47,8 @@ class AppViewController extends Cubit<AppViewState> {
 
     // Increment usage count after initialization is complete
     appUsageDataController.incrementUsageCount();
-    if (appUsageDataController.usageCount > 0 &&
-        appUsageDataController.usageCount % 3 == 0) {
-      Future.delayed(const Duration(seconds: 1), showReviewDialog);
+    if (_shouldShowReviewDialog()) {
+      unawaited(Future.delayed(const Duration(seconds: 3), showReviewDialog));
     }
 
     updateViewState();
@@ -62,5 +61,10 @@ class AppViewController extends Cubit<AppViewState> {
         isLoading: !appUsageDataController.isInitialized.value,
       ),
     );
+  }
+
+  bool _shouldShowReviewDialog() {
+    return appUsageDataController.usageCount > 0 &&
+        appUsageDataController.usageCount % 5 == 0;
   }
 }
