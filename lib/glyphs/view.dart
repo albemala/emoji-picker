@@ -296,7 +296,7 @@ class _GlyphGroupGridView extends StatelessWidget {
         final glyph = glyphs[index];
         return GlyphTileViewCreator(
           glyph: glyph,
-          glyphContentBuilder: (Glyph glyph) {
+          glyphContentBuilder: (glyph) {
             return SquaredGlyphTileContentView(glyph: glyph);
           },
         );
@@ -318,7 +318,7 @@ class _GlyphGroupListView extends StatelessWidget {
         final glyph = glyphs[index];
         return GlyphTileViewCreator(
           glyph: glyph,
-          glyphContentBuilder: (Glyph glyph) {
+          glyphContentBuilder: (glyph) {
             return RectangularGlyphTileContentView(glyph: glyph);
           },
         );

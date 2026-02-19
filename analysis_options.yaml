@@ -16,3 +16,5 @@ linter:
     sort_unnamed_constructors_first: false
     always_put_required_named_parameters_first: false
     avoid_positional_boolean_parameters: false
+    avoid_catches_without_on_clauses: false
+    document_ignores: false
