@@ -5,8 +5,8 @@ platform :android do
       aab: '../build/app/outputs/bundle/release/app-release.aab',
       track: 'production',
       json_key: ENV["ANDROID_JSON_KEY_FILE"], # google auth key
-      skip_upload_images: true, # banner, icon
-      skip_upload_screenshots: true,
+      skip_upload_images: false, # banner, icon
+      skip_upload_screenshots: false,
     )
   end
 
