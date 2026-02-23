@@ -1,0 +1,8 @@
+Nouveau Look
+- Refonte complète de l'interface pour une expérience plus moderne et intuitive
+- Design visuel amélioré avec une meilleure typographie et palette de couleurs
+- Mise en page raffinée pour une meilleure organisation du contenu
+
+Améliorations des Performances
+- Stabilité générale de l'application améliorée
+- Optimisations générales des performances
