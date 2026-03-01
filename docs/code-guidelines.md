@@ -300,7 +300,7 @@ import 'data-controller.dart';
 class UserProfileViewController extends Cubit<UserProfileViewState> {
   final UserDataController dataController;
 
-  StreamSubscription<UserDataState>? dataControllerSubscription;
+  StreamSubscription<void>? dataControllerSubscription;
 
   factory UserProfileViewController.fromContext(BuildContext context) {
     return UserProfileViewController(context.read<UserDataController>());
