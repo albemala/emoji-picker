@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:app/app_usage/data-controller.dart';
-import 'package:app/clipboard.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:app/recent/data-controller.dart';
-import 'package:app/review.dart';
-import 'package:app/routing.dart';
 import 'package:app/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_utils/flutter_utils.dart';
 
 Future<void> copyGlyphToClipboard(BuildContext context, Glyph glyph) async {
   await copyToClipboard(glyph.glyph);

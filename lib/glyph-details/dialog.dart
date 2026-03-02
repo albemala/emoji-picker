@@ -1,6 +1,6 @@
 import 'package:app/glyph-details/view.dart';
-import 'package:app/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_utils/flutter_utils.dart';
 
 class GlyphDetailsDialog extends StatelessWidget {
   const GlyphDetailsDialog({

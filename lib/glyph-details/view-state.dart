@@ -2,6 +2,7 @@ import 'package:app/ads.dart';
 import 'package:app/glyph-data/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_utils/flutter_utils.dart';
 
 @immutable
 class GlyphDetailsViewState extends Equatable {
@@ -18,7 +19,7 @@ class GlyphDetailsViewState extends Equatable {
   factory GlyphDetailsViewState.initial() {
     return GlyphDetailsViewState(
       glyph: unknownGlyph,
-      adData: allAdsData.first,
+      adData: adsData.first,
       isFavorite: false,
     );
   }

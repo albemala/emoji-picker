@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:app/app/view-state.dart';
 import 'package:app/app_usage/data-controller.dart';
 import 'package:app/preferences/data-controller.dart';
-import 'package:app/review.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_utils/flutter_utils.dart';
 
 class AppViewController extends Cubit<AppViewState> {
   final AppUsageDataController appUsageDataController;

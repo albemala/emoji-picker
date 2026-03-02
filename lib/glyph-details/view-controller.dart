@@ -7,6 +7,7 @@ import 'package:app/glyph-tile/functions.dart';
 import 'package:app/selected-glyph/data-controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_utils/flutter_utils.dart';
 
 class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
   final SelectedGlyphDataController selectedGlyphDataController;
@@ -47,7 +48,7 @@ class GlyphDetailsViewController extends Cubit<GlyphDetailsViewState> {
 
   void updateState() {
     final selectedGlyph = selectedGlyphDataController.state.selectedGlyph;
-    final adData = selectRandomAdData(); // Always select an ad
+    final adData = selectRandomAdData(adsData); // Always select an ad
     final isFavorite = favoritesDataController.isFavorite(selectedGlyph);
     emit(
       GlyphDetailsViewState(
