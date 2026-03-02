@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/glyph-tile/functions.dart';
-import 'package:app/search/data-controller.dart';
-import 'package:app/selected-glyph/data-controller.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-tile/functions.dart';
+import 'package:emoji_picker/search/data-controller.dart';
+import 'package:emoji_picker/selected-glyph/data-controller.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

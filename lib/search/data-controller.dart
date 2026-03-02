@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:app/favorites/data-controller.dart';
-import 'package:app/glyph-data/data-controller.dart';
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/recent/data-controller.dart';
-import 'package:app/search/data-state.dart';
-import 'package:app/search/functions.dart';
+import 'package:emoji_picker/favorites/data-controller.dart';
+import 'package:emoji_picker/glyph-data/data-controller.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/recent/data-controller.dart';
+import 'package:emoji_picker/search/data-state.dart';
+import 'package:emoji_picker/search/functions.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

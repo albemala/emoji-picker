@@ -1,9 +1,9 @@
-import 'package:app/app-content/view.dart';
-import 'package:app/app/defines.dart';
-import 'package:app/app/view-controller.dart';
-import 'package:app/app/view-state.dart';
-import 'package:app/shortcuts/intents-actions.dart';
-import 'package:app/theme/data.dart';
+import 'package:emoji_picker/app-content/view.dart';
+import 'package:emoji_picker/app/defines.dart';
+import 'package:emoji_picker/app/view-controller.dart';
+import 'package:emoji_picker/app/view-state.dart';
+import 'package:emoji_picker/shortcuts/intents-actions.dart';
+import 'package:emoji_picker/theme/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

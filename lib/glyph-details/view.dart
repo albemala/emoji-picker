@@ -1,9 +1,9 @@
-import 'package:app/ads.dart';
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/glyph-details/view-controller.dart';
-import 'package:app/glyph-details/view-state.dart';
-import 'package:app/glyph-tile/functions.dart';
-import 'package:app/theme/text.dart';
+import 'package:emoji_picker/ads.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-details/view-controller.dart';
+import 'package:emoji_picker/glyph-details/view-state.dart';
+import 'package:emoji_picker/glyph-tile/functions.dart';
+import 'package:emoji_picker/theme/text.dart';
 import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

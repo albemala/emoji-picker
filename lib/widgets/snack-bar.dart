@@ -1,4 +1,4 @@
-import 'package:app/theme/text.dart';
+import 'package:emoji_picker/theme/text.dart';
 import 'package:flutter/material.dart';
 
 SnackBar createCopiedToClipboardSnackBar(BuildContext context, String char) {

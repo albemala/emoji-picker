@@ -1,6 +1,6 @@
-import 'package:app/testing/view-controller.dart';
-import 'package:app/testing/view-state.dart';
-import 'package:app/theme/text.dart';
+import 'package:emoji_picker/testing/view-controller.dart';
+import 'package:emoji_picker/testing/view-state.dart';
+import 'package:emoji_picker/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

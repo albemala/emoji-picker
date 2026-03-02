@@ -1,4 +1,4 @@
-import 'package:app/purchases/data-state.dart';
+import 'package:emoji_picker/purchases/data-state.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_data_storage/flutter_data_storage.dart';
 

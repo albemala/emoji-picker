@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:app/app/view-state.dart';
-import 'package:app/app_usage/data-controller.dart';
-import 'package:app/preferences/data-controller.dart';
+import 'package:emoji_picker/app/view-state.dart';
+import 'package:emoji_picker/app_usage/data-controller.dart';
+import 'package:emoji_picker/preferences/data-controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_utils/flutter_utils.dart';

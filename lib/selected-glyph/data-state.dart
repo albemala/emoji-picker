@@ -1,4 +1,4 @@
-import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

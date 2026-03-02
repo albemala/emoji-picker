@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:app/about/view-controller.dart';
-import 'package:app/about/view-state.dart';
-import 'package:app/app/defines.dart';
-import 'package:app/theme/text.dart';
-import 'package:app/urls.dart';
+import 'package:emoji_picker/about/view-controller.dart';
+import 'package:emoji_picker/about/view-state.dart';
+import 'package:emoji_picker/app/defines.dart';
+import 'package:emoji_picker/theme/text.dart';
+import 'package:emoji_picker/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_utils/flutter_utils.dart';

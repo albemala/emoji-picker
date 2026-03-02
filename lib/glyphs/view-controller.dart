@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/glyphs/view-state.dart';
-import 'package:app/search/data-controller.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyphs/view-state.dart';
+import 'package:emoji_picker/search/data-controller.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';

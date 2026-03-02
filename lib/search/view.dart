@@ -1,4 +1,4 @@
-import 'package:app/search/view-controller.dart';
+import 'package:emoji_picker/search/view-controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

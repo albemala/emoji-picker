@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app/theme/text.dart';
+import 'package:emoji_picker/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_utils/flutter_utils.dart';
 

@@ -1,4 +1,4 @@
-import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

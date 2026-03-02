@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/glyph-details/dialog.dart';
-import 'package:app/glyph-tile/functions.dart';
-import 'package:app/glyph-tile/view-state.dart';
-import 'package:app/responsive.dart';
-import 'package:app/selected-glyph/data-controller.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-details/dialog.dart';
+import 'package:emoji_picker/glyph-tile/functions.dart';
+import 'package:emoji_picker/glyph-tile/view-state.dart';
+import 'package:emoji_picker/responsive.dart';
+import 'package:emoji_picker/selected-glyph/data-controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/glyph-data/defines/symbol.dart';
+import 'package:emoji_picker/glyph-data/defines/symbol.dart';
 
 // Unicode Block data examples:
 // {begin: 0x0000, end: 0x007F, name: 'Basic Latin'},

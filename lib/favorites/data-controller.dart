@@ -1,5 +1,5 @@
-import 'package:app/favorites/data-state.dart';
-import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/favorites/data-state.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_data_storage/flutter_data_storage.dart';

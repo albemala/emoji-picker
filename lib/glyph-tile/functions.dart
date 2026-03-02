@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:app/app_usage/data-controller.dart';
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/recent/data-controller.dart';
-import 'package:app/widgets/snack-bar.dart';
+import 'package:emoji_picker/app_usage/data-controller.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/recent/data-controller.dart';
+import 'package:emoji_picker/widgets/snack-bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_utils/flutter_utils.dart';

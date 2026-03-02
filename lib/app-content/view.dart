@@ -1,12 +1,12 @@
-import 'package:app/app-content/view-controller.dart';
-import 'package:app/app-content/view-state.dart';
-import 'package:app/glyph-details/view.dart';
-import 'package:app/glyphs/view.dart';
-import 'package:app/responsive.dart';
-import 'package:app/search/view.dart';
-import 'package:app/widgets/about.dart';
-import 'package:app/widgets/preferences.dart';
-import 'package:app/widgets/testing.dart';
+import 'package:emoji_picker/app-content/view-controller.dart';
+import 'package:emoji_picker/app-content/view-state.dart';
+import 'package:emoji_picker/glyph-details/view.dart';
+import 'package:emoji_picker/glyphs/view.dart';
+import 'package:emoji_picker/responsive.dart';
+import 'package:emoji_picker/search/view.dart';
+import 'package:emoji_picker/widgets/about.dart';
+import 'package:emoji_picker/widgets/preferences.dart';
+import 'package:emoji_picker/widgets/testing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

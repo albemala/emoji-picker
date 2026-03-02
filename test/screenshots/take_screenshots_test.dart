@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:app/preferences/data-controller.dart';
-import 'package:app/theme/data.dart';
+import 'package:emoji_picker/preferences/data-controller.dart';
+import 'package:emoji_picker/theme/data.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

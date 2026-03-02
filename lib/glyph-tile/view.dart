@@ -1,7 +1,7 @@
-import 'package:app/glyph-data/defines/glyph.dart';
-import 'package:app/glyph-tile/view-controller.dart';
-import 'package:app/glyph-tile/view-state.dart';
-import 'package:app/theme/text.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-tile/view-controller.dart';
+import 'package:emoji_picker/glyph-tile/view-state.dart';
+import 'package:emoji_picker/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

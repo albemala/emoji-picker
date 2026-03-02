@@ -1,4 +1,4 @@
-import 'package:app/glyph-data/defines/glyph.dart';
+import 'package:emoji_picker/glyph-data/defines/glyph.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
 bool matchesSearchTerm(Glyph glyph, String searchTerm) {
