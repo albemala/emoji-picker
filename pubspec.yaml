@@ -40,7 +40,7 @@ dependencies:
   flutter_utils:
     git:
       url: https://github.com/albemala/flutter_utils.git
-      ref: 1.0.1
+      ref: 2.0.3
 
   sentry_flutter: ^9.13.0
 
@@ -120,11 +120,11 @@ package_rename_config:
   macos:
     app_name: Ejimo
     package_name: me.albemala.ejimo
-    copyright_notice: Copyright © 2025 Alberto Malagoli (albemala.me). All rights reserved.
+    copyright_notice: Copyright © 2026 Alberto Malagoli (albemala.me). All rights reserved.
   windows:
     app_name: Ejimo
     organization: albemala.me
-    copyright_notice: Copyright © 2025 Alberto Malagoli (albemala.me).
+    copyright_notice: Copyright © 2026 Alberto Malagoli (albemala.me).
     exe_name: Ejimo
   linux:
     app_name: Ejimo
