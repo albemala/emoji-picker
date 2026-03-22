@@ -298,7 +298,7 @@ import 'view-state.dart';
 import 'data-controller.dart';
 
 class UserProfileViewController extends Cubit<UserProfileViewState> {
-  final UserDataController dataController;
+  final UserDataController userDataController;
 
   StreamSubscription<void>? dataControllerSubscription;
 
@@ -306,9 +306,9 @@ class UserProfileViewController extends Cubit<UserProfileViewState> {
     return UserProfileViewController(context.read<UserDataController>());
   }
 
-  UserProfileViewController(this.dataController)
+  UserProfileViewController(this.userDataController)
     : super(UserProfileViewState.initial()) {
-    dataControllerSubscription = dataController.stream.listen((_) {
+    dataControllerSubscription = userDataController.stream.listen((_) {
       updateViewState();
     });
     updateViewState();
@@ -323,23 +323,23 @@ class UserProfileViewController extends Cubit<UserProfileViewState> {
   void updateViewState() {
     emit(
       state.copyWith(
-        username: dataController.state.username,
-        email: dataController.state.email,
-        isVerified: dataController.state.isVerified,
+        username: userDataController.username,
+        email: userDataController.email,
+        isVerified: userDataController.isVerified,
       ),
     );
   }
 
   void setUsername(String username) {
-    dataController.username = username;
+    userDataController.username = username;
   }
 
   void setEmail(String email) {
-    dataController.email = email;
+    userDataController.email = email;
   }
 
   void setIsVerified(bool isVerified) {
-    dataController.isVerified = isVerified;
+    userDataController.isVerified = isVerified;
   }
 }
 ```
