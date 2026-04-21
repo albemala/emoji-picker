@@ -3,6 +3,10 @@ PODS:
     - FlutterMacOS
   - device_info_plus (0.0.1):
     - FlutterMacOS
+  - file_picker (0.0.1):
+    - FlutterMacOS
+  - file_selector_macos (0.0.1):
+    - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - in_app_review (2.0.0):
     - FlutterMacOS
@@ -28,6 +32,8 @@ PODS:
 DEPENDENCIES:
   - clipboard (from `Flutter/ephemeral/.symlinks/plugins/clipboard/macos`)
   - device_info_plus (from `Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos`)
+  - file_picker (from `Flutter/ephemeral/.symlinks/plugins/file_picker/macos`)
+  - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - in_app_review (from `Flutter/ephemeral/.symlinks/plugins/in_app_review/macos`)
   - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
@@ -47,6 +53,10 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/clipboard/macos
   device_info_plus:
     :path: Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos
+  file_picker:
+    :path: Flutter/ephemeral/.symlinks/plugins/file_picker/macos
+  file_selector_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
   in_app_review:
@@ -69,6 +79,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   clipboard: 70b8b95b301d76ded300083bb981ceed7ea668da
   device_info_plus: 4fb280989f669696856f8b129e4a5e3cd6c48f76
+  file_picker: 7584aae6fa07a041af2b36a2655122d42f578c1a
+  file_selector_macos: 9e9e068e90ebee155097d00e89ae91edb2374db7
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
   in_app_review: 66e7680752b632d83f4f0e88b34d52ed303fbff4
   package_info_plus: f0052d280d17aa382b932f399edf32507174e870
