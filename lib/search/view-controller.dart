@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:emoji_picker/search/data-controller.dart';
 import 'package:emoji_picker/search/data-state.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
