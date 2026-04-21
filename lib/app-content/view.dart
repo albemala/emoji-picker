@@ -7,6 +7,7 @@ import 'package:emoji_picker/search/view.dart';
 import 'package:emoji_picker/widgets/about.dart';
 import 'package:emoji_picker/widgets/preferences.dart';
 import 'package:emoji_picker/widgets/testing.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -94,7 +95,7 @@ class HeaderView extends StatelessWidget {
           SizedBox(width: 12),
           ThemeModeToggleViewCreator(),
           AboutButtonView(),
-          TestingButtonView(),
+          if (kDebugMode) TestingButtonView(),
         ],
       ),
     );

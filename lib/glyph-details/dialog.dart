@@ -13,7 +13,7 @@ class GlyphDetailsDialog extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Details'),
       ),
-      backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+      // backgroundColor: Theme.of(context).colorScheme.surfaceBright,
       body: const SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: SafeArea(child: GlyphDetailsViewCreator()),
