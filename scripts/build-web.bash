@@ -13,7 +13,10 @@ source .env
 flutter clean
 
 # build
-flutter build web --release --source-maps
+flutter build web --release --wasm --source-maps
+
+# upload to Firebase Hosting
+firebase deploy --only hosting
 
 # upload source maps to Sentry
 SENTRY_RELEASE="me.albemala.ejimo@$APP_VERSION"
@@ -28,7 +31,3 @@ sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT files $SENTRY_RELEASE uplo
 sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT files $SENTRY_RELEASE upload-sourcemaps build/web --ext map --ext js
 # finalize release
 sentry-cli releases -o $SENTRY_ORG -p $SENTRY_PROJECT finalize $SENTRY_RELEASE
-
-# upload to Firebase Hosting
-firebase deploy --only hosting
-  

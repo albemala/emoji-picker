@@ -16,13 +16,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   GoogleFonts.config.allowRuntimeFetching = false;
 
   await SentryFlutter.init(
     configureSentry,
     appRunner: () {
+      WidgetsFlutterBinding.ensureInitialized();
+
       runApp(
         MultiBlocProvider(
           providers: const [

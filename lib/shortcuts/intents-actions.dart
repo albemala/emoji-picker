@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:emoji_picker/glyph-data/defines/glyph.dart';
 import 'package:emoji_picker/glyph-tile/functions.dart';
 import 'package:emoji_picker/search/data-controller.dart';
@@ -8,6 +7,7 @@ import 'package:emoji_picker/selected-glyph/data-controller.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 // ------ Intents ------
 
@@ -51,18 +51,18 @@ class CopyGlyphAction extends Action<CopyGlyphIntent> {
 
 final Map<LogicalKeySet, Intent> shortcuts = {
   // focus search
-  if (cross_platform.Platform.isMacOS) //
+  if (UniversalPlatform.isMacOS) //
     LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyF):
         const FocusSearchIntent(),
-  if (cross_platform.Platform.isWindows || cross_platform.Platform.isLinux) //
+  if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) //
     LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyF):
         const FocusSearchIntent(),
   LogicalKeySet(LogicalKeyboardKey.escape): const FocusSearchIntent(),
   // copy glyph
-  if (cross_platform.Platform.isMacOS) //
+  if (UniversalPlatform.isMacOS) //
     LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyC):
         const CopyGlyphIntent(),
-  if (cross_platform.Platform.isWindows || cross_platform.Platform.isLinux) //
+  if (UniversalPlatform.isWindows || UniversalPlatform.isLinux) //
     LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyC):
         const CopyGlyphIntent(),
 };

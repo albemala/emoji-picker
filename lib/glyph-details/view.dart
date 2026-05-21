@@ -1,4 +1,3 @@
-import 'package:cross_platform/cross_platform.dart' as cross_platform;
 import 'package:emoji_picker/ads.dart';
 import 'package:emoji_picker/glyph-data/defines/glyph.dart';
 import 'package:emoji_picker/glyph-details/view-controller.dart';
@@ -8,6 +7,7 @@ import 'package:emoji_picker/theme/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class GlyphDetailsViewCreator extends StatelessWidget {
   const GlyphDetailsViewCreator({super.key});
@@ -200,9 +200,9 @@ class _CopyGlyphView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           ),
         ),
-        if (cross_platform.Platform.isDesktop)
+        if (UniversalPlatform.isDesktop)
           Text(
-            cross_platform.Platform.isMacOS ? 'or ⌘C' : 'or Ctrl C',
+            UniversalPlatform.isMacOS ? 'or ⌘C' : 'or Ctrl C',
             style: getBodyTextStyle(context),
           ),
       ],
