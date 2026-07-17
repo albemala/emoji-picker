@@ -1,4 +1,4 @@
-# Base UI Guidelines
+# Material UI Guidelines
 
 These guidelines provide the foundation for consistent UI development across all Flutter projects. They focus on standard Material Design practices, spacing scales, and common component patterns.
 
