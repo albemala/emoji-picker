@@ -1,4 +1,4 @@
-# Code Guidelines
+# Flutter Code Guidelines
 
 ## Data State Classes
 
@@ -9,10 +9,16 @@ Data state classes define immutable application state using Equatable for value 
 - Extend `Equatable` for value-based equality comparison
 - Annotate with `@immutable`
 - All properties are `final` and `required`
-- Implement `copyWith()` for immutable updates
-- Override `props` getter with all properties
-- Include `toMap()` and `fromMap()` for persistence
-- Create `initial()` factory constructor
+- All constructors must be public
+- All properties must be non-null. The default value in `initial()` must be an "empty" state (e.g., `0`, `''`, `false`, `IList.empty()`, `IMap.empty()`)
+- Declare members in this exact order:
+  1. Primary constructor
+  2. `initial()` factory constructor
+  3. `props` getter
+  4. `copyWith()`
+  5. `toMap()`
+  6. `fromMap()` factory constructor
+- No business logic in the state class — only `copyWith()`, `toMap()`, `fromMap()`, and `initial()`
 
 **Example:**
 ```dart
@@ -35,6 +41,16 @@ class UserDataState extends Equatable {
     required this.tags,
     required this.status,
   });
+
+  factory UserDataState.initial() {
+    return const UserDataState(
+      id: 0,
+      name: '',
+      isActive: true,
+      tags: IList.empty(),
+      status: EnumType.active,
+    );
+  }
 
   @override
   List<Object> get props => [id, name, isActive, tags, status];
@@ -84,16 +100,6 @@ class UserDataState extends Equatable {
       _ => UserDataState.initial(),
     };
   }
-
-  factory UserDataState.initial() {
-    return const UserDataState(
-      id: 0,
-      name: '',
-      isActive: true,
-      tags: IList.empty(),
-      status: EnumType.active,
-    );
-  }
 }
 
 enum EnumType {
@@ -122,6 +128,8 @@ Data controllers manage state persistence using `StoredCubit` from `flutter_data
 - Constructor accepts optional `DataStore? dataStore` for testing
 - Implement `storeName`, `fromMap()`, `toMap()`, `migrateData()`
 - Generate getters/setters for each state property
+- All constructors must be public
+- All business logic lives here
 
 **Example:**
 ```dart
@@ -219,10 +227,15 @@ View state classes define immutable UI state using Equatable for value equality.
 - Extend `Equatable` for value-based equality comparison
 - Annotate with `@immutable`
 - All properties are `final` and `required`
-- Implement `copyWith()` for immutable updates
-- Override `props` getter with all properties
-- Create `initial()` factory constructor
+- All constructors must be public
+- All properties must be non-null. The default value in `initial()` must be an "empty" state (e.g., `0`, `''`, `false`, `IList.empty()`, `IMap.empty()`)
+- Declare members in this exact order:
+  1. Primary constructor
+  2. `initial()` factory constructor
+  3. `props` getter
+  4. `copyWith()`
 - No `toMap()`/`fromMap()` needed (view state is not persisted)
+- No logic in the state class — only `copyWith()` and `initial()`
 
 **Example:**
 ```dart
@@ -241,6 +254,14 @@ class UserProfileViewState extends Equatable {
     required this.isVerified,
   });
 
+  factory UserProfileViewState.initial() {
+    return const UserProfileViewState(
+      username: '',
+      email: '',
+      isVerified: false,
+    );
+  }
+
   @override
   List<Object> get props => [username, email, isVerified];
 
@@ -253,14 +274,6 @@ class UserProfileViewState extends Equatable {
       username: username ?? this.username,
       email: email ?? this.email,
       isVerified: isVerified ?? this.isVerified,
-    );
-  }
-
-  factory UserProfileViewState.initial() {
-    return const UserProfileViewState(
-      username: '',
-      email: '',
-      isVerified: false,
     );
   }
 }
@@ -286,6 +299,8 @@ View controllers manage view state using `Cubit` from `flutter_bloc`. They may d
 - Cancel subscription in `close()`
 - Implement `updateViewState()` to sync with data controller
 - Generate setter methods for each view state property
+- All constructors must be public
+- All view logic lives here
 
 **Example:**
 ```dart
@@ -358,11 +373,14 @@ class UserProfileViewController extends Cubit<UserProfileViewState> {
 View classes are `StatelessWidget`s that display UI based on view state. They follow a 3-class pattern.
 
 **Rules:**
-- Follow 3-class pattern: `*ViewCreator`, `*View`, and optional config views
+- Follow 3-class pattern: `*DialogView` (if available), `*ViewCreator`, and `*View`
+- Declare classes in this exact order: Dialog view (if available), View Creator, View.
 - `*ViewCreator`: BlocProvider setup with BlocBuilder
 - `*View`: Stateless widget receiving controller and state
 - Use `context.read<ViewController>()` to access controller
 - Use `BlocBuilder` to rebuild UI on state changes
+- All constructors must be public
+- No logic in the view — display only
 
 **Example:**
 ```dart
@@ -371,6 +389,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'view-state.dart';
 import 'view-controller.dart';
+
+class UserProfileDialogView extends StatelessWidget {
+  const UserProfileDialogView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('User Profile'),
+      content: const UserProfileViewCreator(),
+      actions: [
+        TextButton(
+          onPressed: () => closeCurrentView<void>(context),
+          child: const Text('Close'),
+        ),
+      ],
+    );
+  }
+}
 
 class UserProfileViewCreator extends StatelessWidget {
   const UserProfileViewCreator({super.key});
@@ -417,29 +453,9 @@ class UserProfileView extends StatelessWidget {
 }
 ```
 
-**Dialog Pattern:**
-```dart
-class UserProfileDialogView extends StatelessWidget {
-  const UserProfileDialogView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('User Profile'),
-      content: const UserProfileViewCreator(),
-      actions: [
-        TextButton(
-          onPressed: () => closeCurrentView<void>(context),
-          child: const Text('Close'),
-        ),
-      ],
-    );
-  }
-}
-```
-
 **Key Points:**
-- `*ViewCreator` wraps the view with BlocProvider and BlocBuilder
-- `*View` receives controller and state as required parameters
+- `*DialogView` is defined first (if it exists)
+- `*ViewCreator` wraps the view with BlocProvider and BlocBuilder and is defined second
+- `*View` receives controller and state as required parameters and is defined third
 - Use `context.read<ViewController>()` to access controller in event handlers
 - For dialogs, wrap `*ViewCreator` in `AlertDialog` with close button
