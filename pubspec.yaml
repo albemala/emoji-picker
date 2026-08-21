@@ -67,7 +67,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/app-icon/
+    - assets/app/
     - assets/data/
     - assets/fonts/TitilliumWeb/
     - assets/fonts/Noto_Color_Emoji/
@@ -94,7 +94,7 @@ flutter:
 
 # dart run icons_launcher:create && flutter clean && flutter pub get
 icons_launcher:
-  image_path: "assets/app-icon/app-icon.png"
+  image_path: "assets/app/icon.png"
   platforms:
     android:
       enable: false
@@ -140,9 +140,9 @@ msix_config:
   msix_version: 2.0.2.0
   # App
   display_name: Ejimo
-  logo_path: assets/images/app-icon.png
-  start_menu_icon_path: assets/images/app-icon.png
-  tile_icon_path: assets/images/app-icon.png
+  logo_path: assets/app/icon.png
+  start_menu_icon_path: assets/app/icon.png
+  tile_icon_path: assets/app/icon.png
   icons_background_color: transparent
   languages: en-us
   architecture: x64

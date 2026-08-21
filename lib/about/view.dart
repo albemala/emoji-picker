@@ -77,7 +77,7 @@ class _AppInfoView extends StatelessWidget {
       spacing: 16,
       children: [
         Image.asset(
-          'assets/app-icon/app-icon.png',
+          'assets/app/icon.png',
           width: 56,
           height: 56,
         ),
