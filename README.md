@@ -62,7 +62,7 @@ Setup, how to run and build: https://docs.flutter.dev/desktop
 
 ## Other projects
 
-[All my projects](https://projects.albemala.me/)
+[All my projects](https://albemala.me/apps/)
 
 ## Credits
 
