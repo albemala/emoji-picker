@@ -12,7 +12,6 @@ final List<AdData> adsData = [
   iroIroAdData,
   // ejimoAdData,
   luvAdData,
-  catIdentifierAdData,
   textmineAdData,
   clarityAdData,
 ];
