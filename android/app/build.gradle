@@ -13,12 +13,12 @@ if (keystorePropertiesFile.exists()) {
 
 android { 
     namespace = "me.albemala.ejimo"
-    compileSdk 36
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
@@ -27,8 +27,8 @@ android {
 
     defaultConfig {
         applicationId = "me.albemala.ejimo"
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 36
+        minSdkVersion = 26
+        targetSdkVersion = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }

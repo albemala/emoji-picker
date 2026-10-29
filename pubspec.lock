@@ -156,10 +156,11 @@ packages:
   clipboard:
     dependency: transitive
     description:
-      name: clipboard
-      sha256: c0ba5e7214035b824549473fa134870bc544fff0d7b89170d4756c0ac2c0239d
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "833cac17f132624bd21ad19a5d4ec3dddad46084"
+      resolved-ref: "833cac17f132624bd21ad19a5d4ec3dddad46084"
+      url: "https://github.com/samuelezedi/flutter_clipboard.git"
+    source: git
     version: "3.0.14"
   clock:
     dependency: transitive
@@ -448,11 +449,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "2.1.1"
-      resolved-ref: "0bcbb196357b57ab12d33ab8ffc403548afc32dd"
+      ref: "2.1.2"
+      resolved-ref: b55a5ce29892e4e7b6b98845123fa649d55a04eb
       url: "https://github.com/albemala/flutter_utils.git"
     source: git
-    version: "2.1.1"
+    version: "2.1.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
