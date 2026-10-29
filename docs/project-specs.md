@@ -1,46 +1,24 @@
-# Core Glyph Engine
+# Project Specs
 
-**Overview:** Unified glyph processing pipeline handling Emoji, Symbols, and Kaomoji via a normalized data model.
+## What it is
 
-**Purpose:** Loads, normalizes, and searches extensive glyph databases from JSON assets to provide fast, searchable access to unicode characters.
+Browser for finding and copying emoji, kaomoji, and symbols.
 
-**Technical Architecture:**
-*   **Engine:** `GlyphsDataController` (Cubit) loads JSON assets → Maps to raw models (`Emoji`, `Symbol`, `Kaomoji`) → Normalizes to unified `Glyph` model.
-*   **Search:** `SearchGlyphsDataController` (Cubit) implements `fuzzywuzzy` weighted ratio matching (>80 threshold) on names and keywords.
-*   **Inputs:** JSON assets (`emoji.json`, `symbols.json`, `kaomoji.json`).
-*   **Outputs:** `IList<Glyph>` (immutable lists for filtered/unfiltered data).
+## Main technologies
 
-**Key Features:**
-1.  **Unified Data Model:** Single `Glyph` class abstracts differences between Emoji, Symbols, and Kaomoji.
-2.  **Fuzzy Search:** Weighted ratio matching enables natural language discovery.
-3.  **Categorization:** Group-based organization for browsing.
-4.  **Performance:** Fast lookups via unified `IMap` and immutable state.
+Dart + Flutter, BLoC state management, file-based local persistence, bundled data assets.
 
-**Supported Formats:**
+## Main structure
 
-| Type | Fields |
-| :--- | :--- |
-| **Emoji** | `char`, `name`, `group`, `skinToneSupport`, `keywords` |
-| **Symbol** | `charcode`, `name`, `group` |
-| **Kaomoji** | `string`, `keywords` |
-
-**Tests:**
-*   Golden tests (`golden_screenshot`) for UI verification.
-*   Unit tests implied for core logic.
-
----
-
-# Ejimo App
-
-**Overview:** Cross-platform Flutter application wrapping the Core Glyph Engine.
-
-**Features:**
-*   **Multi-Platform:** Android, iOS, macOS, Windows, Linux, Web.
-*   **Interaction:** Real-time search, clipboard copy, drag-and-drop.
-*   **Personalization:** Favorites and Recent history persistence.
-*   **UI:** Responsive design with `flex_color_scheme` and `google_fonts`.
-
-**Architecture:**
-*   **Pattern:** Feature-first directory structure.
-*   **State Management:** `flutter_bloc` (Cubit) for view/data controllers.
-*   **Persistence:** `flutter_data_storage` for local data.
+- `lib/` -> app source organized by feature areas (browsing, search, details, favorites, recents, settings).
+- `assets/` -> bundled static resources for branding, typography, and glyph data.
+- `android/` -> Android platform setup.
+- `ios/` -> iOS platform setup.
+- `macos/` -> macOS platform setup.
+- `linux/` -> Linux platform setup.
+- `windows/` -> Windows platform setup.
+- `web/` -> web platform setup.
+- `scripts/` -> automation grouped by intent (build apps, prepare data, signing).
+- `test/` -> automated tests grouped by intent (screenshots).
+- `screenshots/` -> store listing captures.
+- `docs/` -> project documentation.
