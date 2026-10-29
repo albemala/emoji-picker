@@ -41,7 +41,7 @@ dependencies:
   flutter_utils:
     git:
       url: https://github.com/albemala/flutter_utils.git
-      ref: 2.0.4
+      ref: 2.1.1
 
   sentry_flutter: ^9.13.0
 
@@ -71,7 +71,6 @@ flutter:
     - assets/data/
     - assets/fonts/TitilliumWeb/
     - assets/fonts/Noto_Color_Emoji/
-    - assets/other_apps_icons/
   fonts:
     # https://github.com/notofonts/notofonts.github.io/tree/main/megamerge
     - family: Noto Sans Living

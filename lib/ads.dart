@@ -11,7 +11,7 @@ final List<AdData> adsData = [
   wmapAdData,
   iroIroAdData,
   // ejimoAdData,
-  luvAdData,
+  // luvAdData,
   textmineAdData,
   clarityAdData,
 ];
