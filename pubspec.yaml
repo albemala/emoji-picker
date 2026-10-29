@@ -5,16 +5,16 @@ version: 4.1.1+21
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=3.11.0 <4.0.0'
-  flutter: ">=3.41.0"
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.44.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
   # state management
-  equatable: ^2.0.8
-  fast_immutable_collections: ^11.1.0
+  equatable: ^3.0.0
+  fast_immutable_collections: ^12.0.0
   flutter_bloc: ^9.0.0
   # data storage
   flutter_data_storage:
@@ -24,8 +24,8 @@ dependencies:
 
   # UI
   flex_color_scheme: ^8.4.0
-  google_fonts: ^8.0.2
-  cupertino_icons: ^1.0.8
+  google_fonts: ^8.2.1
+  cupertino_icons: ^2.0.0
   sliver_tools: ^0.2.12
   slivers: ^0.0.1+2
 
@@ -37,32 +37,32 @@ dependencies:
 
   # utils
   collection: ^1.18.0
-  package_info_plus: ^9.0.0 # about version
+  package_info_plus: ^9.0.1 # about version
   flutter_utils:
     git:
       url: https://github.com/albemala/flutter_utils.git
       ref: 2.1.1
 
-  sentry_flutter: ^9.13.0
+  sentry_flutter: ^10.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.4
+  mocktail: ^1.0.5
   # flutter test --update-goldens test/screenshots/take_screenshots_test.dart
-  golden_screenshot: ^10.0.0
+  golden_screenshot: ^10.0.1
 
-  very_good_analysis: ^10.2.0
+  very_good_analysis: ^10.3.0
 
-  build_runner: ^2.11.1
-  icons_launcher: ^3.0.3
+  build_runner: ^2.15.1
+  icons_launcher: ^3.1.0
   package_rename: ^1.10.1
 
   http: ^1.6.0
   path: ^1.9.0
 
   # windows
-  msix: ^3.16.13
+  msix: ^3.18.0
 
 flutter:
   uses-material-design: true
