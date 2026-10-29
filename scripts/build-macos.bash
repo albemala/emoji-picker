@@ -17,7 +17,6 @@ cd macos
 # build for app store
 rm -rf build
 fastlane mac production_store
-exit
 # build standalone
 rm -rf build
 fastlane mac production_standalone
@@ -30,5 +29,5 @@ mkdir -p $ARCHIVE_PATH
 cp -r "macos/build/Ejimo.app.zip" $ARCHIVE_PATH
 cp -r "macos/build/Ejimo.app.dSYM.zip" $ARCHIVE_PATH
 # upload to Google Cloud Storage
-gcloud storage cp --recursive $ARCHIVE_PATH gs://ejimo-app-releases
+gcloud storage cp --exclude='.*' --recursive $ARCHIVE_PATH gs://ejimo-app-releases
   

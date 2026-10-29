@@ -1,13 +1,33 @@
 platform :mac do
 
+  # API-key based syncing: development + App Store distribution.
+  # Runs in its own fastlane process (see scripts/generate-apple-certificates-profiles.bash).
   lane :generate_certificates_profiles do |options|
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APPLE_KEY_ID"],
+      issuer_id: ENV["APPLE_ISSUER_ID"],
+      key_filepath: ENV["APPLE_KEY_FILEPATH"],
+    )
+
     match(
       type: "development",
+      api_key: api_key,
       # force_for_new_devices: true,
     )
     match(
       type: "appstore",
+      api_key: api_key,
     )
+  end
+
+  # Developer ID (application + installer) certificates must NOT use the App
+  # Store Connect API key: Apple's API has blocked access to DEVELOPER_ID_INSTALLER
+  # certificates with API keys since 2021-11-09, and match leaks the lane-context
+  # API key into every match call in the same lane. Keeping this lane free of
+  # api_key and running it as a SEPARATE fastlane process (fresh lane context and
+  # fresh Spaceship state) makes match fall back to Apple ID auth.
+  # Note: it will prompt for the Apple ID password + 2FA code.
+  lane :generate_developer_id_certificates do |options|
     match(
       type: "developer_id",
       additional_cert_types: [
