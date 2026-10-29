@@ -39,9 +39,9 @@ Oh, and Web 🌐 too!
 Available (for **free**) on the:
 
 - [Web](https://ejimo-app.web.app),
-- [macOS App Store](https://apps.apple.com/us/app/ejimo/id1598944603)
+- [macOS App Store](https://apps.apple.com/app/id1598944603)
 - [Windows Store](https://apps.microsoft.com/store/detail/ejimo/9PF0Q1XP8LCX)
-- [iOS App Store](https://apps.apple.com/us/app/ejimo/id1598944603)
+- [iOS App Store](https://apps.apple.com/app/id1598944603)
 - [Android Play Store](https://play.google.com/store/apps/details?id=me.albemala.ejimo)
 - Linux Snap Store (_Soon_)
 
