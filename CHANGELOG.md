@@ -1,50 +1,126 @@
-# 2.0.1
+## 4.2.0
 
-- Added kaomoji.
-- Improved the user interface across the whole app.
-- Showcasing other personal projects.
-- Fixed the issue where keyboard shortcuts would sometimes stop working.
-- Upgraded to Dart 3.0 and Flutter 3.10.
-- Updated the minimum macOS requirement to 10.14.
-- Set the minimum Android SDK to 19.
+- Changed the cross-promotion links to point to the app landing pages.
+- Changed the minimum iOS requirement to 15.
+- Changed the minimum macOS requirement to 12.
+- Changed the minimum Android SDK to 26.
+- Changed the Dart requirement to 3.12.
+- Changed the Flutter requirement to 3.44.
+- Removed the Cat Identifier app from the cross-promotion.
 
-# 1.3.0
 
-- Now supporting Emoji v15 (1800+ emojis) and 17000+ Unicode symbols
-- Added emoji keywords, to improve search experience
-- UI improvements and bug fixes
-- Targeting Dart 2.18 and Flutter 3.3 stable
+## 4.1.1
 
-# 1.2.0
+- Changed the minimum iOS requirement to 13.
+- Changed the target Android version to 36.
+- Changed the Dart requirement to 3.11.
+- Changed the Flutter requirement to 3.41.
+- Fixed the startup review prompt to show after a short delay.
 
-- Ejimo is now available for 
-  - [Web](https://ejimo-app.web.app), 
-  - [Windows](https://apps.microsoft.com/store/detail/ejimo/9PF0Q1XP8LCX), 
-  - [Android](https://play.google.com/store/apps/details?id=me.albemala.ejimo) and 
-  - [iOS](https://apps.apple.com/us/app/ejimo/id1598944603).
-- Improved UI in a few places.
-- Targeting Dart 2.17 and Flutter 3 stable.
 
-# 1.1.0
+## 4.0.3
 
-- Changed emojis list UI design
-- Improved UI responsiveness
-- Using very_good_analysis as linter
-- Targeting Dart 2.16
-- Upgraded packages to the latest version
-- Compiled the app with Flutter 2.13.0-0.2.pre
+- Added a review prompt after every fifth copied glyph.
+- Added Clarity to the cross-promotion.
+- Changed the App Store link to point to the developer page.
+- Changed the dark theme to a higher-contrast variant.
+- Changed the minimum macOS requirement to 10.15.
+- Changed the Dart requirement to 3.9.
+- Changed the Flutter requirement to 3.35.
 
-# 1.0.1
 
-- Select all text when focusing the search field
-- Upgraded Flutter packages to latest versions
-- Compiled the app with Flutter 2.9.0-0.1.pre
+## 4.0.2
 
-# 1.0.0
+- Fixed existing installs to keep lifetime free access.
 
-First public release!
 
-- 3000+ emojis and symbols available
-- Search by name
-- Copy selected glyph using Cmd/Ctrl+C or double-clicking it
-- Switch between Light and Dark themes
+## 4.0.1
+
+- Added a Favorites tab for saving glyphs.
+- Added a favorite toggle to the details view.
+- Added recently copied glyphs at the top of the Emoji, Symbols, and Kaomoji sections.
+- Added a review prompt at startup.
+- Added a highlight to the keyboard-focused tile.
+- Added Cat Identifier and Luv to the cross-promotion.
+- Added lifetime free access for new installs.
+- Changed the About view design.
+- Changed the app to select the first emoji automatically.
+- Changed the target Android version to 35.
+- Changed the Dart requirement to 3.7.
+- Changed the Flutter requirement to 3.29.
+
+
+## 3.0.2
+
+- Fixed the tiles to update while searching.
+
+
+## 3.0.0
+
+- Added copying a glyph by double-tapping it.
+- Changed the visual design across the app.
+- Changed the minimum iOS requirement to 12.
+- Changed the Dart requirement to 3.5.
+- Changed the Flutter requirement to 3.24.
+- Fixed the share menu position on desktop and tablets.
+- Fixed links not opening on Android.
+- Fixed issues with glyph selection.
+
+
+## 2.0.2
+
+- Changed emoji rendering to use system fallback fonts instead of the bundled font.
+
+
+## 2.0.1
+
+- Added Emoji, Symbols, and Kaomoji tabs.
+- Added copying the unicode value and HTML code from the details view.
+- Added cross-promotion of other apps in the main view and the About dialog.
+- Changed emoji rendering to use the bundled Noto Color Emoji font.
+- Changed the visual design across the app.
+- Changed the Dart requirement to 3.0.
+- Changed the Flutter requirement to 3.10.
+- Changed the minimum macOS requirement to 10.14.
+- Changed the minimum Android SDK to 19.
+- Fixed keyboard shortcuts sometimes stopping working.
+
+
+## 1.3.0
+
+- Added the Emoji 15 dataset with 1800+ emoji and 17000+ symbols.
+- Added emoji keywords for search.
+- Changed the minimum iOS requirement to 11.
+- Changed the target Android version to 33.
+- Changed the Dart requirement to 2.18.
+- Changed the Flutter requirement to 3.3.
+
+
+## 1.2.0
+
+- Added the app for Web, Windows, Android, and iOS.
+- Added a button to clear search results.
+- Added a repository link to the About dialog.
+- Changed the system bar color to follow the selected theme.
+- Changed the details view to adapt to the window size.
+- Changed the Dart requirement to 2.17.
+- Changed the Flutter requirement to 3.0.
+
+
+## 1.1.0
+
+- Changed the emoji list design.
+- Changed the Dart requirement to 2.16.
+
+
+## 1.0.1
+
+- Changed the search field to select all text on focus.
+
+
+## 1.0.0
+
+- Added browsing of 3000+ emoji and symbols.
+- Added search by name.
+- Added copying the selected glyph with Cmd/Ctrl+C or double-clicking it.
+- Added Light and Dark themes.
